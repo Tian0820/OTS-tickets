@@ -13,14 +13,14 @@ public interface UserService {
      * @param password 用户密码
      * @return 当前登录状态
      */
-    public ResultMessage signIn(String email, String password);
+    ResultMessage signIn(String email, String password);
 
     /**
      * 登出
      *
      * @return 当前登录状态
      */
-    public ResultMessage signOut();
+    ResultMessage signOut();
 
     /**
      * 重置密码
@@ -28,7 +28,26 @@ public interface UserService {
      * @param passwordBean 新密码和旧密码
      * @return 重置密码结果状态
      */
-    public ResultMessage resetPassword(PasswordBean passwordBean);
+    ResultMessage resetPassword(PasswordBean passwordBean);
+
+    /**
+     * 给用户邮箱发送验证邮件
+     *
+     * @param email    用户邮箱
+     * @param username 用户名
+     * @return
+     */
+    ResultMessage sendEmail(String email, String username);
+
+    /**
+     * 用户注册时验证邮箱
+     *
+     * @param email    用户邮箱
+     * @param username 用户名
+     * @param code     用户输入的收到的激活码
+     * @return
+     */
+    ResultMessage emailVerification(String email, String username, String code);
 
     /**
      * 注册用户
@@ -39,15 +58,14 @@ public interface UserService {
      * @param phone    用户手机
      * @return 是否注册成功
      */
-    public ResultMessage signUp(String email, String username, String phone, String password);
+    ResultMessage signUp(String email, String username, String phone, String password);
 
     /**
-     *
      * @param email
      * @param code
      * @return
      */
-    public ResultMessage userCheckMail(String email, String code);
+    ResultMessage userCheckMail(String email, String code);
 
     /**
      * 根据username查找用户
@@ -55,7 +73,7 @@ public interface UserService {
      * @param username
      * @return 查到的用户
      */
-    public User findUserByUsername(String username);
+    User findUserByUsername(String username);
 
     /**
      * 更新用户信息
@@ -63,7 +81,7 @@ public interface UserService {
      * @param user 新用户
      * @return 是否更新成功
      */
-    public ResultMessage updateUser(User user);
+    ResultMessage updateUser(User user);
 
     /**
      * 删除用户
@@ -71,13 +89,13 @@ public interface UserService {
      * @param id 用户id
      * @return 是否删除成功
      */
-    public ResultMessage deleteUser(int id);
+    ResultMessage deleteUser(int id);
 
     /**
      * 获得当前登录的用户
      *
      * @return 当前登录用户
      */
-    public User getCurrentUser();
+    User getCurrentUser();
 
 }

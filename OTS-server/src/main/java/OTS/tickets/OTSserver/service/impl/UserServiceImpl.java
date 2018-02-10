@@ -19,6 +19,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     MailUtil mailUtil;
 
+    @Autowired
+    CodeUtil codeUtil;
+
     @Override
     public ResultMessage signIn(String email, String password) {
         User user = userRepository.findUserByEmail(email);
@@ -42,25 +45,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultMessage signUp(String email, String username, String phone, String password) {
+    public ResultMessage sendEmail(String email, String username) {
         User oldEmail = userRepository.findUserByEmail(email);
         User oldUsername = userRepository.findUserByUsername(username);
         if (oldEmail != null || oldUsername != null) {
-            // 用户已存在，注册失败
+            // 用户已存在，验证失败
             return ResultMessage.USER_EXIST;
         }
-        // 注册新用户，初始等级为0，初始积分为0
-        CodeUtil codeUtil = new CodeUtil();
-        String code = codeUtil.encryptCode(email); // 用户邮箱加密
-        User user = new User(username, password, email, phone, 0, 0.0);
-        user.setActivate(false); // 设置用户为未激活状态
-        user.setCode(code); // 设置用户激活码
-
-        if (mailUtil.sendRegisterMail(email, code).equals(ResultMessage.SUCCESS)) {
-
+        String encryptCode = codeUtil.encryptCode(email); // 用户邮箱加密
+        // 发送验证码
+        if (mailUtil.sendRegisterMail(email, encryptCode).equals(ResultMessage.SUCCESS)) {
+            return ResultMessage.SUCCESS;
+        } else {
+            return ResultMessage.FAILED;
         }
+    }
 
-        userRepository.save(user);
+    @Override
+    public ResultMessage emailVerification(String email, String username, String code) {
+        String encryptCode = codeUtil.encryptCode(email); // 用户邮箱加密
+        if (code.equals(encryptCode)) {
+            return ResultMessage.SUCCESS;
+        } else {
+            return ResultMessage.FAILED;
+        }
+    }
+
+    @Override
+    public ResultMessage signUp(String email, String username, String phone, String password) {
         return ResultMessage.SUCCESS;
     }
 
