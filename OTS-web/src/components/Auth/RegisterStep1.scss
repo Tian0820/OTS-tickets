@@ -1,0 +1,48 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+@import "../../assets/scss/mixin";
+
+.form-wrapper {
+  display: inline-block;
+  margin-top: 50px;
+  width: 60%;
+  text-align: left;
+
+  /deep/ .el-form--label-top .el-form-item__label {
+    padding: 0;
+  }
+
+  button {
+    float: right;
+    margin-top: 15px;
+    padding: 5px 25px;
+    background-color: $main-color;
+    border-radius: 100px;
+    color: $white-color;
+    vertical-align: middle;
+    cursor: pointer;
+    @include transition(all, 0.5s);
+    &:hover {
+      @include transition(all, 0.5s);
+      background-color: $sub-color;
+    }
+  }
+
+  .email-input {
+    display: inline-block;
+    width: 85%;
+  }
+
+  .verify-button {
+    margin-top: 10px;
+    padding: 0;
+    background: none;
+    color: $main-color;
+    font-size: 13px;
+    &:hover {
+      background: none;
+    }
+  }
+
+}
+
