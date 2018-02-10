@@ -1,0 +1,56 @@
+@import "./assets/scss/variables";
+@import "./assets/scss/base";
+@import "./assets/scss/mixin";
+
+html {
+  .body-wrapper {
+    width: 100%;
+    min-height: 1000px;
+    height: 100%;
+    background: $background-color;
+    //-webkit-font-smoothing: antialiased;
+    //-moz-osx-font-smoothing: grayscale;
+  }
+
+  .container {
+    width: 1005px;
+    margin: 0 auto;
+    @include clear-fix();
+  }
+
+  @media (max-width: 1005px) {
+    .container {
+      width: 100%;
+    }
+  }
+
+  //search input style
+  .el-input__inner {
+    height: 30px;
+    border-radius: 100px;
+    border: $light-grey solid 1px;
+    color: $grey;
+    font-size: 12px;
+
+    @include placeholder($light-grey, 12px, 400);
+
+    &:hover, &:focus {
+      border: $main-color solid 1px;
+      color: $grey;
+    }
+  }
+
+  .el-input__icon {
+    color: $main-color;
+    line-height: 0;
+  }
+
+  .el-input__icon.is-clickable:hover {
+    color: $main-color;
+  }
+
+  .el-input__icon.is-clickable:hover + .el-input__inner {
+    border-color: $main-color;
+  }
+
+}
