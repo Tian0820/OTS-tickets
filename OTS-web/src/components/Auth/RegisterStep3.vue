@@ -9,7 +9,7 @@
 
     </el-form>
 
-    <button>完成注册</button>
+    <button @click="uploadRegister">完成注册</button>
   </div>
 
 </template>
@@ -22,6 +22,7 @@
     FormItem,
     Message
   } from 'element-ui'
+  import {mapMutations} from 'vuex'
 
 
   export default {
@@ -53,7 +54,14 @@
         }
       }
     },
-    methods: {}
+    methods: {
+      ...mapMutations('auth', [
+        'saveRegisterStep'
+      ]),
+      uploadRegister() {
+        this.saveRegisterStep(0)
+      }
+    }
   }
 
 </script>

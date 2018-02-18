@@ -19,7 +19,7 @@
 
     </el-form>
 
-    <button>下一步</button>
+    <button @click="goToNextStep">下一步</button>
   </div>
 
 
@@ -32,6 +32,7 @@
     Form,
     FormItem,
   } from 'element-ui'
+  import {mapMutations} from 'vuex'
 
 
   export default {
@@ -85,7 +86,14 @@
         }
       }
     },
-    methods: {}
+    methods: {
+      ...mapMutations('auth', [
+        'saveRegisterStep'
+      ]),
+      goToNextStep() {
+        this.saveRegisterStep(1)
+      }
+    }
   }
 
 </script>
