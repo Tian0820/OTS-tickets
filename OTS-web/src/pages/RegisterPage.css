@@ -1,0 +1,53 @@
+html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  list-style: none; }
+
+html {
+  height: 100%; }
+
+* {
+  position: relative;
+  box-sizing: border-box; }
+
+button {
+  outline: none; }
+
+/*
+ * grid
+ */
+.container {
+  text-align: center; }
+
+.button-wrapper {
+  display: inline-block;
+  margin: 200px auto;
+  text-align: center; }
+
+button {
+  padding: 5px 25px;
+  background-color: #4e7ede;
+  border-radius: 100px;
+  color: #ffffff;
+  vertical-align: middle;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-transition: all, 0.5s;
+  -moz-transition: all, 0.5s;
+  -ms-transition: all, 0.5s;
+  -o-transition: all, 0.5s;
+  transition: all, 0.5s; }
+  button:hover {
+    -webkit-transition: all, 0.5s;
+    -moz-transition: all, 0.5s;
+    -ms-transition: all, 0.5s;
+    -o-transition: all, 0.5s;
+    transition: all, 0.5s;
+    background-color: #5689f2; }
+  button:first-child {
+    margin-right: 100px; }
+
+/*# sourceMappingURL=RegisterPage.css.map */

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import IndexPage from '@/pages/IndexPage'
 import UserRegisterPage from '@/pages/UserRegisterPage'
+import RegisterPage from '@/pages/RegisterPage'
+import VenueRegisterPage from '@/pages/VenueRegisterPage'
 
 Vue.use(Router)
 
@@ -16,6 +18,16 @@ export default new Router({
       path: '/user/sign-up',
       name: 'UserRegisterPage',
       component: UserRegisterPage
+    },
+    {
+      path: '/sign-up',
+      name: 'RegisterPage',
+      component: RegisterPage
+    },
+    {
+      path: '/venue/sign-up',
+      name: 'VenueRegisterPage',
+      component: VenueRegisterPage
     }
   ]
 })
