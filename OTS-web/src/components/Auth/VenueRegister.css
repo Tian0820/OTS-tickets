@@ -27,7 +27,40 @@ button {
   height: auto;
   text-align: center;
   background-color: #ffffff; }
-  .register-wrapper /deep/ .el-steps--simple {
-    background: none; }
+  .register-wrapper .form-wrapper {
+    display: inline-block;
+    margin-top: 50px;
+    width: 60%;
+    text-align: left; }
+    .register-wrapper .form-wrapper /deep/ .el-form--label-top .el-form-item__label {
+      padding: 0; }
+    .register-wrapper .form-wrapper /deep/ .el-select > .el-input {
+      width: 300px; }
+    .register-wrapper .form-wrapper /deep/ .el-checkbox + .el-checkbox {
+      margin: 0; }
+    .register-wrapper .form-wrapper img {
+      width: 500px;
+      vertical-align: middle; }
+  .register-wrapper button {
+    float: right;
+    margin-top: 15px;
+    padding: 5px 25px;
+    background-color: #4e7ede;
+    border-radius: 100px;
+    color: #ffffff;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-transition: all, 0.5s;
+    -moz-transition: all, 0.5s;
+    -ms-transition: all, 0.5s;
+    -o-transition: all, 0.5s;
+    transition: all, 0.5s; }
+    .register-wrapper button:hover {
+      -webkit-transition: all, 0.5s;
+      -moz-transition: all, 0.5s;
+      -ms-transition: all, 0.5s;
+      -o-transition: all, 0.5s;
+      transition: all, 0.5s;
+      background-color: #5689f2; }
 
 /*# sourceMappingURL=VenueRegister.css.map */

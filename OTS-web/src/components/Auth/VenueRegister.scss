@@ -11,7 +11,43 @@
   text-align: center;
   background-color: $white-color;
 
-  /deep/ .el-steps--simple {
-    background: none;
+  .form-wrapper {
+    display: inline-block;
+    margin-top: 50px;
+    width: 60%;
+    text-align: left;
+
+    /deep/ .el-form--label-top .el-form-item__label {
+      padding: 0;
+    }
+
+    /deep/ .el-select > .el-input {
+      width: 300px;
+    }
+
+    /deep/ .el-checkbox + .el-checkbox {
+      margin: 0;
+    }
+
+    img {
+      width: 500px;
+      vertical-align: middle;
+    }
+  }
+
+  button {
+    float: right;
+    margin-top: 15px;
+    padding: 5px 25px;
+    background-color: $main-color;
+    border-radius: 100px;
+    color: $white-color;
+    vertical-align: middle;
+    cursor: pointer;
+    @include transition(all, 0.5s);
+    &:hover {
+      @include transition(all, 0.5s);
+      background-color: $sub-color;
+    }
   }
 }
