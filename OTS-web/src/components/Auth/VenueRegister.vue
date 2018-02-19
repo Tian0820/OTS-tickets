@@ -95,7 +95,7 @@
       return {
         registerForm: {
           venueName: '',
-          venueAddress: '',
+          venueAddress: '南京',
           venueSeats: ['歌剧院'],
         },
         addresses: [
