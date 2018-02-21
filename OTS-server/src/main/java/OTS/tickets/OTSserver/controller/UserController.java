@@ -19,6 +19,30 @@ public class UserController {
     private UserService userService;
 
     /**
+     * 验证邮箱
+     *
+     * @param user 用户邮箱和用户名
+     * @return 是否发送邮件成功
+     */
+    @ResponseBody
+    @RequestMapping(
+            value = "/user/email-verify",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean sendVerifyCode(
+            @RequestBody User user) {
+        ResultMessage resultMessage = userService.sendEmail(user.getEmail(), user.getUsername());
+        ResultMessageBean resultMessageBean = new ResultMessageBean(false);
+        if (resultMessage == ResultMessage.SUCCESS) {
+            resultMessageBean.result = true;
+        } else if (resultMessage == ResultMessage.FAILED) {
+            resultMessageBean.message = "邮件发送失败！";
+        }
+        return resultMessageBean;
+    }
+
+
+    /**
      * 注册
      *
      * @param user 用户名和密码
@@ -36,7 +60,7 @@ public class UserController {
         if (resultMessage == ResultMessage.SUCCESS) {
             result.result = true;
         } else if (resultMessage == ResultMessage.USER_EXIST) {
-            result.message = "该用户已存在!";
+            result.message = "该用户已存在！";
         }
         return result;
     }

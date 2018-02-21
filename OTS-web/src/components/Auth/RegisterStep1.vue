@@ -10,7 +10,7 @@
 
       <el-form-item label="邮箱账号" prop="email">
         <el-input class="email-input" v-model="registerForm.email"></el-input>
-        <button class="verify-button">发送验证码</button>
+        <button class="verify-button" @click="sendEmail">发送验证码</button>
       </el-form-item>
 
       <el-form-item label="验证码（请填写邮箱中收到的验证码）" prop="code">
@@ -31,8 +31,9 @@
     Input,
     Form,
     FormItem,
+    Message
   } from 'element-ui'
-  import {mapMutations} from 'vuex'
+  import {mapMutations, mapActions} from 'vuex'
 
 
   export default {
@@ -42,6 +43,7 @@
       elInput: Input,
       elForm: Form,
       elFormItem: FormItem,
+      Message,
     },
     data() {
       let checkUsername = (rule, value, callback) => {
@@ -54,9 +56,11 @@
       let checkEmail = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('请输入邮箱账号'))
-        } else if (!/^([\w-_]+(?:\.[\w-_]+)*)@((?:[a-z0-9]+(?:-[a-zA-Z0-9]+)*)+\.[a-z]{2,6})$/i.test(value)) {
-          return callback(new Error('请输入正确的邮箱格式'))
-        } else {
+        }
+//        else if (!/^([\w-_]+(?:\.[\w-_]+)*)@((?:[a-z0-9]+(?:-[a-zA-Z0-9]+)*)+\.[a-z]{2,6})$/i.test(value)) {
+//          return callback(new Error('请输入正确的邮箱格式'))
+//        }
+        else {
           callback()
         }
       }
@@ -90,8 +94,32 @@
       ...mapMutations('auth', [
         'saveRegisterStep'
       ]),
+      ...mapActions('auth', [
+        'sendVerifyCode'
+      ]),
       goToNextStep() {
         this.saveRegisterStep(1)
+      },
+      sendEmail() {
+        if (this.registerForm.username === '' || this.registerForm.email === '') {
+          Message.error("请填写用户名和邮箱！")
+        } else {
+          this.sendVerifyCode({
+            info: {
+              email: this.registerForm.email,
+              username: this.registerForm.username
+            },
+            onSuccess: (success) => {
+              Message({
+                message: '发送成功',
+                type: 'success'
+              });
+            },
+            onError: (error) => {
+              Message.error(error)
+            }
+          })
+        }
       }
     }
   }
