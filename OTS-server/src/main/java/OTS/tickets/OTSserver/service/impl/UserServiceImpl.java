@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultMessage emailVerification(String email, String username, String code) {
+    public ResultMessage emailVerification(String email, String code) {
         String encryptCode = codeUtil.encryptCode(email); // 用户邮箱加密
         if (code.equals(encryptCode)) {
             return ResultMessage.SUCCESS;
@@ -73,6 +73,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultMessage signUp(String email, String username, String phone, String password) {
+        User oldEmail = userRepository.findUserByEmail(email);
+        User oldUsername = userRepository.findUserByUsername(username);
+        if (oldEmail != null || oldUsername != null) {
+            // 用户已存在，验证失败
+            return ResultMessage.USER_EXIST;
+        }
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPhone(phone);
+        user.setPassword(password);
+        userRepository.save(user);
         return ResultMessage.SUCCESS;
     }
 

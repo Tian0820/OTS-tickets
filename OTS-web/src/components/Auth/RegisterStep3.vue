@@ -9,7 +9,7 @@
 
     </el-form>
 
-    <button @click="uploadRegister">完成注册</button>
+    <button @click="uploadRegister('registerForm')">完成注册</button>
   </div>
 
 </template>
@@ -22,7 +22,7 @@
     FormItem,
     Message
   } from 'element-ui'
-  import {mapMutations} from 'vuex'
+  import {mapMutations, mapActions} from 'vuex'
 
 
   export default {
@@ -56,10 +56,29 @@
     },
     methods: {
       ...mapMutations('auth', [
-        'saveRegisterStep'
+        'saveRegisterStep',
+        'savePhone'
       ]),
-      uploadRegister() {
-        this.saveRegisterStep(0)
+      ...mapActions('auth', [
+        'userRegister'
+      ]),
+      uploadRegister(data) {
+        this.$refs[data].validate((valid) => {
+          if (valid) {
+            this.saveRegisterStep(0)
+            this.savePhone(this.registerForm.phone)
+            this.userRegister({
+              onSuccess: (success) => {
+                Message.success(success)
+              },
+              onError: (error) => {
+                Message.error(error)
+              }
+            })
+          } else {
+            Message.error('请正确输入手机号！')
+          }
+        })
       }
     }
   }

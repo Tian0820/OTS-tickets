@@ -92,13 +92,38 @@
     },
     methods: {
       ...mapMutations('auth', [
-        'saveRegisterStep'
+        'saveRegisterStep',
+        'saveUsername',
+        'saveEmail'
       ]),
       ...mapActions('auth', [
-        'sendVerifyCode'
+        'sendVerifyCode',
+        'fetchVerifyResult'
       ]),
       goToNextStep() {
-        this.saveRegisterStep(1)
+        if (this.registerForm.code === '') {
+          Message.error("请填写验证码！")
+        } else {
+          this.fetchVerifyResult({
+            info: {
+              email: this.registerForm.email,
+              code: this.registerForm.code
+            },
+            onSuccess: (success) => {
+              Message({
+                message: success,
+                type: 'success'
+              });
+              this.saveUsername(this.registerForm.username)
+              this.saveEmail(this.registerForm.email)
+              this.saveRegisterStep(1)
+            },
+            onError: (error) => {
+              Message.error(error)
+            }
+          })
+        }
+
       },
       sendEmail() {
         if (this.registerForm.username === '' || this.registerForm.email === '') {
@@ -111,7 +136,7 @@
             },
             onSuccess: (success) => {
               Message({
-                message: '发送成功',
+                message: success,
                 type: 'success'
               });
             },

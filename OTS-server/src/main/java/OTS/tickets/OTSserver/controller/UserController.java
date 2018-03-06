@@ -1,15 +1,13 @@
 package OTS.tickets.OTSserver.controller;
 
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
+import OTS.tickets.OTSserver.bean.UserRegisterBean;
 import OTS.tickets.OTSserver.model.User;
 import OTS.tickets.OTSserver.service.UserService;
 import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/api")
@@ -26,7 +24,7 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(
-            value = "/user/email-verify",
+            value = "/user/send-email",
             method = RequestMethod.POST,
             produces = {"application/json; charset=UTF-8"})
     public ResultMessageBean sendVerifyCode(
@@ -35,8 +33,36 @@ public class UserController {
         ResultMessageBean resultMessageBean = new ResultMessageBean(false);
         if (resultMessage == ResultMessage.SUCCESS) {
             resultMessageBean.result = true;
+        } else if (resultMessage == ResultMessage.USER_EXIST) {
+            resultMessageBean.message = "用户名或邮箱已存在！";
         } else if (resultMessage == ResultMessage.FAILED) {
             resultMessageBean.message = "邮件发送失败！";
+        }
+        return resultMessageBean;
+    }
+
+    /**
+     * 判断验证码是否正确
+     *
+     * @param code  用户填写的验证码
+     * @param email 用户邮箱
+     * @return 是否发送邮件成功
+     */
+    @ResponseBody
+    @RequestMapping(
+            value = "/user/email-verify",
+            params = {"email", "code"},
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean emailVerification(@RequestParam(value = "email") String email,
+                                               @RequestParam(value = "code") String code
+    ) {
+        ResultMessage resultMessage = userService.emailVerification(email, code);
+        ResultMessageBean resultMessageBean = new ResultMessageBean(false);
+        if (resultMessage == ResultMessage.SUCCESS) {
+            resultMessageBean.result = true;
+        } else if (resultMessage == ResultMessage.FAILED) {
+            resultMessageBean.message = "验证码错误！";
         }
         return resultMessageBean;
     }
@@ -54,7 +80,7 @@ public class UserController {
             method = RequestMethod.POST,
             produces = {"application/json; charset=UTF-8"})
     public ResultMessageBean signUp(
-            @RequestBody User user) {
+            @RequestBody UserRegisterBean user) {
         ResultMessage resultMessage = userService.signUp(user.getEmail(), user.getUsername(), user.getPhone(), user.getPassword());
         ResultMessageBean result = new ResultMessageBean(false);
         if (resultMessage == ResultMessage.SUCCESS) {

@@ -13,7 +13,7 @@
 
     </el-form>
 
-    <button @click="goToNextStep">下一步</button>
+    <button @click="goToNextStep('registerForm')">下一步</button>
   </div>
 
 </template>
@@ -71,10 +71,18 @@
     },
     methods: {
       ...mapMutations('auth', [
-        'saveRegisterStep'
+        'saveRegisterStep',
+        'savePassword'
       ]),
-      goToNextStep() {
-        this.saveRegisterStep(2)
+      goToNextStep(data) {
+        this.$refs[data].validate((valid) => {
+          if (valid) {
+            this.savePassword(this.registerForm.password)
+            this.saveRegisterStep(2)
+          } else {
+            Message.error('请正确输入密码！')
+          }
+        })
       }
     }
   }

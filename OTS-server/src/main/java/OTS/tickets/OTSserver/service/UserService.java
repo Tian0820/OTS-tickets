@@ -43,11 +43,10 @@ public interface UserService {
      * 用户注册时验证邮箱
      *
      * @param email    用户邮箱
-     * @param username 用户名
      * @param code     用户输入的收到的激活码
      * @return
      */
-    ResultMessage emailVerification(String email, String username, String code);
+    ResultMessage emailVerification(String email, String code);
 
     /**
      * 注册用户
