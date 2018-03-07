@@ -10,7 +10,9 @@
 
       <el-form-item label="邮箱账号" prop="email">
         <el-input class="email-input" v-model="registerForm.email"></el-input>
-        <button class="verify-button" @click="sendEmail">发送验证码</button>
+        <button :class="{'verify-button': !ifSendVerifyCode, 'disabled-button': ifSendVerifyCode }" @click="sendEmail">
+          发送验证码
+        </button>
       </el-form-item>
 
       <el-form-item label="验证码（请填写邮箱中收到的验证码）" prop="code">
@@ -33,7 +35,7 @@
     FormItem,
     Message
   } from 'element-ui'
-  import {mapMutations, mapActions} from 'vuex'
+  import {mapMutations, mapActions, mapState} from 'vuex'
 
 
   export default {
@@ -90,6 +92,11 @@
         }
       }
     },
+    computed: {
+      ...mapState('auth', {
+        ifSendVerifyCode: state => state.ifSendVerifyCode
+      })
+    },
     methods: {
       ...mapMutations('auth', [
         'saveRegisterStep',
@@ -128,6 +135,8 @@
       sendEmail() {
         if (this.registerForm.username === '' || this.registerForm.email === '') {
           Message.error("请填写用户名和邮箱！")
+        } else if (this.ifSendVerifyCode === true) {
+          Message.warning("验证码已发送至邮箱，请耐心等待")
         } else {
           this.sendVerifyCode({
             info: {

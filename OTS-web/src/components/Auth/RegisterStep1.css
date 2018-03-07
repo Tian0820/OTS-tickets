@@ -58,5 +58,14 @@ button {
     font-size: 13px; }
     .form-wrapper .verify-button:hover {
       background: none; }
+  .form-wrapper .disabled-button {
+    margin-top: 10px;
+    padding: 0;
+    background: none;
+    color: #595959;
+    font-size: 13px;
+    cursor: not-allowed; }
+    .form-wrapper .disabled-button:hover {
+      background: none; }
 
 /*# sourceMappingURL=RegisterStep1.css.map */

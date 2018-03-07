@@ -13,6 +13,7 @@
 <script>
   import Layout from '../components/Layout/Layout.vue'
   import UserRegister from '../components/Auth/UserRegister.vue'
+  import {store} from '../main'
 
   export default {
     name: 'user-register-page',
@@ -23,7 +24,11 @@
     data() {
       return {}
     },
-    methods: {}
+    methods: {},
+    beforeRouteEnter(to, from, next) {
+      store.commit('auth/saveIfSendVerifyCode', false)
+      next(true)
+    }
   }
 
 </script>

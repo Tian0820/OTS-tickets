@@ -44,5 +44,17 @@
     }
   }
 
+  .disabled-button {
+    margin-top: 10px;
+    padding: 0;
+    background: none;
+    color: $grey;
+    font-size: 13px;
+    cursor: not-allowed;
+    &:hover {
+      background: none;
+    }
+  }
+
 }
 

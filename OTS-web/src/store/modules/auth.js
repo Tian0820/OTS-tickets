@@ -15,10 +15,10 @@ const state = {
 const actions = {
 
   sendVerifyCode({commit}, {info, onSuccess, onError}) {
+    commit('saveIfSendVerifyCode', true)
     authApi.sendVerifyCode(data => {
       if (data.result === true) {
         if (onSuccess) {
-          commit('saveIfSendVerifyCode', true)
           onSuccess('发送成功！')
         }
       } else {
