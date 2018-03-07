@@ -1,0 +1,63 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+@import "../../assets/scss/mixin";
+
+.auth-wrapper {
+  display: inline-block;
+  margin-top: 80px;
+  padding: 30px;
+  width: 100%;
+  height: auto;
+  background-color: $white-color;
+
+  .left-form-wrapper {
+    display: inline-block;
+    padding: 30px;
+    width: 60%;
+    height: auto;
+
+    h1 {
+      color: $main-color;
+      font-weight: 400;
+      font-size: 22px;
+    }
+
+    form {
+      margin-top: 50px;
+    }
+
+    .sign-in-button-wrapper {
+      display: block;
+      float: right;
+      margin-right: 20%;
+      text-align: center;
+      /deep/ .el-button {
+        padding: 8px 20px;
+        background-color: $main-color;
+        border-radius: 100px;
+        letter-spacing: 6px;
+        text-indent: 6px;
+        color: $white-color;
+        @include transition(all, 0.5s);
+
+        &:hover {
+          @include transition(all, 0.5s);
+          background-color: $sub-color;
+        }
+      }
+    }
+
+    /deep/ .el-input {
+      width: 80%;
+    }
+
+    /deep/ .el-form-item {
+      margin-bottom: 40px;
+    }
+
+    /deep/ .el-form--label-top .el-form-item__label {
+      padding: 0;
+      height: 35px;
+    }
+  }
+}

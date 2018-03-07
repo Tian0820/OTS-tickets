@@ -2,16 +2,24 @@ package OTS.tickets.OTSserver.bean;
 
 public class UserRegisterBean {
 
-    // 用户名
+    /**
+     * 用户名
+     */
     private String username;
 
-    // 用户邮箱
+    /**
+     * 用户邮箱
+     */
     private String email;
 
-    // 用户密码
+    /**
+     * 用户密码
+     */
     private String password;
 
-    //用户手机
+    /**
+     * 用户手机
+     */
     private String phone;
 
     public UserRegisterBean() {

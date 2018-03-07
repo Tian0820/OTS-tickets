@@ -1,6 +1,8 @@
 package OTS.tickets.OTSserver.controller;
 
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
+import OTS.tickets.OTSserver.bean.UserInfoBean;
+import OTS.tickets.OTSserver.bean.UserPasswordBean;
 import OTS.tickets.OTSserver.bean.UserRegisterBean;
 import OTS.tickets.OTSserver.model.User;
 import OTS.tickets.OTSserver.service.UserService;
@@ -89,5 +91,35 @@ public class UserController {
             result.message = "该用户已存在！";
         }
         return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/sign-in",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean signIn(
+            @RequestBody UserPasswordBean user) {
+        ResultMessage resultMessage = userService.signIn(user.getEmail(), user.getPassword());
+        ResultMessageBean result = new ResultMessageBean(false);
+        if (resultMessage == ResultMessage.SUCCESS) {
+            result.result = true;
+        } else if (resultMessage == ResultMessage.USER_NOT_EXIST) {
+            result.message = "用户不存在！";
+        } else if (resultMessage == ResultMessage.FAILED) {
+            result.message = "密码错误！";
+        }
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/user/me",
+            params = {"email"},
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public UserInfoBean getCurrentUser(
+            @RequestParam(value = "email") String email) {
+        return userService.getCurrentUser(email);
     }
 }

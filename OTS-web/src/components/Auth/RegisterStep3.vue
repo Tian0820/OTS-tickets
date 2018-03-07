@@ -23,6 +23,7 @@
     Message
   } from 'element-ui'
   import {mapMutations, mapActions} from 'vuex'
+  import {router} from '../../main'
 
 
   export default {
@@ -65,11 +66,12 @@
       uploadRegister(data) {
         this.$refs[data].validate((valid) => {
           if (valid) {
-            this.saveRegisterStep(0)
             this.savePhone(this.registerForm.phone)
             this.userRegister({
               onSuccess: (success) => {
+                this.saveRegisterStep(0)
                 Message.success(success)
+                router.push({name: 'IndexPage'})
               },
               onError: (error) => {
                 Message.error(error)

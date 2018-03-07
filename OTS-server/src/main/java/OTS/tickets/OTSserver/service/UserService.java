@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.service;
 
 import OTS.tickets.OTSserver.bean.PasswordBean;
+import OTS.tickets.OTSserver.bean.UserInfoBean;
 import OTS.tickets.OTSserver.model.User;
 import OTS.tickets.OTSserver.util.ResultMessage;
 
@@ -42,8 +43,8 @@ public interface UserService {
     /**
      * 用户注册时验证邮箱
      *
-     * @param email    用户邮箱
-     * @param code     用户输入的收到的激活码
+     * @param email 用户邮箱
+     * @param code  用户输入的收到的激活码
      * @return
      */
     ResultMessage emailVerification(String email, String code);
@@ -95,6 +96,6 @@ public interface UserService {
      *
      * @return 当前登录用户
      */
-    User getCurrentUser();
+    UserInfoBean getCurrentUser(String email);
 
 }

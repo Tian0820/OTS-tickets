@@ -4,6 +4,7 @@ import IndexPage from '@/pages/IndexPage'
 import UserRegisterPage from '@/pages/UserRegisterPage'
 import RegisterPage from '@/pages/RegisterPage'
 import VenueRegisterPage from '@/pages/VenueRegisterPage'
+import LoginPage from '@/pages/LoginPage'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/venue/sign-up',
       name: 'VenueRegisterPage',
       component: VenueRegisterPage
+    },
+    {
+      path: '/sign-in',
+      name: 'LoginPage',
+      component: LoginPage
     }
   ]
 })

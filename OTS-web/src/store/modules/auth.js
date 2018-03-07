@@ -6,7 +6,9 @@ const state = {
     username: '',
     email: '',
     password: '',
-    phone: ''
+    phone: '',
+    currentUsername: '',
+    currentUser: null,
   }
 ;
 
@@ -53,7 +55,41 @@ const actions = {
         onError(data.message)
       }
     }, info)
-  }
+  },
+
+  signIn({dispatch, state}, {info, onSuccess, onError}) {
+    authApi.signIn(data => {
+      if (data.result === false) {
+        onError(data.message)
+      } else {
+        console.log(data)
+        localStorage.setItem('token', state.currentUsername)
+        dispatch('fetchCurrentUser', {onSuccess})
+      }
+    }, info)
+  },
+
+  fetchCurrentUser({commit, state}, {onSuccess, onError}) {
+    let currentUsername = localStorage.getItem('token')
+    authApi.fetchCurrentUser(data => {
+      console.log('fetchCurrentUser', data)
+      commit('saveCurrentUser', data)
+      if (data !== null) {
+        if (onSuccess) {
+          onSuccess(state.currentUser.username)
+        }
+      } else {
+        onError('登录已过期，请重新登录！')
+      }
+    }, currentUsername)
+  },
+
+  refreshUser({dispatch}, {onSuccess, onError}) {
+    const token = localStorage.getItem('token')
+    if (token !== null) {
+      dispatch('fetchCurrentUser', {onSuccess, onError})
+    }
+  },
 
 };
 
@@ -76,6 +112,12 @@ const mutations = {
   'savePhone'(state, phone) {
     state.phone = phone
   },
+  'saveCurrentUser'(state, currentUser) {
+    state.currentUser = currentUser
+  },
+  'saveCurrentUsername'(state, currentUsername) {
+    state.currentUsername = currentUsername
+  }
 };
 
 export default {
