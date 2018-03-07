@@ -91,6 +91,15 @@ const actions = {
     }
   },
 
+  signOut({commit}, {onSuccess}) {
+    const username = state.currentUser.username
+    localStorage.setItem('token', null)
+    commit('saveCurrentUser', null)
+    if (onSuccess) {
+      onSuccess(username)
+    }
+  },
+
 };
 
 const mutations = {

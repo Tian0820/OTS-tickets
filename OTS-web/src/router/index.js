@@ -5,6 +5,7 @@ import UserRegisterPage from '@/pages/UserRegisterPage'
 import RegisterPage from '@/pages/RegisterPage'
 import VenueRegisterPage from '@/pages/VenueRegisterPage'
 import LoginPage from '@/pages/LoginPage'
+import UserHomePage from '@/pages/UserHomePage'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/sign-in',
       name: 'LoginPage',
       component: LoginPage
+    },
+    {
+      path: '/user/:userId',
+      name: 'UserHomePage',
+      component: UserHomePage
     }
   ]
 })

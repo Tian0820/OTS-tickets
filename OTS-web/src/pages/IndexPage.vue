@@ -14,6 +14,8 @@
 
 <script>
   import Layout from '../components/Layout/Layout.vue'
+  import {store} from '../main'
+  import {mapActions} from 'vuex'
 
   export default {
     name: 'index-page',
@@ -23,7 +25,20 @@
     data() {
       return {}
     },
-    methods: {}
+    methods: {
+      ...mapActions('auth', [
+        'refreshUser'
+      ])
+    },
+    beforeRouteEnter(to, from, next) {
+      store.dispatch('auth/refreshUser', {
+        onSuccess: (success) => {
+        },
+        onError: (error) => {
+        }
+      })
+      next(true)
+    }
   }
 </script>
 
