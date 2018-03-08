@@ -34,10 +34,10 @@
           <div v-else>
             <el-dropdown placement="bottom-start" @command="handleCommand">
           <span class="el-dropdown-link">
-          用户<i class="el-icon-caret-bottom el-icon--right"></i>
+          {{user.username}}<i class="el-icon-caret-bottom el-icon--right"></i>
           </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="UserHomePage">我的订单</el-dropdown-item>
+                <el-dropdown-item command="UserHomePage">我的主页</el-dropdown-item>
                 <el-dropdown-item command="AccountPage">修改资料</el-dropdown-item>
                 <el-dropdown-item command="signOut">退出账号</el-dropdown-item>
               </el-dropdown-menu>

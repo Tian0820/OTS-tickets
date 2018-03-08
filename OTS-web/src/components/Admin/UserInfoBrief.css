@@ -1,0 +1,52 @@
+html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  list-style: none; }
+
+html {
+  height: 100%; }
+
+* {
+  position: relative;
+  box-sizing: border-box; }
+
+button {
+  outline: none; }
+
+/*
+ * grid
+ */
+.user-info-wrapper {
+  display: inline-block;
+  margin-top: 80px;
+  padding: 30px;
+  width: 100%;
+  height: 160px;
+  background-color: #ffffff; }
+  .user-info-wrapper .avatar-wrapper {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    vertical-align: top;
+    text-align: center; }
+  .user-info-wrapper .info-wrapper {
+    display: inline-block;
+    margin-left: 50px;
+    height: 100%;
+    vertical-align: top; }
+    .user-info-wrapper .info-wrapper p {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #595959; }
+      .user-info-wrapper .info-wrapper p:first-child {
+        margin-top: 0; }
+
+/*# sourceMappingURL=UserInfoBrief.css.map */
