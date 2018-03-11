@@ -28,7 +28,7 @@
 
 <script>
   import {Col} from 'element-ui'
-  import {store} from '../../main'
+  import {router} from '../../main'
   import {mapActions} from 'vuex'
 
   export default {
@@ -44,7 +44,7 @@
     },
     methods: {
       goToShowDetail() {
-
+        router.push({name: 'ShowDetailPage', params: {showId: 1}})
       }
     },
   }

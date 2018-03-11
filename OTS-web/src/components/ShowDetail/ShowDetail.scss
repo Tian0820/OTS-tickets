@@ -1,0 +1,75 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+@import "../../assets/scss/mixin";
+
+.show-detail-wrapper {
+  display: inline-block;
+  margin-top: 80px;
+  padding: 30px;
+  width: 100%;
+  height: 400px;
+  background-color: $white-color;
+
+  .poster-wrapper {
+    @include cover-img();
+    display: inline-block;
+    width: 26%;
+    height: 100%;
+    vertical-align: top;
+  }
+
+  .info-wrapper {
+    display: inline-block;
+    margin-left: 3%;
+    width: 70%;
+    height: 100%;
+    vertical-align: top;
+  }
+
+  .show-title {
+    color: $grey;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .show-location {
+    margin-top: 10px;
+    color: $medium-grey;
+    font-size: 14px;
+  }
+
+  .price {
+    margin-top: 50px;
+    //margin-left: 5px;
+    color: $grey;
+    font-size: 16px;
+    font-weight: 400;
+    vertical-align: middle;
+
+    img {
+      vertical-align: sub;
+    }
+  }
+
+  /deep/ .el-checkbox-group {
+    margin-top: 20px;
+  }
+
+  button {
+    float: right;
+    //margin-right: 10%;
+    margin-top: 69px;
+    padding: 5px 10px;
+    color: $white-color;
+    background-color: $main-color;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    @include transition(all, 0.3s);
+
+    &:hover {
+      @include transition(all, 0.3s);
+      background-color: $sub-color;
+    }
+  }
+}

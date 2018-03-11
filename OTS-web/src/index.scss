@@ -53,4 +53,22 @@ html {
     border-color: $main-color;
   }
 
+  //checkbox style
+  .el-checkbox__input.is-checked+.el-checkbox__label {
+    color: $main-color
+  }
+
+  .el-checkbox__inner:hover {
+    border-color: $main-color;
+  }
+
+  .el-checkbox.is-bordered.is-checked {
+    border-color: $main-color;
+  }
+
+  .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    background-color: $main-color;
+    border-color: $main-color;
+  }
+
 }

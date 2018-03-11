@@ -60,7 +60,7 @@ button {
           -ms-transition: all, 0.5s;
           -o-transition: all, 0.5s;
           transition: all, 0.5s;
-          background-color: #ecc543; }
+          background-color: #f1a63a; }
     .auth-wrapper .left-form-wrapper /deep/ .el-input {
       width: 80%; }
     .auth-wrapper .left-form-wrapper /deep/ .el-form-item {

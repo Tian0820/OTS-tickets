@@ -1,0 +1,85 @@
+html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  list-style: none; }
+
+html {
+  height: 100%; }
+
+* {
+  position: relative;
+  box-sizing: border-box; }
+
+button {
+  outline: none; }
+
+/*
+ * grid
+ */
+.show-detail-wrapper {
+  display: inline-block;
+  margin-top: 80px;
+  padding: 30px;
+  width: 100%;
+  height: 400px;
+  background-color: #ffffff; }
+  .show-detail-wrapper .poster-wrapper {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: inline-block;
+    width: 26%;
+    height: 100%;
+    vertical-align: top; }
+  .show-detail-wrapper .info-wrapper {
+    display: inline-block;
+    margin-left: 3%;
+    width: 70%;
+    height: 100%;
+    vertical-align: top; }
+  .show-detail-wrapper .show-title {
+    color: #595959;
+    font-size: 18px;
+    font-weight: 500; }
+  .show-detail-wrapper .show-location {
+    margin-top: 10px;
+    color: #848484;
+    font-size: 14px; }
+  .show-detail-wrapper .price {
+    margin-top: 50px;
+    color: #595959;
+    font-size: 16px;
+    font-weight: 400;
+    vertical-align: middle; }
+    .show-detail-wrapper .price img {
+      vertical-align: sub; }
+  .show-detail-wrapper /deep/ .el-checkbox-group {
+    margin-top: 20px; }
+  .show-detail-wrapper button {
+    float: right;
+    margin-top: 69px;
+    padding: 5px 10px;
+    color: #ffffff;
+    background-color: #e9a038;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    -webkit-transition: all, 0.3s;
+    -moz-transition: all, 0.3s;
+    -ms-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s; }
+    .show-detail-wrapper button:hover {
+      -webkit-transition: all, 0.3s;
+      -moz-transition: all, 0.3s;
+      -ms-transition: all, 0.3s;
+      -o-transition: all, 0.3s;
+      transition: all, 0.3s;
+      background-color: #f1a63a; }
+
+/*# sourceMappingURL=ShowDetail.css.map */
