@@ -63,7 +63,7 @@ button {
           -ms-transition: all 0.5s;
           -o-transition: all 0.5s;
           transition: all 0.5s;
-          color: #4e7ede; }
+          color: #e9a038; }
         .nav-wrapper .right-wrapper .button-wrapper .el-button img, .nav-wrapper .right-wrapper .button-wrapper .el-dropdown img {
           vertical-align: middle;
           margin-right: 5px; }
@@ -98,6 +98,6 @@ li {
     -o-transition: all 0.5s;
     transition: all 0.5s;
     background-color: #f6f6f6;
-    color: #4e7ede; }
+    color: #e9a038; }
 
 /*# sourceMappingURL=Navigator.css.map */

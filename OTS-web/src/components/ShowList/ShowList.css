@@ -19,14 +19,10 @@ button {
 /*
  * grid
  */
-.header-wrapper {
-  padding-bottom: 10px; }
-  .header-wrapper h4 {
-    border-left: 3px solid #e9a038;
-    margin-bottom: 15px;
-    padding-left: 10px;
-    color: #595959;
-    font-size: 16px;
-    font-weight: 400; }
+.list-wrapper {
+  display: inline-block;
+  padding: 30px;
+  margin-top: 30px;
+  width: 100%; }
 
-/*# sourceMappingURL=DivHeader.css.map */
+/*# sourceMappingURL=ShowList.css.map */

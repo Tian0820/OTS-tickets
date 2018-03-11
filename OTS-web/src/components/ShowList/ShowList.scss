@@ -1,0 +1,10 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+@import "../../assets/scss/mixin";
+
+.list-wrapper {
+  display: inline-block;
+  padding: 30px;
+  margin-top: 30px;
+  width: 100%;
+}

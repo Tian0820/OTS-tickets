@@ -45,7 +45,7 @@ button {
     float: right;
     margin-top: 15px;
     padding: 5px 25px;
-    background-color: #4e7ede;
+    background-color: #e9a038;
     border-radius: 100px;
     color: #ffffff;
     vertical-align: middle;
@@ -61,6 +61,6 @@ button {
       -ms-transition: all, 0.5s;
       -o-transition: all, 0.5s;
       transition: all, 0.5s;
-      background-color: #5689f2; }
+      background-color: #ecc543; }
 
 /*# sourceMappingURL=VenueRegister.css.map */
