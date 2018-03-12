@@ -26,7 +26,7 @@
 
         <div class="button-wrapper">
 
-          <div v-if="user === null">
+          <div v-if="user === null || user === ''">
             <el-button type="text" @click="goToLoginPage">登录</el-button>
             <el-button type="text" @click="goToRegisterPage">注册</el-button>
           </div>
@@ -38,7 +38,7 @@
           </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="UserHomePage">我的主页</el-dropdown-item>
-                <el-dropdown-item command="AccountPage">修改资料</el-dropdown-item>
+                <el-dropdown-item command="UserInfoPage">修改资料</el-dropdown-item>
                 <el-dropdown-item command="signOut">退出账号</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -48,11 +48,14 @@
 
     </div>
 
+    <exchange-coupon-modal></exchange-coupon-modal>
+
   </div>
 </template>
 
 
 <script>
+  import ExchangeCouponModal from '../Modal/ExchangeCouponModal.vue'
   import {Input, Button, Dropdown, DropdownMenu, DropdownItem, Message} from 'element-ui'
   import {router} from '../../main'
   import {mapMutations, mapState, mapActions} from 'vuex'
@@ -62,6 +65,7 @@
   export default {
     name: 'navigator',
     components: {
+      ExchangeCouponModal,
       elInput: Input,
       elButton: Button,
       elDropdown: Dropdown,

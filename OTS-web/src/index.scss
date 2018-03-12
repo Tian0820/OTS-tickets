@@ -71,4 +71,14 @@ html {
     border-color: $main-color;
   }
 
+  //radio style
+  .el-radio__input.is-checked .el-radio__inner {
+    background-color: $main-color;
+    border-color: $main-color;
+  }
+
+  .el-radio__input.is-checked+.el-radio__label {
+    color: #606266;
+  }
+
 }

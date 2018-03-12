@@ -9,8 +9,9 @@
       <p :style="{fontWeight: 400}">欢迎，{{user.username}}！</p>
       <p>邮箱：{{user.email}}</p>
       <p>手机：{{user.phone}}</p>
-      <p>我的等级：{{user.level}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <p :style="{display: 'inline-block'}">我的等级：{{user.level}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         我的积分：{{user.point}}</p>
+      <button @click="handleExchangeCoupon">兑换优惠券</button>
     </div>
 
   </div>
@@ -35,7 +36,11 @@
         avatarUrl: 'https://cdn.dribbble.com/users/548267/screenshots/2657798/wagon_v1_dribbble.jpg',
       }
     },
-    methods: {}
+    methods: {
+      handleExchangeCoupon() {
+        this.$modal.show('exchange-coupon-modal')
+      }
+    }
   }
 
 </script>

@@ -17,6 +17,7 @@
   import Layout from '../components/Layout/Layout.vue'
   import Banner from '../components/Banner/Banner.vue'
   import ShowList from '../components/ShowList/ShowList.vue'
+  import {Message} from 'element-ui'
   import {store} from '../main'
   import {mapActions} from 'vuex'
 
@@ -25,7 +26,8 @@
     components: {
       Layout,
       Banner,
-      ShowList
+      ShowList,
+      Message
     },
     data() {
       return {}
@@ -40,6 +42,7 @@
         onSuccess: (success) => {
         },
         onError: (error) => {
+          Message.error(error)
         }
       })
       next(true)

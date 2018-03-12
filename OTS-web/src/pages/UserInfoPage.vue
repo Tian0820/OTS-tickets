@@ -2,9 +2,7 @@
   <div class="body-wrapper">
     <layout>
       <div class="container">
-
-        <user-home v-if="user"></user-home>
-
+        <user-info v-if="user" :user="user"></user-info>
       </div>
     </layout>
   </div>
@@ -12,17 +10,17 @@
 </template>
 
 <script>
-  import {Message} from 'element-ui'
+  import UserInfo from '../components/Admin/UserInfo.vue'
   import Layout from '../components/Layout/Layout.vue'
-  import UserHome from '../components/UserHome/UserHome.vue'
+  import {Message} from 'element-ui'
   import {router, store} from '../main'
   import {mapState} from 'vuex'
 
   export default {
-    name: 'user-home-page',
+    name: 'user-info-page',
     components: {
       Layout,
-      UserHome
+      UserInfo
     },
     data() {
       return {}

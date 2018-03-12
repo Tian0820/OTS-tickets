@@ -1,0 +1,80 @@
+html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  list-style: none; }
+
+html {
+  height: 100%; }
+
+* {
+  position: relative;
+  box-sizing: border-box; }
+
+button {
+  outline: none; }
+
+/*
+ * grid
+ */
+.user-info-wrapper {
+  display: inline-block;
+  margin-top: 80px;
+  padding: 60px;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff; }
+
+.user-password-wrapper {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 60px;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff; }
+
+h1 {
+  font-size: 22px;
+  font-weight: 400;
+  color: #e9a038; }
+
+.button-wrapper {
+  display: block;
+  float: right;
+  margin-top: 10px;
+  text-align: center; }
+  .button-wrapper button {
+    padding: 5px 20px;
+    background-color: #e9a038;
+    border-radius: 100px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-indent: 3px;
+    color: #ffffff;
+    -webkit-transition: all, 0.3s;
+    -moz-transition: all, 0.3s;
+    -ms-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s; }
+    .button-wrapper button:hover {
+      -webkit-transition: all, 0.5s;
+      -moz-transition: all, 0.5s;
+      -ms-transition: all, 0.5s;
+      -o-transition: all, 0.5s;
+      transition: all, 0.5s;
+      background-color: #f1a63a; }
+
+/deep/ .el-form {
+  margin-top: 50px;
+  width: 80%; }
+
+/deep/ .el-form-item {
+  margin-bottom: 20px; }
+
+/deep/ .el-form--label-top .el-form-item__label {
+  padding: 0;
+  height: 35px; }
+
+/*# sourceMappingURL=UserInfo.css.map */

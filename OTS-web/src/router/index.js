@@ -7,6 +7,7 @@ import VenueRegisterPage from '@/pages/VenueRegisterPage'
 import LoginPage from '@/pages/LoginPage'
 import UserHomePage from '@/pages/UserHomePage'
 import ShowDetailPage from '@/pages/ShowDetailPage'
+import UserInfoPage from '@/pages/UserInfoPage'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/show/:showId',
       name: 'ShowDetailPage',
       component: ShowDetailPage
+    },
+    {
+      path: '/user/me/info',
+      name: 'UserInfoPage',
+      component: UserInfoPage
     }
   ]
 })

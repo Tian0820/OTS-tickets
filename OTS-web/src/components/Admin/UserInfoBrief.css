@@ -36,7 +36,8 @@ button {
     width: 100px;
     height: 100px;
     vertical-align: top;
-    text-align: center; }
+    text-align: center;
+    cursor: pointer; }
   .user-info-wrapper .info-wrapper {
     display: inline-block;
     margin-left: 50px;
@@ -48,5 +49,26 @@ button {
       color: #595959; }
       .user-info-wrapper .info-wrapper p:first-child {
         margin-top: 0; }
+    .user-info-wrapper .info-wrapper button {
+      display: inline-block;
+      margin-left: 20px;
+      padding: 2px 10px;
+      border-radius: 3px;
+      font-size: 12px;
+      color: #ffffff;
+      background-color: #e9a038;
+      cursor: pointer;
+      -webkit-transition: all, 0.3s;
+      -moz-transition: all, 0.3s;
+      -ms-transition: all, 0.3s;
+      -o-transition: all, 0.3s;
+      transition: all, 0.3s; }
+      .user-info-wrapper .info-wrapper button:hover {
+        -webkit-transition: all, 0.3s;
+        -moz-transition: all, 0.3s;
+        -ms-transition: all, 0.3s;
+        -o-transition: all, 0.3s;
+        transition: all, 0.3s;
+        background-color: #f1a63a; }
 
 /*# sourceMappingURL=UserInfoBrief.css.map */

@@ -87,13 +87,14 @@ const actions = {
   refreshUser({dispatch}, {onSuccess, onError}) {
     const token = localStorage.getItem('token')
     if (token !== null) {
+      console.log('null')
       dispatch('fetchCurrentUser', {onSuccess, onError})
     }
   },
 
   signOut({commit}, {onSuccess}) {
     const username = state.currentUser.username
-    localStorage.setItem('token', null)
+    localStorage.setItem('token', '')
     commit('saveCurrentUser', null)
     if (onSuccess) {
       onSuccess(username)
