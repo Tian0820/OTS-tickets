@@ -58,7 +58,7 @@ button {
     vertical-align: middle; }
     .show-detail-wrapper .price img {
       vertical-align: sub; }
-  .show-detail-wrapper /deep/ .el-checkbox-group {
+  .show-detail-wrapper /deep/ .el-radio-group {
     margin-top: 20px; }
   .show-detail-wrapper button {
     float: right;

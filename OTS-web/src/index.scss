@@ -54,7 +54,7 @@ html {
   }
 
   //checkbox style
-  .el-checkbox__input.is-checked+.el-checkbox__label {
+  .el-checkbox__input.is-checked + .el-checkbox__label {
     color: $main-color
   }
 
@@ -71,14 +71,22 @@ html {
     border-color: $main-color;
   }
 
+  .el-checkbox__input.is-focus .el-checkbox__inner {
+    border-color: $main-color;
+  }
+
   //radio style
   .el-radio__input.is-checked .el-radio__inner {
     background-color: $main-color;
     border-color: $main-color;
   }
 
-  .el-radio__input.is-checked+.el-radio__label {
+  .el-radio__input.is-checked + .el-radio__label {
     color: #606266;
+  }
+
+  .el-radio.is-bordered.is-checked {
+    border-color: $main-color;
   }
 
 }

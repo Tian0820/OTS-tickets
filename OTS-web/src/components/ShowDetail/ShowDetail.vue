@@ -18,15 +18,18 @@
           &nbsp;&nbsp;&nbsp;票价
         </p>
 
-        <el-checkbox-group v-model="checkboxGroup" size="small">
-          <el-checkbox label="180元" border></el-checkbox>
-          <el-checkbox label="280元" border></el-checkbox>
-          <el-checkbox label="380元" border></el-checkbox>
-          <el-checkbox label="480元" border></el-checkbox>
-          <el-checkbox label="680元" border></el-checkbox>
-        </el-checkbox-group>
+        <el-radio-group
+          v-model="checkboxGroup"
+          size="small"
+          :max="1">
+          <el-radio label="180元" border></el-radio>
+          <el-radio label="280元" border></el-radio>
+          <el-radio label="380元" border></el-radio>
+          <el-radio label="480元" border></el-radio>
+          <el-radio label="680元" border></el-radio>
+        </el-radio-group>
 
-        <button>选座购票</button>
+        <button @click="handleChooseSeat">选座购票</button>
 
 
       </div>
@@ -42,16 +45,19 @@
 
 <script>
   import DivHeader from '../Util/DivHeader.vue'
-  import {Checkbox, CheckboxGroup} from 'element-ui'
+  import {Checkbox, CheckboxGroup, RadioGroup, Radio} from 'element-ui'
   import {store} from '../../main'
   import {mapActions} from 'vuex'
+  import ElRadio from "../../../node_modules/element-ui/packages/radio/src/radio.vue";
 
   export default {
     name: 'show-detail',
     components: {
       DivHeader,
       elCheckbox: Checkbox,
-      elCheckboxGroup: CheckboxGroup
+      elCheckboxGroup: CheckboxGroup,
+      elRadioGroup: RadioGroup,
+      elRadio: Radio
     },
     data() {
       let name = 'poster.jpg'
@@ -60,7 +66,11 @@
         checkboxGroup: []
       }
     },
-    methods: {},
+    methods: {
+      handleChooseSeat() {
+        this.$modal.show('choose-seat-modal')
+      }
+    },
   }
 </script>
 

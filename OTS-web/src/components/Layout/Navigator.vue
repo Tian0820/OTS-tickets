@@ -49,6 +49,7 @@
     </div>
 
     <exchange-coupon-modal></exchange-coupon-modal>
+    <choose-seat-modal></choose-seat-modal>
 
   </div>
 </template>
@@ -56,6 +57,7 @@
 
 <script>
   import ExchangeCouponModal from '../Modal/ExchangeCouponModal.vue'
+  import ChooseSeatModal from '../Modal/ChooseSeatModal.vue'
   import {Input, Button, Dropdown, DropdownMenu, DropdownItem, Message} from 'element-ui'
   import {router} from '../../main'
   import {mapMutations, mapState, mapActions} from 'vuex'
@@ -66,6 +68,7 @@
     name: 'navigator',
     components: {
       ExchangeCouponModal,
+      ChooseSeatModal,
       elInput: Input,
       elButton: Button,
       elDropdown: Dropdown,

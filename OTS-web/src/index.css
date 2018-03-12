@@ -79,10 +79,14 @@ html .el-checkbox.is-bordered.is-checked {
 html .el-checkbox__input.is-checked .el-checkbox__inner, html .el-checkbox__input.is-indeterminate .el-checkbox__inner {
   background-color: #e9a038;
   border-color: #e9a038; }
+html .el-checkbox__input.is-focus .el-checkbox__inner {
+  border-color: #e9a038; }
 html .el-radio__input.is-checked .el-radio__inner {
   background-color: #e9a038;
   border-color: #e9a038; }
 html .el-radio__input.is-checked + .el-radio__label {
   color: #606266; }
+html .el-radio.is-bordered.is-checked {
+  border-color: #e9a038; }
 
 /*# sourceMappingURL=index.css.map */
