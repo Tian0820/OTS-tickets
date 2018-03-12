@@ -110,8 +110,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultMessage updateUser(User user) {
-        return null;
+    public ResultMessage updateUser(UserInfoBean user) {
+        User currentUser = userRepository.findUserByEmail(user.getEmail());
+        if (currentUser != null) {
+            currentUser.setPhone(user.getPhone());
+            currentUser.setUsername(user.getUsername());
+            userRepository.save(currentUser);
+            return ResultMessage.SUCCESS;
+        }
+        return ResultMessage.FAILED;
     }
 
     @Override

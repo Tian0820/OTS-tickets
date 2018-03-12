@@ -70,3 +70,17 @@ export function fetchCurrentUser(callback, email) {
       console.log(error)
     })
 }
+
+export function editUserInfo(callback, userInfo) {
+  axios.post('/user/info',
+    userInfo,
+    {
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

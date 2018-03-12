@@ -51,3 +51,18 @@
     }
   }
 }
+
+.el-radio {
+  margin-bottom: 50px;
+
+  p {
+    //display: inline-block;
+    font-size: 16px;
+    color: $main-color;
+  }
+}
+
+.el-radio+.el-radio {
+  margin-left: 0;
+  margin-bottom: 20px;
+}

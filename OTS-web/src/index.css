@@ -88,5 +88,13 @@ html .el-radio__input.is-checked + .el-radio__label {
   color: #606266; }
 html .el-radio.is-bordered.is-checked {
   border-color: #e9a038; }
+html .el-select .el-input.is-focus .el-input__inner {
+  border-color: #e9a038; }
+html .el-select-dropdown__item.selected {
+  color: #e9a038; }
+html .el-input-number__decrease:hover, html .el-input-number__increase:hover {
+  color: #e9a038; }
+html .el-input-number__decrease:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled), html .el-input-number__increase:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
+  border-color: #e9a038; }
 
 /*# sourceMappingURL=index.css.map */

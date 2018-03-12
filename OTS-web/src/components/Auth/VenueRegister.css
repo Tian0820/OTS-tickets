@@ -63,4 +63,14 @@ button {
       transition: all, 0.5s;
       background-color: #f1a63a; }
 
+.el-radio {
+  margin-bottom: 50px; }
+  .el-radio p {
+    font-size: 16px;
+    color: #e9a038; }
+
+.el-radio + .el-radio {
+  margin-left: 0;
+  margin-bottom: 20px; }
+
 /*# sourceMappingURL=VenueRegister.css.map */

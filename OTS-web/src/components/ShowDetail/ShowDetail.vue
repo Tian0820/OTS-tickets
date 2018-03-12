@@ -29,6 +29,7 @@
           <el-radio label="680元" border></el-radio>
         </el-radio-group>
 
+        <button @click="handleBuyTickets">立即购买</button>
         <button @click="handleChooseSeat">选座购票</button>
 
 
@@ -69,6 +70,9 @@
     methods: {
       handleChooseSeat() {
         this.$modal.show('choose-seat-modal')
+      },
+      handleBuyTickets() {
+        this.$modal.show('buy-tickets-modal')
       }
     },
   }

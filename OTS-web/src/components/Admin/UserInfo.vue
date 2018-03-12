@@ -65,15 +65,17 @@
 </template>
 
 <script>
-  import {Form, FormItem, Input} from 'element-ui'
+  import {Form, FormItem, Input, Message} from 'element-ui'
   import {router} from '../../main'
+  import {mapActions} from 'vuex'
 
   export default {
     name: 'user-info',
     components: {
       elForm: Form,
       elFormItem: FormItem,
-      elInput: Input
+      elInput: Input,
+      Message
     },
     props: ['user'],
     data() {
@@ -150,8 +152,25 @@
       }
     },
     methods: {
-      submitInfoForm() {
-
+      ...mapActions('auth', [
+        'editUserInfo'
+      ]),
+      submitInfoForm(data) {
+        this.$refs[data].validate((valid) => {
+          if (valid) {
+            this.editUserInfo({
+              userInfo: this.userInfoForm,
+              onSuccess: (success) => {
+                Message.success(success)
+              },
+              onError: (error) => {
+                Message.error(error)
+              }
+            })
+          } else {
+            Message.error('请正确填写信息！')
+          }
+        })
       },
       submitPasswordForm() {
 

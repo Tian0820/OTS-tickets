@@ -1,7 +1,7 @@
 <template>
   <modal
     name="choose-seat-modal"
-    :clickToClose="true"
+    :clickToClose="false"
     :height="500">
 
     <div class="modal-wrapper">

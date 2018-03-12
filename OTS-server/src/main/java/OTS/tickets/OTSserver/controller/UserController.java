@@ -122,4 +122,21 @@ public class UserController {
             @RequestParam(value = "email") String email) {
         return userService.getCurrentUser(email);
     }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/user/info",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean editUserInfo(
+            @RequestBody UserInfoBean user) {
+        ResultMessage resultMessage = userService.updateUser(user);
+        ResultMessageBean result = new ResultMessageBean(false);
+        if (resultMessage == ResultMessage.SUCCESS) {
+            result.result = true;
+        } else if (resultMessage == ResultMessage.FAILED) {
+            result.message = "修改失败！";
+        }
+        return result;
+    }
 }

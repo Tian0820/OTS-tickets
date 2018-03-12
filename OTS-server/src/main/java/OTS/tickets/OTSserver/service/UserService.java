@@ -81,7 +81,7 @@ public interface UserService {
      * @param user 新用户
      * @return 是否更新成功
      */
-    ResultMessage updateUser(User user);
+    ResultMessage updateUser(UserInfoBean user);
 
     /**
      * 删除用户

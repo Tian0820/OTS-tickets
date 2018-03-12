@@ -101,6 +101,18 @@ const actions = {
     }
   },
 
+  editUserInfo({commit}, {userInfo, onSuccess, onError}) {
+    authApi.editUserInfo((data => {
+      if (data.result === true) {
+        if (onSuccess) {
+          onSuccess('修改成功！')
+        }
+      } else {
+        onError(data.message)
+      }
+    }), userInfo)
+  }
+
 };
 
 const mutations = {

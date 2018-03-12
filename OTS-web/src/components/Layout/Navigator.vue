@@ -50,6 +50,7 @@
 
     <exchange-coupon-modal></exchange-coupon-modal>
     <choose-seat-modal></choose-seat-modal>
+    <buy-tickets-modal></buy-tickets-modal>
 
   </div>
 </template>
@@ -58,6 +59,7 @@
 <script>
   import ExchangeCouponModal from '../Modal/ExchangeCouponModal.vue'
   import ChooseSeatModal from '../Modal/ChooseSeatModal.vue'
+  import BuyTicketsModal from '../Modal/BuyTicketsModal.vue'
   import {Input, Button, Dropdown, DropdownMenu, DropdownItem, Message} from 'element-ui'
   import {router} from '../../main'
   import {mapMutations, mapState, mapActions} from 'vuex'
@@ -69,6 +71,7 @@
     components: {
       ExchangeCouponModal,
       ChooseSeatModal,
+      BuyTicketsModal,
       elInput: Input,
       elButton: Button,
       elDropdown: Dropdown,

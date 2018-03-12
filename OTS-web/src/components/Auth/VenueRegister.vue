@@ -11,8 +11,8 @@
           <el-input v-model="registerForm.venueName"></el-input>
         </el-form-item>
 
-        <el-form-item label="场馆地点" prop="venueAddress">
-          <el-select v-model="registerForm.venueAddress" placeholder="请选择地点">
+        <el-form-item label="场馆城市" prop="venueCity">
+          <el-select v-model="registerForm.venueCity" placeholder="请选择地点">
             <el-option
               v-for="item in addresses"
               :key="item.value"
@@ -22,29 +22,29 @@
           </el-select>
         </el-form-item>
 
+        <el-form-item label="具体地点" prop="venueAddress">
+          <el-input v-model="registerForm.venueAddress"></el-input>
+        </el-form-item>
+
         <el-form-item label="座位情况" prop="venueSeats">
-          <el-checkbox-group
+          <el-radio-group
             v-model="registerForm.venueSeats"
-            :min="1"
-            :max="4">
-            <el-checkbox label="歌剧院">
+          >
+            <el-radio label="大剧场">
+              <p>大剧场：一共分为六个区，每个区100个座位</p>
               <img src="http://www.chncpa.org/ycgp_220/cgzwt/gjy1/201607/P020160823576857440865.jpg"/>
-            </el-checkbox>
-            <el-checkbox label="小剧场">
+
+            </el-radio>
+            <el-radio label="小剧场">
+              <p>小剧场：一共分为三个区，每个区100个座位</p>
               <img src="http://www.chncpa.org/ycgp_220/cgzwt/xjc2/201607/P020160823577871558172.jpg"/>
-            </el-checkbox>
-            <el-checkbox label="音乐厅">
-              <img src="http://www.chncpa.org/ycgp_220/cgzwt/yyt1/201607/P020160823577391563903.jpg"/>
-            </el-checkbox>
-            <el-checkbox label="戏剧场">
-              <img src="http://www.chncpa.org/ycgp_220/cgzwt/xjc1/201607/P020160823577654015951.jpg"/>
-            </el-checkbox>
-          </el-checkbox-group>
+            </el-radio>
+          </el-radio-group>
         </el-form-item>
 
       </el-form>
 
-      <button @click="">注册</button>
+      <button @click="submitForm('registerForm')">注册</button>
 
     </div>
 
@@ -62,7 +62,10 @@
     Select,
     Option,
     CheckboxGroup,
-    Checkbox
+    Checkbox,
+    Radio,
+    RadioGroup,
+    Message
   } from 'element-ui'
 
   export default {
@@ -75,7 +78,10 @@
       elSelect: Select,
       elOption: Option,
       elCheckboxGroup: CheckboxGroup,
-      elCheckbox: Checkbox
+      elCheckbox: Checkbox,
+      elRadioGroup: RadioGroup,
+      elRadio: Radio,
+      Message
     },
     data() {
       let checkVenueName = (rule, value, callback) => {
@@ -87,7 +93,7 @@
       };
       let checkVenueAddress = (rule, value, callback) => {
         if (!value) {
-          return callback(new Error('请输入场馆名'))
+          return callback(new Error('请输入场馆地址'))
         } else {
           callback()
         }
@@ -95,8 +101,9 @@
       return {
         registerForm: {
           venueName: '',
-          venueAddress: '北京',
-          venueSeats: ['歌剧院'],
+          venueCity: '北京',
+          venueSeats: '大剧场',
+          venueAddress: ''
         },
         addresses: [
           {
@@ -120,6 +127,9 @@
           venueName: [
             {required: true, validator: checkVenueName, trigger: 'blur'}
           ],
+          venueCity: [
+            {required: true, validator: checkVenueAddress, trigger: 'blur'}
+          ],
           venueAddress: [
             {required: true, validator: checkVenueAddress, trigger: 'blur'}
           ]
@@ -127,7 +137,18 @@
       }
     },
     computed: {},
-    methods: {}
+    methods: {
+      submitForm(data) {
+        this.$refs[data].validate((valid) => {
+          if (valid) {
+
+          } else {
+            Message.error('请正确填写信息！')
+          }
+
+        })
+      }
+    }
   }
 
 </script>
