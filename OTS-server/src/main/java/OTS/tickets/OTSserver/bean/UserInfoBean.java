@@ -37,10 +37,15 @@ public class UserInfoBean {
      */
     private double point;
 
+    /**
+     * 用户余额
+     */
+    private double balance;
+
     public UserInfoBean() {
     }
 
-    public UserInfoBean(int userId, String username, String email, String password, String phone, int level, double point) {
+    public UserInfoBean(int userId, String username, String email, String password, String phone, int level, double point, double balance) {
         this.userId = userId;
         this.username = username;
         this.email = email;
@@ -48,6 +53,7 @@ public class UserInfoBean {
         this.phone = phone;
         this.level = level;
         this.point = point;
+        this.balance = balance;
     }
 
     public int getUserId() {
@@ -104,5 +110,13 @@ public class UserInfoBean {
 
     public void setPoint(double point) {
         this.point = point;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

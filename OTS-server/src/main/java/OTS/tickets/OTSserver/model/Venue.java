@@ -16,25 +16,25 @@ public class Venue {
 
     private String code;
 
-    private String venue_name;
+    private String venueName;
 
     private String city;
 
     private String address;
 
-    private String seat_type;
+    private String seatType;
 
     private String password;
 
     public Venue() {
     }
 
-    public Venue(String code, String venue_name, String city, String address, String seat_type, String password) {
+    public Venue(String code, String venueName, String city, String address, String seatType, String password) {
         this.code = code;
-        this.venue_name = venue_name;
+        this.venueName = venueName;
         this.city = city;
         this.address = address;
-        this.seat_type = seat_type;
+        this.seatType = seatType;
         this.password = password;
     }
 
@@ -54,12 +54,12 @@ public class Venue {
         this.code = code;
     }
 
-    public String getVenue_name() {
-        return venue_name;
+    public String getVenueName() {
+        return venueName;
     }
 
-    public void setVenue_name(String venue_name) {
-        this.venue_name = venue_name;
+    public void setVenueName(String venueName) {
+        this.venueName = venueName;
     }
 
     public String getCity() {
@@ -78,12 +78,12 @@ public class Venue {
         this.address = address;
     }
 
-    public String getSeat_type() {
-        return seat_type;
+    public String getSeatType() {
+        return seatType;
     }
 
-    public void setSeat_type(String seat_type) {
-        this.seat_type = seat_type;
+    public void setSeatType(String seatType) {
+        this.seatType = seatType;
     }
 
     public String getPassword() {

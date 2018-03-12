@@ -8,13 +8,13 @@
       <h1>优惠券兑换</h1>
 
       <el-radio-group v-model="radio">
-        <el-radio :label="1"><span><span class="number">1000</span> 积分 兑换 <span class="number">9折 </span>优惠券</span>
+        <el-radio :label="1000"><span><span class="number">1000</span> 积分 兑换 <span class="number">9折 </span>优惠券</span>
         </el-radio>
         <br/>
-        <el-radio :label="2"><span><span class="number">2000</span> 积分 兑换 <span class="number">8折 </span>优惠券</span>
+        <el-radio :label="2000"><span><span class="number">2000</span> 积分 兑换 <span class="number">8折 </span>优惠券</span>
         </el-radio>
         <br/>
-        <el-radio :label="3"><span><span class="number">4000</span> 积分 兑换 <span class="number">7折 </span>优惠券</span>
+        <el-radio :label="4000"><span><span class="number">4000</span> 积分 兑换 <span class="number">7折 </span>优惠券</span>
         </el-radio>
       </el-radio-group>
 
@@ -30,6 +30,7 @@
 <script>
   import {RadioGroup, Radio, Message} from 'element-ui'
   import {router} from '../../main'
+  import {mapState, mapActions} from 'vuex'
 
   export default {
     name: 'exchange-coupon-modal',
@@ -40,13 +41,23 @@
     },
     data() {
       return {
-        radio: 3
+        radio: 1000
       }
+    },
+    computed: {
+      ...mapState('auth', {
+        user: state => state.currentUser
+      })
     },
     methods: {
       handleExchange() {
-        Message.success('兑换成功！')
-        this.$modal.hide('exchange-coupon-modal')
+        if (this.user.point < this.radio) {
+          Message.error('积分不足，无法兑换！')
+        } else {
+          Message.success('兑换成功！')
+          this.$modal.hide('exchange-coupon-modal')
+        }
+
       }
     }
   }

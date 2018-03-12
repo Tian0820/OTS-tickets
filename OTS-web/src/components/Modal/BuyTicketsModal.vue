@@ -51,8 +51,9 @@
         this.$modal.hide('buy-tickets-modal')
       },
       handleConfirm() {
-        Message.success('购买成功！')
+//        Message.success('购买成功！')
         this.$modal.hide('buy-tickets-modal')
+        this.$modal.show('pay-modal')
       }
     }
   }

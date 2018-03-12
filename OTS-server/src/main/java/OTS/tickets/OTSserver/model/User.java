@@ -29,16 +29,19 @@ public class User {
 
     private String code;
 
+    private Double balance;
+
     public User() {
     }
 
-    public User(String username, String password, String email, String phone, Integer level, Double point) {
+    public User(String username, String password, String email, String phone, Integer level, Double point, Double balance) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.level = level;
         this.point = point;
+        this.balance = balance;
     }
 
     public Integer getId() {
@@ -111,5 +114,13 @@ public class User {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 }

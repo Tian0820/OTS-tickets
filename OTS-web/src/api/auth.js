@@ -84,3 +84,7 @@ export function editUserInfo(callback, userInfo) {
       console.log(error)
     })
 }
+
+export function exchangeCoupon(callback) {
+
+}

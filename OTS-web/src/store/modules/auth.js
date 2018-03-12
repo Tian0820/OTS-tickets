@@ -111,6 +111,10 @@ const actions = {
         onError(data.message)
       }
     }), userInfo)
+  },
+
+  exchangeCoupon() {
+
   }
 
 };
