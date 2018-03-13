@@ -42,7 +42,15 @@
         onSuccess: (success) => {
         },
         onError: (error) => {
-          Message.error(error)
+//          Message.error('user not login')
+          store.dispatch('venue/refreshVenue', {
+            onSuccess: (success) => {
+            },
+            onError: (error) => {
+//              Message.error('venue not login')
+            }
+          })
+
         }
       })
       next(true)

@@ -2,6 +2,7 @@ package OTS.tickets.OTSserver.service.impl;
 
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.bean.VenueInfoBean;
+import OTS.tickets.OTSserver.bean.VenuePasswordBean;
 import OTS.tickets.OTSserver.model.Venue;
 import OTS.tickets.OTSserver.repository.VenueRepository;
 import OTS.tickets.OTSserver.service.VenueService;
@@ -15,9 +16,24 @@ public class VenueServiceImpl implements VenueService {
     @Autowired
     VenueRepository venueRepository;
 
+    private VenueInfoBean venueToVenueInfoBean(Venue venue) {
+        return new VenueInfoBean(venue.getId(), venue.getCode(), venue.getVenueName(), venue.getCity(),
+                venue.getAddress(), venue.getSeatType(), venue.getPassword());
+    }
+
     @Override
-    public ResultMessage signIn(String code, String password) {
-        return null;
+    public ResultMessageBean signIn(VenuePasswordBean venuePasswordBean) {
+        Venue venue = venueRepository.findVenueByCode(venuePasswordBean.getCode());
+        ResultMessageBean result = new ResultMessageBean(false);
+        if (venue == null) {
+            result.message = "场馆编号不存在！";
+        } else if (!venue.getPassword().equals(venuePasswordBean.getPassword())) {
+            result.message = "密码错误！";
+        } else {
+            result.result = true;
+            result.message = venue.getCode();
+        }
+        return result;
     }
 
     @Override
@@ -48,6 +64,10 @@ public class VenueServiceImpl implements VenueService {
 
     @Override
     public VenueInfoBean getCurrentVenue(String venueCode) {
+        Venue venue = venueRepository.findVenueByCode(venueCode);
+        if (venue != null) {
+            return venueToVenueInfoBean(venue);
+        }
         return null;
     }
 }

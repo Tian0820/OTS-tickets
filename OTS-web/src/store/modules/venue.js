@@ -20,6 +20,18 @@ const actions = {
     }, info)
   },
 
+  venueLogin({dispatch}, {info, onSuccess, onError}) {
+    venueApi.signIn(data => {
+      if (data.result === false) {
+        onError(data.message)
+      } else {
+        console.log(data)
+        localStorage.setItem('token', data.message)
+        dispatch('fetchCurrentVenue', {onSuccess})
+      }
+    }, info)
+  },
+
   fetchCurrentVenue({commit, state}, {onSuccess, onError}) {
     let currentVenue = localStorage.getItem('token')
     venueApi.fetchCurrentVenue(data => {
@@ -34,6 +46,18 @@ const actions = {
       }
     }, currentVenue)
   },
+
+  refreshVenue({dispatch, commit}, {onSuccess, onError}) {
+    const token = localStorage.getItem('token')
+    if (token === null || token.length !== 7) {
+      if (onError) {
+        onError('')
+      }
+    } else {
+      dispatch('fetchCurrentVenue', {onSuccess, onError})
+    }
+  },
+
 
 };
 

@@ -44,7 +44,7 @@ export function userRegister(callback, info) {
 }
 
 export function signIn(callback, info) {
-  axios.post('/sign-in',
+  axios.post('/user/sign-in',
     info,
     {
       headers: {'Content-Type': 'application/json'}

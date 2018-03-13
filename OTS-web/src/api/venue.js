@@ -14,6 +14,20 @@ export function venueRegister(callback, info) {
     })
 }
 
+export function signIn(callback, info) {
+  axios.post('/venue/sign-in',
+    info,
+    {
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
 export function fetchCurrentVenue(callback, currentVenue) {
   axios.get('/venue/me', {
     params: {

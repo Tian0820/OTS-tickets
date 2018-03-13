@@ -1,6 +1,7 @@
 import * as authApi from '../../api/auth'
 
 const state = {
+    loginType: null,
     registerStep: 0,
     ifSendVerifyCode: false,
     username: '',
@@ -8,7 +9,7 @@ const state = {
     password: '',
     phone: '',
     currentUsername: '',
-    currentUser: null,
+    currentUser: null
   }
 ;
 
@@ -84,17 +85,17 @@ const actions = {
     }, currentUsername)
   },
 
-  refreshUser({dispatch}, {onSuccess, onError}) {
+  refreshUser({dispatch, commit}, {onSuccess, onError}) {
     const token = localStorage.getItem('token')
-    if (token !== null) {
-      if (token.indexOf('@') >= 0) {
-        //当前登录的是会员
-        dispatch('fetchCurrentUser', {onSuccess, onError})
-      } else {
-        //当前登录的是场馆
-
+    if (token === null || token.indexOf('@') < 0) {
+      if (onError) {
+        onError('')
       }
+    } else {
+      // commit('saveLoginType', 'user');
+      dispatch('fetchCurrentUser', {onSuccess, onError})
     }
+
   },
 
   signOut({commit}, {onSuccess}) {
@@ -125,6 +126,9 @@ const actions = {
 };
 
 const mutations = {
+  'saveLoginType'(state, loginType) {
+    state.loginType = loginType
+  },
   'saveRegisterStep'(state, registerStep) {
     state.registerStep = registerStep
   },

@@ -26,12 +26,12 @@
 
         <div class="button-wrapper">
 
-          <div v-if="user === null || user === ''">
+          <div v-if="user === null && venue === null">
             <el-button type="text" @click="goToLoginPage">登录</el-button>
             <el-button type="text" @click="goToRegisterPage">注册</el-button>
           </div>
 
-          <div v-else>
+          <div v-else-if="user">
             <el-dropdown placement="bottom-start" @command="handleCommand">
           <span class="el-dropdown-link">
           {{user.username}}<i class="el-icon-caret-bottom el-icon--right"></i>
@@ -43,6 +43,21 @@
               </el-dropdown-menu>
             </el-dropdown>
           </div>
+
+          <div v-else-if="venue">
+            <el-dropdown placement="bottom-start" @command="handleCommand">
+          <span class="el-dropdown-link">
+          {{venue.venueName}}<i class="el-icon-caret-bottom el-icon--right"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="UserHomePage">我的主页</el-dropdown-item>
+                <el-dropdown-item command="UserInfoPage">修改资料</el-dropdown-item>
+                <el-dropdown-item command="signOut">退出账号</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+
+
         </div>
       </div>
 
@@ -92,11 +107,17 @@
     computed: {
       ...mapState('auth', {
         user: state => state.currentUser
+      }),
+      ...mapState('venue', {
+        venue: state => state.currentVenue
       })
     },
     methods: {
       ...mapActions('auth', [
         'signOut'
+      ]),
+      ...mapMutations('login', [
+        'saveCurrentLogin'
       ]),
       goToIndexPage() {
         router.push({name: 'IndexPage'})
@@ -116,6 +137,7 @@
           }
           router.push({name: command})
         } else {
+          this.saveCurrentLogin(null)
           this.signOut({
             onSuccess: (username) => {
               Message({

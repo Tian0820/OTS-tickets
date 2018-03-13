@@ -6,7 +6,7 @@
 
       <el-form :model="LoginForm" :rules="rules" ref="LoginForm" labelPosition="top">
 
-        <el-form-item label="用户邮箱 / 场馆编号" prop="email" auto-complete="off">
+        <el-form-item :label="label" prop="email" auto-complete="off">
           <el-input v-model="LoginForm.email"></el-input>
         </el-form-item>
 
@@ -53,7 +53,7 @@
     data() {
       let checkUsername = (rule, value, callback) => {
         if (!value) {
-          return callback(new Error('请输入邮箱账号'))
+          return callback(new Error('请输入内容'))
         } else {
           callback()
         }
@@ -65,7 +65,16 @@
           callback()
         }
       }
+      let label = ''
+      if (this.type === 'user') {
+        label = '用户邮箱'
+      } else if (this.type === 'venue') {
+        label = '场馆编号'
+      } else {
+        label = '经理编号'
+      }
       return {
+        label: label,
         activeName: 'first',
         LoginForm: {
           password: '',
@@ -81,6 +90,7 @@
         }
       }
     },
+    props: ['type'],
     computed: {
       ...mapState('auth', {
         user: state => state.user
@@ -89,6 +99,9 @@
     methods: {
       ...mapActions('auth', [
         'signIn'
+      ]),
+      ...mapActions('venue', [
+        'venueLogin'
       ]),
       ...mapMutations('auth', [
         'saveCurrentUsername'
@@ -100,20 +113,40 @@
         this.$refs[data].validate((valid) => {
           if (valid) {
             console.log('sign in !')
-            this.saveCurrentUsername(this.LoginForm.email)
-            this.signIn({
-              info: this.LoginForm,
-              onSuccess: (success) => {
-                Message({
-                  message: '欢迎，' + success + '！',
-                  type: 'success'
-                })
-                router.push({name: 'IndexPage'})
-              },
-              onError: (error) => {
-                Message.error(error)
-              }
-            })
+            if (this.type === 'user') {
+              this.saveCurrentUsername(this.LoginForm.email)
+              this.signIn({
+                info: this.LoginForm,
+                onSuccess: (success) => {
+                  Message({
+                    message: '欢迎，' + success + '！',
+                    type: 'success'
+                  })
+                  router.push({name: 'IndexPage'})
+                },
+                onError: (error) => {
+                  Message.error(error)
+                }
+              })
+            } else if (this.type === 'venue') {
+              this.venueLogin({
+                info: {
+                  code: this.LoginForm.email,
+                  password: this.LoginForm.password
+                },
+                onSuccess: (success) => {
+                  Message({
+                    message: '欢迎，' + success + '！',
+                    type: 'success'
+                  })
+                  router.push({name: 'IndexPage'})
+                },
+                onError: (error) => {
+                  Message.error(error)
+                }
+              })
+            }
+
           } else {
             Message.error('请正确填写信息！')
           }

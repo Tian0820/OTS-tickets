@@ -95,7 +95,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(
-            value = "/sign-in",
+            value = "/user/sign-in",
             method = RequestMethod.POST,
             produces = {"application/json; charset=UTF-8"})
     public ResultMessageBean signIn(

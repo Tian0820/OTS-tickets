@@ -2,6 +2,7 @@ package OTS.tickets.OTSserver.service;
 
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.bean.VenueInfoBean;
+import OTS.tickets.OTSserver.bean.VenuePasswordBean;
 import OTS.tickets.OTSserver.util.ResultMessage;
 
 public interface VenueService {
@@ -9,11 +10,10 @@ public interface VenueService {
     /**
      * 场馆登录
      *
-     * @param code     场馆编码
-     * @param password 密码
+     * @param venuePasswordBean     场馆编码和密码
      * @return 当前登录状态
      */
-    ResultMessage signIn(String code, String password);
+    ResultMessageBean signIn(VenuePasswordBean venuePasswordBean);
 
     /**
      * 场馆注册
