@@ -1,0 +1,60 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+@import "../../assets/scss/mixin";
+
+.plan-wrapper {
+  display: inline-block;
+  margin-top: 80px;
+  padding: 60px;
+  width: 100%;
+  height: auto;
+  background-color: $white-color;
+}
+
+.button-wrapper {
+  display: block;
+  float: right;
+  margin-top: 10px;
+  //margin-right: 20%;
+  text-align: center;
+  button {
+    padding: 5px 20px;
+    background-color: $main-color;
+    border-radius: 100px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-indent: 3px;
+    color: $white-color;
+    @include transition(all, 0.3s);
+
+    &:hover {
+      @include transition(all, 0.5s);
+      background-color: $sub-color;
+    }
+  }
+}
+
+.el-table td div {
+  width: 50%;
+}
+
+table {
+  /deep/ .el-input__inner {
+    width: 50%;
+
+  }
+}
+
+/deep/ .el-form {
+  margin-top: 50px;
+  width: 80%;
+}
+
+/deep/ .el-form-item {
+  margin-bottom: 20px;
+}
+
+/deep/ .el-form--label-top .el-form-item__label {
+  padding: 0;
+  height: 35px;
+}

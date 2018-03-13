@@ -7,12 +7,12 @@
 
       <div class="right-wrapper">
 
-        <div class="button-wrapper">
-          <el-button type="text" @click="">职位</el-button>
-          <el-button type="text" @click="">公司</el-button>
-          <el-button type="text" @click="">待遇</el-button>
-          <el-button type="text" @click="">技能</el-button>
-        </div>
+        <!--<div class="button-wrapper">-->
+        <!--<el-button type="text" @click="">职位</el-button>-->
+        <!--<el-button type="text" @click="">公司</el-button>-->
+        <!--<el-button type="text" @click="">待遇</el-button>-->
+        <!--<el-button type="text" @click="">技能</el-button>-->
+        <!--</div>-->
 
         <div class="input-wrapper">
           <el-input class="search-input"
@@ -32,7 +32,7 @@
           </div>
 
           <div v-else-if="user">
-            <el-dropdown placement="bottom-start" @command="handleCommand">
+            <el-dropdown placement="bottom-start" @command="handleUserCommand">
           <span class="el-dropdown-link">
           {{user.username}}<i class="el-icon-caret-bottom el-icon--right"></i>
           </span>
@@ -45,13 +45,15 @@
           </div>
 
           <div v-else-if="venue">
-            <el-dropdown placement="bottom-start" @command="handleCommand">
+            <el-dropdown placement="bottom-start" @command="handleVenueCommand">
           <span class="el-dropdown-link">
           {{venue.venueName}}<i class="el-icon-caret-bottom el-icon--right"></i>
           </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="UserHomePage">我的主页</el-dropdown-item>
-                <el-dropdown-item command="UserInfoPage">修改资料</el-dropdown-item>
+                <el-dropdown-item command="VenueHomePage">场馆主页</el-dropdown-item>
+                <el-dropdown-item command="VenuePlanPage">发布计划</el-dropdown-item>
+                <el-dropdown-item command="VenueSitePage">现场卖票</el-dropdown-item>
+                <el-dropdown-item command="VenueInfoPage">修改信息</el-dropdown-item>
                 <el-dropdown-item command="signOut">退出账号</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -128,7 +130,7 @@
       goToRegisterPage() {
         router.push({name: 'RegisterPage'})
       },
-      handleCommand(command) {
+      handleUserCommand(command) {
         if (command !== 'signOut') {
           if (command === 'UserHomePage') {
             router.push({name: 'UserHomePage', params: {userId: this.user.userId}})
@@ -148,6 +150,18 @@
           });
         }
       },
+      handleVenueCommand(command) {
+        if (command !== 'signOut') {
+          if (command === 'VenueHomePage') {
+            router.push({name: 'VenueHomePage', params: {venueCode: this.venue.code}})
+          } else {
+            router.push({name: command})
+          }
+          router.push({name: command})
+        } else {
+
+        }
+      }
     }
   }
 </script>

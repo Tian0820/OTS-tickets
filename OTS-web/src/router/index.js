@@ -9,8 +9,11 @@ import UserLoginPage from '@/pages/UserLoginPage'
 import VenueLoginPage from '@/pages/VenueLoginPage'
 import ManagerLoginPage from '@/pages/ManagerLoginPage'
 import UserHomePage from '@/pages/UserHomePage'
+import VenueHomePage from '@/pages/VenueHomePage'
 import ShowDetailPage from '@/pages/ShowDetailPage'
 import UserInfoPage from '@/pages/UserInfoPage'
+import VenueInfoPage from '@/pages/VenueInfoPage'
+import VenuePlanPage from '@/pages/VenuePlanPage'
 
 Vue.use(Router)
 
@@ -62,6 +65,11 @@ export default new Router({
       component: UserHomePage
     },
     {
+      path: '/venue/:venueCode',
+      name: 'VenueHomePage',
+      component: VenueHomePage
+    },
+    {
       path: '/show/:showId',
       name: 'ShowDetailPage',
       component: ShowDetailPage
@@ -70,6 +78,16 @@ export default new Router({
       path: '/user/me/info',
       name: 'UserInfoPage',
       component: UserInfoPage
+    },
+    {
+      path: '/venue/me/info',
+      name: 'VenueInfoPage',
+      component: VenueInfoPage
+    },
+    {
+      path: '/venue/plan',
+      name: 'VenuePlanPage',
+      component: VenuePlanPage
     }
   ]
 })
