@@ -11,8 +11,16 @@
           <el-input v-model="registerForm.venueName"></el-input>
         </el-form-item>
 
-        <el-form-item label="场馆城市" prop="venueCity">
-          <el-select v-model="registerForm.venueCity" placeholder="请选择地点">
+        <el-form-item label="密码" prop="password">
+          <el-input type="password" v-model="registerForm.password"></el-input>
+        </el-form-item>
+
+        <el-form-item label="确认密码" prop="confirmPassword">
+          <el-input type="password" v-model="registerForm.confirmPassword"></el-input>
+        </el-form-item>
+
+        <el-form-item label="场馆城市" prop="city">
+          <el-select v-model="registerForm.city" placeholder="请选择地点">
             <el-option
               v-for="item in addresses"
               :key="item.value"
@@ -22,13 +30,13 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="具体地点" prop="venueAddress">
-          <el-input v-model="registerForm.venueAddress"></el-input>
+        <el-form-item label="具体地点" prop="address">
+          <el-input v-model="registerForm.address"></el-input>
         </el-form-item>
 
-        <el-form-item label="座位情况" prop="venueSeats">
+        <el-form-item label="座位情况" prop="seatType">
           <el-radio-group
-            v-model="registerForm.venueSeats"
+            v-model="registerForm.seatType"
           >
             <el-radio label="大剧场">
               <p>大剧场：一共分为六个区，每个区100个座位</p>
@@ -67,6 +75,8 @@
     RadioGroup,
     Message
   } from 'element-ui'
+  import {mapActions} from 'vuex'
+  import {router} from '../../main'
 
   export default {
     name: 'venue-register',
@@ -86,14 +96,30 @@
     data() {
       let checkVenueName = (rule, value, callback) => {
         if (!value) {
-          return callback(new Error('请输入场馆名'))
+          return callback(new Error('请输入场馆名!'))
         } else {
           callback()
         }
       };
       let checkVenueAddress = (rule, value, callback) => {
         if (!value) {
-          return callback(new Error('请输入场馆地址'))
+          return callback(new Error('请输入场馆地址!'))
+        } else {
+          callback()
+        }
+      };
+      let checkPassword = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('请输入密码!'))
+        } else {
+          callback()
+        }
+      };
+      let checkConfirmPassword = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('请输入密码!'))
+        } else if (value !== this.registerForm.password) {
+          callback(new Error('两次输入密码不一致!'))
         } else {
           callback()
         }
@@ -101,25 +127,27 @@
       return {
         registerForm: {
           venueName: '',
-          venueCity: '北京',
-          venueSeats: '大剧场',
-          venueAddress: ''
+          city: '北京',
+          seatType: '大剧场',
+          address: '',
+          password: '',
+          confirmPassword: ''
         },
         addresses: [
           {
-            value: '选项1',
+            value: '北京',
             label: '北京'
           }, {
-            value: '选项2',
+            value: '上海',
             label: '上海'
           }, {
-            value: '选项3',
+            value: '广州',
             label: '广州'
           }, {
-            value: '选项4',
+            value: '南京',
             label: '南京'
           }, {
-            value: '选项5',
+            value: '成都',
             label: '成都'
           }
         ],
@@ -127,21 +155,39 @@
           venueName: [
             {required: true, validator: checkVenueName, trigger: 'blur'}
           ],
-          venueCity: [
+          city: [
             {required: true, validator: checkVenueAddress, trigger: 'blur'}
           ],
-          venueAddress: [
+          address: [
             {required: true, validator: checkVenueAddress, trigger: 'blur'}
+          ],
+          password: [
+            {required: true, validator: checkPassword, trigger: 'blur'}
+          ],
+          confirmPassword: [
+            {required: true, validator: checkConfirmPassword, trigger: 'blur'}
           ]
         }
       }
     },
     computed: {},
     methods: {
+      ...mapActions('venue', [
+        'venueRegister'
+      ]),
       submitForm(data) {
         this.$refs[data].validate((valid) => {
           if (valid) {
-
+            this.venueRegister({
+              info: this.registerForm,
+              onSuccess: (success) => {
+                Message.success(success)
+                this.$modal.show('venue-code-modal')
+              },
+              onError: (error) => {
+                Message.error(error)
+              }
+            })
           } else {
             Message.error('请正确填写信息！')
           }

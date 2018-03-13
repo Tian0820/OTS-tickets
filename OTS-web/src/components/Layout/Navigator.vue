@@ -52,6 +52,7 @@
     <choose-seat-modal></choose-seat-modal>
     <buy-tickets-modal></buy-tickets-modal>
     <pay-modal></pay-modal>
+    <venue-code-modal></venue-code-modal>
 
   </div>
 </template>
@@ -62,6 +63,7 @@
   import ChooseSeatModal from '../Modal/ChooseSeatModal.vue'
   import BuyTicketsModal from '../Modal/BuyTicketsModal.vue'
   import PayModal from '../Modal/PayModal.vue'
+  import VenueCodeModal from '../Modal/VenueCodeModal.vue'
   import {Input, Button, Dropdown, DropdownMenu, DropdownItem, Message} from 'element-ui'
   import {router} from '../../main'
   import {mapMutations, mapState, mapActions} from 'vuex'
@@ -75,6 +77,7 @@
       ChooseSeatModal,
       BuyTicketsModal,
       PayModal,
+      VenueCodeModal,
       elInput: Input,
       elButton: Button,
       elDropdown: Dropdown,

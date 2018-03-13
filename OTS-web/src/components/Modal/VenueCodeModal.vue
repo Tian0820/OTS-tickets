@@ -1,6 +1,6 @@
 <template>
   <modal
-    name="pay-modal"
+    name="venue-code-modal"
     :clickToClose="false"
     :height="350">
 
@@ -11,17 +11,17 @@
         @click="closeBox"></el-button>
 
       <div :style="{padding: '20px'}">
-        <h1>支付</h1>
+        <h1>场馆编码</h1>
 
         <div :style="{textAlign: 'center', marginTop: '40px'}">
-          <p class="need-to-pay">需支付
-            <span :style="{fontSize: '24px', color: '#E9A038'}">2000</span>
-            元</p>
-          <p class="balance" v-if="user">账户余额：{{user.balance}} 元</p>
+          <p class="need-to-pay">请保管本场馆编号用于登录操作：
+            <br/>
+            <span :style="{fontSize: '24px', color: '#E9A038'}">{{code}}</span>
+          </p>
         </div>
 
 
-        <button class="confirm-button" @click="handlePay">确认支付</button>
+        <button class="confirm-button" @click="handleConfirm">确认</button>
 
       </div>
     </div>
@@ -37,7 +37,7 @@
   import {mapState, mapActions} from 'vuex'
 
   export default {
-    name: 'pay-modal',
+    name: 'venue-code-modal',
     components: {
       elButton: Button,
       Message
@@ -46,16 +46,18 @@
       return {}
     },
     computed: {
-      ...mapState('auth', {
-        user: state => state.currentUser
+      ...mapState('venue', {
+        code: state => state.venueCode
       })
     },
     methods: {
-      handlePay() {
-
+      handleConfirm() {
+        this.$modal.hide('venue-code-modal')
+        router.push({name: 'LoginPage'})
       },
       closeBox() {
-        this.$modal.hide('pay-modal')
+        this.$modal.hide('venue-code-modal')
+        router.push({name: 'LoginPage'})
       }
     }
   }

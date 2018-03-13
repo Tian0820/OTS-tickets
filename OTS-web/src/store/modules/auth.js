@@ -87,8 +87,13 @@ const actions = {
   refreshUser({dispatch}, {onSuccess, onError}) {
     const token = localStorage.getItem('token')
     if (token !== null) {
-      console.log('null')
-      dispatch('fetchCurrentUser', {onSuccess, onError})
+      if (token.indexOf('@') >= 0) {
+        //当前登录的是会员
+        dispatch('fetchCurrentUser', {onSuccess, onError})
+      } else {
+        //当前登录的是场馆
+
+      }
     }
   },
 

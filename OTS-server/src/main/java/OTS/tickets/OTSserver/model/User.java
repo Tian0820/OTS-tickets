@@ -1,9 +1,7 @@
 package OTS.tickets.OTSserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -30,6 +28,9 @@ public class User {
     private String code;
 
     private Double balance;
+
+    @ManyToMany
+    private List<Coupon> coupons;
 
     public User() {
     }

@@ -1,5 +1,6 @@
 package OTS.tickets.OTSserver.service;
 
+import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.bean.VenueInfoBean;
 import OTS.tickets.OTSserver.util.ResultMessage;
 
@@ -20,7 +21,14 @@ public interface VenueService {
      * @param venue 场馆信息
      * @return
      */
-    ResultMessage signUp(VenueInfoBean venue);
+    ResultMessageBean signUp(VenueInfoBean venue);
+
+    /**
+     * 获得当前登录的场馆信息
+     * @param venueCode 场馆编号
+     * @return
+     */
+    VenueInfoBean getCurrentVenue(String venueCode);
 
 
 }
