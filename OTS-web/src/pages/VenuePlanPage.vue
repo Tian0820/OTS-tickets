@@ -2,7 +2,7 @@
   <div class="body-wrapper">
     <layout>
       <div class="container">
-        <venue-plan v-if="venue"></venue-plan>
+        <venue-plan v-if="venue" :venue="venue"></venue-plan>
       </div>
     </layout>
   </div>

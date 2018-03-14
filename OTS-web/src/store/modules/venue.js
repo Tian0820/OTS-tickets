@@ -58,6 +58,15 @@ const actions = {
     }
   },
 
+  venueSignOut({commit, state}, {onSuccess}) {
+    const venueName = state.currentVenue.venueName
+    localStorage.setItem('token', null)
+    commit('saveCurrentVenue', null)
+    if (onSuccess) {
+      onSuccess(venueName)
+    }
+  },
+
 
 };
 

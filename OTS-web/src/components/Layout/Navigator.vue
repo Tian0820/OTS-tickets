@@ -118,6 +118,9 @@
       ...mapActions('auth', [
         'signOut'
       ]),
+      ...mapActions('venue', [
+        'venueSignOut'
+      ]),
       ...mapMutations('login', [
         'saveCurrentLogin'
       ]),
@@ -146,6 +149,7 @@
                 message: 'Goodbye, ' + username + '!',
                 type: 'success'
               });
+              router.push({name: 'IndexPage'})
             }
           });
         }
@@ -159,7 +163,15 @@
           }
           router.push({name: command})
         } else {
-
+          this.venueSignOut({
+            onSuccess: (venueName) => {
+              Message({
+                message: 'Goodbye, ' + venueName + '!',
+                type: 'success'
+              });
+              router.push({name: 'IndexPage'})
+            }
+          });
         }
       }
     }

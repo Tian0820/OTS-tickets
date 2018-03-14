@@ -13,11 +13,22 @@
       </el-form-item>
 
       <el-form-item label="演出时间" prop="time">
-        <el-input v-model="planInfoForm.time"></el-input>
+        <el-date-picker
+          v-model="planInfoForm.time"
+          type="datetime"
+          placeholder="选择日期时间">
+        </el-date-picker>
       </el-form-item>
 
       <el-form-item label="演出类型" prop="type">
-        <el-input v-model="planInfoForm.type"></el-input>
+        <el-select v-model="planInfoForm.type" placeholder="请选择">
+          <el-option
+            v-for="item in types"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
       </el-form-item>
 
       <el-form-item label="演出简介" prop="introduction">
@@ -41,7 +52,8 @@
           >
             <template slot-scope="scope">
               <div>
-              <el-input class="price-input" v-model="scope.row.price"></el-input>  元
+                <el-input class="price-input" v-model="scope.row.price"></el-input>
+                元
               </div>
             </template>
           </el-table-column>
@@ -53,7 +65,7 @@
 
       <el-form-item>
         <div class="button-wrapper">
-          <button @click="submitInfoForm('planInfoForm')">修改</button>
+          <button @click="submitInfoForm('planInfoForm')">发布</button>
         </div>
         <!--<el-button @click="resetForm('signInForm')">重置</el-button>-->
       </el-form-item>
@@ -67,8 +79,9 @@
 
 <script>
   import DivHeader from '../Util/DivHeader.vue'
-  import {Form, FormItem, Input, Message, Table, TableColumn, Tag, Button} from 'element-ui'
+  import {Form, FormItem, Input, Message, Table, TableColumn, Tag, Button, Select, Option, DatePicker} from 'element-ui'
   import {router} from '../../main'
+  import {mapState, mapActions} from 'vuex'
 
   export default {
     name: 'venue-plan',
@@ -81,8 +94,12 @@
       elTableColumn: TableColumn,
       elTag: Tag,
       elButton: Button,
+      elSelect: Select,
+      elOption: Option,
+      elDatePicker: DatePicker,
       Message
     },
+    props: ['venue'],
     data() {
       let checkName = (rule, value, callback) => {
         if (!value) {
@@ -114,6 +131,22 @@
           introduction: '',
           price: 100
         },
+        types: [{
+          value: '演唱会',
+          label: '演唱会'
+        }, {
+          value: '音乐会',
+          label: '音乐会'
+        }, {
+          value: '舞蹈',
+          label: '舞蹈'
+        }, {
+          value: '话剧',
+          label: '话剧'
+        }, {
+          value: '体育比赛',
+          label: '体育比赛'
+        }],
         rules: {
           name: [
             {validator: checkName, trigger: 'blur'}
@@ -125,22 +158,33 @@
             {validator: checkIntroduction, trigger: 'blur'}
           ]
         },
-        tableData: [{
+        tableData: this.venue.seatType === '小剧场' ? [{
           area: '一区',
-          price: 380,
-          address: '上海市普陀区金沙江路 1518 弄'
+          price: 580,
         }, {
           area: '二区',
           price: 480,
-          address: '上海市普陀区金沙江路 1517 弄'
         }, {
           area: '三区',
-          price: 580,
-          address: '上海市普陀区金沙江路 1519 弄'
+          price: 380,
+        }] : [{
+          area: '一区',
+          price: 880,
+        }, {
+          area: '二区',
+          price: 780,
+        }, {
+          area: '三区',
+          price: 680,
         }, {
           area: '四区',
-          price: 680,
-          address: '上海市普陀区金沙江路 1516 弄'
+          price: 580,
+        }, {
+          area: '五区',
+          price: 480,
+        }, {
+          area: '六区',
+          price: 380,
         }]
       }
     },

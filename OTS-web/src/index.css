@@ -70,6 +70,33 @@ html .el-input__icon.is-clickable:hover {
   color: #e9a038; }
 html .el-input__icon.is-clickable:hover + .el-input__inner {
   border-color: #e9a038; }
+html .el-textarea__inner {
+  border-radius: 100px;
+  color: #595959;
+  font-size: 12px; }
+  html .el-textarea__inner::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #bababa;
+    font-size: 12px;
+    font-weight: 400; }
+  html .el-textarea__inner:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #bababa;
+    font-size: 12px;
+    font-weight: 400; }
+  html .el-textarea__inner::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #bababa;
+    font-size: 12px;
+    font-weight: 400; }
+  html .el-textarea__inner:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #bababa;
+    font-size: 12px;
+    font-weight: 400; }
+  html .el-textarea__inner:hover, html .el-textarea__inner:focus {
+    border: #e9a038 solid 1px;
+    color: #595959; }
 html .el-checkbox__input.is-checked + .el-checkbox__label {
   color: #e9a038; }
 html .el-checkbox__inner:hover {
@@ -96,5 +123,15 @@ html .el-input-number__decrease:hover, html .el-input-number__increase:hover {
   color: #e9a038; }
 html .el-input-number__decrease:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled), html .el-input-number__increase:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
   border-color: #e9a038; }
+html .el-date-table td.today span, html .el-date-table td.available:hover {
+  color: #e9a038; }
+html .el-date-table td.current:not(.disabled) span {
+  background-color: #e9a038; }
+html .el-button--text, html .el-button--text:focus, html .el-button--text:hover, html .el-button.is-plain:focus, html .el-button.is-plain:hover {
+  color: #e9a038; }
+html .el-button.is-plain:focus, html .el-button.is-plain:hover {
+  border-color: #e9a038; }
+html .el-picker-panel__icon-btn:hover {
+  color: #e9a038; }
 
 /*# sourceMappingURL=index.css.map */
