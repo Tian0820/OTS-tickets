@@ -29,7 +29,7 @@
           <el-radio label="680元" border></el-radio>
         </el-radio-group>
 
-        <button @click="handleBuyTickets">立即购买</button>
+        <button v-if="type === 'user'" @click="handleBuyTickets">立即购买</button>
         <button @click="handleChooseSeat">选座购票</button>
 
 
@@ -60,6 +60,7 @@
       elRadioGroup: RadioGroup,
       elRadio: Radio
     },
+    props: ['type'],
     data() {
       let name = 'poster.jpg'
       return {

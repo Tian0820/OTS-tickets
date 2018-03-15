@@ -2,7 +2,7 @@
   <div class="body-wrapper">
     <layout>
       <div class="container">
-        <show-detail></show-detail>
+        <show-detail :type="type"></show-detail>
       </div>
     </layout>
   </div>
@@ -14,6 +14,7 @@
   import Layout from '../components/Layout/Layout.vue'
   import ShowDetail from '../components/ShowDetail/ShowDetail.vue'
   import {router, store} from '../main'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'show-detail-page',
@@ -24,13 +25,26 @@
     data() {
       return {}
     },
+    computed: {
+      ...mapState('auth', {
+        type: state => state.loginType
+      })
+    },
     methods: {},
     beforeRouteEnter(to, from, next) {
       store.dispatch('auth/refreshUser', {
         onSuccess: (success) => {
+          store.commit('auth/saveLoginType', 'user')
         },
         onError: (error) => {
-          Message.error(error)
+          store.dispatch('venue/refreshVenue', {
+            onSuccess: (success) => {
+              store.commit('auth/saveLoginType', 'venue')
+            },
+            onError: (error) => {
+//              Message.error('venue not login')
+            }
+          })
         }
       })
       next(true)

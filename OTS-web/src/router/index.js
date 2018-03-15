@@ -14,6 +14,7 @@ import ShowDetailPage from '@/pages/ShowDetailPage'
 import UserInfoPage from '@/pages/UserInfoPage'
 import VenueInfoPage from '@/pages/VenueInfoPage'
 import VenuePlanPage from '@/pages/VenuePlanPage'
+import VenueSitePage from '@/pages/VenueSitePage'
 
 Vue.use(Router)
 
@@ -88,6 +89,11 @@ export default new Router({
       path: '/venue/plan',
       name: 'VenuePlanPage',
       component: VenuePlanPage
+    },
+    {
+      path: '/venue/site',
+      name: 'VenueSitePage',
+      component: VenueSitePage
     }
   ]
 })
