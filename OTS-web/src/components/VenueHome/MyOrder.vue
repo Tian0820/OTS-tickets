@@ -2,8 +2,6 @@
 
   <div class="my-order-wrapper">
     <div-header :header="'场馆订单'"></div-header>
-
-
   </div>
 
 
@@ -16,7 +14,7 @@
   export default {
     name: 'my-order',
     components: {
-      DivHeader
+      DivHeader,
     },
     data() {
       return {}

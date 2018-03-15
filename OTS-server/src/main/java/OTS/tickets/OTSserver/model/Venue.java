@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -23,16 +24,22 @@ public class Venue {
 
     private String password;
 
+    private Double balance;
+
+    @OneToMany
+    private List<Order> orders;
+
     public Venue() {
     }
 
-    public Venue(String code, String venueName, String city, String address, String seatType, String password) {
+    public Venue(String code, String venueName, String city, String address, String seatType, String password, Double balance) {
         this.code = code;
         this.venueName = venueName;
         this.city = city;
         this.address = address;
         this.seatType = seatType;
         this.password = password;
+        this.balance = balance;
     }
 
     public Integer getId() {
@@ -89,5 +96,13 @@ public class Venue {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 }

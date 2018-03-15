@@ -23,6 +23,8 @@ public class User {
 
     private Double point;
 
+    private Double accumulativePoint;
+
     private boolean activate;
 
     private String code;
@@ -32,16 +34,20 @@ public class User {
     @ManyToMany
     private List<Coupon> coupons;
 
+    @OneToMany
+    private List<Order> orders;
+
     public User() {
     }
 
-    public User(String username, String password, String email, String phone, Integer level, Double point, Double balance) {
+    public User(String username, String password, String email, String phone, Integer level, Double point, Double accumulativePoint, Double balance) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.level = level;
         this.point = point;
+        this.accumulativePoint = accumulativePoint;
         this.balance = balance;
     }
 
@@ -123,5 +129,13 @@ public class User {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public Double getAccumulativePoint() {
+        return accumulativePoint;
+    }
+
+    public void setAccumulativePoint(Double accumulativePoint) {
+        this.accumulativePoint = accumulativePoint;
     }
 }

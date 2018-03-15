@@ -38,6 +38,11 @@ public class UserInfoBean {
     private double point;
 
     /**
+     * 累计积分
+     */
+    private double accumulativePoint;
+
+    /**
      * 用户余额
      */
     private double balance;
@@ -45,7 +50,7 @@ public class UserInfoBean {
     public UserInfoBean() {
     }
 
-    public UserInfoBean(int userId, String username, String email, String password, String phone, int level, double point, double balance) {
+    public UserInfoBean(int userId, String username, String email, String password, String phone, int level, double point, double accumulativePoint, double balance) {
         this.userId = userId;
         this.username = username;
         this.email = email;
@@ -53,6 +58,7 @@ public class UserInfoBean {
         this.phone = phone;
         this.level = level;
         this.point = point;
+        this.accumulativePoint = accumulativePoint;
         this.balance = balance;
     }
 

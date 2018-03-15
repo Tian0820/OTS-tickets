@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     private UserInfoBean userToUserInfoBean(User user) {
         return new UserInfoBean(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(),
-                user.getPhone(), user.getLevel(), user.getPoint(), user.getBalance());
+                user.getPhone(), user.getLevel(), user.getPoint(), user.getAccumulativePoint(), user.getBalance());
     }
 
     @Override
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
             // 用户已存在，验证失败
             return ResultMessage.USER_EXIST;
         }
-        User user = new User(username, password, email, phone, 0, 0.0, 10000.0);
+        User user = new User(username, password, email, phone, 0, 0.0, 0.0, 10000.0);
         userRepository.save(user);
         return ResultMessage.SUCCESS;
     }
