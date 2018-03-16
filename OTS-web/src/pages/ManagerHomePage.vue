@@ -2,7 +2,7 @@
   <div class="body-wrapper">
     <layout>
       <div class="container">
-
+        <manager-approval></manager-approval>
 
       </div>
     </layout>
@@ -12,7 +12,7 @@
 
 <script>
   import Layout from '../components/Layout/Layout.vue'
-  import LoginForm from '../components/Auth/LoginForm.vue'
+  import ManagerApproval from '../components/ManagerApproval/ManagerApproval.vue'
   import {Message} from 'element-ui'
   import {router, store} from '../main'
 
@@ -20,7 +20,7 @@
     name: 'manager-home-page',
     components: {
       Layout,
-      LoginForm,
+      ManagerApproval,
       Message
     },
     data() {

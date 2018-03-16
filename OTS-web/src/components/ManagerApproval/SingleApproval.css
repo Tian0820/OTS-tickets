@@ -1,0 +1,65 @@
+html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  list-style: none; }
+
+html {
+  height: 100%; }
+
+* {
+  position: relative;
+  box-sizing: border-box; }
+
+button {
+  outline: none; }
+
+/*
+ * grid
+ */
+.single-approval-wrapper {
+  display: inline-block;
+  padding: 20px;
+  margin-top: 10px;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #e8e8e8; }
+  .single-approval-wrapper h1 {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #595959;
+    vertical-align: middle; }
+  .single-approval-wrapper .approve-time {
+    float: right;
+    color: #bababa;
+    font-size: 12px;
+    vertical-align: middle; }
+  .single-approval-wrapper .info-wrapper {
+    display: inline-block;
+    width: 80%; }
+    .single-approval-wrapper .info-wrapper p {
+      margin-top: 10px;
+      color: #595959;
+      font-size: 14px; }
+  .single-approval-wrapper .approve-button-wrapper {
+    display: inline-block;
+    float: right;
+    width: auto;
+    vertical-align: top; }
+    .single-approval-wrapper .approve-button-wrapper button {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 3px;
+      color: #ffffff;
+      cursor: pointer; }
+    .single-approval-wrapper .approve-button-wrapper .approve-button {
+      margin-right: 5px;
+      background-color: #e9a038; }
+    .single-approval-wrapper .approve-button-wrapper .disapprove-button {
+      background-color: #848484; }
+
+/*# sourceMappingURL=SingleApproval.css.map */
