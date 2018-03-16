@@ -1,0 +1,30 @@
+html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  list-style: none; }
+
+html {
+  height: 100%; }
+
+* {
+  position: relative;
+  box-sizing: border-box; }
+
+button {
+  outline: none; }
+
+/*
+ * grid
+ */
+.manager-statistics-wrapper {
+  display: inline-block;
+  margin-top: 80px;
+  padding: 30px;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff; }
+
+/*# sourceMappingURL=ManagerStatistics.css.map */
