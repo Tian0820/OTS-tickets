@@ -2,7 +2,10 @@
 
   <div class="manager-approval-wrapper">
     <div-header :header="'场馆审批'"></div-header>
-    <single-approval v-for="item in 10"></single-approval>
+
+    <div class="approve-list">
+      <single-approval v-for="item in 10"></single-approval>
+    </div>
 
   </div>
 

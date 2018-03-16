@@ -2,16 +2,11 @@
 @import "../../assets/scss/base";
 @import "../../assets/scss/mixin";
 
-.manager-approval-wrapper {
+.manager-statistics-wrapper {
   display: inline-block;
   margin-top: 80px;
   padding: 30px;
   width: 100%;
   height: auto;
   background-color: $white-color;
-
-  .approve-list {
-    height: 600px;
-    overflow: auto;
-  }
 }

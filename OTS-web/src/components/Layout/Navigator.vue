@@ -66,7 +66,7 @@
           </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="ManagerHomePage">我的主页</el-dropdown-item>
-                <el-dropdown-item command="StatisticsPage">统计信息</el-dropdown-item>
+                <el-dropdown-item command="ManagerStatisticsPage">统计信息</el-dropdown-item>
                 <el-dropdown-item command="signOut">退出账号</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>

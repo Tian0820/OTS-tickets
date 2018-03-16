@@ -26,5 +26,8 @@ button {
   width: 100%;
   height: auto;
   background-color: #ffffff; }
+  .manager-approval-wrapper .approve-list {
+    height: 600px;
+    overflow: auto; }
 
 /*# sourceMappingURL=ManagerApproval.css.map */

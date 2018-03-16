@@ -16,6 +16,7 @@ import VenueInfoPage from '@/pages/VenueInfoPage'
 import VenuePlanPage from '@/pages/VenuePlanPage'
 import VenueSitePage from '@/pages/VenueSitePage'
 import ManagerHomePage from '@/pages/ManagerHomePage'
+import ManagerStatisticsPage from '@/pages/ManagerStatisticsPage'
 
 Vue.use(Router)
 
@@ -100,6 +101,11 @@ export default new Router({
       path: '/manager/:managerId',
       name: 'ManagerHomePage',
       component: ManagerHomePage
+    },
+    {
+      path: '/manager/statistics',
+      name: 'ManagerStatisticsPage',
+      component: ManagerStatisticsPage
     }
   ]
 })
