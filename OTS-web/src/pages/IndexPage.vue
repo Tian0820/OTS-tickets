@@ -48,6 +48,13 @@
             },
             onError: (error) => {
 //              Message.error('venue not login')
+              store.dispatch('manager/refreshManager', {
+                onSuccess: (success) => {
+                },
+                onError: (error) => {
+//              Message.error('venue not login')
+                }
+              })
             }
           })
 

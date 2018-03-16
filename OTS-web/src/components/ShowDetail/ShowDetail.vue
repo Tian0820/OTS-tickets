@@ -70,7 +70,11 @@
     },
     methods: {
       handleChooseSeat() {
-        this.$modal.show('choose-seat-modal')
+        if (this.type === 'user') {
+          this.$modal.show('choose-seat-modal')
+        } else if (this.type === 'venue') {
+          this.$modal.show('user-account-modal')
+        }
       },
       handleBuyTickets() {
         this.$modal.show('buy-tickets-modal')

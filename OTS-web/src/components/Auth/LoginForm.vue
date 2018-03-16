@@ -71,7 +71,7 @@
       } else if (this.type === 'venue') {
         label = '场馆编号'
       } else {
-        label = '经理编号'
+        label = '经理名称'
       }
       return {
         label: label,
@@ -103,6 +103,9 @@
       ...mapActions('venue', [
         'venueLogin'
       ]),
+      ...mapActions('manager', [
+        'managerLogin'
+      ]),
       ...mapMutations('auth', [
         'saveCurrentUsername'
       ]),
@@ -132,6 +135,23 @@
               this.venueLogin({
                 info: {
                   code: this.LoginForm.email,
+                  password: this.LoginForm.password
+                },
+                onSuccess: (success) => {
+                  Message({
+                    message: '欢迎，' + success + '！',
+                    type: 'success'
+                  })
+                  router.push({name: 'IndexPage'})
+                },
+                onError: (error) => {
+                  Message.error(error)
+                }
+              })
+            } else {
+              this.managerLogin({
+                info: {
+                  managerName: this.LoginForm.email,
                   password: this.LoginForm.password
                 },
                 onSuccess: (success) => {

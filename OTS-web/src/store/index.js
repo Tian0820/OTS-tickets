@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import auth from './modules/auth'
 import venue from './modules/venue'
 import login from './modules/login'
+import manager from './modules/manager'
 import createLogger from 'vuex/dist/logger'
 
 Vue.use(Vuex)
@@ -17,7 +18,8 @@ export default new Vuex.Store({
   modules: {
     auth,
     venue,
-    login
+    login,
+    manager
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

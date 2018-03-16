@@ -26,7 +26,7 @@
 
         <div class="button-wrapper">
 
-          <div v-if="user === null && venue === null">
+          <div v-if="user === null && venue === null && manager === null">
             <el-button type="text" @click="goToLoginPage">登录</el-button>
             <el-button type="text" @click="goToRegisterPage">注册</el-button>
           </div>
@@ -59,6 +59,19 @@
             </el-dropdown>
           </div>
 
+          <div v-else-if="manager">
+            <el-dropdown placement="bottom-start" @command="handleManagerCommand">
+          <span class="el-dropdown-link">
+          {{manager.managerName}}<i class="el-icon-caret-bottom el-icon--right"></i>
+          </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="ManagerHomePage">我的主页</el-dropdown-item>
+                <el-dropdown-item command="StatisticsPage">统计信息</el-dropdown-item>
+                <el-dropdown-item command="signOut">退出账号</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+
 
         </div>
       </div>
@@ -70,6 +83,7 @@
     <buy-tickets-modal></buy-tickets-modal>
     <pay-modal></pay-modal>
     <venue-code-modal></venue-code-modal>
+    <user-account-modal></user-account-modal>
 
   </div>
 </template>
@@ -81,6 +95,7 @@
   import BuyTicketsModal from '../Modal/BuyTicketsModal.vue'
   import PayModal from '../Modal/PayModal.vue'
   import VenueCodeModal from '../Modal/VenueCodeModal.vue'
+  import UserAccountModal from '../Modal/UserAccountModal.vue'
   import {Input, Button, Dropdown, DropdownMenu, DropdownItem, Message} from 'element-ui'
   import {router} from '../../main'
   import {mapMutations, mapState, mapActions} from 'vuex'
@@ -95,6 +110,7 @@
       BuyTicketsModal,
       PayModal,
       VenueCodeModal,
+      UserAccountModal,
       elInput: Input,
       elButton: Button,
       elDropdown: Dropdown,
@@ -112,6 +128,9 @@
       }),
       ...mapState('venue', {
         venue: state => state.currentVenue
+      }),
+      ...mapState('manager', {
+        manager: state => state.currentManager
       })
     },
     methods: {
@@ -120,6 +139,9 @@
       ]),
       ...mapActions('venue', [
         'venueSignOut'
+      ]),
+      ...mapActions('manager', [
+        'managerSignOut'
       ]),
       ...mapMutations('login', [
         'saveCurrentLogin'
@@ -167,6 +189,26 @@
             onSuccess: (venueName) => {
               Message({
                 message: 'Goodbye, ' + venueName + '!',
+                type: 'success'
+              });
+              router.push({name: 'IndexPage'})
+            }
+          });
+        }
+      },
+      handleManagerCommand(command) {
+        if (command !== 'signOut') {
+          if (command === 'ManagerHomePage') {
+            router.push({name: 'ManagerHomePage', params: {managerId: this.manager.managerId}})
+          } else {
+            router.push({name: command})
+          }
+          router.push({name: command})
+        } else {
+          this.managerSignOut({
+            onSuccess: (success) => {
+              Message({
+                message: 'Goodbye, tian !',
                 type: 'success'
               });
               router.push({name: 'IndexPage'})
