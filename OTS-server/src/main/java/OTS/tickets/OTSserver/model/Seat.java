@@ -15,9 +15,7 @@ public class Seat {
 
     private String area;
 
-    private Integer row;
-
-    private Integer col;
+    private Integer number;
 
     /**
      * 是否已卖出，已卖出为0，未卖出为1
@@ -29,10 +27,9 @@ public class Seat {
     public Seat() {
     }
 
-    public Seat(String area, Integer row, Integer col, Integer available, Double price) {
+    public Seat(String area, Integer number, Integer available, Double price) {
         this.area = area;
-        this.row = row;
-        this.col = col;
+        this.number = number;
         this.available = available;
         this.price = price;
     }
@@ -53,20 +50,12 @@ public class Seat {
         this.area = area;
     }
 
-    public Integer getRow() {
-        return row;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setRow(Integer row) {
-        this.row = row;
-    }
-
-    public Integer getCol() {
-        return col;
-    }
-
-    public void setCol(Integer col) {
-        this.col = col;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public Integer getAvailable() {

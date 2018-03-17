@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.service;
 
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
+import OTS.tickets.OTSserver.bean.ShowPlanBean;
 import OTS.tickets.OTSserver.bean.VenueInfoBean;
 import OTS.tickets.OTSserver.bean.VenuePasswordBean;
 import OTS.tickets.OTSserver.util.ResultMessage;
@@ -29,6 +30,13 @@ public interface VenueService {
      * @return
      */
     VenueInfoBean getCurrentVenue(String venueCode);
+
+    /**
+     * 场馆发布演出计划
+     * @param showPlanBean 演出信息
+     * @return 发布结果
+     */
+    ResultMessageBean uploadShowPlan(ShowPlanBean showPlanBean);
 
 
 }

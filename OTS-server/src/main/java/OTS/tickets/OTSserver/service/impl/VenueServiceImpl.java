@@ -1,20 +1,34 @@
 package OTS.tickets.OTSserver.service.impl;
 
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
+import OTS.tickets.OTSserver.bean.ShowPlanBean;
 import OTS.tickets.OTSserver.bean.VenueInfoBean;
 import OTS.tickets.OTSserver.bean.VenuePasswordBean;
+import OTS.tickets.OTSserver.model.Seat;
+import OTS.tickets.OTSserver.model.ShowPlan;
 import OTS.tickets.OTSserver.model.Venue;
+import OTS.tickets.OTSserver.repository.SeatRepository;
+import OTS.tickets.OTSserver.repository.ShowPlanRepository;
 import OTS.tickets.OTSserver.repository.VenueRepository;
 import OTS.tickets.OTSserver.service.VenueService;
 import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class VenueServiceImpl implements VenueService {
 
     @Autowired
     VenueRepository venueRepository;
+
+    @Autowired
+    ShowPlanRepository showPlanRepository;
+
+    @Autowired
+    SeatRepository seatRepository;
 
     private VenueInfoBean venueToVenueInfoBean(Venue venue) {
         return new VenueInfoBean(venue.getId(), venue.getCode(), venue.getVenueName(), venue.getCity(),
@@ -69,5 +83,31 @@ public class VenueServiceImpl implements VenueService {
             return venueToVenueInfoBean(venue);
         }
         return null;
+    }
+
+    @Override
+    public ResultMessageBean uploadShowPlan(ShowPlanBean showPlanBean) {
+        ResultMessageBean result = new ResultMessageBean(false);
+        ShowPlan oldShowPlan = showPlanRepository.findShowPlanByName(showPlanBean.getName());
+
+        if (oldShowPlan != null) {
+            result.message = "演出名称已存在！";
+        } else {
+            String[] prices = showPlanBean.getPrice().split(";");
+            List<Seat> seats = new ArrayList<>();
+            Venue venue = venueRepository.findVenueByCode(showPlanBean.getVenueCode());
+            for (int i = 0; i < prices.length; i++) {
+                for (int j = 0; j < 100; j++) {
+                    Seat seat = new Seat(String.valueOf(i + 1), j, 1, Double.valueOf(prices[i]));
+                    seats.add(seat);
+                    seatRepository.save(seat);
+                }
+            }
+            showPlanRepository.save(new ShowPlan(showPlanBean.getName(), showPlanBean.getStar(),
+                    showPlanBean.getTime(), showPlanBean.getType(), showPlanBean.getIntroduction(),
+                    seats, venue));
+            result.result = true;
+        }
+        return result;
     }
 }

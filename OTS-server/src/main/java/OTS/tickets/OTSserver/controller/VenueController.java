@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.controller;
 
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
+import OTS.tickets.OTSserver.bean.ShowPlanBean;
 import OTS.tickets.OTSserver.bean.VenueInfoBean;
 import OTS.tickets.OTSserver.bean.VenuePasswordBean;
 import OTS.tickets.OTSserver.service.VenueService;
@@ -58,6 +59,22 @@ public class VenueController {
     public VenueInfoBean getCurrentVenue(
             @RequestParam(value = "venueCode") String venueCode) {
         return venueService.getCurrentVenue(venueCode);
+    }
+
+    /**
+     * 场馆发布计划
+     *
+     * @param showPlanBean 计划信息
+     * @return 登录结果，是否成功
+     */
+    @ResponseBody
+    @RequestMapping(
+            value = "/venue/show-plan",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean uploadShowPlan(
+            @RequestBody ShowPlanBean showPlanBean) {
+        return venueService.uploadShowPlan(showPlanBean);
     }
 
 

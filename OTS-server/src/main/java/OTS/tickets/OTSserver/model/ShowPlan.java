@@ -16,7 +16,7 @@ public class ShowPlan {
 
     private String star;
 
-    private LocalDateTime time;
+    private String time;
 
     private String type;
 
@@ -25,16 +25,21 @@ public class ShowPlan {
     @OneToMany
     private List<Seat> seats;
 
+    @ManyToOne
+    private Venue venue;
+
+
     public ShowPlan() {
     }
 
-    public ShowPlan(String name, String star, LocalDateTime time, String type, String introduction, List<Seat> seats) {
+    public ShowPlan(String name, String star, String time, String type, String introduction, List<Seat> seats, Venue venue) {
         this.name = name;
         this.star = star;
         this.time = time;
         this.type = type;
         this.introduction = introduction;
         this.seats = seats;
+        this.venue = venue;
     }
 
     public Integer getId() {
@@ -61,11 +66,11 @@ public class ShowPlan {
         this.star = star;
     }
 
-    public LocalDateTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -91,5 +96,13 @@ public class ShowPlan {
 
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
+    }
+
+    public Venue getVenue() {
+        return venue;
+    }
+
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 }

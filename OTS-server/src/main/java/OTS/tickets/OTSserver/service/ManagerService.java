@@ -9,7 +9,7 @@ public interface ManagerService {
     /**
      * 经理登录
      *
-     * @param password 登录密码
+     * @param manager 登录密码
      * @return
      */
     ResultMessageBean signIn(ManagerPasswordBean manager);

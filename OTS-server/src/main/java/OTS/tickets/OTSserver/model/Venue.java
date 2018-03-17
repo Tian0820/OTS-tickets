@@ -27,7 +27,13 @@ public class Venue {
     private Double balance;
 
     @OneToMany
+    private List<ShowPlan> showPlans;
+
+    @OneToMany
     private List<Order> orders;
+
+    @OneToMany
+    private List<Approval> approvals;
 
     public Venue() {
     }

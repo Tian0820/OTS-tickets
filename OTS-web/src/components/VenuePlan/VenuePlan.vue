@@ -16,7 +16,9 @@
         <el-date-picker
           v-model="planInfoForm.time"
           type="datetime"
-          placeholder="选择日期时间">
+          :picker-options="pickerOption"
+          placeholder="选择日期时间"
+        >
         </el-date-picker>
       </el-form-item>
 
@@ -185,7 +187,14 @@
         }, {
           area: '六区',
           price: 380,
-        }]
+        }],
+        pickerOption: {
+          disabledDate(time) {
+//            console.log('111');
+            let timeSpace = time.getTime() < Date.now();
+            return timeSpace;
+          }
+        }
       }
     },
     methods: {

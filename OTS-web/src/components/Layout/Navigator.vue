@@ -65,7 +65,7 @@
           {{manager.managerName}}<i class="el-icon-caret-bottom el-icon--right"></i>
           </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="ManagerHomePage">我的主页</el-dropdown-item>
+                <el-dropdown-item command="ManagerHomePage">审批中心</el-dropdown-item>
                 <el-dropdown-item command="ManagerStatisticsPage">统计信息</el-dropdown-item>
                 <el-dropdown-item command="signOut">退出账号</el-dropdown-item>
               </el-dropdown-menu>
