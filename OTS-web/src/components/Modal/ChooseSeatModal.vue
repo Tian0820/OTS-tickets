@@ -15,13 +15,15 @@
 
         <div :style="{textAlign: 'center', marginTop: '30px'}">
           <p>舞台</p>
-          <el-checkbox-group
-            v-model="chosenSeats"
-            :min="1"
-            :max="6">
-            <el-checkbox v-for="seat in seats" :disabled="seat.available===0" :label="seat" :key="seat.id">&nbsp;
-            </el-checkbox>
-          </el-checkbox-group>
+          <div :style="{padding: '20px 100px'}">
+            <el-checkbox-group
+              v-model="chosenSeats"
+              :min="1"
+              :max="6">
+              <el-checkbox v-for="seat in seats" :disabled="seat.available===0" :label="seat" :key="seat.id">&nbsp;
+              </el-checkbox>
+            </el-checkbox-group>
+          </div>
         </div>
 
         <button class="confirm-button" @click="handleConfirm">确认选座</button>
@@ -37,7 +39,7 @@
 <script>
   import {RadioGroup, Radio, Checkbox, CheckboxGroup, Message, Button} from 'element-ui'
   import {router} from '../../main'
-  import {mapState} from 'vuex'
+  import {mapState, mapMutations} from 'vuex'
 
   export default {
     name: 'choose-seat-modal',
@@ -67,13 +69,25 @@
 //    },
     props: ['currentShow', 'chosenArea'],
     methods: {
+      ...mapMutations('showPlan', [
+        'saveChosenSeats'
+      ]),
       closeBox() {
         this.chosenSeats = []
         this.$modal.hide('choose-seat-modal')
       },
       handleConfirm() {
+        this.saveChosenSeats(this.chosenSeats)
+        console.log(this.chosenSeats)
         Message.success('选择成功！')
+        
+
+
         this.$modal.hide('choose-seat-modal')
+        this.$modal.show('pay-modal')
+
+
+
       }
     }
   }

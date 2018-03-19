@@ -15,6 +15,10 @@ public class ShowPlanServiceImpl implements ShowPlanService {
     @Autowired
     ShowPlanRepository showPlanRepository;
 
+//    private ShowPlanBean ShowPlanToShowPlanBean(ShowPlan showPlan) {
+//
+//    }
+
     @Override
     public List<ShowPlan> getAllShowPlans() {
         return showPlanRepository.findAll();

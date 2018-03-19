@@ -1,5 +1,7 @@
 package OTS.tickets.OTSserver.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -34,7 +36,8 @@ public class User {
     @ManyToMany
     private List<Coupon> coupons;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private List<Order> orders;
 
     public User() {

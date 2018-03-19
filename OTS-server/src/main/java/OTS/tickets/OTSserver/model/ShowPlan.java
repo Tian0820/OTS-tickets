@@ -1,5 +1,8 @@
 package OTS.tickets.OTSserver.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,23 +25,27 @@ public class ShowPlan {
 
     private String introduction;
 
-    @OneToMany
+    @OneToMany(mappedBy = "showPlan")
+    @JsonManagedReference
     private List<Seat> seats;
 
     @ManyToOne
     private Venue venue;
 
+    @OneToMany(mappedBy = "showPlan")
+    @JsonBackReference
+    private List<Order> orders;
+
 
     public ShowPlan() {
     }
 
-    public ShowPlan(String name, String star, String time, String type, String introduction, List<Seat> seats, Venue venue) {
+    public ShowPlan(String name, String star, String time, String type, String introduction, Venue venue) {
         this.name = name;
         this.star = star;
         this.time = time;
         this.type = type;
         this.introduction = introduction;
-        this.seats = seats;
         this.venue = venue;
     }
 
@@ -104,5 +111,13 @@ public class ShowPlan {
 
     public void setVenue(Venue venue) {
         this.venue = venue;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

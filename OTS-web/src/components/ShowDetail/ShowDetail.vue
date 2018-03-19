@@ -11,7 +11,8 @@
         <p class="show-title">{{currentShow.name}}</p>
         <p class="show-info">时间：{{currentShow.time}}</p>
         <p class="show-info">艺人：{{currentShow.star}}</p>
-        <p class="show-info">地点：{{currentShow.venue.city}}&nbsp;{{currentShow.venue.address}}</p>
+        <p class="show-info">
+          地点：{{currentShow.venue.city}}&nbsp;{{currentShow.venue.venueName}}&nbsp;{{currentShow.venue.address}}</p>
 
         <p class="price">
           <img src="../../assets/img/price-tag.png" width="20"/>

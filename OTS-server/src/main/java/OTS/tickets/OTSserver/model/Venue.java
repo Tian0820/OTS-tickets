@@ -26,7 +26,7 @@ public class Venue {
 
     private Double balance;
 
-    @OneToMany
+    @OneToMany(mappedBy = "venue")
     private List<ShowPlan> showPlans;
 
     @OneToMany

@@ -96,16 +96,17 @@ public class VenueServiceImpl implements VenueService {
             String[] prices = showPlanBean.getPrice().split(";");
             List<Seat> seats = new ArrayList<>();
             Venue venue = venueRepository.findVenueByCode(showPlanBean.getVenueCode());
+            ShowPlan newShow = new ShowPlan(showPlanBean.getName(), showPlanBean.getStar(),
+                    showPlanBean.getTime(), showPlanBean.getType(), showPlanBean.getIntroduction(),
+                    venue);
+            showPlanRepository.save(newShow);
             for (int i = 0; i < prices.length; i++) {
                 for (int j = 0; j < 100; j++) {
-                    Seat seat = new Seat(String.valueOf(i + 1), j, 1, Double.valueOf(prices[i]));
+                    Seat seat = new Seat(String.valueOf(i + 1), j, 1, Double.valueOf(prices[i]), null, newShow);
                     seats.add(seat);
                     seatRepository.save(seat);
                 }
             }
-            showPlanRepository.save(new ShowPlan(showPlanBean.getName(), showPlanBean.getStar(),
-                    showPlanBean.getTime(), showPlanBean.getType(), showPlanBean.getIntroduction(),
-                    seats, venue));
             result.result = true;
         }
         return result;

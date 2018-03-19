@@ -4,6 +4,7 @@ const state = {
     allShowPlans: null,
     currentShow: null,
     chosenArea: 1,
+    chosenSeats: [],
   }
 ;
 
@@ -35,6 +36,9 @@ const mutations = {
   },
   'saveChosenArea'(state, chosenArea) {
     state.chosenArea = chosenArea
+  },
+  'saveChosenSeats'(state, chosenSeats) {
+    state.chosenSeats = chosenSeats
   }
 };
 
