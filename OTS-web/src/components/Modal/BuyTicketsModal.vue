@@ -32,6 +32,7 @@
 <script>
   import {InputNumber, Message, Button} from 'element-ui'
   import {router} from '../../main'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'buy-tickets-modal',
@@ -44,6 +45,11 @@
       return {
         number: 1,
       }
+    },
+    computed: {
+      ...mapState('showPlan', {
+        currentShow: state => state.currentShow
+      })
     },
     methods: {
       closeBox() {

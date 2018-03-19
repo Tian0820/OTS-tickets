@@ -2,7 +2,7 @@
   <div class="body-wrapper">
     <layout>
       <div class="container">
-        <show-detail :type="type"></show-detail>
+        <show-detail v-if="currentShow" :type="type" :currentShow="currentShow"></show-detail>
       </div>
     </layout>
   </div>
@@ -28,10 +28,14 @@
     computed: {
       ...mapState('auth', {
         type: state => state.loginType
+      }),
+      ...mapState('showPlan', {
+        currentShow: state => state.currentShow
       })
     },
     methods: {},
     beforeRouteEnter(to, from, next) {
+      store.dispatch('showPlan/fetchShowPlanById', to.params.showId)
       store.dispatch('auth/refreshUser', {
         onSuccess: (success) => {
           store.commit('auth/saveLoginType', 'user')

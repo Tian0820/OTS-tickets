@@ -3,7 +3,7 @@
   <div class="list-wrapper">
     <div-header :header="'最近演出'"></div-header>
     <el-row :gutter="10">
-      <single-show v-for="item in 8" :key="item"></single-show>
+      <single-show v-for="item in showPlans" :key="item.id" :show="item"></single-show>
     </el-row>
 
   </div>
@@ -25,6 +25,7 @@
       DivHeader,
       SingleShow
     },
+    props: ['showPlans'],
     data() {
       return {}
     },

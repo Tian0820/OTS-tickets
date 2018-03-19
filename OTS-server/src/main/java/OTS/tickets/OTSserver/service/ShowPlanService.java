@@ -8,4 +8,6 @@ import java.util.List;
 public interface ShowPlanService {
 
     List<ShowPlan> getAllShowPlans();
+
+    ShowPlan getShowPlanById(int showPlanId);
 }

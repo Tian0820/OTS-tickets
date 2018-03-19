@@ -90,5 +90,7 @@ button {
   width: 100%;
   height: auto;
   background-color: #ffffff; }
+  .show-info-wrapper p {
+    color: #595959; }
 
 /*# sourceMappingURL=ShowDetail.css.map */

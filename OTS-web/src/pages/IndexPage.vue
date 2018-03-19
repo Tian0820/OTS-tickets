@@ -4,7 +4,7 @@
       <banner></banner>
 
       <div class="container">
-        <show-list></show-list>
+        <show-list v-if="showPlans" :showPlans="showPlans"></show-list>
 
       </div>
 
@@ -19,7 +19,7 @@
   import ShowList from '../components/ShowList/ShowList.vue'
   import {Message} from 'element-ui'
   import {store} from '../main'
-  import {mapActions} from 'vuex'
+  import {mapActions, mapState} from 'vuex'
 
   export default {
     name: 'index-page',
@@ -32,12 +32,19 @@
     data() {
       return {}
     },
+    computed: {
+      ...mapState('showPlan', {
+        showPlans: state => state.allShowPlans
+      })
+    },
     methods: {
       ...mapActions('auth', [
         'refreshUser'
       ])
     },
     beforeRouteEnter(to, from, next) {
+      store.dispatch('showPlan/fetchAllShowPlans')
+
       store.dispatch('auth/refreshUser', {
         onSuccess: (success) => {
         },

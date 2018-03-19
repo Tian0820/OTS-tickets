@@ -10,10 +10,10 @@
 
       <div class="show-info-wrapper">
         <p class="show-title" @click="goToShowDetail" title="2018咪咕音乐现场南京站徐佳莹心里学音乐会">
-          2018咪咕音乐现场南京站徐佳莹心里学音乐会
+          {{show.name}}
         </p>
         <p class="show-info">
-          南京&nbsp;&nbsp;&nbsp;&nbsp;2018-03-24
+          {{show.venue.city}}&nbsp;&nbsp;&nbsp;&nbsp;{{show.time}}
         </p>
         <p class="show-price">
           票价：<span :style="{fontWeight: '500', fontSize: '18px', color: '#595959'}">380</span>&nbsp;起
@@ -42,9 +42,10 @@
         posterUrl: require('../../assets/img/' + name)
       }
     },
+    props: ['show'],
     methods: {
       goToShowDetail() {
-        router.push({name: 'ShowDetailPage', params: {showId: 1}})
+        router.push({name: 'ShowDetailPage', params: {showId: this.show.id}})
       }
     },
   }

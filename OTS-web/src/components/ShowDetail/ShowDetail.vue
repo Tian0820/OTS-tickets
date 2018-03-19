@@ -8,10 +8,10 @@
 
       <div class="info-wrapper">
 
-        <p class="show-title">2018咪咕音乐现场南京站徐佳莹心里学音乐会</p>
-        <p class="show-info">时间：2018-03-24 19:30</p>
-        <p class="show-info">艺人：徐佳莹</p>
-        <p class="show-info">地点：南京太阳宫</p>
+        <p class="show-title">{{currentShow.name}}</p>
+        <p class="show-info">时间：{{currentShow.time}}</p>
+        <p class="show-info">艺人：{{currentShow.star}}</p>
+        <p class="show-info">地点：{{currentShow.venue.city}}&nbsp;{{currentShow.venue.address}}</p>
 
         <p class="price">
           <img src="../../assets/img/price-tag.png" width="20"/>
@@ -22,11 +22,12 @@
           v-model="checkboxGroup"
           size="small"
           :max="1">
-          <el-radio label="180元" border></el-radio>
-          <el-radio label="280元" border></el-radio>
-          <el-radio label="380元" border></el-radio>
-          <el-radio label="480元" border></el-radio>
-          <el-radio label="680元" border></el-radio>
+          <el-radio
+            v-for="(price, index) in prices"
+            :label="price"
+            :key="index"
+            @change="handleChange"
+            border></el-radio>
         </el-radio-group>
 
         <button v-if="type === 'user'" @click="handleBuyTickets">立即购买</button>
@@ -38,6 +39,8 @@
 
     <div class="show-info-wrapper">
       <div-header :header="'演出信息'"></div-header>
+
+      <p>{{currentShow.introduction}}</p>
     </div>
   </div>
 
@@ -48,7 +51,7 @@
   import DivHeader from '../Util/DivHeader.vue'
   import {Checkbox, CheckboxGroup, RadioGroup, Radio} from 'element-ui'
   import {store} from '../../main'
-  import {mapActions} from 'vuex'
+  import {mapActions, mapMutations} from 'vuex'
   import ElRadio from "../../../node_modules/element-ui/packages/radio/src/radio.vue";
 
   export default {
@@ -60,15 +63,28 @@
       elRadioGroup: RadioGroup,
       elRadio: Radio
     },
-    props: ['type'],
+    props: ['type', 'currentShow'],
     data() {
       let name = 'poster.jpg'
+      let prices = []
+      let areas = this.currentShow.seats.length / 100
+      for (let i = 0; i < areas; i++) {
+        prices.push(this.currentShow.seats[i * 100].price)
+      }
+
       return {
         posterUrl: require('../../assets/img/' + name),
-        checkboxGroup: []
+        checkboxGroup: prices[0],
+        prices: prices
       }
     },
     methods: {
+      ...mapMutations('showPlan', [
+        'saveChosenArea'
+      ]),
+      handleChange(val) {
+        this.saveChosenArea(this.prices.indexOf(val) + 1)
+      },
       handleChooseSeat() {
         if (this.type === 'user') {
           this.$modal.show('choose-seat-modal')

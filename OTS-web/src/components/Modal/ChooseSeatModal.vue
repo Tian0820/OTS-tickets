@@ -19,7 +19,8 @@
             v-model="chosenSeats"
             :min="1"
             :max="6">
-            <el-checkbox v-for="seat in 200" :label="seat" :key="seat">&nbsp;</el-checkbox>
+            <el-checkbox v-for="seat in seats" :disabled="seat.available===0" :label="seat" :key="seat.id">&nbsp;
+            </el-checkbox>
           </el-checkbox-group>
         </div>
 
@@ -36,6 +37,7 @@
 <script>
   import {RadioGroup, Radio, Checkbox, CheckboxGroup, Message, Button} from 'element-ui'
   import {router} from '../../main'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'choose-seat-modal',
@@ -48,10 +50,22 @@
       Message
     },
     data() {
+      let seats = []
+      for (let i = this.chosenArea * 100; i < this.chosenArea * 100 + 100; i++) {
+        seats.push(this.currentShow.seats[i]);
+      }
       return {
         chosenSeats: [],
+        seats: seats
       }
     },
+//    computed: {
+//      ...mapState('showPlan', {
+//        currentShow: state => state.currentShow,
+//        chosenArea: state => state.chosenArea
+//      })
+//    },
+    props: ['currentShow', 'chosenArea'],
     methods: {
       closeBox() {
         this.chosenSeats = []

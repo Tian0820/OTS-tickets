@@ -19,4 +19,9 @@ public class ShowPlanServiceImpl implements ShowPlanService {
     public List<ShowPlan> getAllShowPlans() {
         return showPlanRepository.findAll();
     }
+
+    @Override
+    public ShowPlan getShowPlanById(int showPlanId) {
+        return showPlanRepository.findShowPlanById(showPlanId);
+    }
 }
