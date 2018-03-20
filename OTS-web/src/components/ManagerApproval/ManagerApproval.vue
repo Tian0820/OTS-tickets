@@ -4,7 +4,7 @@
     <div-header :header="'场馆审批'"></div-header>
 
     <div class="approve-list">
-      <single-approval v-for="item in 10"></single-approval>
+      <single-approval v-for="item in 10" :key="item"></single-approval>
     </div>
 
   </div>

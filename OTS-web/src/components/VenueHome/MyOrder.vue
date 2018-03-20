@@ -2,7 +2,7 @@
 
   <div class="my-order-wrapper">
     <div-header :header="'场馆订单'"></div-header>
-    <single-order v-for="item in 10"></single-order>
+    <single-order v-for="item in 10" :key="item"></single-order>
   </div>
 
 

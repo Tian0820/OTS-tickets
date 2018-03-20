@@ -2,7 +2,7 @@
 
   <div class="list-wrapper">
     <div-header :header="'演出列表'"></div-header>
-    <single-plan v-for="item in 5"></single-plan>
+    <single-plan v-for="item in 5" :key="item"></single-plan>
   </div>
 
 
