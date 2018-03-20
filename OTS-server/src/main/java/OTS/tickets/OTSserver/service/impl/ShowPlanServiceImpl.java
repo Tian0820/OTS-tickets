@@ -26,6 +26,6 @@ public class ShowPlanServiceImpl implements ShowPlanService {
 
     @Override
     public ShowPlan getShowPlanById(int showPlanId) {
-        return showPlanRepository.findShowPlanById(showPlanId);
+        return showPlanRepository.findShowPlanByIdOrderBySeatsAsc(showPlanId);
     }
 }

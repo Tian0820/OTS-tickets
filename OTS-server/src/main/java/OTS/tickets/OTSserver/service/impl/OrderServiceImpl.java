@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
         ResultMessageBean result = new ResultMessageBean(true);
 
         User user = userRepository.findUserById(order.getUserId());
-        ShowPlan showPlan = showPlanRepository.findShowPlanById(order.getShowId());
+        ShowPlan showPlan = showPlanRepository.findShowPlanByIdOrderBySeatsAsc(order.getShowId());
 
         Date date = new Date();
 

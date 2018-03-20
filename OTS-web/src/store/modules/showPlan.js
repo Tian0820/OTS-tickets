@@ -21,6 +21,9 @@ const actions = {
   fetchShowPlanById({commit}, id) {
     showApi.fetchShowPlanById(data => {
       if (data !== null) {
+        data.seats.sort(function (a, b) {
+          return a.id - b.id
+        })
         commit('saveCurrentShow', data)
       }
     }, id)

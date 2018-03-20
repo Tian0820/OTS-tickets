@@ -79,7 +79,7 @@
     </div>
 
     <exchange-coupon-modal></exchange-coupon-modal>
-    <choose-seat-modal v-if="currentShow" :currentShow="currentShow" :chosenArea="chosenArea"></choose-seat-modal>
+    <choose-seat-modal></choose-seat-modal>
     <buy-tickets-modal></buy-tickets-modal>
     <pay-modal></pay-modal>
     <venue-code-modal></venue-code-modal>
@@ -131,10 +131,6 @@
       }),
       ...mapState('manager', {
         manager: state => state.currentManager
-      }),
-      ...mapState('showPlan', {
-        currentShow: state => state.currentShow,
-        chosenArea: state => state.chosenArea
       })
     },
     methods: {

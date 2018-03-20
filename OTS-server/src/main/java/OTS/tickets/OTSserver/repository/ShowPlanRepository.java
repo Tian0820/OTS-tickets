@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ShowPlanRepository extends JpaRepository<ShowPlan, Integer> {
 
-    ShowPlan findShowPlanById(int id);
+    ShowPlan findShowPlanByIdOrderBySeatsAsc(int id);
 
     ShowPlan findShowPlanByName(String name);
 
