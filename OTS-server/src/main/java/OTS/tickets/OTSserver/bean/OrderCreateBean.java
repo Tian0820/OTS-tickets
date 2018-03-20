@@ -26,12 +26,15 @@ public class OrderCreateBean {
 
     private Double price;
 
-    private List<Seat> seats;
+    /**
+     * 订单座位号，由";"隔开
+     */
+    private String seats;
 
     public OrderCreateBean() {
     }
 
-    public OrderCreateBean(Integer orderId, Integer showId, Integer userId, String type, String state, String createTime, Double price, List<Seat> seats) {
+    public OrderCreateBean(Integer orderId, Integer showId, Integer userId, String type, String state, String createTime, Double price, String seats) {
         this.orderId = orderId;
         this.showId = showId;
         this.userId = userId;
@@ -98,11 +101,11 @@ public class OrderCreateBean {
         this.price = price;
     }
 
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
+    public String getSeats() {
+        return seats;
     }
 
-    public List<Seat> getSeats() {
-        return seats;
+    public void setSeats(String seats) {
+        this.seats = seats;
     }
 }

@@ -24,7 +24,8 @@ public class OrderController {
             value = "/order/create",
             method = RequestMethod.POST,
             produces = {"application/json; charset=UTF-8"})
-    public ResultMessageBean createOrder(@RequestBody OrderCreateBean order) {
+    public ResultMessageBean createOrder(
+            @RequestBody OrderCreateBean order) {
         return orderService.createOrder(order);
     }
 }

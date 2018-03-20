@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,11 +49,17 @@ public class OrderServiceImpl implements OrderService {
 
         System.out.println(df.format(date));
 
+        String[] seats = order.getSeats().split(";");
+        List<Seat> seatList = new ArrayList<>();
+        for (String seatId :
+                seats) {
+            seatList.add(seatRepository.findSeatById(Integer.valueOf(seatId)));
+        }
+
         Order newOrder = new Order(showPlan, user, order.getType(),
-                order.getState(), df.format(date), null, order.getPrice(), order.getSeats());
+                order.getState(), df.format(date), null, order.getPrice(), seatList);
         orderRepository.save(newOrder);
 
-        List<Seat> seatList = order.getSeats();
         for (int i = 0; i < seatList.size(); i++) {
             System.out.print(seatList.get(i).getId() + ";");
             Seat seat = seatRepository.findSeatById(seatList.get(i).getId());
