@@ -85,6 +85,26 @@ export function editUserInfo(callback, userInfo) {
     })
 }
 
-export function exchangeCoupon(callback) {
+export function exchangeCoupon(callback, info) {
+  axios.post('/user/exchange-coupon',
+    info,
+    {
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
 
+export function getUserOrders(callback, userId) {
+  axios.get(`/user/${userId}/orders`)
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
 }

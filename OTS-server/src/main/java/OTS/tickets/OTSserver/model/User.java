@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -33,7 +34,8 @@ public class User {
 
     private Double balance;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "users")
+    @JsonManagedReference
     private List<Coupon> coupons;
 
     @OneToMany(mappedBy = "user")
@@ -140,5 +142,21 @@ public class User {
 
     public void setAccumulativePoint(Double accumulativePoint) {
         this.accumulativePoint = accumulativePoint;
+    }
+
+    public List<Coupon> getCoupons() {
+        return coupons;
+    }
+
+    public void setCoupons(List<Coupon> coupons) {
+        this.coupons = coupons;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

@@ -29,13 +29,21 @@
     },
     computed: {
       ...mapState('auth', {
-        user: state => state.currentUser
+        user: state => state.currentUser,
+        userOrders: state => state.userOrders
       })
     },
     methods: {},
     beforeRouteEnter(to, from, next) {
       store.dispatch('auth/refreshUser', {
         onSuccess: (success) => {
+          store.dispatch('auth/getUserOrders', {
+            onSuccess: (success) => {
+            },
+            onError: (error) => {
+              Message.error(error)
+            }
+          })
         },
         onError: (error) => {
           Message.error(error)

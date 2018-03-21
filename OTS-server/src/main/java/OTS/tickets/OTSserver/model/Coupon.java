@@ -1,9 +1,9 @@
 package OTS.tickets.OTSserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "coupon")
@@ -13,15 +13,21 @@ public class Coupon {
     @GeneratedValue
     private Integer id;
 
-    private String coupon_name;
+    private String couponName;
 
     private Double discount;
 
-    public Coupon() {}
+    @ManyToMany
+    @JsonBackReference
+    private List<User> users;
 
-    public Coupon(String coupon_name, Double discount) {
-        this.coupon_name = coupon_name;
+    public Coupon() {
+    }
+
+    public Coupon(String couponName, Double discount, List<User> users) {
+        this.couponName = couponName;
         this.discount = discount;
+        this.users = users;
     }
 
     public Integer getId() {
@@ -32,12 +38,12 @@ public class Coupon {
         this.id = id;
     }
 
-    public String getCoupon_name() {
-        return coupon_name;
+    public String getCouponName() {
+        return couponName;
     }
 
-    public void setCoupon_name(String coupon_name) {
-        this.coupon_name = coupon_name;
+    public void setCouponName(String couponName) {
+        this.couponName = couponName;
     }
 
     public Double getDiscount() {
@@ -46,5 +52,13 @@ public class Coupon {
 
     public void setDiscount(Double discount) {
         this.discount = discount;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

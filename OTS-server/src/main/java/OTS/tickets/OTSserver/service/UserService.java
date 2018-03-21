@@ -1,9 +1,14 @@
 package OTS.tickets.OTSserver.service;
 
 import OTS.tickets.OTSserver.bean.PasswordBean;
+import OTS.tickets.OTSserver.bean.ResultMessageBean;
+import OTS.tickets.OTSserver.bean.UserCouponBean;
 import OTS.tickets.OTSserver.bean.UserInfoBean;
+import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.model.User;
 import OTS.tickets.OTSserver.util.ResultMessage;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -97,5 +102,18 @@ public interface UserService {
      * @return 当前登录用户
      */
     UserInfoBean getCurrentUser(String email);
+
+    /**
+     * 获得用户订单
+     * @param userId 用户id
+     * @return 订单列表
+     */
+    List<Order> getUserOrders(int userId);
+
+    /**
+     * 用户兑换优惠券
+     * @return 兑换结果
+     */
+    ResultMessageBean exchangeCoupon(UserCouponBean userCouponBean);
 
 }

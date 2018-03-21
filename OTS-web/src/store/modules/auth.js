@@ -9,7 +9,8 @@ const state = {
     password: '',
     phone: '',
     currentUsername: '',
-    currentUser: null
+    currentUser: null,
+    userOrders: []
   }
 ;
 
@@ -119,8 +120,31 @@ const actions = {
     }), userInfo)
   },
 
-  exchangeCoupon() {
+  exchangeCoupon({commit}, {info, onSuccess, onError}) {
+    console.log('info', info)
+    authApi.exchangeCoupon(data => {
+      if (data.result === true) {
+        if (onSuccess) {
+          onSuccess('兑换成功！')
+        }
+      } else {
+        onError(data.message)
+      }
+    }, info)
+  },
 
+  getUserOrders({commit, state}, {onSuccess, onError}) {
+    let userId = state.currentUser ? state.currentUser.userId : null
+    authApi.getUserOrders(data => {
+      if (data !== null && data !== undefined) {
+        commit('saveUserOrders', data)
+        if (onSuccess) {
+          onSuccess()
+        }
+      } else {
+        onError('获取用户订单错误！')
+      }
+    }, userId)
   }
 
 };
@@ -152,6 +176,9 @@ const mutations = {
   },
   'saveCurrentUsername'(state, currentUsername) {
     state.currentUsername = currentUsername
+  },
+  'saveUserOrders'(state, userOrders) {
+    state.userOrders = userOrders
   }
 };
 

@@ -1,8 +1,13 @@
 package OTS.tickets.OTSserver.service.impl;
 
 import OTS.tickets.OTSserver.bean.PasswordBean;
+import OTS.tickets.OTSserver.bean.ResultMessageBean;
+import OTS.tickets.OTSserver.bean.UserCouponBean;
 import OTS.tickets.OTSserver.bean.UserInfoBean;
+import OTS.tickets.OTSserver.model.Coupon;
+import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.model.User;
+import OTS.tickets.OTSserver.repository.CouponRepository;
 import OTS.tickets.OTSserver.repository.UserRepository;
 import OTS.tickets.OTSserver.service.UserService;
 import OTS.tickets.OTSserver.util.CodeUtil;
@@ -11,11 +16,16 @@ import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    CouponRepository couponRepository;
 
     @Autowired
     MailUtil mailUtil;
@@ -133,5 +143,43 @@ public class UserServiceImpl implements UserService {
             return userToUserInfoBean(user);
         }
         return null;
+    }
+
+    @Override
+    public List<Order> getUserOrders(int userId) {
+        User user = userRepository.findUserById(userId);
+        return user.getOrders();
+    }
+
+    @Override
+    public ResultMessageBean exchangeCoupon(UserCouponBean userCouponBean) {
+        ResultMessageBean result = new ResultMessageBean(false);
+        User user = userRepository.findUserById(userCouponBean.getUserId());
+        if (user == null) {
+            result.message = "用户不存在！";
+        } else {
+            Coupon coupon = couponRepository.findCouponByDiscount(userCouponBean.getDiscount());
+
+            double point = user.getPoint() - userCouponBean.getPoint();
+
+            if (point < 0) {
+                result.message = "积分不足！";
+                return result;
+            }
+
+            user.setPoint(point);
+            List<Coupon> coupons = user.getCoupons();
+            coupons.add(coupon);
+            user.setCoupons(coupons);
+            userRepository.save(user);
+
+            List<User> users = coupon.getUsers();
+            users.add(user);
+            coupon.setUsers(users);
+            couponRepository.save(coupon);
+
+            result.result = true;
+        }
+        return result;
     }
 }

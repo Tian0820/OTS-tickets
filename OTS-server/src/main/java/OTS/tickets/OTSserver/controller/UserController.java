@@ -1,15 +1,15 @@
 package OTS.tickets.OTSserver.controller;
 
-import OTS.tickets.OTSserver.bean.ResultMessageBean;
-import OTS.tickets.OTSserver.bean.UserInfoBean;
-import OTS.tickets.OTSserver.bean.UserPasswordBean;
-import OTS.tickets.OTSserver.bean.UserRegisterBean;
+import OTS.tickets.OTSserver.bean.*;
+import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.model.User;
 import OTS.tickets.OTSserver.service.UserService;
 import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/api")
@@ -138,6 +138,26 @@ public class UserController {
             result.message = "修改失败！";
         }
         return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/user/{userId}/orders",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public List<Order> getUserOrders(
+            @PathVariable int userId) {
+        return userService.getUserOrders(userId);
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/user/exchange-coupon",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean exchangeCoupon(
+            @RequestBody UserCouponBean userCouponBean) {
+        return userService.exchangeCoupon(userCouponBean);
     }
 
 

@@ -4,15 +4,15 @@
     </div>
 
     <div class="info-wrapper">
-      <h1>2018咪咕音乐现场南京站徐佳莹心里学音乐会</h1>
-      <el-tag type="success">已成交x</el-tag>
-      <span class="order-time">2018-02-14 23:58</span>
+      <h1>{{order.showPlan.name}}</h1>
+      <el-tag type="success">{{order.state}}</el-tag>
+      <span class="order-time">{{order.createTime}}</span>
       <br/>
 
-      <p>时间：2018-03-24 19:30</p>
-      <p>地点：南京太阳宫</p>
-      <p>座位：一区2座，一区3座，一区4座</p>
-      <p>价格：1000 元</p>
+      <p>时间：{{order.showPlan.time}}</p>
+      <p>地点：{{order.showPlan.venue.city}}   {{order.showPlan.venue.venueName}}    {{order.showPlan.venue.address}}</p>
+      <p>座位：{{orderSeats.join(', ')}}</p>
+      <p>价格：{{order.price}} 元</p>
     </div>
 
   </div>
@@ -27,10 +27,18 @@
     components: {
       elTag: Tag
     },
+    props: ['order'],
     data() {
       let name = 'poster.jpg'
+      let orderSeats = []
+      this.order.seats.forEach(seat => {
+        let row = Math.floor((seat.number + 1) % 10) === 0 ? Math.floor((seat.number + 1) / 10) : Math.floor((seat.number + 1) / 10) + 1
+        let col = Math.floor((seat.number + 1) % 10) === 0 ? 10 : Math.floor((seat.number + 1) % 10)
+        orderSeats.push(seat.area + '区' + row + '排' + col + '座')
+      })
       return {
         posterUrl: require('../../assets/img/' + name),
+        orderSeats: orderSeats
       }
     },
     methods: {}
