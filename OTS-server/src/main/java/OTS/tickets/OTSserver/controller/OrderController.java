@@ -2,6 +2,7 @@ package OTS.tickets.OTSserver.controller;
 
 import OTS.tickets.OTSserver.bean.OrderCreateBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
+import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +25,18 @@ public class OrderController {
             value = "/order/create",
             method = RequestMethod.POST,
             produces = {"application/json; charset=UTF-8"})
-    public ResultMessageBean createOrder(
+    public Order createOrder(
             @RequestBody OrderCreateBean order) {
         return orderService.createOrder(order);
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/order/pay",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean payOrder(
+            @RequestBody int orderId) {
+        return orderService.payOrder(orderId);
     }
 }

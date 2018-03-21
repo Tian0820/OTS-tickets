@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,15 +40,13 @@ public class OrderServiceImpl implements OrderService {
     private DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override
-    public ResultMessageBean createOrder(OrderCreateBean order) {
+    public Order createOrder(OrderCreateBean order) {
         ResultMessageBean result = new ResultMessageBean(true);
 
         User user = userRepository.findUserById(order.getUserId());
         ShowPlan showPlan = showPlanRepository.findShowPlanByIdOrderBySeatsAsc(order.getShowId());
 
         Date date = new Date();
-
-        System.out.println(df.format(date));
 
         String[] seats = order.getSeats().split(";");
         List<Seat> seatList = new ArrayList<>();
@@ -61,14 +60,55 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(newOrder);
 
         for (int i = 0; i < seatList.size(); i++) {
-            System.out.print(seatList.get(i).getId() + ";");
             Seat seat = seatRepository.findSeatById(seatList.get(i).getId());
             seat.setAvailable(0);
             seat.setOrder(newOrder);
             seatRepository.save(seat);
         }
 
-        return result;
+        return newOrder;
+    }
 
+    @Override
+    public ResultMessageBean payOrder(int orderId) {
+        ResultMessageBean result = new ResultMessageBean(false);
+
+        Order order = orderRepository.findOrderById(orderId);
+
+        //检查是否在15分钟内付款
+        Date date = new Date();
+        try {
+            Date createDate = df.parse(order.getCreateTime());
+            long interval = (date.getTime() - createDate.getTime()) / (1000 * 60);
+            if (interval > 15) {
+                //订单过期，解除已锁定的座位
+                System.out.println("===================过期！！！");
+                List<Seat> seats = order.getSeats();
+                for (int i = 0; i < seats.size(); i++) {
+                    Seat seat = seatRepository.findSeatById(seats.get(i).getId());
+                    seat.setAvailable(1);
+                    seat.setOrder(null);
+                    seatRepository.save(seat);
+                }
+                result.message = "订单已过期，请重新下单！";
+            } else {
+                //订单正常
+                User user = order.getUser();
+                Double balance = user.getBalance() - order.getPrice();
+                if (balance < 0) {
+                    result.message = "余额不足！";
+                    return result;
+                } else {
+                    user.setBalance(balance);
+                    order.setState("已付款");
+                    orderRepository.save(order);
+                    result.result = true;
+                    return result;
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

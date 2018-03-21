@@ -39,6 +39,7 @@ public class Order {
     private Double price;
 
     @OneToMany(mappedBy = "order")
+    @JsonManagedReference
     private List<Seat> seats;
 
     public Order() {

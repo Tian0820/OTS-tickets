@@ -15,7 +15,7 @@
 
         <div :style="{textAlign: 'center', marginTop: '40px'}">
           <p class="need-to-pay">需支付
-            <span :style="{fontSize: '24px', color: '#E9A038'}">2000</span>
+            <span :style="{fontSize: '24px', color: '#E9A038'}">{{currentOrder ? currentOrder.price : null}}</span>
             元</p>
           <p class="balance" v-if="user">账户余额：{{user.balance}} 元</p>
         </div>
@@ -48,11 +48,30 @@
     computed: {
       ...mapState('auth', {
         user: state => state.currentUser
+      }),
+      ...mapState('order', {
+        currentOrder: state => state.currentOrder
       })
     },
     methods: {
+      ...mapActions('order', [
+        'payOrder'
+      ]),
       handlePay() {
-
+        if (this.currentOrder.price > this.user.balance) {
+          Message.error('余额不足！')
+        } else {
+          this.payOrder({
+            order: this.currentOrder.id,
+            onSuccess: (success) => {
+              Message.success(success)
+              this.$modal.hide('pay-modal')
+            },
+            onError: (error) => {
+              Message.error(error)
+            }
+          })
+        }
       },
       closeBox() {
         this.$modal.hide('pay-modal')
