@@ -56,7 +56,7 @@
 
         <el-form-item>
           <div class="button-wrapper">
-            <button @click="submitPasswordForm('userPasswordForm')">修改</button>
+            <button @click="submitPasswordForm('venuePasswordForm')">修改</button>
           </div>
           <!--<el-button @click="resetForm('signInForm')">重置</el-button>-->
         </el-form-item>
@@ -84,25 +84,16 @@
     },
     props: ['venue'],
     data() {
-      let checkUsername = (rule, value, callback) => {
+      let checkVenueName = (rule, value, callback) => {
         if (!value) {
-          return callback(new Error('请输入用户名'))
+          return callback(new Error('请输入场馆名'))
         } else {
           callback()
         }
       };
-      let checkEmail = (rule, value, callback) => {
+      let checkAddress = (rule, value, callback) => {
         if (!value) {
-          return callback(new Error('请输入邮箱账号'))
-        } else if (!/^([\w-_]+(?:\.[\w-_]+)*)@((?:[a-z0-9]+(?:-[a-zA-Z0-9]+)*)+\.[a-z]{2,6})$/i.test(value)) {
-          return callback(new Error('请输入正确的邮箱格式'))
-        } else {
-          callback()
-        }
-      };
-      let checkPhone = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('请输入手机号'))
+          return callback(new Error('请输入场馆地址'))
         } else {
           callback()
         }
@@ -117,7 +108,7 @@
       let validateConfirmPassword = (rule, value, callback) => {
         if (!value) {
           callback(new Error('请再次输入密码'));
-        } else if (value !== this.userPasswordForm.newPassword) {
+        } else if (value !== this.venuePasswordForm.newPassword) {
           callback(new Error('两次输入密码不一致!'));
         } else {
           callback();
@@ -125,7 +116,7 @@
       };
       return {
         venueInfoForm: {
-          username: this.venue.venueName,
+          venueName: this.venue.venueName,
           code: this.venue.code,
           city: this.venue.city,
           address: this.venue.address
@@ -136,14 +127,11 @@
           confirmPassword: ''
         },
         rules: {
-          username: [
-            {validator: checkUsername, trigger: 'blur'}
+          venueName: [
+            {validator: checkVenueName, trigger: 'blur'}
           ],
-          email: [
-            {validator: checkEmail, trigger: 'blur'}
-          ],
-          phone: [
-            {validator: checkPhone, trigger: 'blur'}
+          address: [
+            {validator: checkAddress, trigger: 'blur'}
           ],
           oldPassword: [
             {validator: validatePassword, trigger: 'blur'}
@@ -158,14 +146,14 @@
       }
     },
     methods: {
-      ...mapActions('auth', [
-        'editUserInfo'
+      ...mapActions('venue', [
+        'editVenueInfo'
       ]),
       submitInfoForm(data) {
         this.$refs[data].validate((valid) => {
           if (valid) {
-            this.editUserInfo({
-              userInfo: this.userInfoForm,
+            this.editVenueInfo({
+              info: this.venueInfoForm,
               onSuccess: (success) => {
                 Message.success(success)
               },
@@ -178,8 +166,14 @@
           }
         })
       },
-      submitPasswordForm() {
+      submitPasswordForm(data) {
+        this.$refs[data].validate((valid) => {
+          if (valid) {
 
+          } else {
+            Message.error('请正确填写信息！')
+          }
+        })
       }
     }
   }

@@ -37,6 +37,14 @@ public interface VenueService {
     VenueInfoBean getCurrentVenue(String venueCode);
 
     /**
+     * 修改场馆信息
+     *
+     * @param venueInfoBean 场馆信息
+     * @return 修改结果
+     */
+    ResultMessageBean editVenueInfo(VenueInfoBean venueInfoBean);
+
+    /**
      * 场馆发布演出计划
      *
      * @param showPlanBean 演出信息

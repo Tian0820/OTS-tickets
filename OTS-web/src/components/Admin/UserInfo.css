@@ -53,6 +53,7 @@ h1 {
     letter-spacing: 3px;
     text-indent: 3px;
     color: #ffffff;
+    cursor: pointer;
     -webkit-transition: all, 0.3s;
     -moz-transition: all, 0.3s;
     -ms-transition: all, 0.3s;

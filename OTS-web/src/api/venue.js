@@ -42,6 +42,20 @@ export function fetchCurrentVenue(callback, currentVenue) {
     })
 }
 
+export function editVenueInfo(callback, info) {
+  axios.post('/venue/info',
+    info,
+    {
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
 export function uploadShowPlan(callback, info) {
   axios.post('/venue/show-plan',
     info,

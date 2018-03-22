@@ -6,8 +6,10 @@ import OTS.tickets.OTSserver.bean.ManagerPasswordBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.Approval;
 import OTS.tickets.OTSserver.model.Manager;
+import OTS.tickets.OTSserver.model.Venue;
 import OTS.tickets.OTSserver.repository.ApprovalRepository;
 import OTS.tickets.OTSserver.repository.ManagerRepository;
+import OTS.tickets.OTSserver.repository.VenueRepository;
 import OTS.tickets.OTSserver.service.ManagerService;
 import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
     private ApprovalRepository approvalRepository;
+
+    @Autowired
+    private VenueRepository venueRepository;
 
     private ManagerInfoBean managerToManagerInfoBean(Manager manager) {
         return new ManagerInfoBean(manager.getId(), manager.getManagerName(), manager.getPassword());
@@ -68,6 +73,10 @@ public class ManagerServiceImpl implements ManagerService {
         } else {
             approval.setState(approvalBean.getApprovalResult());
             approvalRepository.save(approval);
+            if (approval.getType().equals("修改")) {
+                Venue venue = approval.getVenue();
+                venueRepository.save(venue);
+            }
             result.result = true;
         }
         return result;

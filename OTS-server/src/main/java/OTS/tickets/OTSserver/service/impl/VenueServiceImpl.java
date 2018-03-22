@@ -107,6 +107,24 @@ public class VenueServiceImpl implements VenueService {
     }
 
     @Override
+    public ResultMessageBean editVenueInfo(VenueInfoBean venueInfoBean) {
+        ResultMessageBean result = new ResultMessageBean(false);
+        Venue venue = venueRepository.findVenueByCode(venueInfoBean.getCode());
+        if (venue == null) {
+            result.message = "场馆不存在！";
+        } else {
+            venue.setAddress(venueInfoBean.getAddress());
+            venue.setVenueName(venueInfoBean.getVenueName());
+
+            Approval approval = new Approval("审批中", "修改", df.format(new Date()), venue);
+            approvalRepository.save(approval);
+
+            result.result = true;
+        }
+        return result;
+    }
+
+    @Override
     public ResultMessageBean uploadShowPlan(ShowPlanBean showPlanBean) {
         ResultMessageBean result = new ResultMessageBean(false);
         ShowPlan oldShowPlan = showPlanRepository.findShowPlanByName(showPlanBean.getName());

@@ -2,7 +2,7 @@ package OTS.tickets.OTSserver.bean;
 
 public class VenueInfoBean {
 
-    private int venue_id;
+    private int venueId;
 
     private String code;
 
@@ -19,8 +19,8 @@ public class VenueInfoBean {
     public VenueInfoBean() {
     }
 
-    public VenueInfoBean(int venue_id, String code, String venueName, String city, String address, String seatType, String password) {
-        this.venue_id = venue_id;
+    public VenueInfoBean(int venueId, String code, String venueName, String city, String address, String seatType, String password) {
+        this.venueId = venueId;
         this.code = code;
         this.venueName = venueName;
         this.city = city;
@@ -29,12 +29,12 @@ public class VenueInfoBean {
         this.password = password;
     }
 
-    public int getVenue_id() {
-        return venue_id;
+    public int getVenueId() {
+        return venueId;
     }
 
-    public void setVenue_id(int venue_id) {
-        this.venue_id = venue_id;
+    public void setVenueId(int venueId) {
+        this.venueId = venueId;
     }
 
     public String getCode() {

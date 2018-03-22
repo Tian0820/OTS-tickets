@@ -69,6 +69,18 @@ const actions = {
     }
   },
 
+  editVenueInfo({commit}, {info, onSuccess, onError}) {
+    venueApi.editVenueInfo(data => {
+      if (data.result === true) {
+        if (onSuccess) {
+          onSuccess('修改已提交审核，请耐心等待！')
+        }
+      } else {
+        onError('修改失败！')
+      }
+    }, info)
+  },
+
   uploadShowPlan({commit}, {info, onSuccess, onError}) {
     venueApi.uploadShowPlan(data => {
       if (data.result === true) {

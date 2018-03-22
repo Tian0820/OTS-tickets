@@ -40,6 +40,7 @@ h1 {
     letter-spacing: 3px;
     text-indent: 3px;
     color: $white-color;
+    cursor: pointer;
     @include transition(all, 0.3s);
 
     &:hover {

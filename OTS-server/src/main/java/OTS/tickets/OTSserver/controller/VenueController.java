@@ -65,6 +65,16 @@ public class VenueController {
         return venueService.getCurrentVenue(venueCode);
     }
 
+    @ResponseBody
+    @RequestMapping(
+            value = "/venue/info",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean editVenueInfo(
+            @RequestBody VenueInfoBean venue) {
+        return venueService.editVenueInfo(venue);
+    }
+
     /**
      * 场馆发布计划
      *
