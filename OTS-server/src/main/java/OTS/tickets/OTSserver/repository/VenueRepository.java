@@ -9,4 +9,6 @@ public interface VenueRepository extends JpaRepository<Venue, Integer> {
 
     Venue findVenueByVenueName(String venueName);
 
+    Venue findVenueById(int id);
+
 }

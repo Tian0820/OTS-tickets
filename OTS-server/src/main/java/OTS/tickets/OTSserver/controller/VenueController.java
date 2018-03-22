@@ -1,9 +1,6 @@
 package OTS.tickets.OTSserver.controller;
 
-import OTS.tickets.OTSserver.bean.ResultMessageBean;
-import OTS.tickets.OTSserver.bean.ShowPlanBean;
-import OTS.tickets.OTSserver.bean.VenueInfoBean;
-import OTS.tickets.OTSserver.bean.VenuePasswordBean;
+import OTS.tickets.OTSserver.bean.*;
 import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.model.ShowPlan;
 import OTS.tickets.OTSserver.service.VenueService;
@@ -73,6 +70,16 @@ public class VenueController {
     public ResultMessageBean editVenueInfo(
             @RequestBody VenueInfoBean venue) {
         return venueService.editVenueInfo(venue);
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/venue/password",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean editVenuePassword(
+            @RequestBody PasswordBean passwordBean) {
+        return venueService.editVenuePassword(passwordBean);
     }
 
     /**

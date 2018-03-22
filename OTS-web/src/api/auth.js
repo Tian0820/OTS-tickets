@@ -85,6 +85,21 @@ export function editUserInfo(callback, userInfo) {
     })
 }
 
+export function editUserPassword(callback, info) {
+  axios.post('/user/password',
+    info,
+    {
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
+
 export function exchangeCoupon(callback, info) {
   axios.post('/user/exchange-coupon',
     info,

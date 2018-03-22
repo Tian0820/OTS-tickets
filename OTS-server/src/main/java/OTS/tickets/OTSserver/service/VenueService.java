@@ -1,9 +1,6 @@
 package OTS.tickets.OTSserver.service;
 
-import OTS.tickets.OTSserver.bean.ResultMessageBean;
-import OTS.tickets.OTSserver.bean.ShowPlanBean;
-import OTS.tickets.OTSserver.bean.VenueInfoBean;
-import OTS.tickets.OTSserver.bean.VenuePasswordBean;
+import OTS.tickets.OTSserver.bean.*;
 import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.model.ShowPlan;
 import OTS.tickets.OTSserver.util.ResultMessage;
@@ -43,6 +40,14 @@ public interface VenueService {
      * @return 修改结果
      */
     ResultMessageBean editVenueInfo(VenueInfoBean venueInfoBean);
+
+    /**
+     * 修改场馆密码
+     *
+     * @param passwordBean 密码
+     * @return 修改结果
+     */
+    ResultMessageBean editVenuePassword(PasswordBean passwordBean);
 
     /**
      * 场馆发布演出计划

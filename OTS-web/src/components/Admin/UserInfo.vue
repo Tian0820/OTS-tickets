@@ -153,7 +153,8 @@
     },
     methods: {
       ...mapActions('auth', [
-        'editUserInfo'
+        'editUserInfo',
+        'editUserPassword'
       ]),
       submitInfoForm(data) {
         this.$refs[data].validate((valid) => {
@@ -172,8 +173,29 @@
           }
         })
       },
-      submitPasswordForm() {
-
+      submitPasswordForm(data) {
+        this.$refs[data].validate((valid) => {
+          if (valid) {
+            this.editUserPassword({
+              info: {
+                id: this.user.userId,
+                oldPassword: this.userPasswordForm.oldPassword,
+                newPassword: this.userPasswordForm.newPassword
+              },
+              onSuccess: (success) => {
+                Message.success(success)
+                this.userPasswordForm.oldPassword = ''
+                this.userPasswordForm.newPassword = ''
+                this.userPasswordForm.confirmPassword = ''
+              },
+              onError: (error) => {
+                Message.error(error)
+              }
+            })
+          } else {
+            Message.error('请正确填写信息！')
+          }
+        })
       }
     }
   }

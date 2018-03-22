@@ -56,6 +56,20 @@ export function editVenueInfo(callback, info) {
     })
 }
 
+export function editVenuePassword(callback, info) {
+  axios.post('/venue/password',
+    info,
+    {
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
 export function uploadShowPlan(callback, info) {
   axios.post('/venue/show-plan',
     info,

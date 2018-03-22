@@ -132,6 +132,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public ResultMessageBean editUserPassword(PasswordBean passwordBean) {
+        ResultMessageBean result = new ResultMessageBean(false);
+        User user = userRepository.findUserById(passwordBean.getId());
+        if (user == null) {
+            result.message = "用户不存在！";
+        } else if (!user.getPassword().equals(passwordBean.getOldPassword())) {
+            result.message = "旧密码错误！";
+        } else {
+            user.setPassword(passwordBean.getNewPassword());
+            userRepository.save(user);
+            result.result = true;
+        }
+        return result;
+    }
+
+    @Override
     public ResultMessage deleteUser(int id) {
         return null;
     }

@@ -121,6 +121,18 @@ const actions = {
     }), userInfo)
   },
 
+  editUserPassword({commit}, {info, onSuccess, onError}) {
+    authApi.editUserPassword(data => {
+      if (data.result === true) {
+        if (onSuccess) {
+          onSuccess('修改成功！')
+        }
+      } else {
+        onError(data.message)
+      }
+    }, info)
+  },
+
   exchangeCoupon({commit}, {info, onSuccess, onError}) {
     console.log('info', info)
     authApi.exchangeCoupon(data => {

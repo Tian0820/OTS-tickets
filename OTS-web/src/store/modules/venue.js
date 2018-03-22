@@ -81,6 +81,18 @@ const actions = {
     }, info)
   },
 
+  editVenuePassword({commit}, {info, onSuccess, onError}) {
+    venueApi.editVenuePassword(data => {
+      if (data.result === true) {
+        if (onSuccess) {
+          onSuccess('修改成功！')
+        }
+      } else {
+        onError(data.message)
+      }
+    }, info)
+  },
+
   uploadShowPlan({commit}, {info, onSuccess, onError}) {
     venueApi.uploadShowPlan(data => {
       if (data.result === true) {

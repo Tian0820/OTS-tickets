@@ -1,22 +1,38 @@
 package OTS.tickets.OTSserver.bean;
 
 public class PasswordBean {
+
+    /**
+     * 登录id
+     */
+    private int id;
+
+
     /**
      * 旧密码
      */
-    public String oldPassword;
+    private String oldPassword;
 
     /**
      * 新密码
      */
-    public String newPassword;
+    private String newPassword;
 
     public PasswordBean() {
     }
 
-    public PasswordBean(String oldPassword, String newPassword) {
+    public PasswordBean(int id, String oldPassword, String newPassword) {
+        this.id = id;
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getOldPassword() {

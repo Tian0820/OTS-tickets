@@ -1,9 +1,6 @@
 package OTS.tickets.OTSserver.service.impl;
 
-import OTS.tickets.OTSserver.bean.ResultMessageBean;
-import OTS.tickets.OTSserver.bean.ShowPlanBean;
-import OTS.tickets.OTSserver.bean.VenueInfoBean;
-import OTS.tickets.OTSserver.bean.VenuePasswordBean;
+import OTS.tickets.OTSserver.bean.*;
 import OTS.tickets.OTSserver.model.*;
 import OTS.tickets.OTSserver.repository.ApprovalRepository;
 import OTS.tickets.OTSserver.repository.SeatRepository;
@@ -119,6 +116,22 @@ public class VenueServiceImpl implements VenueService {
             Approval approval = new Approval("审批中", "修改", df.format(new Date()), venue);
             approvalRepository.save(approval);
 
+            result.result = true;
+        }
+        return result;
+    }
+
+    @Override
+    public ResultMessageBean editVenuePassword(PasswordBean passwordBean) {
+        ResultMessageBean result = new ResultMessageBean(false);
+        Venue venue = venueRepository.findVenueById(passwordBean.getId());
+        if (venue == null) {
+            result.message = "场馆不存在！";
+        } else if (!venue.getPassword().equals(passwordBean.getOldPassword())) {
+            result.message = "旧密码错误！";
+        } else {
+            venue.setPassword(passwordBean.getNewPassword());
+            venueRepository.save(venue);
             result.result = true;
         }
         return result;

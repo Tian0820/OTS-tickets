@@ -143,6 +143,16 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(
+            value = "/user/password",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean editUserPassword(
+            @RequestBody PasswordBean passwordBean) {
+        return userService.editUserPassword(passwordBean);
+    }
+
+    @ResponseBody
+    @RequestMapping(
             value = "/user/{userId}/orders",
             method = RequestMethod.GET,
             produces = {"application/json; charset=UTF-8"})

@@ -89,6 +89,15 @@ public interface UserService {
      */
     ResultMessage updateUser(UserInfoBean user);
 
+
+    /**
+     * 修改用户密码
+     *
+     * @param passwordBean 密码
+     * @return 修改结果
+     */
+    ResultMessageBean editUserPassword(PasswordBean passwordBean);
+
     /**
      * 删除用户
      *

@@ -147,7 +147,8 @@
     },
     methods: {
       ...mapActions('venue', [
-        'editVenueInfo'
+        'editVenueInfo',
+        'editVenuePassword'
       ]),
       submitInfoForm(data) {
         this.$refs[data].validate((valid) => {
@@ -169,7 +170,22 @@
       submitPasswordForm(data) {
         this.$refs[data].validate((valid) => {
           if (valid) {
-
+            this.editVenuePassword({
+              info: {
+                id: this.venue.venueId,
+                oldPassword: this.venuePasswordForm.oldPassword,
+                newPassword: this.venuePasswordForm.newPassword
+              },
+              onSuccess: (success) => {
+                Message.success(success)
+                this.venuePasswordForm.oldPassword = ''
+                this.venuePasswordForm.newPassword = ''
+                this.venuePasswordForm.confirmPassword = ''
+              },
+              onError: (error) => {
+                Message.error(error)
+              }
+            })
           } else {
             Message.error('请正确填写信息！')
           }
