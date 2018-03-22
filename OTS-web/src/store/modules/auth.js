@@ -10,7 +10,8 @@ const state = {
     phone: '',
     currentUsername: '',
     currentUser: null,
-    userOrders: []
+    userOrders: [],
+    userCoupons: []
   }
 ;
 
@@ -133,16 +134,20 @@ const actions = {
     }, info)
   },
 
-  getUserOrders({commit, state}, {onSuccess, onError}) {
+  getUserOrders({commit, state}) {
     let userId = state.currentUser ? state.currentUser.userId : null
     authApi.getUserOrders(data => {
       if (data !== null && data !== undefined) {
         commit('saveUserOrders', data)
-        if (onSuccess) {
-          onSuccess()
-        }
-      } else {
-        onError('获取用户订单错误！')
+      }
+    }, userId)
+  },
+
+  getUserCoupons({commit, state}) {
+    let userId = state.currentUser ? state.currentUser.userId : null
+    authApi.getUserCoupons(data => {
+      if (data !== null && data !== undefined) {
+        commit('saveUserCoupons', data)
       }
     }, userId)
   }
@@ -179,6 +184,9 @@ const mutations = {
   },
   'saveUserOrders'(state, userOrders) {
     state.userOrders = userOrders
+  },
+  'saveUserCoupons'(state, userCoupons) {
+    state.userCoupons = userCoupons
   }
 };
 

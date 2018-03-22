@@ -182,4 +182,10 @@ public class UserServiceImpl implements UserService {
         }
         return result;
     }
+
+    @Override
+    public List<Coupon> getUserCoupons(int userId) {
+        User user = userRepository.findUserById(userId);
+        return user.getCoupons();
+    }
 }

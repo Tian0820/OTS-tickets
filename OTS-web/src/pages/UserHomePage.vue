@@ -37,13 +37,8 @@
     beforeRouteEnter(to, from, next) {
       store.dispatch('auth/refreshUser', {
         onSuccess: (success) => {
-          store.dispatch('auth/getUserOrders', {
-            onSuccess: (success) => {
-            },
-            onError: (error) => {
-              Message.error(error)
-            }
-          })
+          store.dispatch('auth/getUserOrders')
+          store.dispatch('auth/getUserCoupons')
         },
         onError: (error) => {
           Message.error(error)

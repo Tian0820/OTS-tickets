@@ -108,3 +108,13 @@ export function getUserOrders(callback, userId) {
       console.log(error)
     })
 }
+
+export function getUserCoupons(callback, userId) {
+  axios.get(`/user/${userId}/coupons`)
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

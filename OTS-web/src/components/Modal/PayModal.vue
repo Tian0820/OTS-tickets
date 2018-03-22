@@ -20,6 +20,16 @@
           <p class="balance" v-if="user">账户余额：{{user.balance}} 元</p>
         </div>
 
+        <div class="coupon-wrapper">
+          <div-header :header="'我的优惠券'"></div-header>
+
+          <el-radio-group v-model="radio">
+            <el-radio v-for="(item, index) in coupons" :key="index" :label="index">
+              <single-coupon :coupon="item"></single-coupon>
+            </el-radio>
+          </el-radio-group>
+        </div>
+
 
         <button class="confirm-button" @click="handlePay">确认支付</button>
 
@@ -32,22 +42,31 @@
 </template>
 
 <script>
-  import {Button, Message} from 'element-ui'
-  import {router} from '../../main'
+  import DivHeader from '../Util/DivHeader.vue'
+  import SingleCoupon from '../Coupon/SingleCoupon.vue'
+  import {Button, Message, RadioGroup, Radio} from 'element-ui'
+  import {router, store} from '../../main'
   import {mapState, mapActions} from 'vuex'
 
   export default {
     name: 'pay-modal',
     components: {
+      DivHeader,
+      SingleCoupon,
       elButton: Button,
+      elRadioGroup: RadioGroup,
+      elRadio: Radio,
       Message
     },
     data() {
-      return {}
+      return {
+        radio: 0
+      }
     },
     computed: {
       ...mapState('auth', {
-        user: state => state.currentUser
+        user: state => state.currentUser,
+        coupons: state => state.userCoupons
       }),
       ...mapState('order', {
         currentOrder: state => state.currentOrder

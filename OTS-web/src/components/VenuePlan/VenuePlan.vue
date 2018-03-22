@@ -18,6 +18,8 @@
           type="datetime"
           :picker-options="pickerOption"
           placeholder="选择日期时间"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          @change="changeTime"
         >
         </el-date-picker>
       </el-form-item>
@@ -198,7 +200,42 @@
       }
     },
     methods: {
-      submitInfoForm() {
+      ...mapActions('venue', [
+        'uploadShowPlan'
+      ]),
+      changeTime(val) {
+        console.log(val)
+      },
+      submitInfoForm(data) {
+        this.$refs[data].validate((valid) => {
+          if (valid) {
+            let prices = []
+            this.tableData.forEach(data => {
+              prices.push(data.price)
+            })
+            this.uploadShowPlan({
+              info: {
+                name: this.planInfoForm.name,
+                venueCode: this.venue.code,
+                star: this.planInfoForm.star,
+                type: this.planInfoForm.type,
+                time: this.planInfoForm.time,
+                introduction: this.planInfoForm.introduction,
+                price: prices.join(';')
+              },
+              onSuccess: (success) => {
+                Message.success(success)
+                router.push({name: 'VenueHomePage', params: {venueCode: this.venue.code}})
+              },
+              onError: (error) => {
+                Message.error(error)
+              }
+            })
+          } else {
+            Message.error('请正确填写信息！')
+          }
+        })
+
 
       },
     }

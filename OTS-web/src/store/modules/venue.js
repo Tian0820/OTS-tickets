@@ -67,6 +67,18 @@ const actions = {
     }
   },
 
+  uploadShowPlan({commit}, {info, onSuccess, onError}) {
+    venueApi.uploadShowPlan(data => {
+      if (data.result === true) {
+        if (onSuccess) {
+          onSuccess('发布成功！')
+        } else {
+          onError(data.message)
+        }
+      }
+    }, info)
+  }
+
 
 };
 

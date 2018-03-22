@@ -38,6 +38,7 @@
       store.dispatch('showPlan/fetchShowPlanById', to.params.showId)
       store.dispatch('auth/refreshUser', {
         onSuccess: (success) => {
+          store.dispatch('auth/getUserCoupons')
           store.commit('auth/saveLoginType', 'user')
         },
         onError: (error) => {

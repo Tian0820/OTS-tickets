@@ -5,13 +5,15 @@
 
     <div class="info-wrapper">
       <h1>{{order.showPlan.name}}</h1>
-      <el-tag type="success">{{order.state}}</el-tag>
+      <el-tag :type="order.state === '已过期' ? 'danger' : 'success'">{{order.state}}</el-tag>
       <span class="order-time">{{order.createTime}}</span>
       <br/>
 
-      <p>时间：{{order.showPlan.time}}</p>
-      <p>地点：{{order.showPlan.venue.city}}   {{order.showPlan.venue.venueName}}    {{order.showPlan.venue.address}}</p>
-      <p>座位：{{orderSeats.join(', ')}}</p>
+      <button v-if="order.state === '已付款'">退款</button>
+
+      <p>时间：{{order.showPlan.time}}</p><br/>
+      <p>地点：{{order.showPlan.venue.city}}   {{order.showPlan.venue.venueName}}    {{order.showPlan.venue.address}}</p><br/>
+      <p>座位：{{orderSeats.join(', ')}}</p><br/>
       <p>价格：{{order.price}} 元</p>
     </div>
 

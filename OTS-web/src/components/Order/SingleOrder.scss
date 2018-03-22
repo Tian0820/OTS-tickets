@@ -41,7 +41,23 @@
       color: $light-grey;
     }
 
+    button {
+      float: right;
+      padding: 5px 10px;
+      background-color: $main-color;
+      border-radius: 3px;
+      color: $white-color;
+      cursor: pointer;
+      @include transition(all, 0.3s);
+
+      &:hover {
+        @include transition(all, 0.3s);
+        background-color: $sub-color;
+      }
+    }
+
     p {
+      display: inline-block;
       margin-top: 3px;
       font-size: 14px;
       color: $grey;

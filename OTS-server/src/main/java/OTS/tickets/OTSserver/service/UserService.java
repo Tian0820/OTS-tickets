@@ -4,6 +4,7 @@ import OTS.tickets.OTSserver.bean.PasswordBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.bean.UserCouponBean;
 import OTS.tickets.OTSserver.bean.UserInfoBean;
+import OTS.tickets.OTSserver.model.Coupon;
 import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.model.User;
 import OTS.tickets.OTSserver.util.ResultMessage;
@@ -105,6 +106,7 @@ public interface UserService {
 
     /**
      * 获得用户订单
+     *
      * @param userId 用户id
      * @return 订单列表
      */
@@ -112,8 +114,17 @@ public interface UserService {
 
     /**
      * 用户兑换优惠券
+     *
      * @return 兑换结果
      */
     ResultMessageBean exchangeCoupon(UserCouponBean userCouponBean);
+
+    /**
+     * 获得用户优惠券
+     *
+     * @param userId 用户id
+     * @return 用户优惠券
+     */
+    List<Coupon> getUserCoupons(int userId);
 
 }

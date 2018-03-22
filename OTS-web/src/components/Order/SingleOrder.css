@@ -51,7 +51,27 @@ button {
       margin-top: 5px;
       font-size: 12px;
       color: #bababa; }
+    .single-order-wrapper .info-wrapper button {
+      float: right;
+      padding: 5px 10px;
+      background-color: #e9a038;
+      border-radius: 3px;
+      color: #ffffff;
+      cursor: pointer;
+      -webkit-transition: all, 0.3s;
+      -moz-transition: all, 0.3s;
+      -ms-transition: all, 0.3s;
+      -o-transition: all, 0.3s;
+      transition: all, 0.3s; }
+      .single-order-wrapper .info-wrapper button:hover {
+        -webkit-transition: all, 0.3s;
+        -moz-transition: all, 0.3s;
+        -ms-transition: all, 0.3s;
+        -o-transition: all, 0.3s;
+        transition: all, 0.3s;
+        background-color: #f1a63a; }
     .single-order-wrapper .info-wrapper p {
+      display: inline-block;
       margin-top: 3px;
       font-size: 14px;
       color: #595959; }

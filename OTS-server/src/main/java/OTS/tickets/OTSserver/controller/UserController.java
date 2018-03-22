@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.controller;
 
 import OTS.tickets.OTSserver.bean.*;
+import OTS.tickets.OTSserver.model.Coupon;
 import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.model.User;
 import OTS.tickets.OTSserver.service.UserService;
@@ -158,6 +159,16 @@ public class UserController {
     public ResultMessageBean exchangeCoupon(
             @RequestBody UserCouponBean userCouponBean) {
         return userService.exchangeCoupon(userCouponBean);
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/user/{userId}/coupons",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public List<Coupon> getUserCoupons(
+            @PathVariable int userId) {
+        return userService.getUserCoupons(userId);
     }
 
 
