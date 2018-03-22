@@ -2,7 +2,7 @@
 
   <div class="list-wrapper">
     <div-header :header="'演出列表'"></div-header>
-    <single-plan v-for="item in 5" :key="item"></single-plan>
+    <single-plan v-for="item in showPlans" :key="item.id" :showPlan="item"></single-plan>
   </div>
 
 
@@ -13,7 +13,7 @@
   import SinglePlan from './SinglePlan.vue'
   import {Row} from 'element-ui'
   import {store} from '../../main'
-  import {mapActions} from 'vuex'
+  import {mapActions, mapState} from 'vuex'
 
   export default {
     name: 'plan-list',
@@ -21,6 +21,11 @@
       elRow: Row,
       DivHeader,
       SinglePlan
+    },
+    computed: {
+      ...mapState('venue', {
+        showPlans: state => state.showPlans
+      })
     },
     data() {
       return {}

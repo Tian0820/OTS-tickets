@@ -4,11 +4,11 @@
     </div>
 
     <div class="info-wrapper">
-      <h1>2018咪咕音乐现场南京站徐佳莹心里学音乐会</h1>
+      <h1>{{showPlan.name}}</h1>
       <br/><br/>
 
-      <p>时间：2018-03-24 19:30</p>
-      <p>地点：南京太阳宫</p>
+      <p>时间：{{showPlan.time}}</p>
+      <p>地点：{{showPlan.venue.city}}  {{showPlan.venue.venueName}}  {{showPlan.venue.address}}</p>
     </div>
 
   </div>
@@ -24,6 +24,7 @@
     components: {
       elTag: Tag
     },
+    props: ['showPlan'],
     data() {
       let name = 'poster.jpg'
       return {

@@ -4,6 +4,7 @@ import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.bean.ShowPlanBean;
 import OTS.tickets.OTSserver.bean.VenueInfoBean;
 import OTS.tickets.OTSserver.bean.VenuePasswordBean;
+import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.model.Seat;
 import OTS.tickets.OTSserver.model.ShowPlan;
 import OTS.tickets.OTSserver.model.Venue;
@@ -110,5 +111,31 @@ public class VenueServiceImpl implements VenueService {
             result.result = true;
         }
         return result;
+    }
+
+    @Override
+    public List<ShowPlan> getVenueShowPlans(String venueCode) {
+        Venue venue = venueRepository.findVenueByCode(venueCode);
+        if (venue != null) {
+            return venue.getShowPlans();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Order> getVenueOrders(String venueCode) {
+        Venue venue = venueRepository.findVenueByCode(venueCode);
+        if (venue != null) {
+            List<ShowPlan> showPlans = venue.getShowPlans();
+            List<Order> orders = new ArrayList<>();
+            for (ShowPlan show :
+                    showPlans) {
+                orders.addAll(show.getOrders());
+            }
+            return orders;
+        } else {
+            return null;
+        }
     }
 }

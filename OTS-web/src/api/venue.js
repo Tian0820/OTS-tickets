@@ -55,3 +55,24 @@ export function uploadShowPlan(callback, info) {
       console.log(error)
     })
 }
+
+export function fetchVenueShowPlans(callback, code) {
+  axios.get(`/venue/${code}/show-plans`)
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
+export function fetchVenueOrders(callback, code) {
+  axios.get(`/venue/${code}/orders`)
+    .then(function (response) {
+      console.log('orders', response.data)
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

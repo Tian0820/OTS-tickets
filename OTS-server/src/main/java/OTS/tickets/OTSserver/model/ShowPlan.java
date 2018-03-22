@@ -30,6 +30,7 @@ public class ShowPlan {
     private List<Seat> seats;
 
     @ManyToOne
+    @JsonManagedReference
     private Venue venue;
 
     @OneToMany(mappedBy = "showPlan")

@@ -1,9 +1,8 @@
 package OTS.tickets.OTSserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,5 +22,9 @@ public class Approval {
     private String state;
 
     private LocalDateTime time;
+
+    @ManyToOne
+    @JsonManagedReference
+    private Venue venue;
 
 }

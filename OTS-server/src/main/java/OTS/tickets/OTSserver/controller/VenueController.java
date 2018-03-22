@@ -4,12 +4,16 @@ import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.bean.ShowPlanBean;
 import OTS.tickets.OTSserver.bean.VenueInfoBean;
 import OTS.tickets.OTSserver.bean.VenuePasswordBean;
+import OTS.tickets.OTSserver.model.Order;
+import OTS.tickets.OTSserver.model.ShowPlan;
 import OTS.tickets.OTSserver.service.VenueService;
 import OTS.tickets.OTSserver.util.ResultMessage;
 import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/api")
@@ -75,6 +79,27 @@ public class VenueController {
     public ResultMessageBean uploadShowPlan(
             @RequestBody ShowPlanBean showPlanBean) {
         return venueService.uploadShowPlan(showPlanBean);
+    }
+
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/venue/{venueCode}/show-plans",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public List<ShowPlan> getVenueShowPlans(
+            @PathVariable String venueCode) {
+        return venueService.getVenueShowPlans(venueCode);
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/venue/{venueCode}/orders",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public List<Order> getVenueOrders(
+            @PathVariable String venueCode) {
+        return venueService.getVenueOrders(venueCode);
     }
 
 

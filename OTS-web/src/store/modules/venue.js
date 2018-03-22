@@ -2,7 +2,9 @@ import * as venueApi from '../../api/venue'
 
 const state = {
     currentVenue: null,
-    venueCode: ''
+    venueCode: '',
+    showPlans: [],
+    orders: []
   }
 ;
 
@@ -77,6 +79,20 @@ const actions = {
         }
       }
     }, info)
+  },
+
+  fetchVenueShowPlans({state, commit}) {
+    let code = state.currentVenue ? state.currentVenue.code : null
+    venueApi.fetchVenueShowPlans(data => {
+      commit('saveShowPlans', data)
+    }, code)
+  },
+
+  fetchVenueOrders({state, commit}) {
+    let code = state.currentVenue ? state.currentVenue.code : null
+    venueApi.fetchVenueOrders(data => {
+      commit('saveOrders', data)
+    }, code)
   }
 
 
@@ -89,6 +105,14 @@ const mutations = {
 
   'saveVenueCode'(state, venueCode) {
     state.venueCode = venueCode
+  },
+
+  'saveShowPlans'(state, showPlans) {
+    state.showPlans = showPlans
+  },
+
+  'saveOrders'(state, orders) {
+    state.orders = orders
   }
 };
 

@@ -2,7 +2,7 @@
 
   <div class="my-order-wrapper">
     <div-header :header="'场馆订单'"></div-header>
-    <single-order v-for="item in 10" :key="item"></single-order>
+    <single-order v-for="item in orders" :key="item.id" :order="item"></single-order>
   </div>
 
 
@@ -12,12 +12,18 @@
   import DivHeader from '../Util/DivHeader.vue'
   import SingleOrder from '../Order/SingleOrder.vue'
   import {router} from '../../main'
+  import {mapState, mapActions, mapMutations} from 'vuex'
 
   export default {
     name: 'my-order',
     components: {
       DivHeader,
       SingleOrder
+    },
+    computed: {
+      ...mapState('venue', {
+        orders: state => state.orders
+      })
     },
     data() {
       return {}

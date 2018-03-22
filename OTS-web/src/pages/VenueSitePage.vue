@@ -36,6 +36,7 @@
     beforeRouteEnter(to, from, next) {
       store.dispatch('venue/refreshVenue', {
         onSuccess: (success) => {
+          store.dispatch('venue/fetchVenueShowPlans')
         },
         onError: (error) => {
           Message.error(error)
