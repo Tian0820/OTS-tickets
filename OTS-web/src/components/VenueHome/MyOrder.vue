@@ -20,11 +20,7 @@
       DivHeader,
       SingleOrder
     },
-    computed: {
-      ...mapState('venue', {
-        orders: state => state.orders
-      })
-    },
+    props: ['orders'],
     data() {
       return {}
     },

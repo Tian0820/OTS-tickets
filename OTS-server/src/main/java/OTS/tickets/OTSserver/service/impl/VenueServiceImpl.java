@@ -215,6 +215,11 @@ public class VenueServiceImpl implements VenueService {
             user.setConsume(consume);
             userRepository.save(user);
 
+            Venue venue = order.getShowPlan().getVenue();
+            double balance = venue.getBalance() + order.getPrice();
+            venue.setBalance(balance);
+            venueRepository.save(venue);
+
             result.result = true;
 
         }
