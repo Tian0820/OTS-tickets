@@ -104,3 +104,18 @@ export function fetchVenueOrders(callback, code) {
       console.log(error)
     })
 }
+
+export function checkTicket(callback, orderId) {
+  axios.get('/venue/check-ticket', {
+    params: {
+      orderId: orderId
+    }
+  })
+    .then(function (response) {
+      console.log('orders', response.data)
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

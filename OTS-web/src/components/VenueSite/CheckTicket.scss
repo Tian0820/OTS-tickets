@@ -1,0 +1,30 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+@import "../../assets/scss/mixin";
+
+.check-ticket-wrapper {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 30px;
+  width: 100%;
+  height: auto;
+  background-color: $white-color;
+}
+
+p {
+  color: $grey;
+}
+
+button {
+  margin-left: 20px;
+  padding: 5px 10px;
+  background-color: $main-color;
+  border-radius: 3px;
+  color: $white-color;
+  cursor: pointer;
+
+}
+
+/deep/ .el-input {
+  width: 50%;
+}

@@ -34,6 +34,8 @@ public class User {
 
     private Double balance;
 
+    private Double consume;
+
     @ManyToMany(mappedBy = "users")
     @JsonManagedReference
     private List<Coupon> coupons;
@@ -45,7 +47,7 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String email, String phone, Integer level, Double point, Double accumulativePoint, Double balance) {
+    public User(String username, String password, String email, String phone, Integer level, Double point, Double accumulativePoint, Double balance, Double consume) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -54,6 +56,7 @@ public class User {
         this.point = point;
         this.accumulativePoint = accumulativePoint;
         this.balance = balance;
+        this.consume = consume;
     }
 
     public Integer getId() {
@@ -158,5 +161,13 @@ public class User {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public Double getConsume() {
+        return consume;
+    }
+
+    public void setConsume(Double consume) {
+        this.consume = consume;
     }
 }

@@ -2,10 +2,7 @@ package OTS.tickets.OTSserver.service.impl;
 
 import OTS.tickets.OTSserver.bean.*;
 import OTS.tickets.OTSserver.model.*;
-import OTS.tickets.OTSserver.repository.ApprovalRepository;
-import OTS.tickets.OTSserver.repository.SeatRepository;
-import OTS.tickets.OTSserver.repository.ShowPlanRepository;
-import OTS.tickets.OTSserver.repository.VenueRepository;
+import OTS.tickets.OTSserver.repository.*;
 import OTS.tickets.OTSserver.service.VenueService;
 import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +29,12 @@ public class VenueServiceImpl implements VenueService {
     @Autowired
     ApprovalRepository approvalRepository;
 
+    @Autowired
+    OrderRepository orderRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
     private DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private VenueInfoBean venueToVenueInfoBean(Venue venue) {
@@ -46,7 +49,7 @@ public class VenueServiceImpl implements VenueService {
         if (venue == null) {
             result.message = "场馆编号不存在！";
         } else {
-            Approval approval = approvalRepository.findApprovalByVenueId(venue.getId());
+            Approval approval = approvalRepository.findApprovalByVenueIdAndType(venue.getId(), "注册");
             if (!venue.getPassword().equals(venuePasswordBean.getPassword())) {
                 result.message = "密码错误！";
             } else if (approval.getState().equals("审批中")) {
@@ -188,5 +191,34 @@ public class VenueServiceImpl implements VenueService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public ResultMessageBean checkTicket(int orderId) {
+        ResultMessageBean result = new ResultMessageBean(false);
+        Order order = orderRepository.findOrderById(orderId);
+        if (order == null) {
+            result.message = "订单不存在！";
+        } else if (!order.getState().equals("已付款")) {
+            result.message = "订单状态异常，无法检票！";
+        } else {
+            order.setState("已完成");
+            order.setFinishTime(df.format(new Date()));
+            orderRepository.save(order);
+
+            User user = order.getUser();
+            double point = user.getPoint() + order.getPrice() / 10;
+            double accumulativePoint = user.getAccumulativePoint() + order.getPrice() / 10;
+            double consume = user.getConsume() + order.getPrice();
+            user.setPoint(point);
+            user.setAccumulativePoint(accumulativePoint);
+            user.setConsume(consume);
+            userRepository.save(user);
+
+            result.result = true;
+
+        }
+
+        return result;
     }
 }

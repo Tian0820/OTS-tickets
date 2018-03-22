@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
             // 用户已存在，验证失败
             return ResultMessage.USER_EXIST;
         }
-        User user = new User(username, password, email, phone, 0, 0.0, 0.0, 10000.0);
+        User user = new User(username, password, email, phone, 0, 0.0, 0.0, 10000.0, 0.0);
         userRepository.save(user);
         return ResultMessage.SUCCESS;
     }

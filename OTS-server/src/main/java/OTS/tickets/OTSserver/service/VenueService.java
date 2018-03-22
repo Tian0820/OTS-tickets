@@ -73,5 +73,13 @@ public interface VenueService {
      */
     List<Order> getVenueOrders(String venueCode);
 
+    /**
+     * 现场检票
+     *
+     * @param orderId 订单id
+     * @return 检票结果
+     */
+    ResultMessageBean checkTicket(int orderId);
+
 
 }

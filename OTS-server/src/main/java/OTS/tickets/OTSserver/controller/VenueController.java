@@ -119,5 +119,15 @@ public class VenueController {
         return venueService.getVenueOrders(venueCode);
     }
 
+    @ResponseBody
+    @RequestMapping(
+            value = "/venue/check-ticket",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean checkTicket(
+            @RequestParam(value = "orderId") int orderId) {
+        return venueService.checkTicket(orderId);
+    }
+
 
 }

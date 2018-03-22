@@ -117,6 +117,18 @@ const actions = {
     venueApi.fetchVenueOrders(data => {
       commit('saveOrders', data)
     }, code)
+  },
+
+  checkTicket({commit}, {orderId, onSuccess, onError}) {
+    venueApi.checkTicket(data => {
+      if (data.result === true) {
+        if (onSuccess) {
+          onSuccess('检票成功！')
+        }
+      } else {
+        onError(data.message)
+      }
+    }, orderId)
   }
 
 

@@ -4,7 +4,7 @@
     </div>
 
     <div class="info-wrapper">
-      <h1>{{order.showPlan.name}}</h1>
+      <h1>{{order.showPlan.name}}（订单号：{{order.id}}）</h1>
       <el-tag :type="order.state === '已过期' ? 'danger' : 'success'">{{order.state}}</el-tag>
       <span class="order-time">{{order.createTime}}</span>
       <br/>
