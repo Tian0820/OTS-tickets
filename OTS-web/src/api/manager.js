@@ -51,3 +51,23 @@ export function managerApprove(callback, info) {
       console.log(error)
     })
 }
+
+export function fetchAllUsers(callback) {
+  axios.get('/manager/users')
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
+export function banUser(callback, userId) {
+  axios.get(`/manager/ban-user/${userId}`)
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

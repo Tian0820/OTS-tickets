@@ -39,18 +39,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultMessage signIn(String email, String password) {
+    public ResultMessageBean signIn(String email, String password) {
+        ResultMessageBean result = new ResultMessageBean(false);
         User user = userRepository.findUserByEmail(email);
         if (user == null) {
             // 用户不存在
-            return ResultMessage.USER_NOT_EXIST;
+            result.message = "用户不存在！";
         } else if (!user.getPassword().equals(password)) {
             // 密码错误
-            return ResultMessage.FAILED;
+            result.message = "密码错误！";
+        } else if (user.getActivate() != 1) {
+            // 密码错误
+            result.message = "您已被注销！";
         } else {
             // 登录成功
-            return ResultMessage.SUCCESS;
+            result.result = true;
         }
+        return result;
     }
 
     @Override
@@ -98,7 +103,7 @@ public class UserServiceImpl implements UserService {
             // 用户已存在，验证失败
             return ResultMessage.USER_EXIST;
         }
-        User user = new User(username, password, email, phone, 0, 0.0, 0.0, 10000.0, 0.0);
+        User user = new User(username, password, email, phone, 0, 0.0, 0.0, 1, 10000.0, 0.0);
         userRepository.save(user);
         return ResultMessage.SUCCESS;
     }
@@ -107,7 +112,7 @@ public class UserServiceImpl implements UserService {
     public ResultMessage userCheckMail(String email, String code) {
         User user = userRepository.findUserByCode(code);
         if (user.getEmail() != null && user.getEmail().equals(email)) {
-            user.setActivate(true);
+            user.setActivate(1);
             userRepository.save(user);
             return ResultMessage.SUCCESS;
         }

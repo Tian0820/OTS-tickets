@@ -47,7 +47,14 @@
               store.commit('auth/saveLoginType', 'venue')
             },
             onError: (error) => {
-//              Message.error('venue not login')
+              store.dispatch('manager/refreshManager', {
+                onSuccess: (success) => {
+                  store.commit('auth/saveLoginType', 'manager')
+                },
+                onError: (error) => {
+                }
+              })
+
             }
           })
         }

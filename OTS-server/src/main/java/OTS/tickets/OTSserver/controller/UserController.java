@@ -31,7 +31,7 @@ public class UserController {
             method = RequestMethod.POST,
             produces = {"application/json; charset=UTF-8"})
     public ResultMessageBean sendVerifyCode(
-            @RequestBody User user) {
+            @RequestBody UserEmailBean user) {
         ResultMessage resultMessage = userService.sendEmail(user.getEmail(), user.getUsername());
         ResultMessageBean resultMessageBean = new ResultMessageBean(false);
         if (resultMessage == ResultMessage.SUCCESS) {
@@ -101,16 +101,7 @@ public class UserController {
             produces = {"application/json; charset=UTF-8"})
     public ResultMessageBean signIn(
             @RequestBody UserPasswordBean user) {
-        ResultMessage resultMessage = userService.signIn(user.getEmail(), user.getPassword());
-        ResultMessageBean result = new ResultMessageBean(false);
-        if (resultMessage == ResultMessage.SUCCESS) {
-            result.result = true;
-        } else if (resultMessage == ResultMessage.USER_NOT_EXIST) {
-            result.message = "用户不存在！";
-        } else if (resultMessage == ResultMessage.FAILED) {
-            result.message = "密码错误！";
-        }
-        return result;
+        return userService.signIn(user.getEmail(), user.getPassword());
     }
 
     @ResponseBody

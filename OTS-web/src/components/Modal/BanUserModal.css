@@ -1,0 +1,55 @@
+html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  list-style: none; }
+
+html {
+  height: 100%; }
+
+* {
+  position: relative;
+  box-sizing: border-box; }
+
+button {
+  outline: none; }
+
+/*
+ * grid
+ */
+.modal-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  text-align: center; }
+  .modal-wrapper p {
+    color: #595959;
+    font-size: 16px; }
+  .modal-wrapper button {
+    margin-top: 20px;
+    margin-right: 100px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background-color: #e9a038;
+    color: #ffffff;
+    cursor: pointer;
+    -webkit-transition: all, 0.3s;
+    -moz-transition: all, 0.3s;
+    -ms-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s; }
+    .modal-wrapper button:last-child {
+      margin-right: 0; }
+    .modal-wrapper button:hover {
+      -webkit-transition: all, 0.3s;
+      -moz-transition: all, 0.3s;
+      -ms-transition: all, 0.3s;
+      -o-transition: all, 0.3s;
+      transition: all, 0.3s;
+      background-color: #f1a63a; }
+
+/*# sourceMappingURL=BanUserModal.css.map */

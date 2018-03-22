@@ -2,7 +2,9 @@ import * as managerApi from '../../api/manager'
 
 const state = {
     currentManager: null,
-    approvals: []
+    approvals: [],
+    allUsers: [],
+    userToBan: null
   }
 ;
 
@@ -72,8 +74,25 @@ const actions = {
         onError('操作失败！')
       }
     }, info)
-  }
+  },
 
+  fetchAllUsers({commit}) {
+    managerApi.fetchAllUsers(data => {
+      commit('saveAllUsers', data)
+    })
+  },
+
+  banUser({commit}, {userId, onSuccess, onError}) {
+    managerApi.banUser(data => {
+      if (data.result === true) {
+        if (onSuccess) {
+          onSuccess('注销成功！')
+        }
+      } else {
+        onError('注销失败！')
+      }
+    }, userId)
+  }
 
 };
 
@@ -83,6 +102,12 @@ const mutations = {
   },
   'saveApprovals'(state, approvals) {
     state.approvals = approvals
+  },
+  'saveAllUsers'(state, allUsers) {
+    state.allUsers = allUsers
+  },
+  'saveUserToBan'(state, userToBan) {
+    state.userToBan = userToBan
   }
 };
 

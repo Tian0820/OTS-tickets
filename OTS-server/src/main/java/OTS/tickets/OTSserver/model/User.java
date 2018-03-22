@@ -28,7 +28,10 @@ public class User {
 
     private Double accumulativePoint;
 
-    private boolean activate;
+    /**
+     * 是否被封禁，未被封禁为1，被封禁为0
+     */
+    private int activate;
 
     private String code;
 
@@ -47,7 +50,7 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String email, String phone, Integer level, Double point, Double accumulativePoint, Double balance, Double consume) {
+    public User(String username, String password, String email, String phone, Integer level, Double point, Double accumulativePoint, int activate, Double balance, Double consume) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -55,6 +58,7 @@ public class User {
         this.level = level;
         this.point = point;
         this.accumulativePoint = accumulativePoint;
+        this.activate = activate;
         this.balance = balance;
         this.consume = consume;
     }
@@ -87,8 +91,12 @@ public class User {
         return point;
     }
 
-    public boolean isActivate() {
+    public int getActivate() {
         return activate;
+    }
+
+    public void setActivate(int activate) {
+        this.activate = activate;
     }
 
     public String getCode() {
@@ -121,10 +129,6 @@ public class User {
 
     public void setPoint(Double point) {
         this.point = point;
-    }
-
-    public void setActivate(boolean activate) {
-        this.activate = activate;
     }
 
     public void setCode(String code) {

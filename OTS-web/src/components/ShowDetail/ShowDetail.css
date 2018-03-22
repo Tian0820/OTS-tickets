@@ -91,6 +91,7 @@ button {
   height: auto;
   background-color: #ffffff; }
   .show-info-wrapper p {
-    color: #595959; }
+    color: #595959;
+    font-size: 14px; }
 
 /*# sourceMappingURL=ShowDetail.css.map */

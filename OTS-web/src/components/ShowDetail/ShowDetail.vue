@@ -9,6 +9,7 @@
       <div class="info-wrapper">
 
         <p class="show-title">{{currentShow.name}}</p>
+        <p class="show-info">类型：{{currentShow.type}}</p>
         <p class="show-info">时间：{{currentShow.time}}</p>
         <p class="show-info">艺人：{{currentShow.star}}</p>
         <p class="show-info">
@@ -50,8 +51,8 @@
 
 <script>
   import DivHeader from '../Util/DivHeader.vue'
-  import {Checkbox, CheckboxGroup, RadioGroup, Radio} from 'element-ui'
-  import {store} from '../../main'
+  import {Checkbox, CheckboxGroup, RadioGroup, Radio, Message} from 'element-ui'
+  import {store, router} from '../../main'
   import {mapActions, mapMutations} from 'vuex'
   import ElRadio from "../../../node_modules/element-ui/packages/radio/src/radio.vue";
 
@@ -62,7 +63,8 @@
       elCheckbox: Checkbox,
       elCheckboxGroup: CheckboxGroup,
       elRadioGroup: RadioGroup,
-      elRadio: Radio
+      elRadio: Radio,
+      Message
     },
     props: ['type', 'currentShow'],
     data() {
@@ -91,6 +93,11 @@
           this.$modal.show('choose-seat-modal')
         } else if (this.type === 'venue') {
           this.$modal.show('user-account-modal')
+        } else if (this.type === 'manager') {
+          Message.warning('经理无法操作！')
+        } else {
+          Message.error('请登录后操作！')
+          router.push({name: 'LoginPage'})
         }
       },
       handleBuyTickets() {

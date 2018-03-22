@@ -20,7 +20,7 @@ public interface UserService {
      * @param password 用户密码
      * @return 当前登录状态
      */
-    ResultMessage signIn(String email, String password);
+    ResultMessageBean signIn(String email, String password);
 
     /**
      * 登出

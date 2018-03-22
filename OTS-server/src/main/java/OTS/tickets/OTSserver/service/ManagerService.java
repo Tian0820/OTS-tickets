@@ -5,6 +5,7 @@ import OTS.tickets.OTSserver.bean.ManagerInfoBean;
 import OTS.tickets.OTSserver.bean.ManagerPasswordBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.Approval;
+import OTS.tickets.OTSserver.model.User;
 
 import java.util.List;
 
@@ -40,4 +41,19 @@ public interface ManagerService {
      * @return 审批结果
      */
     ResultMessageBean managerApproval(ApproveBean approval);
+
+    /**
+     * 获得所有用户
+     *
+     * @return 用户列表
+     */
+    List<User> getAllUsers();
+
+    /**
+     * 管理员封禁用户
+     *
+     * @param userId 用户id
+     * @return 封禁结果
+     */
+    ResultMessageBean banUser(int userId);
 }

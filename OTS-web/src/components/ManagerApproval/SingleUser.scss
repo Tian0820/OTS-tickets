@@ -1,0 +1,46 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+@import "../../assets/scss/mixin";
+
+.el-col {
+  margin-bottom: 10px;
+}
+
+.single-user-wrapper {
+  padding: 10px;
+  height: 120px;
+  //background-color: red;
+  border-radius: 3px;
+  border: solid 1px $border-color;
+
+  .img-wrapper {
+    @include cover-img();
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 3px;
+  }
+
+  .info-wrapper {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: top;
+    height: 100px;
+
+    p {
+      display: inline-block;
+      margin-bottom: 5px;
+      color: $grey;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 2px 15px;
+      background-color: $main-color;
+      color: $white-color;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  }
+
+}

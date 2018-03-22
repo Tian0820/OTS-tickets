@@ -3,6 +3,7 @@
     <layout>
       <div class="container">
         <manager-approval v-if="manager"></manager-approval>
+        <user-banning v-if="manager"></user-banning>
       </div>
     </layout>
   </div>
@@ -12,6 +13,7 @@
 <script>
   import Layout from '../components/Layout/Layout.vue'
   import ManagerApproval from '../components/ManagerApproval/ManagerApproval.vue'
+  import UserBanning from '../components/ManagerApproval/UserBanning.vue'
   import {Message} from 'element-ui'
   import {router, store} from '../main'
   import {mapState} from 'vuex'
@@ -21,6 +23,7 @@
     components: {
       Layout,
       ManagerApproval,
+      UserBanning,
       Message
     },
     computed: {
@@ -36,6 +39,7 @@
       store.dispatch('manager/refreshManager', {
         onSuccess: (success) => {
           store.dispatch('manager/fetchApprovals')
+          store.dispatch('manager/fetchAllUsers')
         },
         onError: (error) => {
           Message.error('manager not login')

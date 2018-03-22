@@ -5,6 +5,7 @@ import OTS.tickets.OTSserver.bean.ManagerInfoBean;
 import OTS.tickets.OTSserver.bean.ManagerPasswordBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.Approval;
+import OTS.tickets.OTSserver.model.User;
 import OTS.tickets.OTSserver.service.ManagerService;
 import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,24 @@ public class ManagerController {
     public ResultMessageBean managerApprove(
             @RequestBody ApproveBean approval) {
         return managerService.managerApproval(approval);
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/manager/users",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public List<User> getAllUsers() {
+        return managerService.getAllUsers();
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/manager/ban-user/{userId}",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean getAllUsers(@PathVariable int userId) {
+        return managerService.banUser(userId);
     }
 
 }

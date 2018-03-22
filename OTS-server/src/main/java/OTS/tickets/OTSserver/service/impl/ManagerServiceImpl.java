@@ -6,9 +6,11 @@ import OTS.tickets.OTSserver.bean.ManagerPasswordBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.Approval;
 import OTS.tickets.OTSserver.model.Manager;
+import OTS.tickets.OTSserver.model.User;
 import OTS.tickets.OTSserver.model.Venue;
 import OTS.tickets.OTSserver.repository.ApprovalRepository;
 import OTS.tickets.OTSserver.repository.ManagerRepository;
+import OTS.tickets.OTSserver.repository.UserRepository;
 import OTS.tickets.OTSserver.repository.VenueRepository;
 import OTS.tickets.OTSserver.service.ManagerService;
 import com.sun.org.apache.regexp.internal.RE;
@@ -28,6 +30,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
     private VenueRepository venueRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private ManagerInfoBean managerToManagerInfoBean(Manager manager) {
         return new ManagerInfoBean(manager.getId(), manager.getManagerName(), manager.getPassword());
@@ -80,5 +85,18 @@ public class ManagerServiceImpl implements ManagerService {
             result.result = true;
         }
         return result;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public ResultMessageBean banUser(int userId) {
+        User user = userRepository.findUserById(userId);
+        user.setActivate(0);
+        userRepository.save(user);
+        return new ResultMessageBean(true);
     }
 }

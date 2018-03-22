@@ -84,6 +84,7 @@
     <pay-modal></pay-modal>
     <venue-code-modal></venue-code-modal>
     <user-account-modal></user-account-modal>
+    <ban-user-modal></ban-user-modal>
 
   </div>
 </template>
@@ -96,6 +97,7 @@
   import PayModal from '../Modal/PayModal.vue'
   import VenueCodeModal from '../Modal/VenueCodeModal.vue'
   import UserAccountModal from '../Modal/UserAccountModal.vue'
+  import BanUserModal from '../Modal/BanUserModal.vue'
   import {Input, Button, Dropdown, DropdownMenu, DropdownItem, Message} from 'element-ui'
   import {router} from '../../main'
   import {mapMutations, mapState, mapActions} from 'vuex'
@@ -111,6 +113,7 @@
       PayModal,
       VenueCodeModal,
       UserAccountModal,
+      BanUserModal,
       elInput: Input,
       elButton: Button,
       elDropdown: Dropdown,
