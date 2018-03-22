@@ -1,7 +1,8 @@
 import * as managerApi from '../../api/manager'
 
 const state = {
-    currentManager: null
+    currentManager: null,
+    approvals: []
   }
 ;
 
@@ -53,12 +54,35 @@ const actions = {
     }
   },
 
+  fetchApprovals({commit}) {
+    managerApi.fetchApprovals(data => {
+      if (data !== null && data !== undefined) {
+        commit('saveApprovals', data)
+      }
+    })
+  },
+
+  managerApprove({state, commit}, {info, onSuccess, onError}) {
+    managerApi.managerApprove(data => {
+      if (data.result === true) {
+        if (onSuccess) {
+          onSuccess('操作成功！')
+        }
+      } else {
+        onError('操作失败！')
+      }
+    }, info)
+  }
+
 
 };
 
 const mutations = {
   'saveCurrentManager'(state, currentManager) {
     state.currentManager = currentManager
+  },
+  'saveApprovals'(state, approvals) {
+    state.approvals = approvals
   }
 };
 

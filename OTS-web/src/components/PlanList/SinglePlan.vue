@@ -33,7 +33,7 @@
     },
     methods: {
       goToSellTickets() {
-        router.push({name: 'ShowDetailPage', params: {showId: 1}})
+        router.push({name: 'ShowDetailPage', params: {showId: this.showPlan.id}})
       }
     }
   }

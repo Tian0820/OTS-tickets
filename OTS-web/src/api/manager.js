@@ -27,3 +27,27 @@ export function fetchCurrentManager(callback, name) {
       console.log(error)
     })
 }
+
+export function fetchApprovals(callback) {
+  axios.get('/manager/approvals')
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
+export function managerApprove(callback, info) {
+  axios.post('/manager/approve',
+    info,
+    {
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

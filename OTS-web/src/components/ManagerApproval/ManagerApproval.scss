@@ -11,7 +11,7 @@
   background-color: $white-color;
 
   .approve-list {
-    height: 600px;
+    max-height: 600px;
     overflow: auto;
   }
 }

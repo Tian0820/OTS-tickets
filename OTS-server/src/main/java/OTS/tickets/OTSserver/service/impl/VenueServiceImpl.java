@@ -4,10 +4,8 @@ import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.bean.ShowPlanBean;
 import OTS.tickets.OTSserver.bean.VenueInfoBean;
 import OTS.tickets.OTSserver.bean.VenuePasswordBean;
-import OTS.tickets.OTSserver.model.Order;
-import OTS.tickets.OTSserver.model.Seat;
-import OTS.tickets.OTSserver.model.ShowPlan;
-import OTS.tickets.OTSserver.model.Venue;
+import OTS.tickets.OTSserver.model.*;
+import OTS.tickets.OTSserver.repository.ApprovalRepository;
 import OTS.tickets.OTSserver.repository.SeatRepository;
 import OTS.tickets.OTSserver.repository.ShowPlanRepository;
 import OTS.tickets.OTSserver.repository.VenueRepository;
@@ -16,7 +14,10 @@ import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,6 +32,11 @@ public class VenueServiceImpl implements VenueService {
     @Autowired
     SeatRepository seatRepository;
 
+    @Autowired
+    ApprovalRepository approvalRepository;
+
+    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     private VenueInfoBean venueToVenueInfoBean(Venue venue) {
         return new VenueInfoBean(venue.getId(), venue.getCode(), venue.getVenueName(), venue.getCity(),
                 venue.getAddress(), venue.getSeatType(), venue.getPassword());
@@ -42,12 +48,20 @@ public class VenueServiceImpl implements VenueService {
         ResultMessageBean result = new ResultMessageBean(false);
         if (venue == null) {
             result.message = "场馆编号不存在！";
-        } else if (!venue.getPassword().equals(venuePasswordBean.getPassword())) {
-            result.message = "密码错误！";
         } else {
-            result.result = true;
-            result.message = venue.getCode();
+            Approval approval = approvalRepository.findApprovalByVenueId(venue.getId());
+            if (!venue.getPassword().equals(venuePasswordBean.getPassword())) {
+                result.message = "密码错误！";
+            } else if (approval.getState().equals("审批中")) {
+                result.message = "场馆注册正在审批中！";
+            } else if (approval.getState().equals("失败")) {
+                result.message = "场馆注册审批未通过！";
+            } else {
+                result.result = true;
+                result.message = venue.getCode();
+            }
         }
+
         return result;
     }
 
@@ -69,6 +83,12 @@ public class VenueServiceImpl implements VenueService {
             newVenue.setAddress(venue.getAddress());
             newVenue.setSeatType(venue.getSeatType());
             newVenue.setPassword(venue.getPassword());
+            newVenue.setBalance(0.0);
+
+            //发布审批
+            Approval approval = new Approval("审批中", "注册", df.format(new Date()), newVenue);
+            approvalRepository.save(approval);
+
             venueRepository.save(newVenue);
 
             result.result = true;

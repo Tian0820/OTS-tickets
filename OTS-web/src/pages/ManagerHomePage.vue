@@ -2,8 +2,7 @@
   <div class="body-wrapper">
     <layout>
       <div class="container">
-        <manager-approval></manager-approval>
-
+        <manager-approval v-if="manager"></manager-approval>
       </div>
     </layout>
   </div>
@@ -15,6 +14,7 @@
   import ManagerApproval from '../components/ManagerApproval/ManagerApproval.vue'
   import {Message} from 'element-ui'
   import {router, store} from '../main'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'manager-home-page',
@@ -23,6 +23,11 @@
       ManagerApproval,
       Message
     },
+    computed: {
+      ...mapState('manager', {
+        manager: state => state.currentManager
+      })
+    },
     data() {
       return {}
     },
@@ -30,6 +35,7 @@
     beforeRouteEnter(to, from, next) {
       store.dispatch('manager/refreshManager', {
         onSuccess: (success) => {
+          store.dispatch('manager/fetchApprovals')
         },
         onError: (error) => {
           Message.error('manager not login')
