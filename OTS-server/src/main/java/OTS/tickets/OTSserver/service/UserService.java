@@ -136,4 +136,11 @@ public interface UserService {
      */
     List<Coupon> getUserCoupons(int userId);
 
+    /**
+     * 通过用户邮箱查询用户
+     * @param email 邮箱
+     * @return 用户
+     */
+    User getUserByEmail(String email);
+
 }

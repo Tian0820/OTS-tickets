@@ -64,6 +64,9 @@
       ...mapState('auth', {
         user: state => state.currentUser
       }),
+      ...mapState('venue', {
+        siteUser: state => state.siteUser
+      }),
 
       seatNumbers: function () {
         let temp = []
@@ -96,25 +99,51 @@
           seatIds.push(seat.id)
         })
 
-        this.createOrder({
-          info: {
-            showId: this.currentShow.id,
-            userId: this.user.userId,
-            type: '选座',
-            state: '未付款',
-            price: this.chosenSeats[0].price * this.chosenSeats.length,
-            seats: seatIds.join(';')
-          },
-          onSuccess: (success) => {
-            Message.success(success)
-            this.$modal.hide('choose-seat-modal')
-            this.$modal.show('pay-modal')
-          },
-          onError:
-            (error) => {
-              Message.error(error)
-            }
-        })
+        if (this.user !== null) {
+          // 用户买票
+          this.createOrder({
+            info: {
+              showId: this.currentShow.id,
+              userId: this.user.userId,
+              type: '选座',
+              state: '未付款',
+              price: this.chosenSeats[0].price * this.chosenSeats.length,
+              seats: seatIds.join(';')
+            },
+            onSuccess: (success) => {
+              Message.success(success)
+              this.$modal.hide('choose-seat-modal')
+              this.$modal.show('pay-modal')
+            },
+            onError:
+              (error) => {
+                Message.error(error)
+              }
+          })
+        } else {
+          // 场馆现场卖票
+          console.log('venue!!!')
+          this.createOrder({
+            info: {
+              showId: this.currentShow.id,
+              userId: this.siteUser === null ? null : this.siteUser.id,
+              type: '分配',
+              state: '未付款',
+              price: this.chosenSeats[0].price * this.chosenSeats.length,
+              seats: seatIds.join(';')
+            },
+            onSuccess: (success) => {
+              Message.success(success)
+              this.$modal.hide('choose-seat-modal')
+              this.$modal.show('pay-modal')
+            },
+            onError:
+              (error) => {
+                Message.error(error)
+              }
+          })
+        }
+
       }
     }
   }

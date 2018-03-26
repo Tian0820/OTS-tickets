@@ -4,7 +4,8 @@ const state = {
     currentVenue: null,
     venueCode: '',
     showPlans: [],
-    orders: []
+    orders: [],
+    siteUser: null,
   }
 ;
 
@@ -129,6 +130,27 @@ const actions = {
         onError(data.message)
       }
     }, orderId)
+  },
+
+  fetchUserByEmail({commit}, {email, onSuccess, onError}) {
+
+    console.log('email', email)
+
+    if (email !== 'not member') {
+      venueApi.fetchUserByEmail(data => {
+        console.log('siteUser', data)
+        if (data !== null && data !== '' && data !== undefined) {
+          commit('saveSiteUser', data)
+          if (onSuccess) {
+            onSuccess()
+          }
+        } else {
+          onError('会员不存在！')
+        }
+      }, email)
+    } else {
+      commit('saveSiteUser', null)
+    }
   }
 
 
@@ -149,6 +171,10 @@ const mutations = {
 
   'saveOrders'(state, orders) {
     state.orders = orders
+  },
+
+  'saveSiteUser'(state, siteUser) {
+    state.siteUser = siteUser
   }
 };
 

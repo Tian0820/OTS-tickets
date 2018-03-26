@@ -172,5 +172,16 @@ public class UserController {
         return userService.getUserCoupons(userId);
     }
 
+    @ResponseBody
+    @RequestMapping(
+            value = "/user/get-by-email",
+            params = {"email"},
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public User getUserByEmail(
+            @RequestParam(value = "email") String email) {
+        return userService.getUserByEmail(email);
+    }
+
 
 }

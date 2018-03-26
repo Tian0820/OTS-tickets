@@ -209,4 +209,9 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findUserById(userId);
         return user.getCoupons();
     }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
 }

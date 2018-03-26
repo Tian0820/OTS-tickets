@@ -37,7 +37,7 @@
 <script>
   import {Button, Message, Input} from 'element-ui'
   import {router} from '../../main'
-  import {mapState, mapActions} from 'vuex'
+  import {mapState, mapActions, mapMutations} from 'vuex'
 
   export default {
     name: 'user-account-modal',
@@ -54,18 +54,39 @@
     computed: {
       ...mapState('auth', {
         user: state => state.currentUser
+      }),
+      ...mapState('venue', {
+        siteUser: state => state.siteUser
       })
     },
     methods: {
+      ...mapActions('venue', [
+        'fetchUserByEmail'
+      ]),
       notMember() {
-
-      },
-      goOn() {
+        this.fetchUserByEmail({
+          email: 'not member',
+        })
         this.$modal.hide('user-account-modal')
         this.$modal.show('choose-seat-modal')
+        this.email = ''
+      },
+      goOn() {
+        this.fetchUserByEmail({
+          email: this.email,
+          onSuccess: () => {
+            this.$modal.hide('user-account-modal')
+            this.$modal.show('choose-seat-modal')
+            this.email = ''
+          },
+          onError: (error) => {
+            Message.error(error)
+          }
+        })
       },
       closeBox() {
         this.$modal.hide('user-account-modal')
+        this.email = ''
       }
     }
   }

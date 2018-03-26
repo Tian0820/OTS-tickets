@@ -119,3 +119,18 @@ export function checkTicket(callback, orderId) {
       console.log(error)
     })
 }
+
+export function fetchUserByEmail(callback, email) {
+  axios.get(`/user/get-by-email`, {
+    params: {
+      email: email
+    }
+  })
+    .then(function (response) {
+      console.log('orders', response.data)
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
