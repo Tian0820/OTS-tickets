@@ -9,7 +9,8 @@
       <span class="order-time">{{order.createTime}}</span>
       <br/>
 
-      <button v-if="order.state === '已付款' && user !== null">退款</button>
+      <button v-if="order.state === '已付款' && user !== null" @click="handleRefund">退款</button>
+      <button v-if="order.state === '未付款' && user !== null" @click="handlePay">付款</button>
 
       <p>时间：{{order.showPlan.time}}</p><br/>
       <p>地点：{{order.showPlan.venue.city}}   {{order.showPlan.venue.venueName}}    {{order.showPlan.venue.address}}</p>
@@ -24,7 +25,7 @@
 
 <script>
   import {Tag} from 'element-ui'
-  import {mapState} from 'vuex'
+  import {mapState, mapActions, mapMutations} from 'vuex'
 
   export default {
     name: 'single-order',
@@ -50,7 +51,19 @@
         orderSeats: orderSeats
       }
     },
-    methods: {}
+    methods: {
+      ...mapMutations('order', [
+        'saveCurrentOrder'
+      ]),
+      handlePay() {
+        this.saveCurrentOrder(this.order)
+        this.$modal.show('pay-modal')
+      },
+      handleRefund() {
+        this.saveCurrentOrder(this.order)
+        this.$modal.show('refund-modal')
+      }
+    }
   }
 </script>
 

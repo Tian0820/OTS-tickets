@@ -11,4 +11,6 @@ public interface OrderService {
 
     ResultMessageBean payOrder(PayOrderBean payOrderBean);
 
+    ResultMessageBean refundOrder(int orderId);
+
 }

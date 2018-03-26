@@ -3,14 +3,8 @@ package OTS.tickets.OTSserver.service.impl;
 import OTS.tickets.OTSserver.bean.OrderCreateBean;
 import OTS.tickets.OTSserver.bean.PayOrderBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
-import OTS.tickets.OTSserver.model.Order;
-import OTS.tickets.OTSserver.model.Seat;
-import OTS.tickets.OTSserver.model.ShowPlan;
-import OTS.tickets.OTSserver.model.User;
-import OTS.tickets.OTSserver.repository.OrderRepository;
-import OTS.tickets.OTSserver.repository.SeatRepository;
-import OTS.tickets.OTSserver.repository.ShowPlanRepository;
-import OTS.tickets.OTSserver.repository.UserRepository;
+import OTS.tickets.OTSserver.model.*;
+import OTS.tickets.OTSserver.repository.*;
 import OTS.tickets.OTSserver.service.OrderService;
 import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +31,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     SeatRepository seatRepository;
+
+    @Autowired
+    CouponRepository couponRepository;
 
     private DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -99,10 +96,23 @@ public class OrderServiceImpl implements OrderService {
                 User user = order.getUser();
                 if (user != null) {
                     Double balance = user.getBalance() - order.getPrice();
+                    Coupon coupon = couponRepository.findCouponById(payOrderBean.getCouponId());
                     if (balance < 0) {
                         result.message = "余额不足！";
                         return result;
                     } else {
+                        if (coupon != null) {
+                            System.out.println("coupons remove!!!");
+                            List<Coupon> coupons = user.getCoupons();
+                            coupons.remove(coupon);
+                            List<User> users = coupon.getUsers();
+                            users.remove(order.getUser());
+
+                            System.out.println(coupons.size());
+
+                            user.setCoupons(coupons);
+                            coupon.setUsers(users);
+                        }
                         user.setBalance(balance);
                     }
                 }
@@ -115,5 +125,44 @@ public class OrderServiceImpl implements OrderService {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public ResultMessageBean refundOrder(int orderId) {
+        Order order = orderRepository.findOrderById(orderId);
+        User user = order.getUser();
+        ResultMessageBean result = new ResultMessageBean(false);
+        Date now = new Date();
+        Date showDate = null;
+        try {
+            showDate = df.parse(order.getShowPlan().getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long interval = (showDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24);
+        if (interval < 7) {
+            result.message = "演出开始前一周无法退款！";
+            return result;
+        } else if (interval < 30) {
+            // 演出开始前一周退回一半票价
+            double balance = user.getBalance() + order.getPrice() / 2;
+            user.setBalance(balance);
+            userRepository.save(user);
+            order.setState("已退款");
+            orderRepository.save(order);
+
+            result.result = true;
+            return result;
+        } else {
+            // 距离演出开始大于一个月，退回全部
+            double balance = user.getBalance() + order.getPrice();
+            user.setBalance(balance);
+            userRepository.save(user);
+            order.setState("已退款");
+            orderRepository.save(order);
+
+            result.result = true;
+            return result;
+        }
     }
 }

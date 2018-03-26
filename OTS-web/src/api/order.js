@@ -28,3 +28,13 @@ export function payOrder(callback, order) {
       console.log(error)
     })
 }
+
+export function refundOrder(callback, orderId) {
+  axios.get(`/order/refund/${orderId}`)
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

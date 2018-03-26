@@ -21,6 +21,7 @@ const actions = {
   },
 
   payOrder({commit, state}, {order, onSuccess, onError}) {
+    console.log('pay-order', order)
     orderApi.payOrder(data => {
       if (data.result === true) {
         if (onSuccess) {
@@ -30,6 +31,18 @@ const actions = {
         onError("支付失败！")
       }
     }, order)
+  },
+
+  refundOrder({commit}, {orderId, onSuccess, onError}) {
+    orderApi.refundOrder(data => {
+      if (data.result === true) {
+        if (onSuccess) {
+          onSuccess("退款成功！")
+        }
+      } else {
+        onError(data.message)
+      }
+    }, orderId)
   }
 
 };

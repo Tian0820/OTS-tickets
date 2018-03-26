@@ -100,7 +100,8 @@
             this.payOrder({
               order: {
                 orderId: this.currentOrder.id,
-                price: this.currentOrder.price * this.discount
+                price: this.currentOrder.price * this.discount,
+                couponId: this.coupons ? this.coupons[this.radio].id : null
               },
               onSuccess: (success) => {
                 Message.success(success)
@@ -115,7 +116,8 @@
           this.payOrder({
             order: {
               orderId: this.currentOrder.id,
-              price: this.currentOrder.price * this.discount
+              price: this.currentOrder.price * this.discount,
+              couponId: this.coupons ? this.coupons[this.radio].id : null
             },
             onSuccess: (success) => {
               Message.success(success)

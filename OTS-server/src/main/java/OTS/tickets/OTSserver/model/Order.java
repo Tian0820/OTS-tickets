@@ -38,7 +38,7 @@ public class Order {
 
     private Double price;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Seat> seats;
 
