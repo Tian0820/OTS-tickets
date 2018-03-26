@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.controller;
 
 import OTS.tickets.OTSserver.bean.OrderCreateBean;
+import OTS.tickets.OTSserver.bean.PayOrderBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.service.OrderService;
@@ -36,7 +37,7 @@ public class OrderController {
             method = RequestMethod.POST,
             produces = {"application/json; charset=UTF-8"})
     public ResultMessageBean payOrder(
-            @RequestBody int orderId) {
-        return orderService.payOrder(orderId);
+            @RequestBody PayOrderBean order) {
+        return orderService.payOrder(order);
     }
 }

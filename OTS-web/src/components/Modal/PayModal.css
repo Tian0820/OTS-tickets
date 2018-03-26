@@ -39,7 +39,7 @@ button {
         color: #bababa; }
   .modal-wrapper .coupon-wrapper {
     margin-top: 30px; }
-    .modal-wrapper .coupon-wrapper /deep/ .el-radio + .el-radio {
+    .modal-wrapper .coupon-wrapper /deep/ .el-radio {
       margin-left: 0;
       width: 100%; }
   .modal-wrapper .confirm-button {

@@ -15,12 +15,14 @@
 
         <div :style="{textAlign: 'center', marginTop: '40px'}">
           <p class="need-to-pay">需支付
-            <span :style="{fontSize: '24px', color: '#E9A038'}">{{currentOrder ? currentOrder.price : null}}</span>
+            <span
+              :style="{fontSize: '24px', color: '#E9A038'}">{{currentOrder ? currentOrder.price * discount : null}}</span>
             元</p>
           <p class="balance" v-if="user">账户余额：{{user.balance}} 元</p>
+          <p class="balance" v-if="venue && siteUser">（会员现场购票95折）</p>
         </div>
 
-        <div class="coupon-wrapper">
+        <div class="coupon-wrapper" v-if="user">
           <div-header :header="'我的优惠券'"></div-header>
 
           <el-radio-group v-model="radio">
@@ -60,7 +62,7 @@
     },
     data() {
       return {
-        radio: 0
+        radio: 0,
       }
     },
     computed: {
@@ -68,20 +70,53 @@
         user: state => state.currentUser,
         coupons: state => state.userCoupons
       }),
+      ...mapState('venue', {
+        venue: state => state.currentVenue,
+        siteUser: state => state.siteUser
+      }),
       ...mapState('order', {
         currentOrder: state => state.currentOrder
-      })
+      }),
+      discount: function () {
+        if (this.venue && this.siteUser) {
+          console.log(0.95)
+          return 0.95
+        } else if (this.user) {
+          return this.coupons[this.radio].discount
+        } else {
+          return 1
+        }
+      }
     },
     methods: {
       ...mapActions('order', [
         'payOrder'
       ]),
       handlePay() {
-        if (this.currentOrder.price > this.user.balance) {
-          Message.error('余额不足！')
+        if (this.user) {
+          if (this.currentOrder.price * this.discount > this.user.balance) {
+            Message.error('余额不足！')
+          } else {
+            this.payOrder({
+              order: {
+                orderId: this.currentOrder.id,
+                price: this.currentOrder.price * this.discount
+              },
+              onSuccess: (success) => {
+                Message.success(success)
+                this.$modal.hide('pay-modal')
+              },
+              onError: (error) => {
+                Message.error(error)
+              }
+            })
+          }
         } else {
           this.payOrder({
-            order: this.currentOrder.id,
+            order: {
+              orderId: this.currentOrder.id,
+              price: this.currentOrder.price * this.discount
+            },
             onSuccess: (success) => {
               Message.success(success)
               this.$modal.hide('pay-modal')

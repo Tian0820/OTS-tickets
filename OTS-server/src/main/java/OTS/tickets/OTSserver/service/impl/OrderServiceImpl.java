@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.service.impl;
 
 import OTS.tickets.OTSserver.bean.OrderCreateBean;
+import OTS.tickets.OTSserver.bean.PayOrderBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.model.Seat;
@@ -70,10 +71,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public ResultMessageBean payOrder(int orderId) {
+    public ResultMessageBean payOrder(PayOrderBean payOrderBean) {
+
         ResultMessageBean result = new ResultMessageBean(false);
 
-        Order order = orderRepository.findOrderById(orderId);
+        Order order = orderRepository.findOrderById(payOrderBean.getOrderId());
+        order.setPrice(payOrderBean.getPrice());
 
         //检查是否在15分钟内付款
         Date date = new Date();
@@ -94,17 +97,19 @@ public class OrderServiceImpl implements OrderService {
             } else {
                 //订单正常
                 User user = order.getUser();
-                Double balance = user.getBalance() - order.getPrice();
-                if (balance < 0) {
-                    result.message = "余额不足！";
-                    return result;
-                } else {
-                    user.setBalance(balance);
-                    order.setState("已付款");
-                    orderRepository.save(order);
-                    result.result = true;
-                    return result;
+                if (user != null) {
+                    Double balance = user.getBalance() - order.getPrice();
+                    if (balance < 0) {
+                        result.message = "余额不足！";
+                        return result;
+                    } else {
+                        user.setBalance(balance);
+                    }
                 }
+                order.setState("已付款");
+                orderRepository.save(order);
+                result.result = true;
+                return result;
             }
         } catch (ParseException e) {
             e.printStackTrace();

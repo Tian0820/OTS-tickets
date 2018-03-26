@@ -56,6 +56,18 @@ public class Order {
         this.seats = seats;
     }
 
+    public Order(Integer id, ShowPlan showPlan, User user, String type, String state, String createTime, String finishTime, Double price, List<Seat> seats) {
+        this.id = id;
+        this.showPlan = showPlan;
+        this.user = user;
+        this.type = type;
+        this.state = state;
+        this.createTime = createTime;
+        this.finishTime = finishTime;
+        this.price = price;
+        this.seats = seats;
+    }
+
     public Integer getId() {
         return id;
     }

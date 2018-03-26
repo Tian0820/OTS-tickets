@@ -20,7 +20,7 @@ const actions = {
     }, info)
   },
 
-  payOrder({commit}, {order, onSuccess, onError}) {
+  payOrder({commit, state}, {order, onSuccess, onError}) {
     orderApi.payOrder(data => {
       if (data.result === true) {
         if (onSuccess) {
@@ -37,6 +37,9 @@ const actions = {
 const mutations = {
   'saveCurrentOrder'(state, currentOrder) {
     state.currentOrder = currentOrder
+  },
+  'saveNewOrderPrice'(state, price) {
+    state.currentOrder.price = price
   }
 };
 
