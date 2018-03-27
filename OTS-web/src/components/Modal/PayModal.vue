@@ -14,6 +14,7 @@
         <h1>支付</h1>
 
         <div :style="{textAlign: 'center', marginTop: '40px'}">
+          <p class="need-to-pay">请在15分钟内完成付款！</p>
           <p class="need-to-pay">需支付
             <span
               :style="{fontSize: '24px', color: '#E9A038'}">{{currentOrder ? currentOrder.price * discount : null}}</span>
@@ -130,6 +131,7 @@
         }
       },
       closeBox() {
+        Message.warning('请在15分钟内完成付款！可前往个人主页付款！')
         this.$modal.hide('pay-modal')
       }
     }

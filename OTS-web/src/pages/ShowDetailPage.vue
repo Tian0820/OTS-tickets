@@ -52,6 +52,7 @@
                   store.commit('auth/saveLoginType', 'manager')
                 },
                 onError: (error) => {
+                  store.commit('auth/saveLoginType', null)
                 }
               })
 

@@ -35,7 +35,8 @@ public class UserServiceImpl implements UserService {
 
     private UserInfoBean userToUserInfoBean(User user) {
         return new UserInfoBean(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(),
-                user.getPhone(), user.getLevel(), user.getPoint(), user.getAccumulativePoint(), user.getBalance());
+                user.getPhone(), user.getLevel(), user.getPoint(), user.getAccumulativePoint(),
+                user.getBalance(), user.getConsume());
     }
 
     @Override

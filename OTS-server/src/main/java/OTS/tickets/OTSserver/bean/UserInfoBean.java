@@ -47,10 +47,15 @@ public class UserInfoBean {
      */
     private double balance;
 
+    /**
+     * 总消费
+     */
+    private double consume;
+
     public UserInfoBean() {
     }
 
-    public UserInfoBean(int userId, String username, String email, String password, String phone, int level, double point, double accumulativePoint, double balance) {
+    public UserInfoBean(int userId, String username, String email, String password, String phone, int level, double point, double accumulativePoint, double balance, double consume) {
         this.userId = userId;
         this.username = username;
         this.email = email;
@@ -60,6 +65,7 @@ public class UserInfoBean {
         this.point = point;
         this.accumulativePoint = accumulativePoint;
         this.balance = balance;
+        this.consume = consume;
     }
 
     public int getUserId() {
@@ -124,5 +130,21 @@ public class UserInfoBean {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public double getAccumulativePoint() {
+        return accumulativePoint;
+    }
+
+    public void setAccumulativePoint(double accumulativePoint) {
+        this.accumulativePoint = accumulativePoint;
+    }
+
+    public double getConsume() {
+        return consume;
+    }
+
+    public void setConsume(double consume) {
+        this.consume = consume;
     }
 }
