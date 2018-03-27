@@ -26,5 +26,14 @@ button {
   width: 100%;
   height: auto;
   background-color: #ffffff; }
+  .user-statistics-wrapper .demo-table-expand {
+    font-size: 0; }
+  .user-statistics-wrapper .demo-table-expand label {
+    width: 90px;
+    color: #99a9bf; }
+  .user-statistics-wrapper .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%; }
 
 /*# sourceMappingURL=UserStatistics.css.map */

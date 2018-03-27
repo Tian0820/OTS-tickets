@@ -3,7 +3,7 @@ import * as managerApi from '../../api/manager'
 const state = {
     currentManager: null,
     approvals: [],
-    allUsers: [],
+    allUsers: null,
     userToBan: null,
     venueStatistics: null
   }

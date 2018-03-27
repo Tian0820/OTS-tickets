@@ -31,6 +31,7 @@
       store.dispatch('manager/refreshManager', {
         onSuccess: (success) => {
           store.dispatch('manager/fetchVenueStatistics')
+          store.dispatch('manager/fetchAllUsers')
         },
         onError: (error) => {
           Message.error('manager not login')
