@@ -1,11 +1,9 @@
 package OTS.tickets.OTSserver.controller;
 
-import OTS.tickets.OTSserver.bean.ApproveBean;
-import OTS.tickets.OTSserver.bean.ManagerInfoBean;
-import OTS.tickets.OTSserver.bean.ManagerPasswordBean;
-import OTS.tickets.OTSserver.bean.ResultMessageBean;
+import OTS.tickets.OTSserver.bean.*;
 import OTS.tickets.OTSserver.model.Approval;
 import OTS.tickets.OTSserver.model.User;
+import OTS.tickets.OTSserver.model.Venue;
 import OTS.tickets.OTSserver.service.ManagerService;
 import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +76,24 @@ public class ManagerController {
             produces = {"application/json; charset=UTF-8"})
     public ResultMessageBean getAllUsers(@PathVariable int userId) {
         return managerService.banUser(userId);
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/manager/venues",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public List<Venue> getAllVenues() {
+        return managerService.getAllVenues();
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/manager/venue-statistics",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public List<VenueStatisticsBean> getAllVenueStatistics() {
+        return managerService.getAllVenueStatistics();
     }
 
 }

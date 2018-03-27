@@ -1,11 +1,9 @@
 package OTS.tickets.OTSserver.service;
 
-import OTS.tickets.OTSserver.bean.ApproveBean;
-import OTS.tickets.OTSserver.bean.ManagerInfoBean;
-import OTS.tickets.OTSserver.bean.ManagerPasswordBean;
-import OTS.tickets.OTSserver.bean.ResultMessageBean;
+import OTS.tickets.OTSserver.bean.*;
 import OTS.tickets.OTSserver.model.Approval;
 import OTS.tickets.OTSserver.model.User;
+import OTS.tickets.OTSserver.model.Venue;
 
 import java.util.List;
 
@@ -56,4 +54,18 @@ public interface ManagerService {
      * @return 封禁结果
      */
     ResultMessageBean banUser(int userId);
+
+    /**
+     * 获得所有场馆
+     *
+     * @return 场馆列表
+     */
+    List<Venue> getAllVenues();
+
+    /**
+     * 获得场馆统计数据
+     *
+     * @return 场馆统计数据列表
+     */
+    List<VenueStatisticsBean> getAllVenueStatistics();
 }

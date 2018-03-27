@@ -1,22 +1,18 @@
 package OTS.tickets.OTSserver.service.impl;
 
-import OTS.tickets.OTSserver.bean.ApproveBean;
-import OTS.tickets.OTSserver.bean.ManagerInfoBean;
-import OTS.tickets.OTSserver.bean.ManagerPasswordBean;
-import OTS.tickets.OTSserver.bean.ResultMessageBean;
-import OTS.tickets.OTSserver.model.Approval;
-import OTS.tickets.OTSserver.model.Manager;
-import OTS.tickets.OTSserver.model.User;
-import OTS.tickets.OTSserver.model.Venue;
+import OTS.tickets.OTSserver.bean.*;
+import OTS.tickets.OTSserver.model.*;
 import OTS.tickets.OTSserver.repository.ApprovalRepository;
 import OTS.tickets.OTSserver.repository.ManagerRepository;
 import OTS.tickets.OTSserver.repository.UserRepository;
 import OTS.tickets.OTSserver.repository.VenueRepository;
 import OTS.tickets.OTSserver.service.ManagerService;
+import OTS.tickets.OTSserver.service.VenueService;
 import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,6 +29,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private VenueService venueService;
 
     private ManagerInfoBean managerToManagerInfoBean(Manager manager) {
         return new ManagerInfoBean(manager.getId(), manager.getManagerName(), manager.getPassword());
@@ -98,5 +97,23 @@ public class ManagerServiceImpl implements ManagerService {
         user.setActivate(0);
         userRepository.save(user);
         return new ResultMessageBean(true);
+    }
+
+    @Override
+    public List<Venue> getAllVenues() {
+        return venueRepository.findAll();
+    }
+
+    @Override
+    public List<VenueStatisticsBean> getAllVenueStatistics() {
+        List<Venue> venues = getAllVenues();
+        List<VenueStatisticsBean> venueStatistics = new ArrayList<>();
+
+        for (Venue venue : venues) {
+            List<Order> orders = venueService.getVenueOrders(venue.getCode());
+            venueStatistics.add(new VenueStatisticsBean(venue.getVenueName(), venue.getCode(), venue.getBalance(),
+                    venue.getCity() + " " + venue.getAddress(), orders, venue.getShowPlans()));
+        }
+        return venueStatistics;
     }
 }

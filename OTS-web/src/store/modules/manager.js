@@ -4,7 +4,8 @@ const state = {
     currentManager: null,
     approvals: [],
     allUsers: [],
-    userToBan: null
+    userToBan: null,
+    venueStatistics: null
   }
 ;
 
@@ -92,6 +93,34 @@ const actions = {
         onError('注销失败！')
       }
     }, userId)
+  },
+
+  fetchVenueStatistics({commit}) {
+    managerApi.fetchVenueStatistics(data => {
+      let statistics = []
+      data.forEach(singleData => {
+        let finishNum = 0
+        let refundNum = 0
+        singleData.orders.forEach(order => {
+          if (order.state === '已完成') {
+            finishNum++
+          } else if (order.state === '已退款') {
+            refundNum++
+          }
+        })
+        statistics.push({
+          name: singleData.name,
+          code: singleData.code,
+          profit: singleData.profit,
+          address: singleData.address,
+          orderNum: singleData.orders.length,
+          showNum: singleData.showPlans.length,
+          finishedOrderNum: finishNum,
+          refundOrderNum: refundNum
+        })
+      })
+      commit('saveVenueStatistics', statistics)
+    })
   }
 
 };
@@ -108,7 +137,11 @@ const mutations = {
   },
   'saveUserToBan'(state, userToBan) {
     state.userToBan = userToBan
+  },
+  'saveVenueStatistics'(state, venueStatistics) {
+    state.venueStatistics = venueStatistics
   }
+
 };
 
 export default {

@@ -71,3 +71,13 @@ export function banUser(callback, userId) {
       console.log(error)
     })
 }
+
+export function fetchVenueStatistics(callback) {
+  axios.get('/manager/venue-statistics')
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

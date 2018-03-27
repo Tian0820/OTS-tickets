@@ -30,6 +30,7 @@
     beforeRouteEnter(to, from, next) {
       store.dispatch('manager/refreshManager', {
         onSuccess: (success) => {
+          store.dispatch('manager/fetchVenueStatistics')
         },
         onError: (error) => {
           Message.error('manager not login')

@@ -9,7 +9,7 @@
       <div class="info-wrapper">
         <p>用户名：{{user.username}}</p><br/>
         <p>邮箱：{{user.email}}</p><br/>
-        <p>等级：{{user.level}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分：{{user.point}}</p><br/>
+        <p>等级：{{user.level}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分：{{user.point.toFixed(2)}}</p><br/>
         <button @click="handleBan">注销</button>
 
       </div>
