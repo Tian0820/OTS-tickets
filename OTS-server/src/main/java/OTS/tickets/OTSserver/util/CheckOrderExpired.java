@@ -44,6 +44,7 @@ public class CheckOrderExpired {
                             seatRepository.save(seat);
                         }
                         order.setState("已过期");
+                        order.setSeatNum(0);
                         orderRepository.save(order);
                     }
                 } catch (ParseException e) {

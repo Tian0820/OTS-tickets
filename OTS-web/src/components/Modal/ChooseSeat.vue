@@ -127,7 +127,7 @@
             info: {
               showId: this.currentShow.id,
               userId: this.siteUser === null ? null : this.siteUser.id,
-              type: '分配',
+              type: '选座',
               state: '未付款',
               price: this.chosenSeats[0].price * this.chosenSeats.length,
               seats: seatIds.join(';')

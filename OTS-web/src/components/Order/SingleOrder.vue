@@ -41,11 +41,17 @@
     data() {
       let name = 'poster.jpg'
       let orderSeats = []
-      this.order.seats.forEach(seat => {
-        let row = Math.floor((seat.number + 1) % 10) === 0 ? Math.floor((seat.number + 1) / 10) : Math.floor((seat.number + 1) / 10) + 1
-        let col = Math.floor((seat.number + 1) % 10) === 0 ? 10 : Math.floor((seat.number + 1) % 10)
-        orderSeats.push(seat.area + '区' + row + '排' + col + '座')
-      })
+      if (this.order.seats === null || this.order.seats.length === 0 && this.order.state === '已过期' || this.order.state === '已退款') {
+        orderSeats.push('座位已被注销')
+      } else if (this.order.seats === null || this.order.seats.length === 0 && this.order.type === '分配') {
+        orderSeats.push('座位待分配（演出开始前两周）')
+      } else {
+        this.order.seats.forEach(seat => {
+          let row = Math.floor((seat.number + 1) % 10) === 0 ? Math.floor((seat.number + 1) / 10) : Math.floor((seat.number + 1) / 10) + 1
+          let col = Math.floor((seat.number + 1) % 10) === 0 ? 10 : Math.floor((seat.number + 1) % 10)
+          orderSeats.push(seat.area + '区' + row + '排' + col + '座')
+        })
+      }
       return {
         posterUrl: require('../../assets/img/' + name),
         orderSeats: orderSeats

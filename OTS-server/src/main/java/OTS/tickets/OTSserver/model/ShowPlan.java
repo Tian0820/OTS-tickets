@@ -25,7 +25,7 @@ public class ShowPlan {
 
     private String introduction;
 
-    @OneToMany(mappedBy = "showPlan")
+    @OneToMany(mappedBy = "showPlan", fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Seat> seats;
 

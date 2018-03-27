@@ -32,7 +32,7 @@
 <script>
   import {InputNumber, Message, Button} from 'element-ui'
   import {router} from '../../main'
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
 
   export default {
     name: 'buy-tickets-modal',
@@ -47,19 +47,51 @@
       }
     },
     computed: {
+      ...mapState('auth', {
+        user: state => state.currentUser
+      }),
       ...mapState('showPlan', {
-        currentShow: state => state.currentShow
-      })
+        currentShow: state => state.currentShow,
+        chosenArea: state => state.chosenArea
+      }),
+      price: function () {
+        return this.currentShow.seats[(this.chosenArea - 1) * 100].price
+      }
     },
     methods: {
+      ...mapActions('order', [
+        'createOrder'
+      ]),
       closeBox() {
         this.chosenSeats = []
         this.$modal.hide('buy-tickets-modal')
       },
       handleConfirm() {
-//        Message.success('购买成功！')
-        this.$modal.hide('buy-tickets-modal')
-        this.$modal.show('pay-modal')
+        let seats = []
+        let price = []
+        for (let i = 0; i < this.number; i++) {
+          seats.push(0)
+        }
+        this.createOrder({
+          info: {
+            showId: this.currentShow.id,
+            userId: this.user.userId,
+            type: '分配',
+            state: '未付款',
+            price: this.price * this.number,
+            seats: seats.join(';')
+          },
+          onSuccess: (success) => {
+            Message.success(success)
+            this.$modal.hide('buy-tickets-modal')
+            this.$modal.show('pay-modal')
+          },
+          onError:
+            (error) => {
+              Message.error(error)
+            }
+        })
+
       }
     }
   }

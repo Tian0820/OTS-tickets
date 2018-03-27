@@ -38,6 +38,8 @@ public class Order {
 
     private Double price;
 
+    private int seatNum;
+
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Seat> seats;
@@ -45,7 +47,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(ShowPlan showPlan, User user, String type, String state, String createTime, String finishTime, Double price, List<Seat> seats) {
+    public Order(ShowPlan showPlan, User user, String type, String state, String createTime, String finishTime, Double price, int seatNum, List<Seat> seats) {
         this.showPlan = showPlan;
         this.user = user;
         this.type = type;
@@ -53,10 +55,11 @@ public class Order {
         this.createTime = createTime;
         this.finishTime = finishTime;
         this.price = price;
+        this.seatNum = seatNum;
         this.seats = seats;
     }
 
-    public Order(Integer id, ShowPlan showPlan, User user, String type, String state, String createTime, String finishTime, Double price, List<Seat> seats) {
+    public Order(Integer id, ShowPlan showPlan, User user, String type, String state, String createTime, String finishTime, Double price, int seatNum, List<Seat> seats) {
         this.id = id;
         this.showPlan = showPlan;
         this.user = user;
@@ -65,6 +68,7 @@ public class Order {
         this.createTime = createTime;
         this.finishTime = finishTime;
         this.price = price;
+        this.seatNum = seatNum;
         this.seats = seats;
     }
 
@@ -138,5 +142,13 @@ public class Order {
 
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
+    }
+
+    public int getSeatNum() {
+        return seatNum;
+    }
+
+    public void setSeatNum(int seatNum) {
+        this.seatNum = seatNum;
     }
 }

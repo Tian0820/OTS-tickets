@@ -48,23 +48,30 @@ public class OrderServiceImpl implements OrderService {
 
         String[] seats = order.getSeats().split(";");
         List<Seat> seatList = new ArrayList<>();
-        for (String seatId :
-                seats) {
-            seatList.add(seatRepository.findSeatById(Integer.valueOf(seatId)));
+        if (order.getType().equals("选座")) {
+            for (String seatId :
+                    seats) {
+                seatList.add(seatRepository.findSeatById(Integer.valueOf(seatId)));
+            }
+
+            Order newOrder = new Order(showPlan, user, order.getType(),
+                    order.getState(), df.format(date), null, order.getPrice(), seatList.size(), seatList);
+            orderRepository.save(newOrder);
+
+            for (int i = 0; i < seatList.size(); i++) {
+                Seat seat = seatRepository.findSeatById(seatList.get(i).getId());
+                seat.setAvailable(0);
+                seat.setOrder(newOrder);
+                seatRepository.save(seat);
+            }
+            return newOrder;
+        } else {
+            Order newOrder = new Order(showPlan, user, order.getType(),
+                    order.getState(), df.format(date), null, order.getPrice(), seats.length, null);
+            orderRepository.save(newOrder);
+            return newOrder;
         }
 
-        Order newOrder = new Order(showPlan, user, order.getType(),
-                order.getState(), df.format(date), null, order.getPrice(), seatList);
-        orderRepository.save(newOrder);
-
-        for (int i = 0; i < seatList.size(); i++) {
-            Seat seat = seatRepository.findSeatById(seatList.get(i).getId());
-            seat.setAvailable(0);
-            seat.setOrder(newOrder);
-            seatRepository.save(seat);
-        }
-
-        return newOrder;
     }
 
     @Override
@@ -144,12 +151,23 @@ public class OrderServiceImpl implements OrderService {
             result.message = "演出开始前一周无法退款！";
             return result;
         } else if (interval < 30) {
-            // 演出开始前一周退回一半票价
+            // 演出开始前一月退回一半票价
             double balance = user.getBalance() + order.getPrice() / 2;
             user.setBalance(balance);
             userRepository.save(user);
             order.setState("已退款");
+            order.setSeatNum(0);
             orderRepository.save(order);
+
+            List<Seat> seats = order.getSeats();
+            if (seats != null && seats.size() != 0) {
+                for (Seat seat :
+                        seats) {
+                    seat.setOrder(null);
+                    seat.setAvailable(1);
+                    seatRepository.save(seat);
+                }
+            }
 
             result.result = true;
             return result;
@@ -159,7 +177,18 @@ public class OrderServiceImpl implements OrderService {
             user.setBalance(balance);
             userRepository.save(user);
             order.setState("已退款");
+            order.setSeatNum(0);
             orderRepository.save(order);
+
+            List<Seat> seats = order.getSeats();
+            if (seats != null && seats.size() != 0) {
+                for (Seat seat :
+                        seats) {
+                    seat.setOrder(null);
+                    seat.setAvailable(1);
+                    seatRepository.save(seat);
+                }
+            }
 
             result.result = true;
             return result;
