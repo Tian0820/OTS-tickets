@@ -32,6 +32,7 @@
         onSuccess: (success) => {
           store.dispatch('manager/fetchVenueStatistics')
           store.dispatch('manager/fetchAllUsers')
+          store.dispatch('order/fetchAllOrders')
         },
         onError: (error) => {
           Message.error('manager not login')

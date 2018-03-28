@@ -14,14 +14,14 @@
         <!--<el-button type="text" @click="">技能</el-button>-->
         <!--</div>-->
 
-        <div class="input-wrapper">
-          <el-input class="search-input"
-                    placeholder=""
-                    suffix-icon="el-icon-search"
-                    v-model="input2"
-          >
-          </el-input>
-        </div>
+        <!--<div class="input-wrapper">-->
+          <!--<el-input class="search-input"-->
+                    <!--placeholder=""-->
+                    <!--suffix-icon="el-icon-search"-->
+                    <!--v-model="input2"-->
+          <!--&gt;-->
+          <!--</el-input>-->
+        <!--</div>-->
 
 
         <div class="button-wrapper">

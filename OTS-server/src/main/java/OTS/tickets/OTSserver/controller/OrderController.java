@@ -47,4 +47,13 @@ public class OrderController {
             @PathVariable int orderId) {
         return orderService.refundOrder(orderId);
     }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/order/get",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public List<Order> getAllOrders() {
+        return orderService.getAllOrders();
+    }
 }

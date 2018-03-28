@@ -5,7 +5,7 @@
 
     <div class="info-wrapper">
       <h1>{{order.showPlan.name}}（订单号：{{order.id}}）</h1>
-      <el-tag :type="order.state === '已过期' ? 'danger' : 'success'">{{order.state}}</el-tag>
+      <el-tag :type="type">{{order.state}}</el-tag>
       <span class="order-time">{{order.createTime}}</span>
       <br/>
 
@@ -52,9 +52,20 @@
           orderSeats.push(seat.area + '区' + row + '排' + col + '座')
         })
       }
+      let type = ''
+      if (this.order.state === '已过期') {
+        type = 'danger'
+      } else if (this.order.state === '已退款') {
+        type = 'info'
+      } else if (this.order.state === '未付款') {
+        type = 'warning'
+      } else if (this.order.state === '已完成') {
+        type = 'success'
+      }
       return {
         posterUrl: require('../../assets/img/' + name),
-        orderSeats: orderSeats
+        orderSeats: orderSeats,
+        type: type
       }
     },
     methods: {

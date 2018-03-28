@@ -26,5 +26,27 @@ button {
   width: 100%;
   height: auto;
   background-color: #ffffff; }
+  .OTS-finance-wrapper p {
+    font-size: 16px;
+    color: #595959; }
+    .OTS-finance-wrapper p span {
+      color: #e9a038;
+      font-size: 18px;
+      font-weight: 400; }
+  .OTS-finance-wrapper button {
+    float: right;
+    margin-top: 20px;
+    margin-right: 60px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background-color: #e9a038;
+    color: #ffffff;
+    cursor: pointer; }
+  .OTS-finance-wrapper .info {
+    margin-top: 3px;
+    margin-right: 10px;
+    float: right;
+    font-size: 12px;
+    color: #848484; }
 
 /*# sourceMappingURL=OTSFinance.css.map */

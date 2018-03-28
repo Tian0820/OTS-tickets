@@ -121,6 +121,14 @@ const actions = {
       })
       commit('saveVenueStatistics', statistics)
     })
+  },
+
+  clearProfit({commit}, {onSuccess}) {
+    managerApi.clearProfit(data => {
+      if (onSuccess) {
+        onSuccess('盈利已结算至场馆！')
+      }
+    })
   }
 
 };

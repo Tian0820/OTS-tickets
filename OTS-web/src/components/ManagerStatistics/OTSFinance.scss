@@ -9,4 +9,35 @@
   width: 100%;
   height: auto;
   background-color: $white-color;
+
+  p {
+    //margin-top: 10px;
+    font-size: 16px;
+    color: $grey;
+
+    span {
+      color: $main-color;
+      font-size: 18px;
+      font-weight: 400;
+    }
+  }
+
+  button {
+    float: right;
+    margin-top: 20px;
+    margin-right: 60px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background-color: $main-color;
+    color: $white-color;
+    cursor: pointer;
+  }
+
+  .info {
+    margin-top: 3px;
+    margin-right: 10px;
+    float: right;
+    font-size: 12px;
+    color: $medium-grey;
+  }
 }

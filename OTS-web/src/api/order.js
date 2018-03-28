@@ -38,3 +38,13 @@ export function refundOrder(callback, orderId) {
       console.log(error)
     })
 }
+
+export function fetchAllOrders(callback) {
+  axios.get('/order/get')
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

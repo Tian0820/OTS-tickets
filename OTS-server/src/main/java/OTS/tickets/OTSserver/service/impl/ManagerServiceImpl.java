@@ -2,10 +2,7 @@ package OTS.tickets.OTSserver.service.impl;
 
 import OTS.tickets.OTSserver.bean.*;
 import OTS.tickets.OTSserver.model.*;
-import OTS.tickets.OTSserver.repository.ApprovalRepository;
-import OTS.tickets.OTSserver.repository.ManagerRepository;
-import OTS.tickets.OTSserver.repository.UserRepository;
-import OTS.tickets.OTSserver.repository.VenueRepository;
+import OTS.tickets.OTSserver.repository.*;
 import OTS.tickets.OTSserver.service.ManagerService;
 import OTS.tickets.OTSserver.service.VenueService;
 import com.sun.org.apache.regexp.internal.RE;
@@ -32,6 +29,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
     private VenueService venueService;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     private ManagerInfoBean managerToManagerInfoBean(Manager manager) {
         return new ManagerInfoBean(manager.getId(), manager.getManagerName(), manager.getPassword());
@@ -115,5 +115,19 @@ public class ManagerServiceImpl implements ManagerService {
                     venue.getCity() + " " + venue.getAddress(), orders, venue.getShowPlans()));
         }
         return venueStatistics;
+    }
+
+    @Override
+    public ResultMessageBean clearProfit() {
+        ResultMessageBean result = new ResultMessageBean(true);
+        List<Order> orders = orderRepository.findOrderByState("已完成");
+        for (Order order :
+                orders) {
+            Venue venue = order.getShowPlan().getVenue();
+            double balance = venue.getBalance() + order.getPrice() * 0.8;
+            venue.setBalance(balance);
+            venueRepository.save(venue);
+        }
+        return result;
     }
 }

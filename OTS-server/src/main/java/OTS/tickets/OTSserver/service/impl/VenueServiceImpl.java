@@ -39,7 +39,7 @@ public class VenueServiceImpl implements VenueService {
 
     private VenueInfoBean venueToVenueInfoBean(Venue venue) {
         return new VenueInfoBean(venue.getId(), venue.getCode(), venue.getVenueName(), venue.getCity(),
-                venue.getAddress(), venue.getSeatType(), venue.getPassword());
+                venue.getAddress(), venue.getSeatType(), venue.getPassword(), venue.getBalance());
     }
 
     @Override
@@ -215,10 +215,10 @@ public class VenueServiceImpl implements VenueService {
             user.setConsume(consume);
             userRepository.save(user);
 
-            Venue venue = order.getShowPlan().getVenue();
-            double balance = venue.getBalance() + order.getPrice();
-            venue.setBalance(balance);
-            venueRepository.save(venue);
+//            Venue venue = order.getShowPlan().getVenue();
+//            double balance = venue.getBalance() + order.getPrice();
+//            venue.setBalance(balance);
+//            venueRepository.save(venue);
 
             result.result = true;
 

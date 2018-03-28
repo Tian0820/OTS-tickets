@@ -1,7 +1,8 @@
 import * as orderApi from '../../api/order'
 
 const state = {
-    currentOrder: null
+    currentOrder: null,
+    allOrders: null
   }
 ;
 
@@ -43,6 +44,12 @@ const actions = {
         onError(data.message)
       }
     }, orderId)
+  },
+
+  fetchAllOrders({commit}) {
+    orderApi.fetchAllOrders(data => {
+      commit('saveAllOrders', data)
+    })
   }
 
 };
@@ -53,6 +60,9 @@ const mutations = {
   },
   'saveNewOrderPrice'(state, price) {
     state.currentOrder.price = price
+  },
+  'saveAllOrders'(state, allOrders) {
+    state.allOrders = allOrders
   }
 };
 

@@ -4,6 +4,9 @@ import OTS.tickets.OTSserver.bean.OrderCreateBean;
 import OTS.tickets.OTSserver.bean.PayOrderBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.Order;
+import org.aspectj.weaver.ast.Or;
+
+import java.util.List;
 
 public interface OrderService {
 
@@ -12,5 +15,7 @@ public interface OrderService {
     ResultMessageBean payOrder(PayOrderBean payOrderBean);
 
     ResultMessageBean refundOrder(int orderId);
+
+    List<Order> getAllOrders();
 
 }

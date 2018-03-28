@@ -96,4 +96,13 @@ public class ManagerController {
         return managerService.getAllVenueStatistics();
     }
 
+    @ResponseBody
+    @RequestMapping(
+            value = "/manager/clear-profit",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessageBean clearProfit() {
+        return managerService.clearProfit();
+    }
+
 }

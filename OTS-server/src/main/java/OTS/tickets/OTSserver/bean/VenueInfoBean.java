@@ -16,10 +16,12 @@ public class VenueInfoBean {
 
     private String password;
 
+    private double balance;
+
     public VenueInfoBean() {
     }
 
-    public VenueInfoBean(int venueId, String code, String venueName, String city, String address, String seatType, String password) {
+    public VenueInfoBean(int venueId, String code, String venueName, String city, String address, String seatType, String password, double balance) {
         this.venueId = venueId;
         this.code = code;
         this.venueName = venueName;
@@ -27,6 +29,7 @@ public class VenueInfoBean {
         this.address = address;
         this.seatType = seatType;
         this.password = password;
+        this.balance = balance;
     }
 
     public int getVenueId() {
@@ -83,5 +86,13 @@ public class VenueInfoBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

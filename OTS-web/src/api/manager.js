@@ -81,3 +81,13 @@ export function fetchVenueStatistics(callback) {
       console.log(error)
     })
 }
+
+export function clearProfit(callback) {
+  axios.get('manager/clear-profit')
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

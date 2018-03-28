@@ -3,7 +3,7 @@
   <div class="manager-statistics-wrapper">
     <venue-statistics v-if="venueStatistics" :venueStatistics="venueStatistics"></venue-statistics>
     <user-statistics v-if="allUsers" :userStatistics="allUsers"></user-statistics>
-    <o-t-s-finance></o-t-s-finance>
+    <o-t-s-finance v-if="allOrders" :allOrders="allOrders"></o-t-s-finance>
 
   </div>
 
@@ -24,10 +24,14 @@
       UserStatistics,
       OTSFinance
     },
+
     computed: {
       ...mapState('manager', {
         venueStatistics: state => state.venueStatistics,
         allUsers: state => state.allUsers
+      }),
+      ...mapState('order', {
+        allOrders: state => state.allOrders
       })
     },
     data() {

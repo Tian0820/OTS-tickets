@@ -194,4 +194,9 @@ public class OrderServiceImpl implements OrderService {
             return result;
         }
     }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
 }

@@ -28,7 +28,7 @@ public class Order {
     private String type;
 
     /**
-     * 订单状态，分为"未付款"，"已过期"，"已付款"，"已完成"，"已退订"
+     * 订单状态，分为"未付款"，"已过期"，"已付款"，"已完成"，"已退款"
      */
     private String state;
 

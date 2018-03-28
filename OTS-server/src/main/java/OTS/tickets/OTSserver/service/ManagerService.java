@@ -68,4 +68,11 @@ public interface ManagerService {
      * @return 场馆统计数据列表
      */
     List<VenueStatisticsBean> getAllVenueStatistics();
+
+    /**
+     * 经理结算
+     *
+     * @return 结算结果
+     */
+    ResultMessageBean clearProfit();
 }
