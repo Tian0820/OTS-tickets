@@ -102,7 +102,7 @@
               order: {
                 orderId: this.currentOrder.id,
                 price: this.currentOrder.price * this.discount,
-                couponId: this.coupons ? this.coupons[this.radio].id : null
+                couponId: this.coupons && this.coupons.length !== 0 ? this.coupons[this.radio].id : null
               },
               onSuccess: (success) => {
                 Message.success(success)
@@ -118,7 +118,7 @@
             order: {
               orderId: this.currentOrder.id,
               price: this.currentOrder.price * this.discount,
-              couponId: this.coupons ? this.coupons[this.radio].id : null
+              couponId: null
             },
             onSuccess: (success) => {
               Message.success(success)

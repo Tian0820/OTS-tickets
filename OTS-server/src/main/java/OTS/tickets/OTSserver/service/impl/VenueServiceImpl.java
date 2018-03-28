@@ -207,13 +207,15 @@ public class VenueServiceImpl implements VenueService {
             orderRepository.save(order);
 
             User user = order.getUser();
-            double point = user.getPoint() + order.getPrice() / 10;
-            double accumulativePoint = user.getAccumulativePoint() + order.getPrice() / 10;
-            double consume = user.getConsume() + order.getPrice();
-            user.setPoint(point);
-            user.setAccumulativePoint(accumulativePoint);
-            user.setConsume(consume);
-            userRepository.save(user);
+            if (user != null) {
+                double point = user.getPoint() + order.getPrice() / 10;
+                double accumulativePoint = user.getAccumulativePoint() + order.getPrice() / 10;
+                double consume = user.getConsume() + order.getPrice();
+                user.setPoint(point);
+                user.setAccumulativePoint(accumulativePoint);
+                user.setConsume(consume);
+                userRepository.save(user);
+            }
 
 //            Venue venue = order.getShowPlan().getVenue();
 //            double balance = venue.getBalance() + order.getPrice();
