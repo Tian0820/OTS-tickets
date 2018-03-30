@@ -50,6 +50,9 @@
       </el-table-column>
     </el-table>
 
+    <show-type-bar-chart v-if="x && y" :x="x" :y="y"></show-type-bar-chart>
+
+
   </div>
 
 
@@ -57,6 +60,7 @@
 
 <script>
   import DivHeader from '../Util/DivHeader.vue'
+  import ShowTypeBarChart from '../Chart/ShowTypeBarChart.vue'
   import {Table, TableColumn, Form, FormItem} from 'element-ui'
   import {router} from '../../main'
 
@@ -64,15 +68,23 @@
     name: 'venue-statistics',
     components: {
       DivHeader,
+      ShowTypeBarChart,
       elTable: Table,
       elTableColumn: TableColumn,
       elForm: Form,
       elFormItem: FormItem
     },
-    props: ['venueStatistics'],
+    props: ['venueStatistics', 'allShowPlans'],
     data() {
+      let x = ['演唱会', '音乐会', '舞蹈', '话剧', '体育比赛']
+      let y = [0, 0, 0, 0, 0]
+      this.allShowPlans.forEach(show => {
+        y[x.indexOf(show.type)]++
+      })
       return {
-        tableData: this.venueStatistics
+        tableData: this.venueStatistics,
+        x: x,
+        y: y
       }
     },
     created() {

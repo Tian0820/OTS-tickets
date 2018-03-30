@@ -111,7 +111,7 @@ const actions = {
         statistics.push({
           name: singleData.name,
           code: singleData.code,
-          profit: singleData.profit,
+          profit: singleData.profit.toFixed(2),
           address: singleData.address,
           orderNum: singleData.orders.length,
           showNum: singleData.showPlans.length,

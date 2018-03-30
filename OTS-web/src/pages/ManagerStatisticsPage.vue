@@ -30,6 +30,7 @@
     beforeRouteEnter(to, from, next) {
       store.dispatch('manager/refreshManager', {
         onSuccess: (success) => {
+          store.dispatch('showPlan/fetchAllShowPlans')
           store.dispatch('manager/fetchVenueStatistics')
           store.dispatch('manager/fetchAllUsers')
           store.dispatch('order/fetchAllOrders')

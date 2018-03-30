@@ -1,7 +1,9 @@
 <template>
 
   <div class="manager-statistics-wrapper">
-    <venue-statistics v-if="venueStatistics" :venueStatistics="venueStatistics"></venue-statistics>
+    <venue-statistics v-if="venueStatistics && allShowPlans"
+                      :venueStatistics="venueStatistics"
+                      :allShowPlans="allShowPlans"></venue-statistics>
     <user-statistics v-if="allUsers" :userStatistics="allUsers"></user-statistics>
     <o-t-s-finance v-if="allOrders" :allOrders="allOrders"></o-t-s-finance>
 
@@ -32,6 +34,9 @@
       }),
       ...mapState('order', {
         allOrders: state => state.allOrders
+      }),
+      ...mapState('showPlan', {
+        allShowPlans: state => state.allShowPlans
       })
     },
     data() {
