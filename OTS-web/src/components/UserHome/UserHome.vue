@@ -2,7 +2,7 @@
 
   <div class="user-home-wrapper">
     <user-info-brief></user-info-brief>
-    <my-order></my-order>
+    <my-order v-if="userOrders" :userOrders="userOrders"></my-order>
     <my-coupon></my-coupon>
 
   </div>
@@ -15,6 +15,7 @@
   import UserInfoBrief from '../Admin/UserInfoBrief.vue'
   import MyOrder from '../UserHome/MyOrder.vue'
   import MyCoupon from '../UserHome/MyCoupon.vue'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'user-home',
@@ -22,6 +23,11 @@
       UserInfoBrief,
       MyOrder,
       MyCoupon
+    },
+    computed: {
+      ...mapState('auth', {
+        userOrders: state => state.userOrders
+      })
     },
     data() {
       return {}

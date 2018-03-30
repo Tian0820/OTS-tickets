@@ -134,3 +134,14 @@ export function fetchUserByEmail(callback, email) {
       console.log(error)
     })
 }
+
+export function fetchWeeklyStatistics(callback) {
+  axios.get('/order/get-week')
+    .then(function (response) {
+      console.log('orders', response.data)
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

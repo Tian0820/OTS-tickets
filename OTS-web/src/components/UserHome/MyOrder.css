@@ -26,5 +26,12 @@ button {
   width: 100%;
   height: auto;
   background-color: #ffffff; }
+  .my-order-wrapper p {
+    margin-bottom: 15px;
+    color: #595959; }
+    .my-order-wrapper p span {
+      color: #e9a038;
+      font-size: 20px;
+      font-weight: 400; }
 
 /*# sourceMappingURL=MyOrder.css.map */

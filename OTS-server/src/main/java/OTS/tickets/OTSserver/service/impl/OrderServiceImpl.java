@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.service.impl;
 
 import OTS.tickets.OTSserver.bean.OrderCreateBean;
+import OTS.tickets.OTSserver.bean.OrderStatisticsBean;
 import OTS.tickets.OTSserver.bean.PayOrderBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.*;
@@ -9,11 +10,13 @@ import OTS.tickets.OTSserver.service.OrderService;
 import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.DateUtils;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +39,7 @@ public class OrderServiceImpl implements OrderService {
     CouponRepository couponRepository;
 
     private DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private DateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     public Order createOrder(OrderCreateBean order) {
@@ -198,5 +202,31 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
+    }
+
+    @Override
+    public List<OrderStatisticsBean> getOrdersWithinWeek() {
+        Calendar cal = Calendar.getInstance();
+        List<OrderStatisticsBean> orderStatistics = new ArrayList<>();
+
+        for (int i = 0; i < 7; i++) {
+            cal.setTime(new Date());
+            System.out.print(simpleDate.format(cal.getTime()));
+
+            cal.add(Calendar.DATE, -i);
+            String date = simpleDate.format(cal.getTime());
+
+            System.out.println(date);
+
+            List<Order> orders = orderRepository.findOrderByCreateTimeStartingWith(date);
+            double price = 0.0;
+            for (Order order :
+                    orders) {
+                price += order.getPrice();
+            }
+            orderStatistics.add(new OrderStatisticsBean(orders, orders.size(), price, date));
+        }
+
+        return orderStatistics;
     }
 }

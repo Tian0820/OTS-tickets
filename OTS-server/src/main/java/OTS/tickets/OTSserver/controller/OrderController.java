@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.controller;
 
 import OTS.tickets.OTSserver.bean.OrderCreateBean;
+import OTS.tickets.OTSserver.bean.OrderStatisticsBean;
 import OTS.tickets.OTSserver.bean.PayOrderBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.Order;
@@ -55,5 +56,14 @@ public class OrderController {
             produces = {"application/json; charset=UTF-8"})
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/order/get-week",
+            method = RequestMethod.GET,
+            produces = {"application/json; charset=UTF-8"})
+    public List<OrderStatisticsBean> getOrdersWithinWeek() {
+        return orderService.getOrdersWithinWeek();
     }
 }

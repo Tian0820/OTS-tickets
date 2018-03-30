@@ -37,6 +37,7 @@
       store.dispatch('venue/refreshVenue', {
         onSuccess: (success) => {
           store.dispatch('venue/fetchVenueOrders')
+          store.dispatch('venue/fetchWeeklyStatistics')
         },
         onError: (error) => {
           Message.error(error)

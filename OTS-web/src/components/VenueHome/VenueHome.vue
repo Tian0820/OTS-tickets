@@ -2,7 +2,9 @@
 
   <div class="venue-home-wrapper">
     <my-order :orders="orders"></my-order>
-    <my-finance :orders="orders"></my-finance>
+    <my-finance v-if="orders&&weeklyStatistics"
+                :orders="orders"
+                :weeklyStatistics="weeklyStatistics"></my-finance>
   </div>
 
 
@@ -22,7 +24,8 @@
     },
     computed: {
       ...mapState('venue', {
-        orders: state => state.orders
+        orders: state => state.orders,
+        weeklyStatistics: state => state.weeklyStatistics
       })
     },
     data() {

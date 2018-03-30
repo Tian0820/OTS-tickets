@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.service;
 
 import OTS.tickets.OTSserver.bean.OrderCreateBean;
+import OTS.tickets.OTSserver.bean.OrderStatisticsBean;
 import OTS.tickets.OTSserver.bean.PayOrderBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.Order;
@@ -17,5 +18,7 @@ public interface OrderService {
     ResultMessageBean refundOrder(int orderId);
 
     List<Order> getAllOrders();
+
+    List<OrderStatisticsBean> getOrdersWithinWeek();
 
 }

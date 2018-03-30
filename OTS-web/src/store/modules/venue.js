@@ -6,6 +6,7 @@ const state = {
     showPlans: [],
     orders: [],
     siteUser: null,
+    weeklyStatistics: null
   }
 ;
 
@@ -151,6 +152,12 @@ const actions = {
     } else {
       commit('saveSiteUser', null)
     }
+  },
+
+  fetchWeeklyStatistics({commit}) {
+    venueApi.fetchWeeklyStatistics(data => {
+      commit('saveWeeklyStatistics', data)
+    })
   }
 
 
@@ -175,7 +182,13 @@ const mutations = {
 
   'saveSiteUser'(state, siteUser) {
     state.siteUser = siteUser
+  },
+
+  'saveWeeklyStatistics'(state, weeklyStatistics) {
+    state.weeklyStatistics = weeklyStatistics
   }
+
+
 };
 
 export default {
