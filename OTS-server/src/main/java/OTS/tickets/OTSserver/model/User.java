@@ -33,8 +33,6 @@ public class User {
      */
     private int activate;
 
-    private String code;
-
     private Double balance;
 
     private Double consume;
@@ -99,10 +97,6 @@ public class User {
         this.activate = activate;
     }
 
-    public String getCode() {
-        return code;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -129,10 +123,6 @@ public class User {
 
     public void setPoint(Double point) {
         this.point = point;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public Double getBalance() {

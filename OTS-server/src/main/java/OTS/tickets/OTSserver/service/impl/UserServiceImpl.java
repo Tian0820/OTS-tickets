@@ -112,12 +112,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultMessage userCheckMail(String email, String code) {
-        User user = userRepository.findUserByCode(code);
-        if (user.getEmail() != null && user.getEmail().equals(email)) {
-            user.setActivate(1);
-            userRepository.save(user);
-            return ResultMessage.SUCCESS;
-        }
+//        User user = userRepository.findUserByCode(code);
+//        if (user.getEmail() != null && user.getEmail().equals(email)) {
+//            user.setActivate(1);
+//            userRepository.save(user);
+//            return ResultMessage.SUCCESS;
+//        }
         return ResultMessage.FAILED;
     }
 
