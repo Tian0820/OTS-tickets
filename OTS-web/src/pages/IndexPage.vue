@@ -5,6 +5,7 @@
 
       <div class="container">
         <show-list v-if="showPlans" :showPlans="showPlans"></show-list>
+        <show-list v-else-if="venueShowPlan" :showPlans="venueShowPlan"></show-list>
 
       </div>
 
@@ -35,6 +36,9 @@
     computed: {
       ...mapState('showPlan', {
         showPlans: state => state.allShowPlans
+      }),
+      ...mapState('venue', {
+        venueShowPlan: state => state.showPlans
       })
     },
     methods: {
@@ -43,20 +47,21 @@
       ])
     },
     beforeRouteEnter(to, from, next) {
-      store.dispatch('showPlan/fetchAllShowPlans')
-
       store.dispatch('auth/refreshUser', {
         onSuccess: (success) => {
+          store.dispatch('showPlan/fetchAllShowPlans')
         },
         onError: (error) => {
 //          Message.error('user not login')
           store.dispatch('venue/refreshVenue', {
             onSuccess: (success) => {
+              store.dispatch('venue/fetchVenueShowPlans')
             },
             onError: (error) => {
 //              Message.error('venue not login')
               store.dispatch('manager/refreshManager', {
                 onSuccess: (success) => {
+                  store.dispatch('showPlan/fetchAllShowPlans')
                 },
                 onError: (error) => {
 //              Message.error('venue not login')

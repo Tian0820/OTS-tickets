@@ -201,6 +201,8 @@ public class VenueServiceImpl implements VenueService {
             result.message = "订单不存在！";
         } else if (!order.getState().equals("已付款")) {
             result.message = "订单状态异常，无法检票！";
+        }  else if (!order.getState().equals("已付款")) {
+            result.message = "订单状态异常，无法检票！";
         } else {
             order.setState("已完成");
             order.setFinishTime(df.format(new Date()));

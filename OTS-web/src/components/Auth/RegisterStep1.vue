@@ -11,7 +11,7 @@
       <el-form-item label="邮箱账号" prop="email">
         <el-input class="email-input" v-model="registerForm.email"></el-input>
         <button :class="{'verify-button': !ifSendVerifyCode, 'disabled-button': ifSendVerifyCode }" @click="sendEmail">
-          发送验证码
+          {{ifSendVerifyCode ? '已发送' : '发送验证码'}}
         </button>
       </el-form-item>
 
