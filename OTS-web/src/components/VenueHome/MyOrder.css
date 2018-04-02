@@ -24,7 +24,8 @@ button {
   margin-top: 80px;
   padding: 30px;
   width: 100%;
-  height: auto;
+  max-height: 600px;
+  overflow: auto;
   background-color: #ffffff; }
 
 /*# sourceMappingURL=MyOrder.css.map */

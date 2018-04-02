@@ -16,6 +16,7 @@ import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -170,7 +171,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Order> getUserOrders(int userId) {
         User user = userRepository.findUserById(userId);
-        return user.getOrders();
+        List<Order> orders = user.getOrders();
+        orders.sort(Comparator.comparing(Order::getCreateTime));
+        return orders;
     }
 
     @Override

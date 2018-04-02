@@ -107,6 +107,7 @@
               onSuccess: (success) => {
                 Message.success(success)
                 this.$modal.hide('pay-modal')
+                router.push({name: 'UserHomePage', params: {userId: this.user.userId}})
               },
               onError: (error) => {
                 Message.error(error)

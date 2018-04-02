@@ -50,7 +50,7 @@
       </el-table-column>
     </el-table>
 
-    <show-type-bar-chart v-if="x && y" :x="x" :y="y"></show-type-bar-chart>
+    <show-type-pie-chart v-if="x && y" :x="x" :y="y"></show-type-pie-chart>
 
 
   </div>
@@ -60,7 +60,7 @@
 
 <script>
   import DivHeader from '../Util/DivHeader.vue'
-  import ShowTypeBarChart from '../Chart/ShowTypeBarChart.vue'
+  import ShowTypePieChart from '../Chart/ShowTypePieChart.vue'
   import {Table, TableColumn, Form, FormItem} from 'element-ui'
   import {router} from '../../main'
 
@@ -68,7 +68,7 @@
     name: 'venue-statistics',
     components: {
       DivHeader,
-      ShowTypeBarChart,
+      ShowTypePieChart,
       elTable: Table,
       elTableColumn: TableColumn,
       elForm: Form,

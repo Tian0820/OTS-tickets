@@ -32,7 +32,7 @@ public class DistributeSeat {
     @Autowired
     UserRepository userRepository;
 
-    @Scheduled(cron = "*/10 * * * * *")
+    @Scheduled(cron = "0 0 6 * * *")
     public void distribute() {
         try {
             List<Order> orders = orderRepository.findOrderByType("分配");
@@ -41,13 +41,9 @@ public class DistributeSeat {
                     List<Seat> seats = order.getSeats();
                     if (order.getState().equals("已付款") && seats == null || seats.isEmpty()) {
 
-                        System.out.println("=======================");
-
                         Date now = new Date();
                         Date showTime = df.parse(order.getShowPlan().getTime());
                         long interval = (showTime.getTime() - now.getTime()) / (1000 * 60 * 60 * 24 * 7);
-
-                        System.out.println(interval);
 
                         if (interval <= 2) {
                             // 演出开始前两周自动配票

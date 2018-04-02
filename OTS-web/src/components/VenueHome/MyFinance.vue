@@ -5,6 +5,7 @@
 
     <p>完成订单：{{finishedOrders.length}}</p>
     <p>订单收入：{{currentVenue.balance.toFixed(2)}}</p>
+    <p>总订单数量：</p>
 
     <order-weekly-line-chart v-if="x&&y&&price"
                              :x="x"

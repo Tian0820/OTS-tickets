@@ -64,6 +64,7 @@
                   store.dispatch('showPlan/fetchAllShowPlans')
                 },
                 onError: (error) => {
+                  store.dispatch('showPlan/fetchAllShowPlans')
 //              Message.error('venue not login')
                 }
               })
