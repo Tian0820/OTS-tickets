@@ -11,6 +11,7 @@
       <p>手机：{{user.phone}}</p>
       <p :style="{display: 'inline-block'}">我的等级：{{user.level}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         总消费：{{user.consume}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        余额：{{user.balance}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         我的积分：{{user.point.toFixed(2)}}</p>
       <button @click="handleExchangeCoupon">兑换优惠券</button>
 
