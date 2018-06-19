@@ -2,7 +2,8 @@
   <div class="nav-wrapper">
     <div class="container">
       <div class="left-wrapper" @click="goToIndexPage">
-        <img src="../../assets/img/logo.png" width="30">
+        <img src="../../assets/img/logo.png" width="40">
+        <h1>OTS</h1>
       </div>
 
       <div class="right-wrapper">

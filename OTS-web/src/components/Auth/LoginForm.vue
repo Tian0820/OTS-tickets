@@ -32,6 +32,9 @@
       </el-form>
 
     </div>
+    <div class="right-form-wrapper">
+
+    </div>
 
   </div>
 </template>

@@ -25,13 +25,13 @@ html .body-wrapper {
   height: 100%;
   background: #f6f6f6; }
 html .container {
-  width: 1005px;
+  width: 1000px;
   margin: 0 auto; }
   html .container:after {
     content: '';
     display: block;
     clear: both; }
-@media (max-width: 1005px) {
+@media (max-width: 1000px) {
   html .container {
     width: 100%; } }
 html .el-input__inner {

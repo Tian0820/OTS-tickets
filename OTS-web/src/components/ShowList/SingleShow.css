@@ -21,7 +21,7 @@ button {
  */
 .single-show-wrapper {
   display: inline-block;
-  width: 200px;
+  width: 100%;
   height: auto; }
   .single-show-wrapper .poster-wrapper {
     width: 100%;

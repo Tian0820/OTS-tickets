@@ -13,12 +13,12 @@ html {
   }
 
   .container {
-    width: 1005px;
+    width: 1000px;
     margin: 0 auto;
     @include clear-fix();
   }
 
-  @media (max-width: 1005px) {
+  @media (max-width: 1000px) {
     .container {
       width: 100%;
     }

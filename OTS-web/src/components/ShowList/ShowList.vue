@@ -2,7 +2,7 @@
 
   <div class="list-wrapper">
     <div-header :header="'最近演出'"></div-header>
-    <el-row :gutter="10">
+    <el-row :gutter="40">
       <single-show v-for="item in showPlans" :key="item.id" :show="item"></single-show>
     </el-row>
 
