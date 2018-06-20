@@ -5,8 +5,8 @@
            :style="{ backgroundImage: 'url(' + posterUrl + ')'}"
            @click="goToShowDetail">
         <div class="show-detail">
-          <p>{{show.venue.city}}</p>
-          <p>{{show.time}}</p>
+          <p><i class="el-icon-location-outline"></i>{{show.venue.city}}</p>
+          <p><i class="el-icon-time"></i>{{show.time}}</p>
         </div>
       </div>
 
