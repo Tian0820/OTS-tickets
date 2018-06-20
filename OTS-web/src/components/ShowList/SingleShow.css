@@ -47,6 +47,8 @@ button {
       -ms-transition: all, 0.3s;
       -o-transition: all, 0.3s;
       transition: all, 0.3s; }
+      .single-show-wrapper .poster-wrapper .show-detail i {
+        padding-right: 5px; }
     .single-show-wrapper .poster-wrapper:hover .show-detail {
       bottom: 0; }
   .single-show-wrapper .show-info-wrapper {
@@ -63,7 +65,7 @@ button {
       padding: 1px 5px;
       background-color: #e9a038;
       color: #ffffff;
-      border-radius: 6px;
+      border-radius: 4px;
       font-size: 12px; }
     .single-show-wrapper .show-info-wrapper .show-title {
       height: 40px;

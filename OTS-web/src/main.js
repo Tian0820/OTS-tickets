@@ -22,4 +22,6 @@ new Vue({
   components: {App}
 })
 
+import './element-variables.scss'
+
 export {App, router, store}
