@@ -157,10 +157,10 @@
         router.push({name: 'IndexPage'})
       },
       goToLoginPage() {
-        router.push({name: 'LoginPage'})
+        router.push({name: 'UserLoginPage'})
       },
       goToRegisterPage() {
-        router.push({name: 'RegisterPage'})
+        router.push({name: 'UserRegisterPage'})
       },
       handleUserCommand(command) {
         if (command !== 'signOut') {
