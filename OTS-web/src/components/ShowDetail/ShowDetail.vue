@@ -97,7 +97,7 @@
           Message.warning('经理无法操作！')
         } else {
           Message.error('请登录后操作！')
-          router.push({name: 'LoginPage'})
+          router.push({name: 'UserLoginPage'})
         }
       },
       handleBuyTickets() {
