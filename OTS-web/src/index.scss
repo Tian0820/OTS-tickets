@@ -137,4 +137,8 @@ html {
     color: $main-color;
   }
 
+  //pagination style
+  .el-pagination.is-background .el-pager li.active{
+    background-color: $main-color;
+  }
 }

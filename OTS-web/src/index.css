@@ -133,5 +133,7 @@ html .el-button.is-plain:focus, html .el-button.is-plain:hover {
   border-color: #e9a038; }
 html .el-picker-panel__icon-btn:hover {
   color: #e9a038; }
+html .el-pagination.is-background .el-pager li.active {
+  background-color: #e9a038; }
 
 /*# sourceMappingURL=index.css.map */
