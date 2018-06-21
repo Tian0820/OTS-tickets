@@ -11,6 +11,7 @@ import ManagerLoginPage from '@/pages/ManagerLoginPage'
 import UserHomePage from '@/pages/UserHomePage'
 import VenueHomePage from '@/pages/VenueHomePage'
 import ShowDetailPage from '@/pages/ShowDetailPage'
+import ShowSearchPage from '@/pages/ShowSearchPage'
 import UserInfoPage from '@/pages/UserInfoPage'
 import VenueInfoPage from '@/pages/VenueInfoPage'
 import VenuePlanPage from '@/pages/VenuePlanPage'
@@ -76,6 +77,11 @@ export default new Router({
       path: '/show/:showId',
       name: 'ShowDetailPage',
       component: ShowDetailPage
+    },
+    {
+      path: '/search',
+      name: 'ShowSearchPage',
+      component: ShowSearchPage
     },
     {
       path: '/user/me/info',

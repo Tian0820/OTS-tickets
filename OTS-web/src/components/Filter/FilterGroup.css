@@ -1,0 +1,11 @@
+/deep/ .type-filter:after {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 1px;
+  margin: 8px 10px;
+  background-color: #dddddd; }
+/deep/ .type-filter:last-child:after {
+  display: none; }
+
+/*# sourceMappingURL=FilterGroup.css.map */
