@@ -1,0 +1,14 @@
+@import "../../assets/scss/variables";
+
+.type-tabs {
+  /deep/ .el-tabs__item {
+    font-weight: 400;
+    color: $medium-grey;
+    &:hover {
+      color: $main-color;
+    }
+  }
+  /deep/ .el-tabs__item.is-active {
+    color: $main-color;
+  }
+}

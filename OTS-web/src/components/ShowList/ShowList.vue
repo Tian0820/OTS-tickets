@@ -1,16 +1,17 @@
 <template>
 
   <div class="list-wrapper">
-    <div-header :header="'最近演出'"></div-header>
+
 
     <el-row :gutter="40">
-        <el-col :xs="12" :sm="8" :md="6" :lg="6" v-for="item in showPlans"  :key="item.id">
-          <single-show :show="item"></single-show>
-        </el-col>
+      <el-col :xs="12" :sm="8" :md="6" :lg="6" v-for="item in showPlans" :key="item.id">
+        <single-show :show="item"></single-show>
+      </el-col>
     </el-row>
 
     <div class="pagination">
       <el-pagination
+        v-if="isPage"
         background
         layout="prev, pager, next"
         :total="1000">
@@ -23,7 +24,6 @@
 </template>
 
 <script>
-  import DivHeader from '../Util/DivHeader.vue'
   import SingleShow from './SingleShow.vue'
   import {Row, Col, Pagination} from 'element-ui'
   import {store} from '../../main'
@@ -35,17 +35,22 @@
       elRow: Row,
       elCol: Col,
       elPagination: Pagination,
-      DivHeader,
       SingleShow
     },
-    props: ['showPlans'],
+    props: {
+      showPlans: {
+        type: Array,
+      },
+      isPage: {
+        type: Boolean,
+        default: true,
+      }
+    },
     data() {
-        return {}
+      return {}
     },
-    computed: {
-    },
-    methods: {
-    },
+    computed: {},
+    methods: {},
   }
 </script>
 
