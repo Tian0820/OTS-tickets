@@ -4,6 +4,12 @@
       <banner></banner>
 
       <div class="container">
+        <show-search v-if="showPlans" class="show-search"></show-search>
+
+        <type-tabs v-if="showPlans"></type-tabs>
+        <show-list v-if="showPlans" :showPlans="typeShowPlans" :isPage="false"></show-list>
+
+        <div-header :header="'最近演出'"></div-header>
         <show-list v-if="showPlans" :showPlans="showPlans"></show-list>
         <show-list v-else-if="venueShowPlan" :showPlans="venueShowPlan"></show-list>
 
@@ -15,9 +21,12 @@
 </template>
 
 <script>
+  import DivHeader from '../components/Util/DivHeader.vue'
   import Layout from '../components/Layout/Layout.vue'
   import Banner from '../components/Banner/Banner.vue'
   import ShowList from '../components/ShowList/ShowList.vue'
+  import ShowSearch from '../components/Search/ShowSearch.vue'
+  import TypeTabs from '../components/Filter/TypeTabs.vue'
   import {Message} from 'element-ui'
   import {store} from '../main'
   import {mapActions, mapState} from 'vuex'
@@ -25,10 +34,13 @@
   export default {
     name: 'index-page',
     components: {
+      DivHeader,
+      ShowSearch,
+      TypeTabs,
       Layout,
       Banner,
       ShowList,
-      Message
+      Message,
     },
     data() {
       return {}
@@ -36,6 +48,9 @@
     computed: {
       ...mapState('showPlan', {
         showPlans: state => state.allShowPlans
+      }),
+      ...mapState('showPlan', {
+        typeShowPlans: state => state.allShowPlans.slice(0, 4)
       }),
       ...mapState('venue', {
         venueShowPlan: state => state.showPlans

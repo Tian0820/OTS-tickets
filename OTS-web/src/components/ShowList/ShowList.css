@@ -21,7 +21,7 @@ button {
  */
 .list-wrapper {
   display: inline-block;
-  margin-top: 40px;
+  margin-top: 10px;
   width: 100%; }
   .list-wrapper /deep/ .el-col {
     margin-bottom: 40px; }
