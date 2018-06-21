@@ -2,7 +2,7 @@
   <modal
     name="choose-seat-modal"
     :clickToClose="false"
-    :height="500">
+    height=auto>
 
     <choose-seat v-if="currentShow" :currentShow="currentShow" :chosenArea="chosenArea"></choose-seat>
 

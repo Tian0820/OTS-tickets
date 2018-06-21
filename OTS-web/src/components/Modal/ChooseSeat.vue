@@ -10,23 +10,48 @@
       <h1>选座购票 <span :style="{color: '#595959', fontSize: '12px'}">（最多选择6个）</span></h1>
 
       <div :style="{textAlign: 'center', marginTop: '30px'}">
-        <p>舞台</p>
+        <p class="stage-p">舞台</p>
         <div :style="{padding: '20px 100px'}">
           <el-checkbox-group
             v-model="chosenSeats"
             :min="1"
             :max="6">
-            <el-checkbox v-for="seat in seats" :disabled="seat.available===0" :label="seat" :key="seat.id">&nbsp;
+            <p class="area-1-p">一区 780元</p>
+            <el-checkbox class="area-1-box" v-for="(seat, index) in seats" v-if="index < 30"
+                         :disabled="seat.available===0"
+                         :label="seat"
+                         :key="seat.id">&nbsp;
+            </el-checkbox>
+            <p class="area-2-p">二区 580元</p>
+            <el-checkbox class="area-2-box" v-for="(seat, index) in seats" v-if="index >= 30 && index < 70"
+                         :disabled="seat.available===0" :label="seat"
+                         :key="seat.id">&nbsp;
+            </el-checkbox>
+            <p class="area-3-p">三区 380元</p>
+            <el-checkbox class="area-3-box" v-for="(seat, index) in seats" v-if="index >= 70"
+                         :disabled="seat.available===0"
+                         :label="seat"
+                         :key="seat.id">&nbsp;
             </el-checkbox>
           </el-checkbox-group>
         </div>
       </div>
 
-      <p :style="{border: 'none', fontSize: '12px', color: '#595959'}">
-        已选：{{seatNumbers ? seatNumbers.join(';') : ''}}</p>
+      <div>
+        <span :style="{fontSize: '14px', color: '#595959'}">已选：</span>
+        <div v-for="seat in chosenSeats" class="chosen-seat" :class="chosenSeat(seat)">
+          <button class="chosen-seat-button" :class="chosenSeat(seat)" type="primary"></button>
+          {{calSeatNumber(seat)}}
+        </div>
+      </div>
 
-      <button class="confirm-button" @click="handleConfirm">确认选座</button>
+      <p :style="{marginTop: '10px',fontSize: '14px', color: '#595959'}">
+        共 <span :style="{border: 'none', fontSize: '20px', color: '#E9A038', fontWeight: '400'}">{{totalPrice}}</span> 元
+      </p>
 
+      <div class="confirm-button-wrapper">
+        <button class="confirm-button" @click="handleConfirm">确认选座</button>
+      </div>
     </div>
   </div>
 
@@ -52,9 +77,6 @@
       for (let i = (this.chosenArea - 1) * 100; i < (this.chosenArea - 1) * 100 + 100; i++) {
         seats.push(this.currentShow.seats[i]);
       }
-      console.log('modal', seats)
-      console.log('area', this.chosenArea)
-
       return {
         chosenSeats: [],
         seats: seats
@@ -68,14 +90,12 @@
         siteUser: state => state.siteUser
       }),
 
-      seatNumbers: function () {
-        let temp = []
+      totalPrice: function () {
+        let total = 0
         this.chosenSeats.forEach(seat => {
-          let row = Math.floor((seat.number + 1) % 10) === 0 ? Math.floor((seat.number + 1) / 10) : Math.floor((seat.number + 1) / 10) + 1
-          let col = Math.floor((seat.number + 1) % 10) === 0 ? 10 : Math.floor((seat.number + 1) % 10)
-          temp.push(row + '排' + col + '座')
+          total += seat.price
         })
-        return temp
+        return total
       }
 
     },
@@ -91,9 +111,26 @@
         this.chosenSeats = []
         this.$modal.hide('choose-seat-modal')
       },
+      calSeatNumber(seat) {
+        let row = Math.floor((seat.number + 1) % 10) === 0 ? Math.floor((seat.number + 1) / 10) : Math.floor((seat.number + 1) / 10) + 1
+        let col = Math.floor((seat.number + 1) % 10) === 0 ? 10 : Math.floor((seat.number + 1) % 10)
+        return row + '排' + col + '座'
+      },
+      chosenSeat(seat) {
+        switch (seat.area) {
+          case '1':
+            return 'seat-1'
+            break;
+          case '2':
+            return 'seat-2'
+            break;
+          case '3':
+            return 'seat-3'
+            break;
+        }
+      },
       handleConfirm() {
         this.saveChosenSeats(this.chosenSeats)
-        console.log(this.chosenSeats)
         let seatIds = []
         this.chosenSeats.forEach(seat => {
           seatIds.push(seat.id)
@@ -122,7 +159,6 @@
           })
         } else {
           // 场馆现场卖票
-          console.log('venue!!!')
           this.createOrder({
             info: {
               showId: this.currentShow.id,
