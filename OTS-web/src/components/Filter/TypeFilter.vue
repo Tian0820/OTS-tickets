@@ -1,25 +1,36 @@
 <template>
   <div class="type-filter">
-    <span class="name">地点：</span>
-    <span class="active">上海</span>
-    <span>上海</span>
-    <span>上海</span>
-    <span>上海</span>
+    <span class="name">{{filter.name}}：</span>
+
+    <span v-for="option in filter.options" :class="classObject(option)" @click="handleClick(option)">{{option}}</span>
+
   </div>
 </template>
 
 <script>
-  import {Input, Carousel, CarouselItem} from 'element-ui'
+  import {Radio} from 'element-ui'
 
   export default {
     name: 'type-filter',
-    components: {},
-    data () {
-      return {
-
-      }
+    components: {
+      elRadio: Radio
     },
-    methods: {}
+    props: ['filter'],
+    data () {
+      return {}
+    },
+    computed: {},
+    methods: {
+      classObject: function (option) {
+        return {
+          'option': true,
+          'active': option === this.filter.model
+        }
+      },
+      handleClick: function(value) {
+        this.filter.model = value
+      }
+    }
   }
 </script>
 
