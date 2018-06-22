@@ -34,21 +34,21 @@ button {
     background-size: cover;
     display: inline-block;
     width: 26%;
-    height: 385px;
+    height: 380px;
     vertical-align: top; }
   .show-detail-wrapper .info-wrapper {
     display: inline-block;
     margin-left: 3%;
     width: 70%;
     height: 100%;
-    min-height: 385px;
+    min-height: 380px;
     vertical-align: top; }
   .show-detail-wrapper .show-title {
     color: #595959;
     font-size: 18px;
     font-weight: 500; }
   .show-detail-wrapper .show-info {
-    margin-top: 10px;
+    margin-top: 15px;
     color: #848484;
     font-size: 14px; }
   .show-detail-wrapper .price {
@@ -59,10 +59,13 @@ button {
     vertical-align: middle; }
     .show-detail-wrapper .price img {
       vertical-align: sub; }
-  .show-detail-wrapper .chosen-price-wrapper .chosen-price {
-    display: inline-block;
-    font-size: 14px;
-    color: #595959; }
+  .show-detail-wrapper .chosen-price-wrapper {
+    display: inline-block; }
+    .show-detail-wrapper .chosen-price-wrapper .chosen-price {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #595959; }
   .show-detail-wrapper button {
     float: right;
     margin-left: 20px;
@@ -98,8 +101,8 @@ button {
     font-size: 14px; }
 
 /deep/ .el-checkbox-group {
-  margin-top: 20px;
-  margin-bottom: 20px; }
+  display: inline-block;
+  margin-bottom: 10px; }
 
 /deep/ .el-checkbox__input {
   display: none; }
