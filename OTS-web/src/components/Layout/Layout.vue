@@ -31,3 +31,10 @@
     computed: {}
   }
 </script>
+
+<style scoped>
+  .body-wrapper {
+    display: inline-block;
+    margin-top: 60px;
+  }
+</style>
