@@ -5,6 +5,10 @@ import OTS.tickets.OTSserver.model.ShowPlan;
 import OTS.tickets.OTSserver.repository.ShowPlanRepository;
 import OTS.tickets.OTSserver.service.ShowPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +24,11 @@ public class ShowPlanServiceImpl implements ShowPlanService {
 //    }
 
     @Override
-    public List<ShowPlan> getAllShowPlans() {
-        return showPlanRepository.findAll();
+    public Page<ShowPlan> getAllShowPlans(int page, int size) {
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
+        Page<ShowPlan> p = showPlanRepository.findAll(pageable);
+
+        return p;
     }
 
     @Override

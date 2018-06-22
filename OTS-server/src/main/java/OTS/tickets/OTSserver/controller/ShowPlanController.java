@@ -4,6 +4,7 @@ import OTS.tickets.OTSserver.bean.ShowPlanBean;
 import OTS.tickets.OTSserver.model.ShowPlan;
 import OTS.tickets.OTSserver.service.ShowPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +23,9 @@ public class ShowPlanController {
             value = "/show-plan",
             method = RequestMethod.GET,
             produces = {"application/json; charset=UTF-8"})
-    public List<ShowPlan> getCurrentShow(@RequestParam(value = "page") int page,
+    public Page<ShowPlan> getCurrentShow(@RequestParam(value = "page") int page,
                                          @RequestParam(value = "size") int size) {
-        return showPlanService.getAllShowPlans();
+        return showPlanService.getAllShowPlans(page, size);
     }
 
     @ResponseBody
