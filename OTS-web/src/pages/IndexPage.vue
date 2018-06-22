@@ -7,11 +7,11 @@
         <show-search v-if="showPlans" class="show-search"></show-search>
 
         <type-tabs v-if="showPlans"></type-tabs>
-        <show-list v-if="showPlans" :showPlans="typeShowPlans" :isPage="false"></show-list>
+        <show-list v-if="showPlans" :showPlans="typeShowPlans"></show-list>
 
         <div-header :header="'最近演出'"></div-header>
-        <show-list v-if="showPlans" :showPlans="showPlans"></show-list>
-        <show-list v-else-if="venueShowPlan" :showPlans="venueShowPlan"></show-list>
+        <show-list v-if="showPlans" :showPlans="showPlans" :pageInfo="pageInfo" :changePage="fetchAllShowPlans"></show-list>
+        <show-list v-else-if="venueShowPlan" :showPlans="venueShowPlan" :pageInfo="pageInfo"></show-list>
 
       </div>
 
@@ -47,10 +47,14 @@
     },
     computed: {
       ...mapState('showPlan', {
-        showPlans: state => state.allShowPlans
-      }),
-      ...mapState('showPlan', {
-        typeShowPlans: state => state.allShowPlans.slice(0, 4)
+        showPlans: state => state.allShowPlans,
+        typeShowPlans: state => state.allShowPlans.slice(0, 4),
+        pageInfo: state => {
+            return {
+                page:state.page,
+                totalPages:state.totalPages
+            }
+        }
       }),
       ...mapState('venue', {
         venueShowPlan: state => state.showPlans
@@ -59,12 +63,15 @@
     methods: {
       ...mapActions('auth', [
         'refreshUser'
+      ]),
+      ...mapActions('showPlan', [
+        'fetchAllShowPlans'
       ])
     },
     beforeRouteEnter(to, from, next) {
       store.dispatch('auth/refreshUser', {
         onSuccess: (success) => {
-          store.dispatch('showPlan/fetchAllShowPlans')
+          store.dispatch('showPlan/fetchAllShowPlans', 1)
         },
         onError: (error) => {
 //          Message.error('user not login')
@@ -76,10 +83,10 @@
 //              Message.error('venue not login')
               store.dispatch('manager/refreshManager', {
                 onSuccess: (success) => {
-                  store.dispatch('showPlan/fetchAllShowPlans')
+                  store.dispatch('showPlan/fetchAllShowPlans', 1)
                 },
                 onError: (error) => {
-                  store.dispatch('showPlan/fetchAllShowPlans')
+                  store.dispatch('showPlan/fetchAllShowPlans', 1)
 //              Message.error('venue not login')
                 }
               })
