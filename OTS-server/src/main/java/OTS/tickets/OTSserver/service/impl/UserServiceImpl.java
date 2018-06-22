@@ -172,7 +172,7 @@ public class UserServiceImpl implements UserService {
     public List<Order> getUserOrders(int userId) {
         User user = userRepository.findUserById(userId);
         List<Order> orders = user.getOrders();
-        orders.sort(Comparator.comparing(Order::getCreateTime));
+        orders.sort(Comparator.comparing(Order::getCreateTime).reversed());
         return orders;
     }
 

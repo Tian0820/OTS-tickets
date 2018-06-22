@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGE,gCAAsB;EACpB,WAAW,EAAE,GAAG;EAChB,KAAK,ECAK,OAAO;EDCjB,sCAAQ;IACN,KAAK,ECLE,OAAO;ADQlB,0CAAgC;EAC9B,KAAK,ECTI,OAAO",
+"sources": ["TypeTabs.scss","../../assets/scss/_variables.scss"],
+"names": [],
+"file": "TypeTabs.css"
+}

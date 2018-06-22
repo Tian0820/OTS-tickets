@@ -4,17 +4,17 @@
 
 .show-detail-wrapper {
   display: inline-block;
-  margin-top: 80px;
+  margin-top: 40px;
   padding: 30px;
   width: 100%;
-  height: 400px;
+  height: auto;
   background-color: $white-color;
 
   .poster-wrapper {
     @include cover-img();
     display: inline-block;
     width: 26%;
-    height: 100%;
+    height: 385px;
     vertical-align: top;
   }
 
@@ -23,6 +23,7 @@
     margin-left: 3%;
     width: 70%;
     height: 100%;
+    min-height: 385px;
     vertical-align: top;
   }
 
@@ -39,7 +40,7 @@
   }
 
   .price {
-    margin-top: 50px;
+    margin-top: 30px;
     //margin-left: 5px;
     color: $grey;
     font-size: 16px;
@@ -51,15 +52,22 @@
     }
   }
 
-  /deep/ .el-radio-group {
-    margin-top: 20px;
+  .chosen-price-wrapper {
+
+    .chosen-price {
+      display: inline-block;
+      //border: 1px solid $main-color;
+      font-size: 14px;
+      color: $grey;
+    }
+
   }
 
   button {
     float: right;
     //margin-right: 10%;
     margin-left: 20px;
-    margin-top: 69px;
+    margin-top: 20px;
     padding: 5px 10px;
     color: $white-color;
     background-color: $main-color;
@@ -88,3 +96,39 @@
     font-size: 14px;
   }
 }
+
+/deep/ .el-checkbox-group {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/deep/ .el-checkbox__input {
+  display: none;
+}
+
+/deep/ .el-checkbox.is-bordered.el-checkbox--small .el-checkbox__label {
+  padding: 0;
+}
+
+/deep/ .el-input-number {
+  margin-left: 40px;
+  margin-right: 20px;
+  width: 120px;
+}
+
+/deep/ .el-checkbox.is-bordered {
+  height: 31px;
+  padding: 5px 20px 5px 20px;
+}
+
+/deep/ .el-input-number__increase, /deep/ .el-input-number__decrease, /deep/ .el-input-number__decrease.is-disabled, /deep/ .el-input-number__increase.is-disabled {
+  //margin-right: 35px;
+  background: none;
+  border: none;
+}
+
+/deep/ .el-input-number .el-input__inner {
+  height: 30px;
+  border-radius: 100px;
+}
+

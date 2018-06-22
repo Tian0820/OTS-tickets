@@ -2,7 +2,8 @@
   <div class="nav-wrapper">
     <div class="container">
       <div class="left-wrapper" @click="goToIndexPage">
-        <img src="../../assets/img/logo.png" width="30">
+        <img src="../../assets/img/logo.png" width="40">
+        <h1>OTS</h1>
       </div>
 
       <div class="right-wrapper">
@@ -156,10 +157,10 @@
         router.push({name: 'IndexPage'})
       },
       goToLoginPage() {
-        router.push({name: 'LoginPage'})
+        router.push({name: 'UserLoginPage'})
       },
       goToRegisterPage() {
-        router.push({name: 'RegisterPage'})
+        router.push({name: 'UserRegisterPage'})
       },
       handleUserCommand(command) {
         if (command !== 'signOut') {

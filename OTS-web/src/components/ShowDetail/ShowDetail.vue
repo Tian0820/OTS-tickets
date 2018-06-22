@@ -17,26 +17,38 @@
 
         <p class="price">
           <img src="../../assets/img/price-tag.png" width="20"/>
-          &nbsp;&nbsp;&nbsp;票价
+          &nbsp;票价
         </p>
 
-        <el-radio-group
+        <el-checkbox-group
           v-model="checkboxGroup"
           size="small"
-          :max="1">
-          <el-radio
+          :min="1"
+          :max="3">
+          <el-checkbox
             v-for="(price, index) in prices"
-            :label="price"
+            :label="price + '元'"
             :key="index"
             @change="handleChange"
-            border></el-radio>
-        </el-radio-group>
+            border></el-checkbox>
+        </el-checkbox-group>
 
-        <button v-if="type === 'user'" @click="handleBuyTickets">立即购买</button>
-        <button @click="handleChooseSeat">选座购票</button>
+        <div class="chosen-price-wrapper" v-for="(price, index) in chosenPrices">
+          <div class="chosen-price">
+            {{price}}
+            <el-input-number v-model="num[index]" @change="handleChange" :min="1" :max="10"
+                             label="描述文字"></el-input-number>
 
-
+            <span>（最多购买 10 张）</span>
+          </div>
+          <br/>
+        </div>
       </div>
+
+      <button v-if="type === 'user'" @click="handleBuyTickets">立即购买</button>
+      <button @click="handleChooseSeat">选座购票</button>
+
+
     </div>
 
     <div class="show-info-wrapper">
@@ -51,7 +63,7 @@
 
 <script>
   import DivHeader from '../Util/DivHeader.vue'
-  import {Checkbox, CheckboxGroup, RadioGroup, Radio, Message} from 'element-ui'
+  import {Checkbox, CheckboxGroup, RadioGroup, Radio, InputNumber, Message} from 'element-ui'
   import {store, router} from '../../main'
   import {mapActions, mapMutations} from 'vuex'
   import ElRadio from "../../../node_modules/element-ui/packages/radio/src/radio.vue";
@@ -64,6 +76,7 @@
       elCheckboxGroup: CheckboxGroup,
       elRadioGroup: RadioGroup,
       elRadio: Radio,
+      elInputNumber: InputNumber,
       Message
     },
     props: ['type', 'currentShow'],
@@ -77,8 +90,14 @@
 
       return {
         posterUrl: require('../../assets/img/' + name),
-        checkboxGroup: prices[0],
-        prices: prices
+        checkboxGroup: [prices[0] + '元'],
+        prices: prices,
+        num: [1, 1, 1]
+      }
+    },
+    computed: {
+      chosenPrices: function () {
+        return this.checkboxGroup
       }
     },
     methods: {
@@ -86,7 +105,7 @@
         'saveChosenArea'
       ]),
       handleChange(val) {
-        this.saveChosenArea(this.prices.indexOf(val) + 1)
+//        this.chosenPrices = this.checkboxGroup
       },
       handleChooseSeat() {
         if (this.type === 'user') {
@@ -97,7 +116,7 @@
           Message.warning('经理无法操作！')
         } else {
           Message.error('请登录后操作！')
-          router.push({name: 'LoginPage'})
+          router.push({name: 'UserLoginPage'})
         }
       },
       handleBuyTickets() {

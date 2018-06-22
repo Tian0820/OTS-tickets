@@ -1,0 +1,25 @@
+@import "../../assets/scss/variables";
+
+.show-search {
+  .select {
+    width: 140px;
+    /deep/ .el-input__inner {
+      width: 140px;
+    }
+  }
+  /deep/ .el-input, /deep/ .el-input__inner {
+    height: 50px;
+  }
+
+  /deep/ .el-input-group__append {
+    width: 80px;
+    color: $white-color;
+    border-color: $main-color;
+    background-color: $main-color;
+    font-size: 16px;
+
+  }
+  /deep/ .el-button {
+    font-weight: 300;
+  }
+}

@@ -15,11 +15,31 @@
     color: $grey;
   }
 
-  p {
+  .stage-p {
     font-size: 18px;
     font-weight: 400;
     color: $grey;
     border: solid 1px $grey;
+  }
+
+  /deep/ .area-1-p {
+    font-size: 12px;
+    font-weight: 400;
+    color: $area-red;
+  }
+
+  /deep/ .area-2-p {
+    margin-top:  10px;
+    font-size: 12px;
+    font-weight: 400;
+    color: $area-yellow;
+  }
+
+  /deep/ .area-3-p {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 400;
+    color: $area-green;
   }
 
   .el-button {
@@ -46,20 +66,88 @@
     margin: 0;
   }
 
-  .confirm-button {
-    //display: inline-block;
-    float: right;
-    margin-top: 20px;
-    padding: 5px 10px;
-    border-radius: 3px;
-    background-color: $main-color;
-    color: $white-color;
-    cursor: pointer;
-    @include transition(all, 0.3s);
-
-    &:hover {
-      @include transition(all, 0.3s);
-      background-color: $sub-color;
+  .area-1-box {
+    /deep/ .el-checkbox__inner {
+      border-color: $area-red;
+    }
+    /deep/ .el-checkbox__input.is-checked .el-checkbox__inner {
+      background-color: $area-red;
     }
   }
+
+  .area-2-box {
+    /deep/ .el-checkbox__inner {
+      border-color: $area-yellow;
+    }
+    /deep/ .el-checkbox__input.is-checked .el-checkbox__inner {
+      background-color: $area-yellow;
+    }
+  }
+
+  .area-3-box {
+    /deep/ .el-checkbox__inner {
+      border-color: $area-green;
+    }
+    /deep/ .el-checkbox__input.is-checked .el-checkbox__inner {
+      background-color: $area-green;
+    }
+  }
+
+  .chosen-seat {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 14px;
+
+    .chosen-seat-button {
+      height: 12px;
+      width: 12px;
+      border: none;
+      border-radius: 2px;
+    }
+
+    .seat-1 {
+      background-color: $area-red;
+    }
+
+    .seat-2 {
+      background-color: $area-yellow;
+    }
+
+    .seat-3 {
+      background-color: $area-green;
+    }
+  }
+
+  .seat-1 {
+    color: $area-red;
+  }
+
+  .seat-2 {
+    color: $area-yellow
+  }
+
+  .seat-3 {
+    color: $area-green
+  }
+
+  .confirm-button-wrapper {
+    display: inline-block;
+    float: right;
+    .confirm-button {
+      //display: inline-block;
+      margin-top: 20px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      background-color: $main-color;
+      color: $white-color;
+      cursor: pointer;
+      @include transition(all, 0.3s);
+
+      &:hover {
+        @include transition(all, 0.3s);
+        background-color: $sub-color;
+      }
+    }
+  }
+
 }

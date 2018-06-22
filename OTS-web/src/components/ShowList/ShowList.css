@@ -21,8 +21,17 @@ button {
  */
 .list-wrapper {
   display: inline-block;
-  padding: 30px;
-  margin-top: 30px;
+  margin-top: 10px;
   width: 100%; }
+  .list-wrapper /deep/ .el-col {
+    margin-bottom: 40px; }
+    .list-wrapper /deep/ .el-col:last-child {
+      margin-bottom: 0; }
+  .list-wrapper .pagination {
+    width: 100%;
+    text-align: center; }
+  .list-wrapper /deep/ .el-pagination {
+    display: inline-block;
+    margin: 30px auto 0; }
 
 /*# sourceMappingURL=ShowList.css.map */

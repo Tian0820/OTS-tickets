@@ -3,27 +3,34 @@
 @import "../../assets/scss/mixin";
 
 .nav-wrapper {
-  height: 52px;
+  height: 60px;
   width: 100%;
   position: fixed;
-  z-index: 1;
+  z-index: 9;
   background-color: $white-color;
   box-shadow: 0px 1px 3px $light-grey;
 
   .left-wrapper {
     display: inline-block;
-    padding-top: 12px;
+    padding-top: 16px;
     border-radius: 3px;
     cursor: pointer;
 
     img {
       vertical-align: middle;
     }
+    h1 {
+      display: inline-block;
+      margin: 0 10px;
+      font-size: 22px;
+      color: $main-color;
+      vertical-align: middle;
+    }
   }
 
   .right-wrapper {
     display: inline-block;
-    padding-top: 11px;
+    padding-top: 16px;
     float: right;
 
     .input-wrapper {
@@ -59,6 +66,7 @@
 
         /deep/ .el-icon-caret-bottom:before {
           font-size: 10px;
+          color: $medium-grey;
         }
       }
     }

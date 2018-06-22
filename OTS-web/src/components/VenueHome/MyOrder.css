@@ -25,7 +25,7 @@ button {
   padding: 30px;
   width: 100%;
   max-height: 600px;
-  overflow: auto;
+  overflow: hidden;
   background-color: #ffffff; }
 
 /*# sourceMappingURL=MyOrder.css.map */
