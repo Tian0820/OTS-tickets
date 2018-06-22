@@ -35,6 +35,10 @@ const mutations = {
     state.allShowPlans = allShowPlans;
   },
   'saveCurrentShow'(state, currentShow) {
+    currentShow.seats.sort(function (a, b) {
+      return a.number - b.number
+    })
+
     state.currentShow = currentShow
   },
   'saveChosenArea'(state, chosenArea) {
