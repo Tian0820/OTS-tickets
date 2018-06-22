@@ -15,9 +15,9 @@
         <p class="show-info">
           地点：{{currentShow.venue.city}}&nbsp;{{currentShow.venue.venueName}}&nbsp;{{currentShow.venue.address}}</p>
 
-        <p class="price">
-          <img src="../../assets/img/price-tag.png" width="20"/>
-          &nbsp;票价
+        <p class="show-info" :style="{display: 'inline-block'}">
+          <!--<img src="../../assets/img/price-tag.png" width="20"/>-->
+          票价：
         </p>
 
         <el-checkbox-group
@@ -33,15 +33,23 @@
             border></el-checkbox>
         </el-checkbox-group>
 
-        <div class="chosen-price-wrapper" v-for="(price, index) in chosenPrices">
-          <div class="chosen-price">
-            {{price}}
-            <el-input-number v-model="num[index]" @change="handleChange" :min="1" :max="10"
-                             label="描述文字"></el-input-number>
+        <br/>
 
-            <span>（最多购买 10 张）</span>
+        <p class="show-info" :style="{display: 'inline-block', marginTop: '18px', verticalAlign: 'top'}">
+          已选：
+        </p>
+
+        <div class="chosen-price-wrapper">
+          <div v-for="(price, index) in chosenPrices">
+            <div class="chosen-price">
+              {{price}}
+              <el-input-number v-model="num[index]" @change="handleChange" :min="1" :max="10"
+                               label="描述文字"></el-input-number>
+
+              <span>（最多购买 10 张）</span>
+            </div>
+            <br/>
           </div>
-          <br/>
         </div>
       </div>
 
