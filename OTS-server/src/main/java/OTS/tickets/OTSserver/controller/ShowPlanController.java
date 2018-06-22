@@ -22,7 +22,8 @@ public class ShowPlanController {
             value = "/show-plan",
             method = RequestMethod.GET,
             produces = {"application/json; charset=UTF-8"})
-    public List<ShowPlan> getCurrentVenue() {
+    public List<ShowPlan> getCurrentShow(@RequestParam(value = "page") int page,
+                                         @RequestParam(value = "size") int size) {
         return showPlanService.getAllShowPlans();
     }
 
