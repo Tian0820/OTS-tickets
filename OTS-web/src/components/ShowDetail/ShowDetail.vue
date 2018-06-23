@@ -90,11 +90,11 @@
     props: ['type', 'currentShow'],
     data() {
       let name = 'poster.jpg'
-      let prices = []
-      let areas = this.currentShow.seats.length / 100
-      for (let i = 0; i < areas; i++) {
-        prices.push(this.currentShow.seats[i * 100].price)
-      }
+      let prices = [380, 580, 780]
+//      let areas = this.currentShow.seats.length / 100
+//      for (let i = 0; i < areas; i++) {
+//        prices.push(this.currentShow.seats[i * 100].price)
+//      }
 
       return {
         posterUrl: require('../../assets/img/' + name),
