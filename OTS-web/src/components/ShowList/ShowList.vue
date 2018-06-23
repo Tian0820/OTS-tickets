@@ -11,10 +11,13 @@
 
     <div class="pagination">
       <el-pagination
-        v-if="isPage"
+        v-if="pageInfo"
         background
         layout="prev, pager, next"
-        :total="1000">
+        :current-page="pageInfo.page"
+        :page-count="pageInfo.totalPages"
+        @current-change="handleChangePage"
+      >
       </el-pagination>
     </div>
 
@@ -41,16 +44,23 @@
       showPlans: {
         type: Array,
       },
-      isPage: {
-        type: Boolean,
-        default: true,
+      pageInfo: {
+        type: Object
+      },
+      changePage: {
+        type: Function
       }
     },
     data() {
       return {}
     },
     computed: {},
-    methods: {},
+    methods: {
+      handleChangePage: function (value) {
+        console.log(value)
+        this.changePage(value)
+      }
+    },
   }
 </script>
 
