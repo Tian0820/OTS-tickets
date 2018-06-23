@@ -9,6 +9,7 @@ const state = {
 const actions = {
 
   createOrder({commit}, {info, onSuccess, onError}) {
+    console.log('info', info)
     orderApi.createOrder(data => {
       if (data !== null && data !== undefined) {
         commit('saveCurrentOrder', data)

@@ -27,10 +27,11 @@
           :max="3">
           <el-checkbox
             v-for="(price, index) in prices"
-            :label="price + '元'"
+            :label="price"
             :key="index"
             @change="handleChange"
-            border></el-checkbox>
+            border>{{price}}元
+          </el-checkbox>
         </el-checkbox-group>
 
         <br/>
@@ -42,7 +43,7 @@
         <div class="chosen-price-wrapper">
           <div v-for="(price, index) in chosenPrices">
             <div class="chosen-price">
-              {{price}}
+              {{price}}元
               <el-input-number v-model="num[index]" @change="handleChange" :min="1" :max="10"
                                label="描述文字"></el-input-number>
 
@@ -51,6 +52,9 @@
             <br/>
           </div>
         </div>
+        <p class="show-info">总计：
+          <span :style="{ color: '#E9A038', fontSize: '20px', fontWeight: '400'}">{{totalPrice}}</span> 元
+        </p>
       </div>
 
       <button v-if="type === 'user'" @click="handleBuyTickets">立即购买</button>
@@ -73,7 +77,7 @@
   import DivHeader from '../Util/DivHeader.vue'
   import {Checkbox, CheckboxGroup, RadioGroup, Radio, InputNumber, Message} from 'element-ui'
   import {store, router} from '../../main'
-  import {mapActions, mapMutations} from 'vuex'
+  import {mapActions, mapMutations, mapState} from 'vuex'
   import ElRadio from "../../../node_modules/element-ui/packages/radio/src/radio.vue";
 
   export default {
@@ -98,17 +102,30 @@
 
       return {
         posterUrl: require('../../assets/img/' + name),
-        checkboxGroup: [prices[0] + '元'],
+        checkboxGroup: [prices[0]],
         prices: prices,
         num: [1, 1, 1]
       }
     },
     computed: {
+      ...mapState('auth', {
+        user: state => state.currentUser
+      }),
       chosenPrices: function () {
         return this.checkboxGroup
+      },
+      totalPrice: function () {
+        let total = 0
+        this.chosenPrices.forEach((p, index) => {
+          total += p * this.num[index]
+        })
+        return total
       }
     },
     methods: {
+      ...mapActions('order', [
+        'createOrder'
+      ]),
       ...mapMutations('showPlan', [
         'saveChosenArea'
       ]),
@@ -128,7 +145,33 @@
         }
       },
       handleBuyTickets() {
-        this.$modal.show('buy-tickets-modal')
+        let seatNum = 0
+        this.chosenPrices.forEach((c, index) => {
+          seatNum += this.num[index]
+        })
+        let seats = []
+        for (let i = 0; i < seatNum; i++) {
+          seats.push(0)
+        }
+
+        this.createOrder({
+          info: {
+            showId: this.currentShow.id,
+            userId: this.user.userId,
+            type: '分配',
+            state: '未付款',
+            price: this.totalPrice,
+            seats: seats.join(';')
+          },
+          onSuccess: (success) => {
+            Message.success(success)
+            this.$modal.show('pay-modal')
+          },
+          onError:
+            (error) => {
+              Message.error(error)
+            }
+        })
       }
     },
   }
