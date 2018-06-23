@@ -24,7 +24,7 @@ public class ShowPlanController {
             value = "/show-plan",
             method = RequestMethod.GET,
             produces = {"application/json; charset=UTF-8"})
-    public Page<ShowPlan> getCurrentShow(@RequestParam(value = "page") int page,
+    public Page<ShowPlanVO> getCurrentShow(@RequestParam(value = "page") int page,
                                          @RequestParam(value = "size") int size) {
         return showPlanService.getAllShowPlans(page, size);
     }
@@ -34,7 +34,7 @@ public class ShowPlanController {
             value = "/show-plan/{showPlanId}",
             method = RequestMethod.GET,
             produces = {"application/json; charset=UTF-8"})
-    public ShowPlanVO getShowPlanById(@PathVariable int showPlanId) {
+    public ShowPlan getShowPlanById(@PathVariable int showPlanId) {
         return showPlanService.getShowPlanById(showPlanId);
     }
 
