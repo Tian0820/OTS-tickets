@@ -1,17 +1,19 @@
 package OTS.tickets.OTSserver.service.impl;
 
 import OTS.tickets.OTSserver.bean.ShowPlanBean;
+import OTS.tickets.OTSserver.bean.ShowPlanVO;
 import OTS.tickets.OTSserver.model.ShowPlan;
 import OTS.tickets.OTSserver.repository.ShowPlanRepository;
 import OTS.tickets.OTSserver.service.ShowPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ShowPlanServiceImpl implements ShowPlanService {
@@ -24,11 +26,21 @@ public class ShowPlanServiceImpl implements ShowPlanService {
 //    }
 
     @Override
-    public Page<ShowPlan> getAllShowPlans(int page, int size) {
-        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
+    public Page<ShowPlanVO> getAllShowPlans(int page, int size) {
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id ");
         Page<ShowPlan> p = showPlanRepository.findAll(pageable);
 
-        return p;
+        List<ShowPlanVO> showPlanVOS = new ArrayList<>();
+
+        for (ShowPlan showPlan : p) {
+            Set<Double> set = new HashSet<>();
+            showPlan.getSeats().forEach(seat -> {
+                set.add(seat.getPrice());
+            });
+            showPlanVOS.add(new ShowPlanVO(showPlan, set));
+        }
+
+        return new PageImpl<>(showPlanVOS);
     }
 
     @Override

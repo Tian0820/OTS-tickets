@@ -30,6 +30,12 @@ public class OrderController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
+    public Order gerOrderById(@PathVariable("id") int id) {
+        return orderService.getOrderById(id);
+    }
+
+    @ResponseBody
     @RequestMapping(
             value = "/order/pay",
             method = RequestMethod.POST,

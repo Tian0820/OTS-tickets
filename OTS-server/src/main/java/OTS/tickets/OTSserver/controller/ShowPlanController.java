@@ -1,6 +1,7 @@
 package OTS.tickets.OTSserver.controller;
 
 import OTS.tickets.OTSserver.bean.ShowPlanBean;
+import OTS.tickets.OTSserver.bean.ShowPlanVO;
 import OTS.tickets.OTSserver.model.ShowPlan;
 import OTS.tickets.OTSserver.service.ShowPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ShowPlanController {
             value = "/show-plan/{showPlanId}",
             method = RequestMethod.GET,
             produces = {"application/json; charset=UTF-8"})
-    public ShowPlan getShowPlanById(@PathVariable int showPlanId) {
+    public ShowPlanVO getShowPlanById(@PathVariable int showPlanId) {
         return showPlanService.getShowPlanById(showPlanId);
     }
 

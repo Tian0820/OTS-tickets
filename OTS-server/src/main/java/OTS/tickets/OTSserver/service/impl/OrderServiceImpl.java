@@ -42,6 +42,11 @@ public class OrderServiceImpl implements OrderService {
     private DateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
+    public Order getOrderById(int orderId) {
+        return orderRepository.findOrderById(orderId);
+    }
+
+    @Override
     public Order createOrder(OrderCreateBean order) {
         ResultMessageBean result = new ResultMessageBean(true);
 

@@ -21,4 +21,6 @@ public interface OrderService {
 
     List<OrderStatisticsBean> getOrdersWithinWeek();
 
+    Order getOrderById(int orderId);
+
 }
