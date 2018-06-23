@@ -18,6 +18,7 @@ import VenuePlanPage from '@/pages/VenuePlanPage'
 import VenueSitePage from '@/pages/VenueSitePage'
 import ManagerHomePage from '@/pages/ManagerHomePage'
 import ManagerStatisticsPage from '@/pages/ManagerStatisticsPage'
+import PayPage from '@/pages/PayPage'
 
 Vue.use(Router)
 
@@ -112,6 +113,11 @@ export default new Router({
       path: '/manager/statistics',
       name: 'ManagerStatisticsPage',
       component: ManagerStatisticsPage
+    },
+    {
+      path: '/order/:orderId/pay',
+      name: 'PayPage',
+      component: PayPage
     }
   ]
 })

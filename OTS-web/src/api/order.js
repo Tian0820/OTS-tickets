@@ -15,6 +15,16 @@ export function createOrder(callback, info) {
     })
 }
 
+export function fetchOrder(callback, orderId) {
+  axios.get(`/order/${orderId}`)
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
 export function payOrder(callback, order) {
   axios.post('/order/pay',
     order,

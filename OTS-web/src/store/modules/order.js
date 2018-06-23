@@ -22,6 +22,14 @@ const actions = {
     }, info)
   },
 
+  fetchOrder({commit}, id) {
+    orderApi.fetchOrder(data => {
+      if (data !== null && data !== undefined) {
+        commit('saveCurrentOrder', data)
+      }
+    }, id)
+  },
+
   payOrder({commit, state}, {order, onSuccess, onError}) {
     console.log('pay-order', order)
     orderApi.payOrder(data => {

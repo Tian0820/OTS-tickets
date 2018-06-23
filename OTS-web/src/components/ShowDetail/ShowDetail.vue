@@ -78,7 +78,6 @@
   import {Checkbox, CheckboxGroup, RadioGroup, Radio, InputNumber, Message} from 'element-ui'
   import {store, router} from '../../main'
   import {mapActions, mapMutations, mapState} from 'vuex'
-  import ElRadio from "../../../node_modules/element-ui/packages/radio/src/radio.vue";
 
   export default {
     name: 'show-detail',
@@ -93,7 +92,6 @@
     },
     props: ['type', 'currentShow'],
     data() {
-      let name = 'poster.jpg'
       let prices = [380, 580, 780]
 //      let areas = this.currentShow.seats.length / 100
 //      for (let i = 0; i < areas; i++) {
@@ -101,7 +99,6 @@
 //      }
 
       return {
-        posterUrl: require('../../assets/img/' + name),
         checkboxGroup: [prices[0]],
         prices: prices,
         num: [1, 1, 1]
@@ -111,6 +108,15 @@
       ...mapState('auth', {
         user: state => state.currentUser
       }),
+      ...mapState('order', {
+        currentOrder: state => state.currentOrder
+      }),
+
+      posterUrl: function () {
+        let name = this.currentShow.id + '.jpeg'
+        return require('../../assets/img/' + name)
+      },
+
       chosenPrices: function () {
         return this.checkboxGroup
       },
@@ -165,7 +171,7 @@
           },
           onSuccess: (success) => {
             Message.success(success)
-            this.$modal.show('pay-modal')
+            router.push({name: 'PayPage', params: {orderId: this.currentOrder.id}})
           },
           onError:
             (error) => {
