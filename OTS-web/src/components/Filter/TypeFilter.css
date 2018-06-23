@@ -4,17 +4,19 @@
   font-size: 0; }
   .type-filter span {
     display: inline-block;
-    padding: 2px 6px;
+    padding: 4px 6px;
     margin: 0 5px;
     font-size: 14px;
+    font-weight: 400;
     color: #595959; }
   .type-filter .name {
     width: 120px;
-    font-weight: 400;
     color: #848484; }
-  .type-filter .active {
+  .type-filter .option {
+    border-radius: 2px;
+    cursor: pointer; }
+  .type-filter .option.active {
     color: white;
-    background-color: #e9a038;
-    border-radius: 3px; }
+    background-color: #e9a038; }
 
 /*# sourceMappingURL=TypeFilter.css.map */

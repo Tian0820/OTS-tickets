@@ -42,12 +42,12 @@ button {
     margin-top: 10px;
     font-size: 12px;
     font-weight: 400;
-    color: #ffdf5e; }
+    color: #ffcf53; }
   .modal-wrapper /deep/ .area-3-p {
     margin-top: 10px;
     font-size: 12px;
     font-weight: 400;
-    color: #bcd487; }
+    color: #add478; }
   .modal-wrapper .el-button {
     background: none; }
     .modal-wrapper .el-button i {
@@ -65,13 +65,13 @@ button {
   .modal-wrapper .area-1-box /deep/ .el-checkbox__input.is-checked .el-checkbox__inner {
     background-color: #ffa171; }
   .modal-wrapper .area-2-box /deep/ .el-checkbox__inner {
-    border-color: #ffdf5e; }
+    border-color: #ffcf53; }
   .modal-wrapper .area-2-box /deep/ .el-checkbox__input.is-checked .el-checkbox__inner {
-    background-color: #ffdf5e; }
+    background-color: #ffcf53; }
   .modal-wrapper .area-3-box /deep/ .el-checkbox__inner {
-    border-color: #bcd487; }
+    border-color: #add478; }
   .modal-wrapper .area-3-box /deep/ .el-checkbox__input.is-checked .el-checkbox__inner {
-    background-color: #bcd487; }
+    background-color: #add478; }
   .modal-wrapper .chosen-seat {
     display: inline-block;
     margin-right: 15px;
@@ -84,15 +84,15 @@ button {
     .modal-wrapper .chosen-seat .seat-1 {
       background-color: #ffa171; }
     .modal-wrapper .chosen-seat .seat-2 {
-      background-color: #ffdf5e; }
+      background-color: #ffcf53; }
     .modal-wrapper .chosen-seat .seat-3 {
-      background-color: #bcd487; }
+      background-color: #add478; }
   .modal-wrapper .seat-1 {
     color: #ffa171; }
   .modal-wrapper .seat-2 {
-    color: #ffdf5e; }
+    color: #ffcf53; }
   .modal-wrapper .seat-3 {
-    color: #bcd487; }
+    color: #add478; }
   .modal-wrapper .confirm-button-wrapper {
     display: inline-block;
     float: right; }

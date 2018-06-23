@@ -73,13 +73,14 @@
       Message
     },
     data() {
-      let seats = []
-      for (let i = (this.chosenArea - 1) * 100; i < (this.chosenArea - 1) * 100 + 100; i++) {
-        seats.push(this.currentShow.seats[i]);
-      }
+//      let seats = []
+//      for (let i = (this.chosenArea - 1) * 100; i < (this.chosenArea - 1) * 100 + 100; i++) {
+//        seats.push(this.currentShow.seats[i]);
+//      }
+      console.log(this.currentShow.seats)
       return {
         chosenSeats: [],
-        seats: seats
+        seats: this.currentShow.seats
       }
     },
     computed: {

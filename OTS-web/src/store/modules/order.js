@@ -9,6 +9,7 @@ const state = {
 const actions = {
 
   createOrder({commit}, {info, onSuccess, onError}) {
+    console.log('info', info)
     orderApi.createOrder(data => {
       if (data !== null && data !== undefined) {
         commit('saveCurrentOrder', data)
@@ -19,6 +20,14 @@ const actions = {
         onError('下单失败！')
       }
     }, info)
+  },
+
+  fetchOrder({commit}, id) {
+    orderApi.fetchOrder(data => {
+      if (data !== null && data !== undefined) {
+        commit('saveCurrentOrder', data)
+      }
+    }, id)
   },
 
   payOrder({commit, state}, {order, onSuccess, onError}) {

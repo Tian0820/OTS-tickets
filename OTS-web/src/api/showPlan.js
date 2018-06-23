@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export function fetchAllShowPlans(callback) {
-  axios.get('/show-plan')
+export function fetchAllShowPlans(callback, size, page) {
+  axios.get(`/show-plan?size=${size}&page=${page-1}`)
     .then(function (response) {
       console.log('show plans', response.data)
       callback(response.data)

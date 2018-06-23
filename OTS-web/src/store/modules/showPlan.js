@@ -1,21 +1,23 @@
 import * as showApi from '../../api/showPlan'
 
 const state = {
-    allShowPlans: null,
-    currentShow: null,
-    chosenArea: 1,
-    chosenSeats: [],
-  }
-;
+  allShowPlans: null,
+  currentShow: null,
+  chosenArea: 1,
+  chosenSeats: [],
+  page: null,
+  size: 8,
+  totalPages: null,
+};
 
 const actions = {
 
-  fetchAllShowPlans({commit}) {
+  fetchAllShowPlans({commit, state}, page) {
     showApi.fetchAllShowPlans(data => {
       if (data !== null) {
         commit('saveAllShowPlans', data)
       }
-    })
+    }, 8, page)
   },
 
   fetchShowPlanById({commit}, id) {
@@ -31,10 +33,16 @@ const actions = {
 };
 
 const mutations = {
-  'saveAllShowPlans'(state, allShowPlans) {
-    state.allShowPlans = allShowPlans;
+  'saveAllShowPlans'(state, data) {
+    state.allShowPlans = data.content
+    state.page = data.number + 1
+    state.totalPages = data.totalPages
   },
   'saveCurrentShow'(state, currentShow) {
+    currentShow.seats.sort(function (a, b) {
+      return a.number - b.number
+    })
+
     state.currentShow = currentShow
   },
   'saveChosenArea'(state, chosenArea) {
