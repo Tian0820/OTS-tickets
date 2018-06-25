@@ -5,6 +5,7 @@
 
       <div class="container">
         <show-search v-if="showPlans" class="show-search"
+                     :isSelect="true"
                      :inputValue="keyword"
                      :onInputChange="handleSearchKeywordChange"
                      :selectValue="city"
@@ -16,8 +17,10 @@
         <show-list v-if="showPlans" :showPlans="typeShowPlans"></show-list>
 
         <div-header :header="'最近演出'"></div-header>
-        <show-list v-if="showPlans" :showPlans="showPlans" :pageInfo="pageInfo"
-                   :changePage="fetchAllShowPlans"></show-list>
+        <show-list v-if="showPlans" :showPlans="showPlans"
+                   :pageInfo="pageInfo"
+                   :changePage="fetchAllShowPlans"
+        ></show-list>
         <show-list v-else-if="venueShowPlan" :showPlans="venueShowPlan" :pageInfo="pageInfo"></show-list>
 
       </div>
@@ -35,7 +38,7 @@
   import ShowSearch from '../components/Search/ShowSearch.vue'
   import TypeTabs from '../components/Filter/TypeTabs.vue'
   import {Message} from 'element-ui'
-  import {store} from '../main'
+  import {store, router} from '../main'
   import {mapActions, mapMutations, mapState} from 'vuex'
   import {SHOW_TYPE} from '../constant'
 
@@ -90,13 +93,13 @@
         this.fetchTypeShowPlans(tab)
       },
       handleSearchKeywordChange (keyword) {
-          this.saveSearchKeyword(keyword)
+        this.saveSearchKeyword(keyword)
       },
       handleCitySelectChange (city) {
         this.saveSearchCity(city)
       },
       handleSearchClick () {
-          console.log(123)
+        router.push({name: 'ShowSearchPage'})
       }
     },
     beforeRouteEnter(to, from, next) {

@@ -2,7 +2,7 @@
   <div class="show-search">
     <el-input placeholder="请输入演出" :value="inputValue" @change="handleValueChange">
 
-      <el-select :value="selectValue" slot="prepend" placeholder="地点" class="select"
+      <el-select v-if="isSelect" :value="selectValue" slot="prepend" placeholder="地点" class="select"
                  @change="handleSelectChange">
         <el-option v-for="city in cities" :label="city" :value="city"></el-option>
       </el-select>
@@ -30,7 +30,7 @@
         cities: CITY
       }
     },
-    props: ['inputValue', 'onInputChange', 'selectValue', 'onSelectChange', 'onSearchClick'],
+    props: ['isSelect', 'inputValue', 'onInputChange', 'selectValue', 'onSelectChange', 'onSearchClick'],
     methods: {
       handleValueChange (value) {
         this.onInputChange(value)

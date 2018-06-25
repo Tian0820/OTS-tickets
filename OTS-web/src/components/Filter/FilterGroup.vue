@@ -13,20 +13,10 @@
     components: {
       TypeFilter
     },
+    props: ['filters'],
     data () {
       return {
-        filters: [
-          {
-            name: '地点',
-            options: ['全部', '上海', '南京'],
-            model: '全部'
-          },
-          {
-            name: '类型',
-            options: ['全部', '演唱会', '音乐会', '体育比赛', '戏曲', '戏剧', '舞蹈', '亲子剧'],
-            model: '全部'
-          }
-        ]
+
       }
     },
     methods: {}

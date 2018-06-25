@@ -33,5 +33,9 @@ export const SHOW_TYPE = [
 ]
 
 export const CITY = [
-  '全部', '上海', '南京'
+  '全部', '北京', '上海', '南京', '成都'
+]
+
+export const TYPE = [
+  '全部', '演唱会', '音乐会', '体育比赛', '话剧', '戏曲', '舞蹈', '亲子剧'
 ]
