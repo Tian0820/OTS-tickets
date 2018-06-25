@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -29,53 +30,70 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public Page<ShowPlan> search(String keyword, String type, String city, String starttime, String endtime, int page, int size) {
         Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "time");
-        Page<ShowPlan> p = showPlanRepository.findAll(new Specification<ShowPlan>() {
-            @Override
-            public Predicate toPredicate(Root<ShowPlan> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                List<Predicate> list = new ArrayList<Predicate>();
-                if (null != type && !"".equals(type)) {
-                    list.add(criteriaBuilder.equal(root.get("type").as(String.class), type));
-                }
+        List<ShowPlan> showPlans = showPlanRepository.findAll();
+        Iterator<ShowPlan> iterator = showPlans.iterator();
+        while (iterator.hasNext()) {
+            ShowPlan showPlan = iterator.next();
 
-                if (null != starttime && null != endtime && !"".equals(starttime) && !"".equals(endtime)) {
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    try {
-                        Date start = dateFormat.parse(starttime);
-                        Date end = dateFormat.parse(endtime);
+            if (null != city && !"".equals(city) && !showPlan.getVenue().getCity().equals(city)) {
+                iterator.remove();
+                continue;
+            }
 
-                        list.add(criteriaBuilder.between(root.get("time").as(Date.class), start, end));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+            if (null != keyword && !"".equals(keyword) && !showPlan.getName().contains(keyword)) {
+                iterator.remove();
+                continue;
+            }
+            if (null != starttime && null != endtime && !"".equals(starttime) && !"".equals(endtime)) {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date start = dateFormat.parse(starttime);
+                    Date end = dateFormat.parse(endtime);
+                    Date date = dateFormat.parse(showPlan.getTime());
+
+                    if (start.getTime() > date.getTime() && end.getTime() < date.getTime()) {
+                        iterator.remove();
+                        continue;
                     }
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-
-                Predicate[] p = new Predicate[list.size()];
-                return criteriaBuilder.and(list.toArray(p));
-            }
-        }, pageable);
-
-        if (null != city && !"".equals(city)) {
-            List<ShowPlan> showPlans = new ArrayList<>();
-
-            for (ShowPlan showPlan : p) {
-                if (showPlan.getVenue().getCity().equals(city))
-                    showPlans.add(showPlan);
             }
 
-            p = new PageImpl<>(showPlans, pageable, p.getTotalElements());
+            if (null != type && !"".equals(type) && !type.equals(showPlan.getType())) {
+                iterator.remove();
+                continue;
+            }
         }
 
-        if (null != keyword && !"".equals(keyword)) {
-            List<ShowPlan> showPlans = new ArrayList<>();
 
-            for (ShowPlan showPlan : p) {
-                if (showPlan.getName().contains(keyword))
-                    showPlans.add(showPlan);
-            }
+//        Page<ShowPlan> p = showPlanRepository.findByCityAndKeyword(city, keyword, new Specification<ShowPlan>() {
+//            @Override
+//            public Predicate toPredicate(Root<ShowPlan> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+//                List<Predicate> list = new ArrayList<Predicate>();
+//                if (null != type && !"".equals(type)) {
+//                    list.add(criteriaBuilder.equal(root.get("type").as(String.class), type));
+//                }
+//
+//                if (null != starttime && null != endtime && !"".equals(starttime) && !"".equals(endtime)) {
+//                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//                    try {
+//                        Date start = dateFormat.parse(starttime);
+//                        Date end = dateFormat.parse(endtime);
+//
+//                        list.add(criteriaBuilder.between(root.get("time").as(Date.class), start, end));
+//                    } catch (ParseException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                Predicate[] p = new Predicate[list.size()];
+//
+//                return criteriaBuilder.and(list.toArray(p));
+//            }
+//        }, pageable);
 
-            p = new PageImpl<>(showPlans, pageable, p.getTotalElements());
-        }
 
-        return p;
+        return new PageImpl<>(showPlans, pageable, showPlans.size());
     }
 }
