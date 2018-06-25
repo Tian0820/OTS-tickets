@@ -62,7 +62,7 @@ public class SearchServiceImpl implements SearchService {
                     showPlans.add(showPlan);
             }
 
-            p = new PageImpl<>(showPlans);
+            p = new PageImpl<>(showPlans, pageable, p.getTotalPages());
         }
 
         if (null != keyword && !"".equals(keyword)) {
@@ -73,7 +73,7 @@ public class SearchServiceImpl implements SearchService {
                     showPlans.add(showPlan);
             }
 
-            p = new PageImpl<>(showPlans);
+            p = new PageImpl<>(showPlans, pageable, p.getTotalPages());
         }
 
         return p;

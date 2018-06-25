@@ -21,11 +21,11 @@ public class SearchController {
             method = RequestMethod.GET,
             produces = {"application/json; charset=UTF-8"})
     public Page<ShowPlan> search(
-            @RequestParam(value = "keyword") String keyword,
-            @RequestParam(value = "type") String type,
-            @RequestParam(value = "city") String city,
-            @RequestParam(value = "starttime") String starttime,
-            @RequestParam(value = "endtime") String endtime,
+            String keyword,
+            String type,
+            String city,
+            String starttime,
+            String endtime,
             @RequestParam(value = "page") int page,
             @RequestParam(value = "size") int size) {
         return searchService.search(keyword, type, city, starttime, endtime, page, size);
