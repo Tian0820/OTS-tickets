@@ -4,15 +4,28 @@
       <banner></banner>
 
       <div class="container">
-        <show-search v-if="showPlans" class="show-search"></show-search>
+        <show-search v-if="showPlans" class="show-search"
+                     :isSelect="true"
+                     :inputValue="keyword"
+                     :onInputChange="handleSearchKeywordChange"
+                     :selectValue="city"
+                     :onSelectChange="handleCitySelectChange"
+                     :onSearchClick="handleSearchClick"
+        ></show-search>
 
         <type-tabs v-if="showPlans" :types="tabTypes" :value="tabValue" :tabClick="handleTypeTabClick"></type-tabs>
-        <show-list v-if="showPlans" :showPlans="typeShowPlans"></show-list>
+        <show-list v-if="typeShowPlans" :showPlans="typeShowPlans"></show-list>
 
-        <div-header :header="'最近演出'"></div-header>
-        <show-list v-if="showPlans" :showPlans="showPlans" :pageInfo="pageInfo" :changePage="fetchAllShowPlans"></show-list>
-        <show-list v-else-if="venueShowPlan" :showPlans="venueShowPlan" :pageInfo="pageInfo"></show-list>
-
+        <div v-if="showPlans">
+          <div-header :header="'最近演出'"></div-header>
+          <show-list :showPlans="showPlans"
+                     :pageInfo="pageInfo"
+                     :changePage="fetchAllShowPlans"
+          ></show-list>
+        </div>
+        <div v-else-if="venueShowPlan">
+          <show-list :showPlans="venueShowPlan" :pageInfo="pageInfo"></show-list>
+        </div>
       </div>
 
     </layout>
@@ -28,8 +41,8 @@
   import ShowSearch from '../components/Search/ShowSearch.vue'
   import TypeTabs from '../components/Filter/TypeTabs.vue'
   import {Message} from 'element-ui'
-  import {store} from '../main'
-  import {mapActions, mapState} from 'vuex'
+  import {store, router} from '../main'
+  import {mapActions, mapMutations, mapState} from 'vuex'
   import {SHOW_TYPE} from '../constant'
 
   export default {
@@ -46,18 +59,20 @@
     data() {
       return {
         tabValue: '演唱会',
-        tabTypes: SHOW_TYPE
+        tabTypes: SHOW_TYPE,
       }
     },
     computed: {
       ...mapState('showPlan', {
+        keyword: state => state.search.keyword,
+        city: state => state.search.city,
         showPlans: state => state.allShowPlans,
         typeShowPlans: state => state.typeShowPlans,
         pageInfo: state => {
-            return {
-                page:state.page,
-                totalPages:state.totalPages
-            }
+          return {
+            page: state.page,
+            totalPages: state.totalPages
+          }
         }
       }),
       ...mapState('venue', {
@@ -72,9 +87,24 @@
         'fetchAllShowPlans',
         'fetchTypeShowPlans'
       ]),
-      handleTypeTabClick: function (tab) {
+      ...mapMutations('showPlan', [
+        'saveSearchKeyword',
+        'saveSearchCity',
+        'saveSearchType'
+      ]),
+      handleTypeTabClick (tab) {
         this.tabValue = tab
         this.fetchTypeShowPlans(tab)
+      },
+      handleSearchKeywordChange (keyword) {
+        this.saveSearchKeyword(keyword)
+      },
+      handleCitySelectChange (city) {
+        this.saveSearchCity(city)
+      },
+      handleSearchClick () {
+        this.saveSearchType('全部')
+        router.push({name: 'ShowSearchPage'})
       }
     },
     beforeRouteEnter(to, from, next) {

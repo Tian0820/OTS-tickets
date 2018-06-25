@@ -29,6 +29,7 @@
       },
       handleClick: function(value) {
         this.filter.model = value
+        this.filter.onChange(value)
       }
     }
   }

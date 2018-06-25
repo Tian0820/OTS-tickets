@@ -2,11 +2,19 @@
   <div class="body-wrapper">
     <layout>
       <div class="container">
-        <show-search v-if="showPlans" class="show-search"></show-search>
+        <show-search class="show-search"
+                     :isSelect="false"
+                     :inputValue="keyword"
+                     :onInputChange="handleSearchKeywordChange"
+                     :onSearchClick="handleSearchClick"
+        ></show-search>
 
-        <filter-group class="filter"></filter-group>
+        <filter-group class="filter" :filters="filters"></filter-group>
 
-        <show-list :showPlans="showPlans"></show-list>
+        <show-list :showPlans="showPlans"
+                   :pageInfo="pageInfo"
+                   :changePage="fetchSearchShowPlans"
+        ></show-list>
       </div>
     </layout>
   </div>
@@ -19,7 +27,8 @@
   import ShowSearch from '../components/Search/ShowSearch.vue'
   import FilterGroup from '../components/Filter/FilterGroup.vue'
   import {router, store} from '../main'
-  import {mapState} from 'vuex'
+  import {mapActions, mapMutations, mapState} from 'vuex'
+  import {CITY, TYPE} from '../constant'
 
   export default {
     name: 'show-search-page',
@@ -30,14 +39,69 @@
       ShowList
     },
     data() {
-      return {}
+      return {
+
+      }
     },
     computed: {
       ...mapState('showPlan', {
-        showPlans: state => state.allShowPlans
+        keyword: state => state.search.keyword,
+        city: state => state.search.city,
+        type: state => state.search.type,
+        showPlans: state => state.search.showPlans,
+        pageInfo: state => {
+          return {
+            page: state.search.page,
+            totalPages: state.search.totalPages
+          }
+        }
       }),
+      filters () {
+        return [
+          {
+            name: '地点',
+            options: CITY,
+            model: this.city,
+            onChange: (value) => {
+              this.saveSearchCity(value)
+              this.fetchSearchShowPlans(1)
+            }
+          },
+          {
+            name: '类型',
+            options: TYPE,
+            model: this.type,
+            onChange: (value) => {
+              this.saveSearchType(value)
+              this.fetchSearchShowPlans(1)
+            }
+          }
+        ]
+      }
     },
-    methods: {},
+    methods: {
+      ...mapActions('showPlan', [
+        'fetchSearchShowPlans'
+      ]),
+      ...mapMutations('showPlan', [
+        'saveSearchKeyword',
+        'saveSearchCity',
+        'saveSearchType'
+      ]),
+      handleSearchKeywordChange (keyword) {
+        this.saveSearchKeyword(keyword)
+      },
+      handleCitySelectChange (city) {
+        this.saveSearchCity(city)
+      },
+      handleSearchClick () {
+//        router.push({name: 'ShowSearchPage'})
+        this.fetchSearchShowPlans(1)
+      },
+      handlePageChange () {
+
+      }
+    },
     beforeRouteEnter(to, from, next) {
       store.dispatch('auth/refreshUser', {
         onSuccess: (success) => {
@@ -45,7 +109,7 @@
         onError: (error) => {
         }
       })
-      store.dispatch('showPlan/fetchAllShowPlans')
+      store.dispatch('showPlan/fetchSearchShowPlans', 1)
       next(true)
     }
   }
