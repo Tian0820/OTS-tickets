@@ -25,8 +25,6 @@ button {
   width: 100%; }
   .list-wrapper /deep/ .el-col {
     margin-bottom: 40px; }
-    .list-wrapper /deep/ .el-col:last-child {
-      margin-bottom: 0; }
   .list-wrapper .pagination {
     width: 100%;
     text-align: center; }
