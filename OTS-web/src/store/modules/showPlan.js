@@ -9,6 +9,16 @@ const state = {
   page: null,
   size: 8,
   totalPages: null,
+  search: {
+    keyword: '',
+    city: '全部',
+    // starttime
+    type: null,
+    showPlans: null,
+    page: null,
+    size: 8,
+    totalPages: null,
+  }
 };
 
 const actions = {
@@ -62,6 +72,12 @@ const mutations = {
   },
   'saveChosenSeats'(state, chosenSeats) {
     state.chosenSeats = chosenSeats
+  },
+  'saveSearchKeyword'(state, keyword) {
+    state.search.keyword = keyword
+  },
+  'saveSearchCity'(state, city) {
+    state.search.city = city
   }
 };
 

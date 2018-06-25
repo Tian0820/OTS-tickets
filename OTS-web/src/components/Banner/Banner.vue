@@ -1,7 +1,7 @@
 <template>
   <div class="banner-wrapper">
 
-    <el-carousel trigger="click" :autoplay="false">
+    <el-carousel trigger="click" :autoplay="true">
       <el-carousel-item v-for="item in 4" :key="item">
 
         <!--<div class="banner">-->

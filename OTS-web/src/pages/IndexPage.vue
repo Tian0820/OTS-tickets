@@ -4,13 +4,20 @@
       <banner></banner>
 
       <div class="container">
-        <show-search v-if="showPlans" class="show-search"></show-search>
+        <show-search v-if="showPlans" class="show-search"
+                     :inputValue="keyword"
+                     :onInputChange="handleSearchKeywordChange"
+                     :selectValue="city"
+                     :onSelectChange="handleCitySelectChange"
+                     :onSearchClick="handleSearchClick"
+        ></show-search>
 
         <type-tabs v-if="showPlans" :types="tabTypes" :value="tabValue" :tabClick="handleTypeTabClick"></type-tabs>
         <show-list v-if="showPlans" :showPlans="typeShowPlans"></show-list>
 
         <div-header :header="'最近演出'"></div-header>
-        <show-list v-if="showPlans" :showPlans="showPlans" :pageInfo="pageInfo" :changePage="fetchAllShowPlans"></show-list>
+        <show-list v-if="showPlans" :showPlans="showPlans" :pageInfo="pageInfo"
+                   :changePage="fetchAllShowPlans"></show-list>
         <show-list v-else-if="venueShowPlan" :showPlans="venueShowPlan" :pageInfo="pageInfo"></show-list>
 
       </div>
@@ -29,7 +36,7 @@
   import TypeTabs from '../components/Filter/TypeTabs.vue'
   import {Message} from 'element-ui'
   import {store} from '../main'
-  import {mapActions, mapState} from 'vuex'
+  import {mapActions, mapMutations, mapState} from 'vuex'
   import {SHOW_TYPE} from '../constant'
 
   export default {
@@ -46,18 +53,20 @@
     data() {
       return {
         tabValue: '演唱会',
-        tabTypes: SHOW_TYPE
+        tabTypes: SHOW_TYPE,
       }
     },
     computed: {
       ...mapState('showPlan', {
+        keyword: state => state.search.keyword,
+        city: state => state.search.city,
         showPlans: state => state.allShowPlans,
         typeShowPlans: state => state.typeShowPlans,
         pageInfo: state => {
-            return {
-                page:state.page,
-                totalPages:state.totalPages
-            }
+          return {
+            page: state.page,
+            totalPages: state.totalPages
+          }
         }
       }),
       ...mapState('venue', {
@@ -72,9 +81,22 @@
         'fetchAllShowPlans',
         'fetchTypeShowPlans'
       ]),
-      handleTypeTabClick: function (tab) {
+      ...mapMutations('showPlan', [
+        'saveSearchKeyword',
+        'saveSearchCity'
+      ]),
+      handleTypeTabClick (tab) {
         this.tabValue = tab
         this.fetchTypeShowPlans(tab)
+      },
+      handleSearchKeywordChange (keyword) {
+          this.saveSearchKeyword(keyword)
+      },
+      handleCitySelectChange (city) {
+        this.saveSearchCity(city)
+      },
+      handleSearchClick () {
+          console.log(123)
       }
     },
     beforeRouteEnter(to, from, next) {

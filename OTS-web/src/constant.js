@@ -19,7 +19,7 @@ export const SHOW_TYPE = [
     icon: 'drama'
   },
   {
-    name: "戏剧",
+    name: "戏曲",
     icon: 'theater'
   },
   {
@@ -30,4 +30,8 @@ export const SHOW_TYPE = [
     name: "亲子剧",
     icon: 'paternity'
   },
+]
+
+export const CITY = [
+  '全部', '上海', '南京'
 ]
