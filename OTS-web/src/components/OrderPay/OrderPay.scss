@@ -40,10 +40,24 @@
   .info-wrapper {
     display: inline-block;
     margin-left: 3%;
-    width: 70%;
+    width: 50%;
     height: 100%;
     min-height: 320px;
     vertical-align: top;
+  }
+
+  .qr-code-wrapper {
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+    min-height: 320px;
+    vertical-align: top;
+    text-align: center;
+
+    p {
+      color: $grey;
+      font-weight: 400;
+    }
   }
 
   .show-title {
