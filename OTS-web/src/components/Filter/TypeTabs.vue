@@ -4,7 +4,7 @@
     <el-tab-pane v-for="type in types" :name="type.name">
       <span slot="label"><i :class="['icon', 'iconfont', `icon-${type.icon}`]"></i> {{type.name}}</span>
     </el-tab-pane>
-    
+
   </el-tabs>
 </template>
 

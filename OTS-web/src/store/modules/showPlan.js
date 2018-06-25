@@ -9,6 +9,16 @@ const state = {
   page: null,
   size: 8,
   totalPages: null,
+  search: {
+    keyword: '',
+    city: '全部',
+    // starttime
+    type: '全部',
+    showPlans: null,
+    page: null,
+    size: 8,
+    totalPages: null,
+  }
 };
 
 const actions = {
@@ -38,7 +48,19 @@ const actions = {
         commit('saveCurrentShow', data)
       }
     }, id)
-  }
+  },
+
+  fetchSearchShowPlans({commit, state}, page) {
+    let keyword = state.search.keyword
+    let city = state.search.city === '全部' ? '' : state.search.city
+    let type = state.search.type === '全部' ? '' : state.search.type
+    showApi.fetchSearchShowPlans(data => {
+      if (data !== null) {
+        commit('saveSearchShowPlans', data)
+      }
+    }, keyword, city, type, 8, page)
+  },
+
 };
 
 const mutations = {
@@ -62,7 +84,21 @@ const mutations = {
   },
   'saveChosenSeats'(state, chosenSeats) {
     state.chosenSeats = chosenSeats
-  }
+  },
+  'saveSearchKeyword'(state, keyword) {
+    state.search.keyword = keyword
+  },
+  'saveSearchCity'(state, city) {
+    state.search.city = city
+  },
+  'saveSearchType'(state, type) {
+    state.search.type = type
+  },
+  'saveSearchShowPlans'(state, data) {
+    state.search.showPlans = data.content
+    state.search.page = data.number + 1
+    state.search.totalPages = data.totalPages
+  },
 };
 
 export default {

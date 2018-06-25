@@ -1,7 +1,7 @@
 <template>
   <div class="footer-wrapper">
     <div class="icon-wrapper">
-      <img src="../../assets/img/logo.png" width="40"/>
+      <img src="../../assets/img/logo.png" width="30"/>
     </div>
     <div class="name-wrapper">
       <span>OTS</span>
