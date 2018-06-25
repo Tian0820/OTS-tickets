@@ -10,17 +10,22 @@
         <span class="time">15:00</span>
       </div>
 
-      <div class="poster-wrapper" :style="{ backgroundImage: 'url(' + posterUrl + ')'}">
+      <div class="order-wrapper">
+        <div class="poster-wrapper" :style="{ backgroundImage: 'url(' + posterUrl + ')'}">
+        </div>
+
+        <div class="info-wrapper">
+
+          <p class="show-title">{{currentOrder.showPlan.name}}</p>
+          <p class="show-info">类型：{{currentOrder.showPlan.type}}</p>
+          <p class="show-info">时间：{{currentOrder.showPlan.time}}</p>
+          <p class="show-info">艺人：{{currentOrder.showPlan.star}}</p>
+          <p class="show-info">座位：{{currentOrder.seats.length === 0 ? '待分配': currentOrder.seats.join(', ')}}</p>
+
+          <p class="show-info">票价：{{currentOrder.price}} 元</p>
+        </div>
+
       </div>
-
-      <div class="info-wrapper">
-
-        <p class="show-title">{{currentOrder.showPlan.name}}</p>
-        <p class="show-info">类型：{{currentOrder.showPlan.type}}</p>
-        <p class="show-info">时间：{{currentOrder.showPlan.time}}</p>
-        <p class="show-info">艺人：{{currentOrder.showPlan.star}}</p>
-      </div>
-
     </div>
   </div>
 
