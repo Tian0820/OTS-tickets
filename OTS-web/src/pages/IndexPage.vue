@@ -6,7 +6,7 @@
       <div class="container">
         <show-search v-if="showPlans" class="show-search"></show-search>
 
-        <type-tabs v-if="showPlans"></type-tabs>
+        <type-tabs v-if="showPlans" :types="tabTypes" :value="tabValue" :tabClick="handleTypeTabClick"></type-tabs>
         <show-list v-if="showPlans" :showPlans="typeShowPlans"></show-list>
 
         <div-header :header="'最近演出'"></div-header>
@@ -30,6 +30,7 @@
   import {Message} from 'element-ui'
   import {store} from '../main'
   import {mapActions, mapState} from 'vuex'
+  import {SHOW_TYPE} from '../constant'
 
   export default {
     name: 'index-page',
@@ -43,12 +44,15 @@
       Message,
     },
     data() {
-      return {}
+      return {
+        tabValue: '演唱会',
+        tabTypes: SHOW_TYPE
+      }
     },
     computed: {
       ...mapState('showPlan', {
         showPlans: state => state.allShowPlans,
-        typeShowPlans: state => state.allShowPlans.slice(0, 4),
+        typeShowPlans: state => state.typeShowPlans,
         pageInfo: state => {
             return {
                 page:state.page,
@@ -65,13 +69,19 @@
         'refreshUser'
       ]),
       ...mapActions('showPlan', [
-        'fetchAllShowPlans'
-      ])
+        'fetchAllShowPlans',
+        'fetchTypeShowPlans'
+      ]),
+      handleTypeTabClick: function (tab) {
+        this.tabValue = tab
+        this.fetchTypeShowPlans(tab)
+      }
     },
     beforeRouteEnter(to, from, next) {
       store.dispatch('auth/refreshUser', {
         onSuccess: (success) => {
           store.dispatch('showPlan/fetchAllShowPlans', 1)
+          store.dispatch('showPlan/fetchTypeShowPlans', SHOW_TYPE[0].name)
         },
         onError: (error) => {
 //          Message.error('user not login')
@@ -87,6 +97,7 @@
                 },
                 onError: (error) => {
                   store.dispatch('showPlan/fetchAllShowPlans', 1)
+                  store.dispatch('showPlan/fetchTypeShowPlans', SHOW_TYPE[0].name)
 //              Message.error('venue not login')
                 }
               })

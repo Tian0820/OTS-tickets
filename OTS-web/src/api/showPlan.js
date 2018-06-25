@@ -11,6 +11,17 @@ export function fetchAllShowPlans(callback, size, page) {
     })
 }
 
+export function fetchTypeShowPlans(callback, type, size, page) {
+  axios.get(`/search?type=${type}&size=${size}&page=${page-1}`)
+    .then(function (response) {
+      console.log('show plans', response.data)
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
 export function fetchShowPlanById(callback, id) {
   axios.get(`/show-plan/${id}`)
     .then(function (response) {

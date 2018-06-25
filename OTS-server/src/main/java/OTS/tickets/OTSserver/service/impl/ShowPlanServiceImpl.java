@@ -27,7 +27,7 @@ public class ShowPlanServiceImpl implements ShowPlanService {
 
     @Override
     public Page<ShowPlanVO> getAllShowPlans(int page, int size) {
-        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "time");
         Page<ShowPlan> p = showPlanRepository.findAll(pageable);
 
         List<ShowPlanVO> showPlanVOS = new ArrayList<>();
