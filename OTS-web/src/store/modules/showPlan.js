@@ -13,7 +13,7 @@ const state = {
     keyword: '',
     city: '全部',
     // starttime
-    type: '',
+    type: '全部',
     showPlans: null,
     page: null,
     size: 8,
@@ -60,6 +60,7 @@ const actions = {
       }
     }, keyword, city, type, 8, page)
   },
+
 };
 
 const mutations = {

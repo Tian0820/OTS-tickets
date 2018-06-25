@@ -40,26 +40,7 @@
     },
     data() {
       return {
-        filters: [
-          {
-            name: '地点',
-            options: CITY,
-            model: '全部',
-            onChange: (value) => {
-              this.saveSearchCity(value)
-              this.fetchSearchShowPlans(1)
-            }
-          },
-          {
-            name: '类型',
-            options: TYPE,
-            model: '全部',
-            onChange: (value) => {
-              this.saveSearchType(value)
-              this.fetchSearchShowPlans(1)
-            }
-          }
-        ]
+
       }
     },
     computed: {
@@ -75,6 +56,28 @@
           }
         }
       }),
+      filters () {
+        return [
+          {
+            name: '地点',
+            options: CITY,
+            model: this.city,
+            onChange: (value) => {
+              this.saveSearchCity(value)
+              this.fetchSearchShowPlans(1)
+            }
+          },
+          {
+            name: '类型',
+            options: TYPE,
+            model: this.type,
+            onChange: (value) => {
+              this.saveSearchType(value)
+              this.fetchSearchShowPlans(1)
+            }
+          }
+        ]
+      }
     },
     methods: {
       ...mapActions('showPlan', [
@@ -93,6 +96,7 @@
       },
       handleSearchClick () {
 //        router.push({name: 'ShowSearchPage'})
+        this.fetchSearchShowPlans(1)
       },
       handlePageChange () {
 

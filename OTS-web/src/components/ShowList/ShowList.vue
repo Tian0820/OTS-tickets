@@ -9,7 +9,11 @@
       </el-col>
     </el-row>
 
-    <div class="pagination">
+    <div v-if="showPlans.length === 0" class="blank">
+      <p>抱歉，没有找到您需要的演出！</p>
+    </div>
+
+    <div v-if="showPlans.length > 0" class="pagination">
       <el-pagination
         v-if="pageInfo"
         background

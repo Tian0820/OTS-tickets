@@ -14,15 +14,18 @@
         ></show-search>
 
         <type-tabs v-if="showPlans" :types="tabTypes" :value="tabValue" :tabClick="handleTypeTabClick"></type-tabs>
-        <show-list v-if="showPlans" :showPlans="typeShowPlans"></show-list>
+        <show-list v-if="typeShowPlans" :showPlans="typeShowPlans"></show-list>
 
-        <div-header :header="'最近演出'"></div-header>
-        <show-list v-if="showPlans" :showPlans="showPlans"
-                   :pageInfo="pageInfo"
-                   :changePage="fetchAllShowPlans"
-        ></show-list>
-        <show-list v-else-if="venueShowPlan" :showPlans="venueShowPlan" :pageInfo="pageInfo"></show-list>
-
+        <div v-if="showPlans">
+          <div-header :header="'最近演出'"></div-header>
+          <show-list :showPlans="showPlans"
+                     :pageInfo="pageInfo"
+                     :changePage="fetchAllShowPlans"
+          ></show-list>
+        </div>
+        <div v-else-if="venueShowPlan">
+          <show-list :showPlans="venueShowPlan" :pageInfo="pageInfo"></show-list>
+        </div>
       </div>
 
     </layout>
@@ -86,7 +89,8 @@
       ]),
       ...mapMutations('showPlan', [
         'saveSearchKeyword',
-        'saveSearchCity'
+        'saveSearchCity',
+        'saveSearchType'
       ]),
       handleTypeTabClick (tab) {
         this.tabValue = tab
@@ -99,6 +103,7 @@
         this.saveSearchCity(city)
       },
       handleSearchClick () {
+        this.saveSearchType('全部')
         router.push({name: 'ShowSearchPage'})
       }
     },
