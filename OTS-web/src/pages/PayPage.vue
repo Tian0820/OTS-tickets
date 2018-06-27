@@ -4,7 +4,7 @@
 
       <div class="container">
 
-        <order-pay v-if="currentOrder" :currentOrder="currentOrder"></order-pay>
+        <order-pay v-if="currentOrder" :currentOrder="currentOrder" :userCoupons="userCoupons"></order-pay>
 
       </div>
 
@@ -36,6 +36,9 @@
       ...mapState('order', {
         currentOrder: state => state.currentOrder
       }),
+      ...mapState('auth', {
+        userCoupons: state => state.userCoupons
+      }),
     },
     methods: {
       ...mapActions('auth', [
@@ -46,6 +49,7 @@
       store.dispatch('auth/refreshUser', {
         onSuccess: (success) => {
           store.dispatch('order/fetchOrder', to.params.orderId)
+          store.dispatch('auth/getUserCoupons')
         },
         onError: (error) => {
 //          Message.error('user not login')
