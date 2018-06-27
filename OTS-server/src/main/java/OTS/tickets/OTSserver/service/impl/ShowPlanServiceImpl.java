@@ -40,7 +40,7 @@ public class ShowPlanServiceImpl implements ShowPlanService {
             showPlanVOS.add(new ShowPlanVO(showPlan, set));
         }
 
-        return new PageImpl<>(showPlanVOS, pageable, p.getTotalElements());
+        return new PageImpl<>(showPlanVOS.subList(page * size, Math.min(showPlanVOS.size(), page * size + size)), pageable, p.getTotalElements());
     }
 
     @Override

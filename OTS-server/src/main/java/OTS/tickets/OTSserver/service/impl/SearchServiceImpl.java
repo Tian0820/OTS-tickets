@@ -93,7 +93,6 @@ public class SearchServiceImpl implements SearchService {
 //            }
 //        }, pageable);
 
-
-        return new PageImpl<>(showPlans, pageable, showPlans.size());
+        return new PageImpl<>(showPlans.subList(size * page, Math.min(showPlans.size(),size * page + size)), pageable, showPlans.size());
     }
 }
