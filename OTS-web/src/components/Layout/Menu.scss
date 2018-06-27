@@ -1,0 +1,16 @@
+@import "../../assets/scss/variables";
+
+
+.menu {
+  /deep/ {
+    .el-menu {
+      border-right: none;
+      border-top: solid $main-color 5px;
+      padding: 20px 0 40px;
+    }
+
+    .icon {
+      padding: 0 6px;
+    }
+  }
+}

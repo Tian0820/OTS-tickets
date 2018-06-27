@@ -3,7 +3,7 @@ import * as venueApi from '../../api/venue'
 const state = {
     currentVenue: null,
     venueCode: '',
-    showPlans: [],
+    showPlans: null,
     orders: [],
     siteUser: null,
     weeklyStatistics: null

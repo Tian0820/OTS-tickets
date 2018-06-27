@@ -11,7 +11,8 @@ const state = {
     currentUsername: '',
     currentUser: null,
     userOrders: [],
-    userCoupons: []
+    userCoupons: [],
+    modifyType: 'info'
   }
 ;
 
@@ -199,6 +200,9 @@ const mutations = {
   },
   'saveUserCoupons'(state, userCoupons) {
     state.userCoupons = userCoupons
+  },
+  'saveModifyType'(state, type) {
+    state.modifyType = type
   }
 };
 

@@ -1,0 +1,8 @@
+.menu /deep/ .el-menu {
+  border-right: none;
+  border-top: solid #e9a038 5px;
+  padding: 20px 0 40px; }
+.menu /deep/ .icon {
+  padding: 0 6px; }
+
+/*# sourceMappingURL=Menu.css.map */
