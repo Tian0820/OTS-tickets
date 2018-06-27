@@ -5,7 +5,7 @@ import OTS.tickets.OTSserver.bean.OrderStatisticsBean;
 import OTS.tickets.OTSserver.bean.PayOrderBean;
 import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.Order;
-import org.aspectj.weaver.ast.Or;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface OrderService {
 
     ResultMessageBean refundOrder(int orderId);
 
-    List<Order> getAllOrders();
+    Page<Order> getAllOrders(String state, int page, int size);
 
     List<OrderStatisticsBean> getOrdersWithinWeek();
 

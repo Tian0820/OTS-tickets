@@ -7,11 +7,19 @@ import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.*;
 import OTS.tickets.OTSserver.repository.*;
 import OTS.tickets.OTSserver.service.OrderService;
-import OTS.tickets.OTSserver.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.DateUtils;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -205,8 +213,25 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+    public Page<Order> getAllOrders(String state, int page, int size) {
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "createTime");
+
+        Page<Order> orders = orderRepository.findAll(new Specification<Order>() {
+            @Override
+            public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+                List<Predicate> list = new ArrayList<Predicate>();
+
+                if (state != null && !"".equals(state)) {
+                    list.add(criteriaBuilder.equal(root.get("state").as(String.class), state));
+                }
+
+                Predicate[] p = new Predicate[list.size()];
+                return criteriaBuilder.and(list.toArray(p));
+            }
+        }, pageable);
+
+        return orders;
     }
 
     @Override

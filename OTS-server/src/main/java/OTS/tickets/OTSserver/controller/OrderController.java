@@ -7,6 +7,7 @@ import OTS.tickets.OTSserver.bean.ResultMessageBean;
 import OTS.tickets.OTSserver.model.Order;
 import OTS.tickets.OTSserver.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,8 +61,10 @@ public class OrderController {
             value = "/order/get",
             method = RequestMethod.GET,
             produces = {"application/json; charset=UTF-8"})
-    public List<Order> getAllOrders() {
-        return orderService.getAllOrders();
+    public Page<Order> getAllOrders(String state,
+                                    @RequestParam(value = "page") int page,
+                                    @RequestParam(value = "size") int size) {
+        return orderService.getAllOrders(state, page, size);
     }
 
     @ResponseBody

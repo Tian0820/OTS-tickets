@@ -30,8 +30,6 @@ public class ShowPlanServiceImpl implements ShowPlanService {
         Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "time");
         Page<ShowPlan> p = showPlanRepository.findAll(pageable);
 
-        System.out.println(p.getTotalElements());
-
         List<ShowPlanVO> showPlanVOS = new ArrayList<>();
 
         for (ShowPlan showPlan : p) {
