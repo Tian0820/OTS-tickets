@@ -16,7 +16,7 @@
 
         <div class="info-wrapper">
 
-          <el-tag type="info">订单{{currentOrder.id}}</el-tag>
+          <el-tag :type="expired?'danger':'warning'">{{expired ? '已过期' : '待付款'}}</el-tag>
           <p class="show-title">{{currentOrder.showPlan.name}}</p>
           <p class="show-info">类型：{{currentOrder.showPlan.type}}</p>
           <p class="show-info">时间：{{currentOrder.showPlan.time}}</p>
@@ -29,9 +29,9 @@
             <i class="el-icon-question"></i>
           </el-tooltip>
           <p class="show-info" :style="{display: 'inline-block', verticalAlign: 'top'}">优惠券：</p>
-          <el-radio-group v-model="chosenCoupon">
-            <el-radio :label="0">不使用优惠券</el-radio>
-            <el-radio v-for="(coupon, index) in userCoupons" :label=index+1>{{coupon.couponName}}</el-radio>
+          <el-radio-group v-model="chosenDiscount">
+            <el-radio :label="1">不使用优惠券</el-radio>
+            <el-radio v-for="(coupon, index) in userCoupons" :label=coupon.discount>{{coupon.couponName}}</el-radio>
             <!--<el-radio :label="3">备选项</el-radio>-->
             <!--<el-radio :label="6">备选项</el-radio>-->
             <!--<el-radio :label="9">备选项</el-radio>-->
@@ -45,7 +45,7 @@
         <div class="qr-code-wrapper">
           <img src="../../assets/img/qrCode.jpg" width="100%"/>
           <p>支付宝扫码付款</p>
-          <span>¥ {{currentOrder.price}}</span>
+          <span>¥ {{currentOrder.price * chosenDiscount}}</span>
         </div>
 
         <div class="button-wrapper">
@@ -80,13 +80,14 @@
     },
     props: ['currentOrder', 'userCoupons'],
     data() {
-      let name = 'poster.jpg'
+      let name = this.currentOrder.showPlan.id + '.jpeg'
       let createTime = new Date(this.currentOrder.createTime)
       return {
         posterUrl: require('../../assets/img/' + name),
         limitTime: new Date(createTime.setMinutes(createTime.getMinutes() + 15)),
         leftTime: '--:--',
-        chosenCoupon: 0
+        expired: false,
+        chosenDiscount: 1,
       }
     },
     mounted: function () {
@@ -107,6 +108,7 @@
           let leftSeconds = Math.floor(((this.limitTime - currentDate) - (leftMinutes * 60 * 1000)) / 1000);
           let leftTime = ''
           if (leftMinutes < 0) {
+            that.expired = true
             leftTime = '00:00'
           } else {
             leftTime = ('0' + leftMinutes).slice(-2) + ':' + ('0' + leftSeconds).slice(-2)
