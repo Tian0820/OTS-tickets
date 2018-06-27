@@ -7,7 +7,7 @@
 
       <div class="time-wrapper">
         <span class="time-label">剩余时间：</span>
-        <span class="time">15:00</span>
+        <span class="time">{{leftTime}}</span>
       </div>
 
       <div class="order-wrapper">
@@ -20,9 +20,14 @@
           <p class="show-info">类型：{{currentOrder.showPlan.type}}</p>
           <p class="show-info">时间：{{currentOrder.showPlan.time}}</p>
           <p class="show-info">艺人：{{currentOrder.showPlan.star}}</p>
-          <p class="show-info">座位：{{currentOrder.seats.length === 0 ? '待分配': currentOrder.seats.join(', ')}}</p>
+          <p class="show-info">座位：{{currentOrder.seats.length === 0 ? '待分配' : currentOrder.seats.join(', ')}}</p>
 
           <p class="show-info">票价：{{currentOrder.price}} 元</p>
+        </div>
+
+        <div class="qr-code-wrapper">
+          <img src="../../assets/img/qrCode.jpg" width="100%"/>
+          <p>支付宝扫码付款</p>
         </div>
 
       </div>
@@ -47,16 +52,40 @@
     props: ['currentOrder'],
     data() {
       let name = 'poster.jpg'
+      let createTime = new Date(this.currentOrder.createTime)
       return {
         posterUrl: require('../../assets/img/' + name),
+        limitTime: new Date(createTime.setMinutes(createTime.getMinutes() + 15)),
+        leftTime: '15:00'
       }
+    },
+    mounted: function () {
+      this.calLeftTime()
     },
     computed: {
       ...mapState('auth', {
         user: state => state.currentUser
       })
     },
-    methods: {},
+    methods: {
+      calLeftTime: function () {
+        let that = this;
+        let leftTime = that.leftTime;
+        let interval = window.setInterval(() => {
+          let currentDate = new Date()
+          let leftMinutes = Math.floor((this.limitTime - currentDate) / 1000 / 60);
+          let leftSeconds = Math.floor(((this.limitTime - currentDate) - (leftMinutes * 60 * 1000)) / 1000);
+          let leftTime = ''
+          if (leftMinutes < 0) {
+            leftTime = '00:00'
+          } else {
+            leftTime = ('0' + leftMinutes).slice(-2) + ':' + ('0' + leftSeconds).slice(-2)
+          }
+//          console.log(leftTime)
+          that.leftTime = leftTime;
+        }, 1000)
+      }
+    },
   }
 </script>
 
