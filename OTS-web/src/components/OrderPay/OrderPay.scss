@@ -58,9 +58,18 @@
       color: $grey;
       font-weight: 400;
     }
+
+    span {
+      //margin-top: 30px;
+      font-size: 30px;
+      font-weight: 400;
+      color: $main-color;
+    }
   }
 
   .show-title {
+    display: inline-block;
+    vertical-align: middle;
     color: $grey;
     font-size: 18px;
     font-weight: 500;
@@ -70,6 +79,52 @@
     margin-top: 12px;
     color: $medium-grey;
     font-size: 14px;
+
   }
 
+  .button-wrapper {
+    //display: inline-block;
+    //float: right;
+    button {
+      float: right;
+      //margin-right: 10%;
+      margin-left: 20px;
+      margin-top: 20px;
+      padding: 5px 10px;
+      color: $white-color;
+      background-color: $main-color;
+      font-size: 14px;
+      border-radius: 3px;
+      cursor: pointer;
+      @include transition(all, 0.3s);
+
+      &:hover {
+        @include transition(all, 0.3s);
+        background-color: $sub-color;
+      }
+    }
+  }
+
+}
+
+/deep/ .el-radio-group {
+  margin-top: 15px;
+}
+
+/deep/ .el-radio {
+  display: block;
+}
+
+/deep/ .el-radio + .el-radio {
+  margin-left: 0;
+  margin-top: 10px;
+}
+
+/deep/ .el-radio__label {
+  font-weight: 300;
+}
+
+/deep/ [class^="el-icon-"], [class*=" el-icon-"] {
+  vertical-align: super;
+  color: #f1bb80;
 }

@@ -16,21 +16,45 @@
 
         <div class="info-wrapper">
 
+          <el-tag type="info">订单{{currentOrder.id}}</el-tag>
           <p class="show-title">{{currentOrder.showPlan.name}}</p>
           <p class="show-info">类型：{{currentOrder.showPlan.type}}</p>
           <p class="show-info">时间：{{currentOrder.showPlan.time}}</p>
           <p class="show-info">艺人：{{currentOrder.showPlan.star}}</p>
+          <p class="show-info">数量：{{currentOrder.seatNum}} 张</p>
           <p class="show-info">座位：{{currentOrder.seats.length === 0 ? '待分配' : currentOrder.seats.join(', ')}}</p>
 
-          <p class="show-info">票价：{{currentOrder.price}} 元</p>
+          <el-tooltip placement="bottom" effect="light">
+            <div slot="content">用户可以在个人主页<br/>使用积分兑换更多优惠券</div>
+            <i class="el-icon-question"></i>
+          </el-tooltip>
+          <p class="show-info" :style="{display: 'inline-block', verticalAlign: 'top'}">优惠券：</p>
+          <el-radio-group v-model="chosenCoupon">
+            <el-radio :label="0">不使用优惠券</el-radio>
+            <el-radio v-for="(coupon, index) in userCoupons" :label=index+1>{{coupon.couponName}}</el-radio>
+            <!--<el-radio :label="3">备选项</el-radio>-->
+            <!--<el-radio :label="6">备选项</el-radio>-->
+            <!--<el-radio :label="9">备选项</el-radio>-->
+          </el-radio-group>
+
+          <!--<p class="show-info">价格：{{currentOrder.price}} 元</p>-->
+
+
         </div>
 
         <div class="qr-code-wrapper">
           <img src="../../assets/img/qrCode.jpg" width="100%"/>
           <p>支付宝扫码付款</p>
+          <span>¥ {{currentOrder.price}}</span>
+        </div>
+
+        <div class="button-wrapper">
+          <button>确认付款</button>
         </div>
 
       </div>
+
+
     </div>
   </div>
 
@@ -39,7 +63,7 @@
 
 <script>
   import DivHeader from '../Util/DivHeader.vue'
-  import {Message} from 'element-ui'
+  import {Message, Tag, Radio, RadioGroup, Popover, Tooltip} from 'element-ui'
   import {store, router} from '../../main'
   import {mapActions, mapMutations, mapState} from 'vuex'
 
@@ -47,16 +71,22 @@
     name: 'order-pay',
     components: {
       DivHeader,
-      Message
+      Message,
+      elTag: Tag,
+      elRadio: Radio,
+      elRadioGroup: RadioGroup,
+      elPopover: Popover,
+      elTooltip: Tooltip
     },
-    props: ['currentOrder'],
+    props: ['currentOrder', 'userCoupons'],
     data() {
       let name = 'poster.jpg'
       let createTime = new Date(this.currentOrder.createTime)
       return {
         posterUrl: require('../../assets/img/' + name),
         limitTime: new Date(createTime.setMinutes(createTime.getMinutes() + 15)),
-        leftTime: '15:00'
+        leftTime: '--:--',
+        chosenCoupon: 0
       }
     },
     mounted: function () {
@@ -64,7 +94,7 @@
     },
     computed: {
       ...mapState('auth', {
-        user: state => state.currentUser
+        user: state => state.currentUser,
       })
     },
     methods: {
