@@ -65,7 +65,13 @@ button {
     .order-pay-wrapper .qr-code-wrapper p {
       color: #595959;
       font-weight: 400; }
+    .order-pay-wrapper .qr-code-wrapper span {
+      font-size: 30px;
+      font-weight: 400;
+      color: #e9a038; }
   .order-pay-wrapper .show-title {
+    display: inline-block;
+    vertical-align: middle;
     color: #595959;
     font-size: 18px;
     font-weight: 500; }
@@ -73,5 +79,44 @@ button {
     margin-top: 12px;
     color: #848484;
     font-size: 14px; }
+  .order-pay-wrapper .button-wrapper button {
+    float: right;
+    margin-left: 20px;
+    margin-top: 20px;
+    padding: 5px 10px;
+    color: #ffffff;
+    background-color: #e9a038;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    -webkit-transition: all, 0.3s;
+    -moz-transition: all, 0.3s;
+    -ms-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s; }
+    .order-pay-wrapper .button-wrapper button:hover {
+      -webkit-transition: all, 0.3s;
+      -moz-transition: all, 0.3s;
+      -ms-transition: all, 0.3s;
+      -o-transition: all, 0.3s;
+      transition: all, 0.3s;
+      background-color: #f1a63a; }
+
+/deep/ .el-radio-group {
+  margin-top: 15px; }
+
+/deep/ .el-radio {
+  display: block; }
+
+/deep/ .el-radio + .el-radio {
+  margin-left: 0;
+  margin-top: 10px; }
+
+/deep/ .el-radio__label {
+  font-weight: 300; }
+
+/deep/ [class^="el-icon-"], [class*=" el-icon-"] {
+  vertical-align: super;
+  color: #f1bb80; }
 
 /*# sourceMappingURL=OrderPay.css.map */
