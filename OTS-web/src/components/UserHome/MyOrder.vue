@@ -13,7 +13,17 @@
 
 
     </div>
-    <single-order v-for="item in orders" :order="item" :key="item.id"></single-order>
+    <single-order v-for="item in orders.slice((page-1)*pageSize, page*pageSize)" :order="item" :key="item.id"></single-order>
+    <div v-if="orders.length > 0" class="pagination">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="orders.length"
+        :page-size="pageSize"
+        :current-page="page"
+        @current-change="handlePageChange"
+      ></el-pagination>
+    </div>
 
   </div>
 
@@ -23,7 +33,7 @@
 <script>
   import DivHeader from '../Util/DivHeader.vue'
   import SingleOrder from '../Order/SingleOrder.vue'
-  import {Tag} from 'element-ui'
+  import {Tag, Pagination} from 'element-ui'
   import {router} from '../../main'
   import {mapState, mapMutations} from 'vuex'
   import {ORDER_TYPE} from '../../constant'
@@ -32,6 +42,7 @@
     name: 'my-user-order',
     components: {
       elTag: Tag,
+      elPagination: Pagination,
       DivHeader,
       SingleOrder
     },
@@ -46,7 +57,7 @@
         } else {
           return this.userOrders.filter(order => order.state === this.orderFilter)
         }
-      }
+      },
     },
     data() {
       let types = ORDER_TYPE
@@ -65,6 +76,8 @@
 
       return {
         types,
+        pageSize: 4,
+        page: 1
       }
     },
     methods: {
@@ -73,7 +86,12 @@
       ]),
       handleTagClick(name) {
         this.saveOrderFilter(name)
+        this.page = 1
+      },
+      handlePageChange(page) {
+          this.page = page
       }
+
     }
   }
 

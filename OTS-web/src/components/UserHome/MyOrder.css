@@ -35,6 +35,13 @@ button {
 .order-filter {
   margin-top: 16px; }
 
+.pagination {
+  width: 100%;
+  text-align: center; }
+  .pagination /deep/ .el-pagination {
+    display: inline-block;
+    margin: 20px auto 0; }
+
 .tag {
   display: inline-block;
   padding: 0 10px;
