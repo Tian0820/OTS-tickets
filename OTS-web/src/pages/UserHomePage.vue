@@ -8,6 +8,8 @@
         </side-layout>
       </div>
     </layout>
+
+    <exchange-coupon-modal :dialogVisible="exchangeCouponModal"></exchange-coupon-modal>
   </div>
 
 </template>
@@ -18,6 +20,7 @@
   import SideLayout from '../components/Layout/SideLayout.vue'
   import Menu from '../components/Layout/Menu.vue'
   import UserHome from '../components/UserHome/UserHome.vue'
+  import ExchangeCouponModal from '../components/Modal/ExchangeCouponModal.vue'
   import {router, store} from '../main'
   import {mapState, mapMutations} from 'vuex'
 
@@ -27,7 +30,8 @@
       Layout,
       SideLayout,
       ostMenu:Menu,
-      UserHome
+      UserHome,
+      ExchangeCouponModal
     },
     data() {
       return {
@@ -54,7 +58,8 @@
     computed: {
       ...mapState('auth', {
         user: state => state.currentUser,
-        userOrders: state => state.userOrders
+        userOrders: state => state.userOrders,
+        exchangeCouponModal: state => state.exchangeCouponModal
       })
     },
     methods: {

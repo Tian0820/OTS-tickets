@@ -39,6 +39,7 @@
 
       </div>
 
+
     </div>
 
   </div>
@@ -47,14 +48,15 @@
 </template>
 
 <script>
+
   import {Button} from 'element-ui'
   import {router} from '../../main'
-  import {mapState} from 'vuex'
+  import {mapState, mapMutations} from 'vuex'
 
   export default {
     name: 'user-info-brief',
     components: {
-      elButton: Button
+      elButton: Button,
     },
     computed: {
       ...mapState('auth', {
@@ -63,12 +65,17 @@
     },
     data() {
       return {
+        dialogVisible: false,
         avatarUrl: 'https://cdn.dribbble.com/users/548267/screenshots/2657798/wagon_v1_dribbble.jpg',
       }
     },
     methods: {
+      ...mapMutations('auth', [
+        'saveHomeType',
+        'saveExchangeCouponModal'
+      ]),
       handleExchangeCoupon() {
-        this.$modal.show('exchange-coupon-modal')
+          this.saveExchangeCouponModal(true)
       }
     }
   }

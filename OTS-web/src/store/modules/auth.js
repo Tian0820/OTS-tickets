@@ -14,7 +14,8 @@ const state = {
     orderFilter: '全部',
     userCoupons: [],
     homeType: 'info',
-    modifyType: 'info'
+    modifyType: 'info',
+    exchangeCouponModal: false
   }
 ;
 
@@ -211,6 +212,9 @@ const mutations = {
   },
   'saveOrderFilter'(state, orderFilter) {
     state.orderFilter = orderFilter
+  },
+  'saveExchangeCouponModal'(state, exchangeCouponModal) {
+    state.exchangeCouponModal = exchangeCouponModal
   }
 };
 

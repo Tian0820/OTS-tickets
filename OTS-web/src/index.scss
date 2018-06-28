@@ -26,6 +26,23 @@ html {
     }
   }
 
+  // dialog
+  .el-dialog__wrapper {
+    position: fixed;
+  }
+  .el-dialog {
+    position: relative;
+  }
+  .el-dialog__header {
+    .el-dialog__title {
+      color: $grey;
+    }
+  }
+
+  .el-button {
+    font-weight: 300;
+  }
+
   //search input style
   //.el-input__inner {
   //  height: 30px;

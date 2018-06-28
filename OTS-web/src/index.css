@@ -35,5 +35,13 @@ html .container {
 @media (max-width: 1000px) {
   html .container {
     width: 100%; } }
+html .el-dialog__wrapper {
+  position: fixed; }
+html .el-dialog {
+  position: relative; }
+html .el-dialog__header .el-dialog__title {
+  color: #595959; }
+html .el-button {
+  font-weight: 300; }
 
 /*# sourceMappingURL=index.css.map */
