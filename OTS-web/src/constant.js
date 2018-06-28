@@ -66,4 +66,9 @@ export const ORDER_TYPE = {
     tag: 'success',
     color: 'green'
   },
+  '已付款' : {
+    name: '已付款',
+    tag: 'success',
+    color: 'green'
+  },
 }
