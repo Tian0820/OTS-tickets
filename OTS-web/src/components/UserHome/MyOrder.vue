@@ -1,16 +1,19 @@
 <template>
 
   <div class="my-order-wrapper">
-    <div-header :header="'我的订单'"></div-header>
+    <div class="my-order-header">
+      <div-header :header="'我的订单'"></div-header>
 
-    <p>您共有
-      <span>{{userOrders.length}}</span> 笔订单，
-      其中 <span>{{finishNum}}</span> 笔已完成，
-      <span>{{payNum}}</span> 笔待付款，
-      <span>{{distributeNum}}</span> 笔待开票
-    </p>
+      <div class="order-filter">
+        <span v-for="type in types"
+              :class="['tag', `tag-${type.color}`, {'tag-active': type.name === orderFilter}]"
+              @click="handleTagClick(type.name)"
+        >{{type.name}} {{type.num}}</span>
+      </div>
 
-    <single-order v-for="item in userOrders" :order="item" :key="item.id"></single-order>
+
+    </div>
+    <single-order v-for="item in orders" :order="item" :key="item.id"></single-order>
 
   </div>
 
@@ -20,37 +23,58 @@
 <script>
   import DivHeader from '../Util/DivHeader.vue'
   import SingleOrder from '../Order/SingleOrder.vue'
+  import {Tag} from 'element-ui'
   import {router} from '../../main'
-  import {mapState} from 'vuex'
+  import {mapState, mapMutations} from 'vuex'
+  import {ORDER_TYPE} from '../../constant'
 
   export default {
     name: 'my-user-order',
     components: {
+      elTag: Tag,
       DivHeader,
       SingleOrder
     },
     props: ['userOrders'],
-    data() {
-      let finishNum = 0
-      let payNum = 0
-      let distributeNum = 0
-      this.userOrders.forEach(order => {
-        if (order.seats === null || order.seats.length === 0 && order.type === '分配') {
-          distributeNum++
+    computed: {
+      ...mapState('auth', {
+        orderFilter: state => state.orderFilter
+      }),
+      orders: function () {
+        if (this.orderFilter === '全部') {
+          return this.userOrders
+        } else {
+          return this.userOrders.filter(order => order.state === this.orderFilter)
         }
-        if (order.state === '已完成') {
-          finishNum++
-        } else if (order.state === '未付款') {
-          payNum++
-        }
-      })
-      return {
-        distributeNum: distributeNum,
-        payNum: payNum,
-        finishNum: finishNum
       }
     },
-    methods: {}
+    data() {
+      let types = ORDER_TYPE
+
+      for (let key in types) {
+        if (types.hasOwnProperty(key)) {
+          types[key].num = 0;
+        }
+      }
+
+      this.userOrders.forEach(order => {
+        types[order.state].num++
+      })
+
+      types['全部'].num = this.userOrders.length
+
+      return {
+        types,
+      }
+    },
+    methods: {
+      ...mapMutations('auth', [
+        'saveOrderFilter'
+      ]),
+      handleTagClick(name) {
+        this.saveOrderFilter(name)
+      }
+    }
   }
 
 </script>

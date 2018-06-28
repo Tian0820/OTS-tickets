@@ -5,18 +5,21 @@
 
     <div class="info-wrapper">
       <h1>{{order.showPlan.name}}（订单号：{{order.id}}）</h1>
-      <el-tag :type="type">{{order.state}}</el-tag>
-      <span class="order-time">{{order.createTime}}</span>
-      <br/>
+      <p class="order-time">{{order.createTime}}</p>
+      <div class="right-top">
+        <el-tag size="small" :type="type">{{order.state}}</el-tag>
+
+      </div>
 
       <button v-if="order.state === '已付款' && user !== null" @click="handleRefund">退款</button>
       <button v-if="order.state === '未付款' && user !== null" @click="handlePay">付款</button>
 
-      <p>时间：{{order.showPlan.time}}</p><br/>
-      <p>地点：{{order.showPlan.venue.city}}   {{order.showPlan.venue.venueName}}    {{order.showPlan.venue.address}}</p>
-      <br/>
-      <p>座位：{{orderSeats.join(', ')}}</p><br/>
-      <p>价格：{{order.price}} 元</p>
+      <div class="detail-wrapper">
+        <p>时间：{{order.showPlan.time}}</p>
+        <p>地点：{{order.showPlan.venue.city}}   {{order.showPlan.venue.venueName}}    {{order.showPlan.venue.address}}</p>
+        <p>座位：{{orderSeats.join(', ')}}</p>
+        <p>价格：{{order.price}} 元</p>
+      </div>
     </div>
 
   </div>
@@ -26,6 +29,7 @@
 <script>
   import {Tag} from 'element-ui'
   import {mapState, mapActions, mapMutations} from 'vuex'
+  import {ORDER_TYPE} from '../../constant'
 
   export default {
     name: 'single-order',
@@ -52,20 +56,20 @@
           orderSeats.push(seat.area + '区' + row + '排' + col + '座')
         })
       }
-      let type = ''
-      if (this.order.state === '已过期') {
-        type = 'danger'
-      } else if (this.order.state === '已退款') {
-        type = 'info'
-      } else if (this.order.state === '未付款') {
-        type = 'warning'
-      } else if (this.order.state === '已完成') {
-        type = 'success'
-      }
+//      let type = ''
+//      if (this.order.state === '已过期') {
+//        type = 'danger'
+//      } else if (this.order.state === '已退款') {
+//        type = 'info'
+//      } else if (this.order.state === '未付款') {
+//        type = 'warning'
+//      } else if (this.order.state === '已完成') {
+//        type = 'success'
+//      }
       return {
         posterUrl: require('../../assets/img/' + name),
         orderSeats: orderSeats,
-        type: type
+        type: ORDER_TYPE[this.order.state].tag
       }
     },
     methods: {

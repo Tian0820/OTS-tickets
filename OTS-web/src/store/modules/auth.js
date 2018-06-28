@@ -11,7 +11,9 @@ const state = {
     currentUsername: '',
     currentUser: null,
     userOrders: [],
+    orderFilter: '全部',
     userCoupons: [],
+    homeType: 'info',
     modifyType: 'info'
   }
 ;
@@ -201,8 +203,14 @@ const mutations = {
   'saveUserCoupons'(state, userCoupons) {
     state.userCoupons = userCoupons
   },
+  'saveHomeType'(state, type) {
+    state.homeType = type
+  },
   'saveModifyType'(state, type) {
     state.modifyType = type
+  },
+  'saveOrderFilter'(state, orderFilter) {
+    state.orderFilter = orderFilter
   }
 };
 

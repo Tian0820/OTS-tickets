@@ -39,7 +39,7 @@ button {
       height: 60px;
       bottom: -60px;
       padding: 10px 15px;
-      background-color: rgba(233, 160, 56, 0.7);
+      background-color: rgba(233, 160, 56, 0.85);
       color: #ffffff;
       font-size: 14px;
       -webkit-transition: all, 0.3s;
