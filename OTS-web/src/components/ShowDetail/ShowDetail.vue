@@ -133,16 +133,17 @@
         'createOrder'
       ]),
       ...mapMutations('showPlan', [
-        'saveChosenArea'
+        'saveChosenArea',
+        'saveChooseSeatModal'
       ]),
       handleChange(val) {
 //        this.chosenPrices = this.checkboxGroup
       },
       handleChooseSeat() {
         if (this.type === 'user') {
-          this.$modal.show('choose-seat-modal')
+          this.saveChooseSeatModal(true)
         } else if (this.type === 'venue') {
-          this.$modal.show('user-account-modal')
+          this.saveChooseSeatModal(true)
         } else if (this.type === 'manager') {
           Message.warning('经理无法操作！')
         } else {

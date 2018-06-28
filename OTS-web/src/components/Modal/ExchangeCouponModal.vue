@@ -3,7 +3,7 @@
   <el-dialog
     class="modal-wrapper"
     title="优惠券兑换"
-    :visible="dialogVisible"
+    :visible="exchangeCouponModal"
     @close="handleClose"
     width="50%">
 
@@ -43,7 +43,6 @@
       elRadio: Radio,
       Message
     },
-    props: ['dialogVisible'],
     data() {
       return {
         radio: 1000,
@@ -53,7 +52,8 @@
     },
     computed: {
       ...mapState('auth', {
-        user: state => state.currentUser
+        user: state => state.currentUser,
+        exchangeCouponModal: state => state.exchangeCouponModal
       })
     },
     methods: {

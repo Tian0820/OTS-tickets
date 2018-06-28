@@ -1,15 +1,13 @@
 <template>
 
-  <div class="modal-wrapper" v-if="currentShow">
-    <el-button
-      icon="el-icon-close"
-      @click="closeBox"></el-button>
+  <!--<div class="modal-wrapper" v-if="currentShow">-->
+    <!--<el-buttonxxcloseBox"></el-button>-->
 
-    <div :style="{padding: '20px'}">
+    <div>
 
-      <h1>选座购票 <span :style="{color: '#595959', fontSize: '12px'}">（最多选择6个）</span></h1>
+      <!--<h1>选座购票 <span :style="{color: '#595959', fontSize: '12px'}">（最多选择6个）</span></h1>-->
 
-      <div :style="{textAlign: 'center', marginTop: '30px'}">
+      <div :style="{textAlign: 'center'}">
         <p class="stage-p">舞台</p>
         <div :style="{padding: '20px 100px'}">
           <el-checkbox-group
@@ -45,15 +43,15 @@
         </div>
       </div>
 
-      <p :style="{marginTop: '10px',fontSize: '14px', color: '#595959'}">
+      <p :style="{marginTop: '30px',fontSize: '14px', color: '#595959'}">
         共 <span :style="{border: 'none', fontSize: '20px', color: '#E9A038', fontWeight: '400'}">{{totalPrice}}</span> 元
       </p>
 
       <div class="confirm-button-wrapper">
-        <button class="confirm-button" @click="handleConfirm">确认选座</button>
+        <el-button size="medium" type="primary" class="confirm-button" @click="handleConfirm">确认选座</el-button>
       </div>
     </div>
-  </div>
+  <!--</div>-->
 
 </template>
 

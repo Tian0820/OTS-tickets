@@ -5,14 +5,18 @@
         <show-detail v-if="currentShow" :type="type" :currentShow="currentShow"></show-detail>
       </div>
     </layout>
-  </div>
 
+    <choose-seat-modal></choose-seat-modal>
+
+  </div>
 </template>
 
 <script>
   import {Message} from 'element-ui'
   import Layout from '../components/Layout/Layout.vue'
   import ShowDetail from '../components/ShowDetail/ShowDetail.vue'
+  import ChooseSeatModal from '../components/Modal/ChooseSeatModal.vue'
+
   import {router, store} from '../main'
   import {mapState} from 'vuex'
 
@@ -20,7 +24,8 @@
     name: 'show-detail-page',
     components: {
       Layout,
-      ShowDetail
+      ShowDetail,
+      ChooseSeatModal
     },
     data() {
       return {}

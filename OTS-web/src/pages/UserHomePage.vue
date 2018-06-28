@@ -9,7 +9,7 @@
       </div>
     </layout>
 
-    <exchange-coupon-modal :dialogVisible="exchangeCouponModal"></exchange-coupon-modal>
+    <exchange-coupon-modal></exchange-coupon-modal>
   </div>
 
 </template>
@@ -68,7 +68,8 @@
       ]),
       handleMenuSelect (key) {
         this.saveHomeType(key)
-      }
+      },
+
     },
     beforeRouteEnter(to, from, next) {
       store.dispatch('auth/refreshUser', {
