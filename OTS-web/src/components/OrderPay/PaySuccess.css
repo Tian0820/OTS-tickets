@@ -1,0 +1,63 @@
+html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  list-style: none; }
+
+html {
+  height: 100%; }
+
+* {
+  position: relative;
+  box-sizing: border-box; }
+
+button {
+  outline: none; }
+
+/*
+ * grid
+ */
+.pay-success-wrapper {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 30px;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff; }
+  .pay-success-wrapper .info-wrapper {
+    margin-top: 40px;
+    text-align: center; }
+    .pay-success-wrapper .info-wrapper span {
+      margin-left: 10px;
+      font-size: 24px;
+      font-weight: 400;
+      color: #add478; }
+    .pay-success-wrapper .info-wrapper p {
+      display: inline-block;
+      margin-top: 20px;
+      color: #e9a038;
+      font-size: 14px;
+      text-decoration: underline;
+      cursor: pointer; }
+
+/deep/ .el-step__head.is-success {
+  color: #e9a038;
+  border-color: #e9a038; }
+
+/deep/ .el-step__title.is-success {
+  color: #e9a038; }
+
+/deep/ .el-step__head.is-process {
+  color: #e9a038;
+  border-color: #e9a038; }
+
+/deep/ .el-step__title.is-process {
+  color: #e9a038; }
+
+/deep/ [class^="el-icon-"], [class*=" el-icon-"] {
+  color: #add478;
+  font-size: 30px; }
+
+/*# sourceMappingURL=PaySuccess.css.map */

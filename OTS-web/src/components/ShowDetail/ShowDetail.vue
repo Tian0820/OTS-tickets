@@ -170,7 +170,7 @@
             seats: seats.join(';')
           },
           onSuccess: (success) => {
-            Message.success(success)
+//            Message.success(success)
             router.push({name: 'PayPage', params: {orderId: this.currentOrder.id}})
           },
           onError:
