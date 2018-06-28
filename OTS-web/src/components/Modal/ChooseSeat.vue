@@ -90,6 +90,9 @@
       ...mapState('venue', {
         siteUser: state => state.siteUser
       }),
+      ...mapState('order', {
+        currentOrder: state => state.currentOrder
+      }),
 
       totalPrice: function () {
         let total = 0
@@ -149,9 +152,9 @@
               seats: seatIds.join(';')
             },
             onSuccess: (success) => {
-              Message.success(success)
+//              Message.success(success)
               this.$modal.hide('choose-seat-modal')
-              this.$modal.show('pay-modal')
+              router.push({name: 'PayPage', params: {orderId: this.currentOrder.id}})
             },
             onError:
               (error) => {

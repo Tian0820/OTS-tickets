@@ -12,21 +12,22 @@
 
   .time-wrapper {
     display: inline-block;
+    margin-top: 40px;
     width: 100%;
-    text-align: center;
+    //text-align: center;
 
     .time-label {
       color: $grey;
     }
     .time {
       color: $main-color;
-      font-size: 32px;
+      font-size: 50px;
       font-weight: 400;
     }
   }
 
   .order-wrapper {
-    margin-top: 30px;
+    margin-top: 40px;
   }
 
   .poster-wrapper {
@@ -102,7 +103,15 @@
         @include transition(all, 0.3s);
         background-color: $sub-color;
       }
+
+      &:disabled {
+        background-color: $light-grey;
+        cursor: not-allowed;
+      }
+
     }
+
+
   }
 
 }
@@ -128,4 +137,22 @@
   margin-top: 13px;
   vertical-align: top;
   color: #f1bb80;
+}
+
+/deep/ .el-step__head.is-success {
+  color: $main-color;
+  border-color: $main-color;
+}
+
+/deep/ .el-step__title.is-success {
+  color: $main-color;
+}
+
+/deep/ .el-step__head.is-process {
+  color: $main-color;
+  border-color: $main-color;
+}
+
+/deep/ .el-step__title.is-process {
+  color: $main-color;
 }

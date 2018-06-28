@@ -4,7 +4,11 @@
 
       <div class="container">
 
-        <order-pay v-if="currentOrder" :currentOrder="currentOrder" :userCoupons="userCoupons"></order-pay>
+        <order-pay v-if="currentOrder && currentOrder.state !== '已付款'" :currentOrder="currentOrder"
+                   :userCoupons="userCoupons"></order-pay>
+
+        <pay-success v-if="currentOrder && currentOrder.state === '已付款'" :currentOrder="currentOrder"
+                     :userCoupons="userCoupons"></pay-success>
 
       </div>
 
@@ -17,6 +21,7 @@
   import DivHeader from '../components/Util/DivHeader.vue'
   import Layout from '../components/Layout/Layout.vue'
   import OrderPay from '../components/OrderPay/OrderPay.vue'
+  import PaySuccess from '../components/OrderPay/PaySuccess.vue'
   import {Message} from 'element-ui'
   import {store} from '../main'
   import {mapActions, mapState} from 'vuex'
@@ -27,6 +32,7 @@
       DivHeader,
       Layout,
       OrderPay,
+      PaySuccess,
       Message,
     },
     data() {
