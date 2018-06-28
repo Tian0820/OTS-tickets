@@ -11,8 +11,10 @@
 
       </div>
 
-      <button v-if="order.state === '已付款' && user !== null" @click="handleRefund">退款</button>
-      <button v-if="order.state === '未付款' && user !== null" @click="handlePay">付款</button>
+      <div class="button-wrapper">
+      <el-button type="primary" size="small" v-if="order.state === '已付款' && user !== null" @click="handleRefund">退款</el-button>
+      <el-button type="primary" size="small" v-if="order.state === '未付款' && user !== null" @click="handlePay">付款</el-button>
+      </div>
 
       <div class="detail-wrapper">
         <p>时间：{{order.showPlan.time}}</p>
@@ -27,14 +29,15 @@
 </template>
 
 <script>
-  import {Tag} from 'element-ui'
+  import {Tag, Button} from 'element-ui'
   import {mapState, mapActions, mapMutations} from 'vuex'
   import {ORDER_TYPE} from '../../constant'
 
   export default {
     name: 'single-order',
     components: {
-      elTag: Tag
+      elTag: Tag,
+      elButton: Button
     },
     props: ['order'],
     computed: {

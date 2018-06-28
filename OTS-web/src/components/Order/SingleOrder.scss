@@ -54,9 +54,15 @@
       position: absolute;
       bottom: 0;
     }
-    button {
-      float: right;
-      padding: 5px 10px;
+
+    .button-wrapper {
+      position: absolute;
+      right: 10px;
+      bottom: 0;
+    }
+    /deep/ .el-button {
+      //float: right;
+      //padding: 5px 10px;
       background-color: $main-color;
       border-radius: 3px;
       color: $white-color;

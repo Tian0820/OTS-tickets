@@ -43,9 +43,11 @@
     .single-order-wrapper .info-wrapper .detail-wrapper {
       position: absolute;
       bottom: 0; }
-    .single-order-wrapper .info-wrapper button {
-      float: right;
-      padding: 5px 10px;
+    .single-order-wrapper .info-wrapper .button-wrapper {
+      position: absolute;
+      right: 10px;
+      bottom: 0; }
+    .single-order-wrapper .info-wrapper /deep/ .el-button {
       background-color: #e9a038;
       border-radius: 3px;
       color: #ffffff;
@@ -55,7 +57,7 @@
       -ms-transition: all, 0.3s;
       -o-transition: all, 0.3s;
       transition: all, 0.3s; }
-      .single-order-wrapper .info-wrapper button:hover {
+      .single-order-wrapper .info-wrapper /deep/ .el-button:hover {
         -webkit-transition: all, 0.3s;
         -moz-transition: all, 0.3s;
         -ms-transition: all, 0.3s;
