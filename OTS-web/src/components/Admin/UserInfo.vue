@@ -2,8 +2,7 @@
 
   <div>
 
-    <div class="user-info-wrapper">
-
+    <div v-if="modifyType === 'info'" class="user-info-wrapper">
       <h1>个人信息</h1>
 
       <el-form :model="userInfoForm" :rules="rules" ref="userInfoForm" labelPosition="top">
@@ -26,13 +25,10 @@
           </div>
           <!--<el-button @click="resetForm('signInForm')">重置</el-button>-->
         </el-form-item>
-
       </el-form>
-
-
     </div>
 
-    <div class="user-password-wrapper">
+    <div v-if="modifyType === 'password'" class="user-password-wrapper">
       <h1>修改密码</h1>
 
       <el-form :model="userPasswordForm" :rules="rules" ref="userPasswordForm" labelPosition="top">
@@ -57,8 +53,8 @@
         </el-form-item>
 
       </el-form>
-
     </div>
+
   </div>
 
 
@@ -67,7 +63,7 @@
 <script>
   import {Form, FormItem, Input, Message} from 'element-ui'
   import {router} from '../../main'
-  import {mapActions} from 'vuex'
+  import {mapActions, mapState} from 'vuex'
 
   export default {
     name: 'user-info',
@@ -150,6 +146,11 @@
           ]
         }
       }
+    },
+    computed: {
+      ...mapState('auth', {
+        modifyType: state => state.modifyType
+      })
     },
     methods: {
       ...mapActions('auth', [

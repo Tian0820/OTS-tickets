@@ -11,7 +11,8 @@
 
         <filter-group class="filter" :filters="filters"></filter-group>
 
-        <show-list :showPlans="showPlans"
+        <show-list v-if="showPlans"
+                   :showPlans="showPlans"
                    :pageInfo="pageInfo"
                    :changePage="fetchSearchShowPlans"
         ></show-list>

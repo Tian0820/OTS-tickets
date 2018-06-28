@@ -23,8 +23,11 @@
                      :changePage="fetchAllShowPlans"
           ></show-list>
         </div>
-        <div v-else-if="venueShowPlan">
-          <show-list :showPlans="venueShowPlan" :pageInfo="pageInfo"></show-list>
+
+        <div v-if="venueShowPlans">
+          <show-list :showPlans="venueShowPlans"
+                     :pageInfo="pageInfo"
+                     :changePage="fetchAllShowPlans"></show-list>
         </div>
       </div>
 
@@ -76,7 +79,7 @@
         }
       }),
       ...mapState('venue', {
-        venueShowPlan: state => state.showPlans
+        venueShowPlans: state => state.showPlans
       })
     },
     methods: {
