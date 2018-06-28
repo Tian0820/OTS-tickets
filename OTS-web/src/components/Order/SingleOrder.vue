@@ -12,8 +12,10 @@
       </div>
 
       <div class="button-wrapper">
-      <el-button type="primary" size="small" v-if="order.state === '已付款' && user !== null" @click="handleRefund">退款</el-button>
-      <el-button type="primary" size="small" v-if="order.state === '未付款' && user !== null" @click="handlePay">付款</el-button>
+        <el-button type="primary" size="small" v-if="order.state === '已付款' && user !== null" @click="handleRefund">退款
+        </el-button>
+        <el-button type="primary" size="small" v-if="order.state === '未付款' && user !== null" @click="handlePay">付款
+        </el-button>
       </div>
 
       <div class="detail-wrapper">
@@ -32,6 +34,7 @@
   import {Tag, Button} from 'element-ui'
   import {mapState, mapActions, mapMutations} from 'vuex'
   import {ORDER_TYPE} from '../../constant'
+  import {router} from '../../main'
 
   export default {
     name: 'single-order',
@@ -43,10 +46,13 @@
     computed: {
       ...mapState('auth', {
         user: state => state.currentUser
-      })
+      }),
+      ...mapState('order', {
+        currentOrder: state => state.currentOrder
+      }),
     },
     data() {
-      let name = 'poster.jpg'
+      let name = this.order.showPlan.id + '.jpeg'
       let orderSeats = []
       if (this.order.seats === null || this.order.seats.length === 0 && this.order.state === '已过期' || this.order.state === '已退款') {
         orderSeats.push('座位已被注销')
@@ -81,7 +87,7 @@
       ]),
       handlePay() {
         this.saveCurrentOrder(this.order)
-        this.$modal.show('pay-modal')
+        router.push({name: 'PayPage', params: {orderId: this.currentOrder.id}})
       },
       handleRefund() {
         this.saveCurrentOrder(this.order)
