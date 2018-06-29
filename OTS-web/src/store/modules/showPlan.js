@@ -4,6 +4,7 @@ const state = {
   allShowPlans: null,
   typeShowPlans: null,
   currentShow: null,
+  chooseSeatModal: false,
   chosenArea: 1,
   chosenSeats: [],
   page: null,
@@ -98,6 +99,9 @@ const mutations = {
     state.search.showPlans = data.content
     state.search.page = data.number + 1
     state.search.totalPages = data.totalPages
+  },
+  'saveChooseSeatModal'(state, chooseSeatModal) {
+    state.chooseSeatModal = chooseSeatModal
   },
 };
 

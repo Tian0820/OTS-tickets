@@ -40,7 +40,8 @@ html .el-dialog__wrapper {
 html .el-dialog {
   position: relative; }
 html .el-dialog__header .el-dialog__title {
-  color: #595959; }
+  color: #595959;
+  font-weight: 400; }
 html .el-button {
   font-weight: 300; }
 
