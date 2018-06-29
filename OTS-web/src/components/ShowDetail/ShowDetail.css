@@ -78,9 +78,12 @@
   width: 100%;
   height: auto;
   background-color: #ffffff; }
-  .show-info-wrapper p {
+  .show-info-wrapper pre {
     color: #595959;
-    font-size: 14px; }
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    word-wrap: break-word;
+    white-space: pre-wrap; }
 
 /deep/ .el-checkbox-group {
   display: inline-block;

@@ -57,6 +57,10 @@
           <img src="../../assets/img/qrCode.jpg" width="100%" draggable="false"/>
           <p>支付宝扫码付款</p>
           <span>¥ {{currentOrder.price * chosenDiscount}}</span>
+          <el-tooltip placement="bottom" effect="light">
+            <div slot="content">下单成功可增加 {{currentOrder.price * chosenDiscount / 10}} 积分</div>
+            <i class="el-icon-question"></i>
+          </el-tooltip>
         </div>
 
         <div class="button-wrapper">

@@ -77,7 +77,10 @@ export default new Router({
     {
       path: '/show/:showId',
       name: 'ShowDetailPage',
-      component: ShowDetailPage
+      component: ShowDetailPage,
+      scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0 }
+      }
     },
     {
       path: '/search',

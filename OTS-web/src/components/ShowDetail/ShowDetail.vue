@@ -66,7 +66,11 @@
     <div class="show-info-wrapper">
       <div-header :header="'演出信息'"></div-header>
 
-      <p>{{currentShow.introduction}}</p>
+      <pre>
+         <!--<p>-->
+        {{currentShow.introduction}}
+        <!--</p>-->
+      </pre>
     </div>
   </div>
 

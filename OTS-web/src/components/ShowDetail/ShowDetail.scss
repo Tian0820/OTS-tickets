@@ -92,9 +92,12 @@
   height: auto;
   background-color: $white-color;
 
-  p {
+  pre {
     color: $grey;
+    font-family: $base-font-family;
     font-size: 14px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
   }
 }
 
