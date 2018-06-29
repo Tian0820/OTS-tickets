@@ -7,4 +7,27 @@
   width: 100%;
   height: auto;
   background-color: $white-color;
+
+  .header-wrapper {
+    display: inline-block;
+  }
+
+  .coupons-wrapper {
+    margin-top: 20px;
+  }
+
+  button {
+    margin-left: 20px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+}
+
+/deep/ [class^="el-icon-"], [class*=" el-icon-"] {
+  color: #f1bb80;
+}
+
+/deep/ .el-tooltip__popper.is-dark {
+  background-color: $main-color;
 }
