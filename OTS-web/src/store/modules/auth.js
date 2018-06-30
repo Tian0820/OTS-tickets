@@ -15,7 +15,8 @@ const state = {
     userCoupons: [],
     homeType: 'info',
     modifyType: 'info',
-    exchangeCouponModal: false
+    exchangeCouponModal: false,
+
   }
 ;
 
@@ -86,7 +87,9 @@ const actions = {
           onSuccess(state.currentUser.username)
         }
       } else {
-        onError('登录已过期，请重新登录！')
+        if (onError) {
+          onError('登录已过期，请重新登录！')
+        }
       }
     }, currentUsername)
   },

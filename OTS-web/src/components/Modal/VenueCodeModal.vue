@@ -63,5 +63,3 @@
   }
 
 </script>
-
-<style scoped src="./PayModal.css"></style>

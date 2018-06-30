@@ -79,28 +79,12 @@
 
     </div>
 
-    <exchange-coupon-modal></exchange-coupon-modal>
-    <choose-seat-modal></choose-seat-modal>
-    <buy-tickets-modal></buy-tickets-modal>
-    <pay-modal></pay-modal>
-    <venue-code-modal></venue-code-modal>
-    <user-account-modal></user-account-modal>
-    <ban-user-modal></ban-user-modal>
-    <refund-modal></refund-modal>
-
   </div>
 </template>
 
 
 <script>
-  import ExchangeCouponModal from '../Modal/ExchangeCouponModal.vue'
-  import ChooseSeatModal from '../Modal/ChooseSeatModal.vue'
-  import BuyTicketsModal from '../Modal/BuyTicketsModal.vue'
-  import PayModal from '../Modal/PayModal.vue'
-  import VenueCodeModal from '../Modal/VenueCodeModal.vue'
-  import UserAccountModal from '../Modal/UserAccountModal.vue'
-  import BanUserModal from '../Modal/BanUserModal.vue'
-  import RefundModal from '../Modal/RefundModal.vue'
+
   import {Input, Button, Dropdown, DropdownMenu, DropdownItem, Message} from 'element-ui'
   import {router} from '../../main'
   import {mapMutations, mapState, mapActions} from 'vuex'
@@ -110,14 +94,7 @@
   export default {
     name: 'navigator',
     components: {
-      ExchangeCouponModal,
-      ChooseSeatModal,
-      BuyTicketsModal,
-      PayModal,
-      VenueCodeModal,
-      UserAccountModal,
-      BanUserModal,
-      RefundModal,
+
       elInput: Input,
       elButton: Button,
       elDropdown: Dropdown,

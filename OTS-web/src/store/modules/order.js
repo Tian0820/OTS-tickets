@@ -2,7 +2,8 @@ import * as orderApi from '../../api/order'
 
 const state = {
     currentOrder: null,
-    allOrders: null
+    allOrders: null,
+    refundModal: false
   }
 ;
 
@@ -73,6 +74,9 @@ const mutations = {
   },
   'saveAllOrders'(state, allOrders) {
     state.allOrders = allOrders
+  },
+  'saveRefundModal'(state, refundModal) {
+    state.refundModal = refundModal
   }
 };
 

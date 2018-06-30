@@ -82,8 +82,78 @@
       color: $grey;
     }
 
-    /deep/ .el-tag {
-      margin-left: 10px;
-    }
+    ///deep/ .el-tag {
+    //  margin-left: 10px;
+    //}
   }
 }
+
+.tag {
+  display: inline-block;
+  padding: 0 10px;
+  height: 28px;
+  line-height: 27px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid;
+  box-sizing: border-box;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tag+.tag {
+  margin-left: 10px;
+}
+@mixin tag-color($color) {
+  color: $color;
+  border-color: rgba($color, 0.8);
+}
+@mixin tag-color-active($color) {
+  background-color: rgba($color, 0.1);
+  border-color: rgba($color, 0.2);
+}
+
+.tag-blue {
+  @include tag-color($tag-blue);
+}
+.tag-blue.tag-active {
+  @include tag-color-active($tag-blue);
+}
+
+.tag-purple {
+  @include tag-color($tag-purple);
+}
+.tag-purple.tag-active {
+  @include tag-color-active($tag-purple);
+}
+
+.tag-red {
+  @include tag-color($tag-red);
+}
+.tag-red.tag-active {
+  @include tag-color-active($tag-red);
+}
+
+.tag-green {
+  @include tag-color($tag-green);
+}
+.tag-green.tag-active {
+  @include tag-color-active($tag-green);
+}
+
+
+.tag-yellow {
+  @include tag-color($tag-yellow);
+}
+.tag-yellow.tag-active {
+  @include tag-color-active($tag-yellow);
+}
+
+
+.tag-grey {
+  @include tag-color($tag-grey);
+}
+.tag-grey.tag-active {
+  @include tag-color-active($tag-grey);
+}
+
