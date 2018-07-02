@@ -11,7 +11,8 @@
     width: 100%;
     height: 100px;
     background-color: #eeeeee;
-    padding: 40px 20px; }
+    padding: 40px 20px;
+    color: #848484; }
   .list-wrapper .pagination {
     width: 100%;
     text-align: center; }

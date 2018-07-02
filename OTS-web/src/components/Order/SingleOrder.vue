@@ -7,8 +7,8 @@
       <h1>{{order.showPlan.name}}（订单号：{{order.id}}）</h1>
       <p class="order-time">{{order.createTime}}</p>
       <div class="right-top">
-        <el-tag size="small" :type="type">{{order.state}}</el-tag>
-
+        <!--<el-tag size="small" :type="type">{{order.state}}</el-tag>-->
+        <span :class="['tag', `tag-${color}`, 'tag-active']">{{order.state}}</span>
       </div>
 
       <div class="button-wrapper">
@@ -65,25 +65,17 @@
           orderSeats.push(seat.area + '区' + row + '排' + col + '座')
         })
       }
-//      let type = ''
-//      if (this.order.state === '已过期') {
-//        type = 'danger'
-//      } else if (this.order.state === '已退款') {
-//        type = 'info'
-//      } else if (this.order.state === '未付款') {
-//        type = 'warning'
-//      } else if (this.order.state === '已完成') {
-//        type = 'success'
-//      }
+
       return {
         posterUrl: require('../../assets/img/' + name),
         orderSeats: orderSeats,
-        type: ORDER_TYPE[this.order.state].tag
+        color: ORDER_TYPE[this.order.state].color
       }
     },
     methods: {
       ...mapMutations('order', [
-        'saveCurrentOrder'
+        'saveCurrentOrder',
+        'saveRefundModal'
       ]),
       handlePay() {
         this.saveCurrentOrder(this.order)
@@ -91,7 +83,7 @@
       },
       handleRefund() {
         this.saveCurrentOrder(this.order)
-        this.$modal.show('refund-modal')
+        this.saveRefundModal(true)
       }
     }
   }

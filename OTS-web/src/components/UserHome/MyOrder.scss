@@ -66,6 +66,13 @@
   @include tag-color-active($tag-blue);
 }
 
+.tag-purple {
+  @include tag-color($tag-purple);
+}
+.tag-purple.tag-active {
+  @include tag-color-active($tag-purple);
+}
+
 .tag-red {
   @include tag-color($tag-red);
 }

@@ -8,8 +8,6 @@
         </side-layout>
       </div>
     </layout>
-
-    <exchange-coupon-modal></exchange-coupon-modal>
   </div>
 
 </template>

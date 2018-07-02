@@ -44,7 +44,7 @@ export const ORDER_TYPE = {
   '全部' : {
     name: '全部',
     tag: '',
-    color: 'blue'
+    color: 'grey'
   },
   '已过期' : {
     name: '已过期',
@@ -54,20 +54,20 @@ export const ORDER_TYPE = {
   '已退款' : {
     name: '已退款',
     tag: 'info',
-    color: 'grey'
+    color: 'purple'
   },
   '未付款' : {
     name: '未付款',
     tag: 'warning',
     color: 'yellow'
   },
-  '已完成' : {
-    name: '已完成',
-    tag: 'success',
-    color: 'green'
-  },
   '已付款' : {
     name: '已付款',
+    tag: 'success',
+    color: 'blue'
+  },
+  '已完成' : {
+    name: '已完成',
     tag: 'success',
     color: 'green'
   },

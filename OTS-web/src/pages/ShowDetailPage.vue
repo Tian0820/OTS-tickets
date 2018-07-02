@@ -6,8 +6,6 @@
       </div>
     </layout>
 
-    <choose-seat-modal></choose-seat-modal>
-
   </div>
 </template>
 

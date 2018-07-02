@@ -58,7 +58,9 @@
     },
     methods: {
       ...mapActions('auth', [
-        'exchangeCoupon'
+        'exchangeCoupon',
+        'getUserCoupons',
+        'fetchCurrentUser'
       ]),
       ...mapMutations('auth', [
         'saveExchangeCouponModal'
@@ -79,6 +81,8 @@
             },
             onSuccess: (success) => {
               this.saveExchangeCouponModal(false)
+              this.getUserCoupons()
+              this.fetchCurrentUser({})
               Message.success(success)
             },
             onError: (error) => {

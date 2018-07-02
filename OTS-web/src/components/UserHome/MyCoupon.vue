@@ -2,10 +2,15 @@
 
   <div class="my-coupon-wrapper">
     <div-header :header="'我的优惠券'"></div-header>
-    <el-button type="primary" @click="handleExchangeCoupon" :disabled="user.point.toFixed(2) === '0.00'">兑换优惠券
+    <el-button type="primary"
+               @click="handleExchangeCoupon"
+               :disabled="user.point.toFixed(2) === '0.00'">兑换优惠券
     </el-button>
-    <div class="coupons-wrapper">
+    <div v-if="coupons" class="coupons-wrapper">
       <single-coupon v-for="item in coupons" :coupon="item"></single-coupon>
+      <div v-if="coupons.length === 0" class="blank">
+        抱歉，没有可用的优惠券！
+      </div>
     </div>
 
   </div>
