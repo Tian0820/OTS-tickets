@@ -34,8 +34,7 @@
     name: 'single-show',
     components: {},
     data() {
-      return {
-      }
+      return {}
     },
     props: ['show'],
     computed: {
@@ -47,7 +46,7 @@
     methods: {
       goToShowDetail() {
         router.push({name: 'ShowDetailPage', params: {showId: this.show.id}})
-        scrollTo(0,0);
+        scrollTo(0, 0);
 
       }
     },
