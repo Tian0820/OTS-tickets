@@ -3,6 +3,7 @@
     <el-input placeholder="请输入演出" :value="inputValue" @change="handleValueChange">
 
       <el-select v-if="isSelect" :value="selectValue" slot="prepend" placeholder="地点" class="select"
+                 :popper-class="'drop-down'"
                  @change="handleSelectChange">
         <el-option v-for="city in cities" :label="city" :value="city"></el-option>
       </el-select>
@@ -39,10 +40,14 @@
         this.onSelectChange(value)
       },
       hendleSearchClick () {
-          this.onSearchClick()
+        this.onSearchClick()
       }
     },
   }
 </script>
 
 <style scoped src="./ShowSearch.css"></style>
+
+<style>
+
+</style>

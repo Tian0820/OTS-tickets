@@ -44,6 +44,19 @@ html {
     font-weight: 300;
   }
 
+  .drop-down {
+
+    .el-select-dropdown__list {
+      padding: 5px;
+    }
+    .el-select-dropdown__item {
+      display: inline-block;
+      width: 25%;
+      padding: 0 5px;
+      text-align: center;
+    }
+  }
+
   //search input style
   //.el-input__inner {
   //  height: 30px;
