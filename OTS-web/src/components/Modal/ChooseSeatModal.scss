@@ -6,8 +6,20 @@
   /deep/ .el-dialog {
     margin-top: 10vh !important;
   }
+  .inner-wrapper {
+    width: 500px;
+    margin:  0 auto;
+  }
+  .limit {
+    color: $light-grey;
+    text-align: left;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
   .stage-p {
-    font-size: 18px;
+    margin: 0 auto;
+    width: 80%;
+    font-size: 14px;
     font-weight: 400;
     color: $grey;
     border: solid 1px $grey;

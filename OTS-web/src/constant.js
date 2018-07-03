@@ -33,7 +33,7 @@ export const SHOW_TYPE = [
 ]
 
 export const CITY = [
-  '全部', '北京', '上海', '南京', '成都'
+  '全部', '北京', '上海', '广州', '南京', '成都'
 ]
 
 export const TYPE = [

@@ -10,9 +10,12 @@
               @click="handleTagClick(type.name)"
         >{{type.name}} {{type.num}}</span>
       </div>
-
-
     </div>
+
+    <div v-if="orders.length === 0" class="blank">
+      抱歉，未找到符合条件的订单！
+    </div>
+
     <single-order v-for="item in orders.slice((page-1)*pageSize, page*pageSize)" :order="item" :key="item.id"></single-order>
     <div v-if="orders.length > 0" class="pagination">
       <el-pagination

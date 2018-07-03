@@ -25,6 +25,7 @@ const state = {
 const actions = {
 
   fetchAllShowPlans({commit, state}, page) {
+    commit('saveBlankAllShowPlans')
     showApi.fetchAllShowPlans(data => {
       if (data !== null) {
         commit('saveAllShowPlans', data)
@@ -33,6 +34,7 @@ const actions = {
   },
 
   fetchTypeShowPlans({commit, state}, type) {
+    // commit('saveBlankTypeShowPlans')
     showApi.fetchTypeShowPlans(data => {
       if (data !== null) {
         commit('saveTypeShowPlans', data)
@@ -52,6 +54,8 @@ const actions = {
   },
 
   fetchSearchShowPlans({commit, state}, page) {
+    commit('saveBlankSearchShowPlans')
+
     let keyword = state.search.keyword
     let city = state.search.city === '全部' ? '' : state.search.city
     let type = state.search.type === '全部' ? '' : state.search.type
@@ -72,8 +76,14 @@ const mutations = {
     state.page = data.number + 1
     state.totalPages = data.totalPages
   },
+  'saveBlankAllShowPlans'(state ) {
+    state.allShowPlans = null
+  },
   'saveTypeShowPlans'(state, data) {
     state.typeShowPlans = data.content
+  },
+  'saveBlankTypeShowPlans'(state ) {
+    state.typeShowPlans = null
   },
   'saveCurrentShow'(state, currentShow) {
     currentShow.seats.sort(function (a, b) {
@@ -99,6 +109,9 @@ const mutations = {
   },
   'saveSearchDate'(state, date) {
     state.search.date = date
+  },
+  'saveBlankSearchShowPlans'(state) {
+    state.search.showPlans = null
   },
   'saveSearchShowPlans'(state, data) {
     state.search.showPlans = data.content

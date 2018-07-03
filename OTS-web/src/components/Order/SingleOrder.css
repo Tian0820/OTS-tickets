@@ -5,7 +5,7 @@
   margin: 20px 0;
   padding: 10px;
   width: 100%;
-  height: 180px;
+  height: 200px;
   background-color: #ffffff; }
   .single-order-wrapper:last-child {
     margin-bottom: 0; }
@@ -17,10 +17,10 @@
     background-size: cover;
     display: inline-block;
     height: 100%;
-    width: 120px; }
+    width: 140px; }
   .single-order-wrapper .info-wrapper {
     position: absolute;
-    padding: 0 10px 0 140px;
+    padding: 0 10px 0 160px;
     left: 0;
     top: 10px;
     bottom: 10px;
