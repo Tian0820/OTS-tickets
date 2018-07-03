@@ -1,30 +1,12 @@
-html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  list-style: none; }
-
-html {
-  height: 100%; }
-
-* {
-  position: relative;
-  box-sizing: border-box; }
-
-button {
-  outline: none; }
-
 /*
  * grid
  */
 .single-order-wrapper {
-  margin-bottom: 10px;
+  margin: 20px 0;
   padding: 10px;
   width: 100%;
-  height: 150px;
-  border: 1px solid #e8e8e8; }
+  height: 180px;
+  background-color: #ffffff; }
   .single-order-wrapper:last-child {
     margin-bottom: 0; }
   .single-order-wrapper .img-wrapper {
@@ -35,25 +17,37 @@ button {
     background-size: cover;
     display: inline-block;
     height: 100%;
-    width: 100px; }
+    width: 120px; }
   .single-order-wrapper .info-wrapper {
-    display: inline-block;
-    margin-left: 20px;
-    width: 770px;
+    position: absolute;
+    padding: 0 10px 0 140px;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 100%;
     vertical-align: top; }
     .single-order-wrapper .info-wrapper h1 {
       display: inline-block;
       color: #595959;
       font-size: 16px;
       font-weight: 400; }
+    .single-order-wrapper .info-wrapper .right-top {
+      position: absolute;
+      top: 0;
+      right: 10px;
+      text-align: right; }
     .single-order-wrapper .info-wrapper .order-time {
-      float: right;
       margin-top: 5px;
       font-size: 12px;
       color: #bababa; }
-    .single-order-wrapper .info-wrapper button {
-      float: right;
-      padding: 5px 10px;
+    .single-order-wrapper .info-wrapper .detail-wrapper {
+      position: absolute;
+      bottom: 0; }
+    .single-order-wrapper .info-wrapper .button-wrapper {
+      position: absolute;
+      right: 10px;
+      bottom: 0; }
+    .single-order-wrapper .info-wrapper /deep/ .el-button {
       background-color: #e9a038;
       border-radius: 3px;
       color: #ffffff;
@@ -63,7 +57,7 @@ button {
       -ms-transition: all, 0.3s;
       -o-transition: all, 0.3s;
       transition: all, 0.3s; }
-      .single-order-wrapper .info-wrapper button:hover {
+      .single-order-wrapper .info-wrapper /deep/ .el-button:hover {
         -webkit-transition: all, 0.3s;
         -moz-transition: all, 0.3s;
         -ms-transition: all, 0.3s;
@@ -71,11 +65,71 @@ button {
         transition: all, 0.3s;
         background-color: #f1a63a; }
     .single-order-wrapper .info-wrapper p {
-      display: inline-block;
       margin-top: 3px;
       font-size: 14px;
       color: #595959; }
-    .single-order-wrapper .info-wrapper /deep/ .el-tag {
-      margin-left: 10px; }
+
+.tag {
+  display: inline-block;
+  padding: 0 10px;
+  height: 28px;
+  line-height: 27px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid;
+  box-sizing: border-box;
+  white-space: nowrap;
+  cursor: pointer; }
+
+.tag + .tag {
+  margin-left: 10px; }
+
+.tag-blue {
+  color: #409eff;
+  border-color: rgba(64, 158, 255, 0.8); }
+
+.tag-blue.tag-active {
+  background-color: rgba(64, 158, 255, 0.1);
+  border-color: rgba(64, 158, 255, 0.2); }
+
+.tag-purple {
+  color: #b59bff;
+  border-color: rgba(181, 155, 255, 0.8); }
+
+.tag-purple.tag-active {
+  background-color: rgba(181, 155, 255, 0.1);
+  border-color: rgba(181, 155, 255, 0.2); }
+
+.tag-red {
+  color: #f56c6c;
+  border-color: rgba(245, 108, 108, 0.8); }
+
+.tag-red.tag-active {
+  background-color: rgba(245, 108, 108, 0.1);
+  border-color: rgba(245, 108, 108, 0.2); }
+
+.tag-green {
+  color: #67c23a;
+  border-color: rgba(103, 194, 58, 0.8); }
+
+.tag-green.tag-active {
+  background-color: rgba(103, 194, 58, 0.1);
+  border-color: rgba(103, 194, 58, 0.2); }
+
+.tag-yellow {
+  color: #e6a23c;
+  border-color: rgba(230, 162, 60, 0.8); }
+
+.tag-yellow.tag-active {
+  background-color: rgba(230, 162, 60, 0.1);
+  border-color: rgba(230, 162, 60, 0.2); }
+
+.tag-grey {
+  color: #909399;
+  border-color: rgba(144, 147, 153, 0.8); }
+
+.tag-grey.tag-active {
+  background-color: rgba(144, 147, 153, 0.1);
+  border-color: rgba(144, 147, 153, 0.2); }
 
 /*# sourceMappingURL=SingleOrder.css.map */

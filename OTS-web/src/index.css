@@ -35,5 +35,23 @@ html .container {
 @media (max-width: 1000px) {
   html .container {
     width: 100%; } }
+html .el-dialog__wrapper {
+  position: fixed; }
+html .el-dialog {
+  position: relative; }
+html .el-dialog__header .el-dialog__title {
+  color: #595959;
+  font-weight: 400; }
+html .el-button {
+  font-weight: 300; }
+html .drop-down .el-select-dropdown__list {
+  padding: 5px; }
+html .drop-down .el-select-dropdown__item {
+  display: inline-block;
+  width: 25%;
+  padding: 0 5px;
+  text-align: center; }
+html .date-picker .el-date-range-picker__header div {
+  margin-left: 50px; }
 
 /*# sourceMappingURL=index.css.map */

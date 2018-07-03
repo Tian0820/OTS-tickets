@@ -26,6 +26,44 @@ html {
     }
   }
 
+  // dialog
+  .el-dialog__wrapper {
+    position: fixed;
+  }
+  .el-dialog {
+    position: relative;
+  }
+  .el-dialog__header {
+    .el-dialog__title {
+      color: $grey;
+      font-weight: 400;
+    }
+  }
+
+  .el-button {
+    font-weight: 300;
+  }
+
+  .drop-down {
+
+    .el-select-dropdown__list {
+      padding: 5px;
+    }
+    .el-select-dropdown__item {
+      display: inline-block;
+      width: 25%;
+      padding: 0 5px;
+      text-align: center;
+    }
+  }
+
+  .date-picker {
+    .el-date-range-picker__header div {
+      margin-left: 50px;
+    }
+  }
+
+
   //search input style
   //.el-input__inner {
   //  height: 30px;

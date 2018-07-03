@@ -1,21 +1,3 @@
-html, body, h1, h2, h3, h4, h5, h6, hr, li, ul, p, a, img, button {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  list-style: none; }
-
-html {
-  height: 100%; }
-
-* {
-  position: relative;
-  box-sizing: border-box; }
-
-button {
-  outline: none; }
-
 /*
  * grid
  */
@@ -39,7 +21,7 @@ button {
       height: 60px;
       bottom: -60px;
       padding: 10px 15px;
-      background-color: rgba(233, 160, 56, 0.7);
+      background-color: rgba(233, 160, 56, 0.85);
       color: #ffffff;
       font-size: 14px;
       -webkit-transition: all, 0.3s;
@@ -56,7 +38,12 @@ button {
     .single-show-wrapper .show-info-wrapper p {
       color: #595959;
       font-weight: 400;
-      font-size: 14px; }
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; }
     .single-show-wrapper .show-info-wrapper .show-type {
       display: inline-block;
       vertical-align: top;

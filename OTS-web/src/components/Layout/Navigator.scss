@@ -1,5 +1,4 @@
 @import "../../assets/scss/variables";
-@import "../../assets/scss/base";
 @import "../../assets/scss/mixin";
 
 .nav-wrapper {
@@ -8,7 +7,7 @@
   position: fixed;
   z-index: 9;
   background-color: $white-color;
-  box-shadow: 0px 1px 3px $light-grey;
+  box-shadow: 0px 0px 1px $light-grey;
 
   .left-wrapper {
     display: inline-block;

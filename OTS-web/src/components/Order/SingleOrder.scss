@@ -1,14 +1,12 @@
 @import "../../assets/scss/variables";
-@import "../../assets/scss/base";
 @import "../../assets/scss/mixin";
 
 .single-order-wrapper {
-  margin-bottom: 10px;
+  margin: 20px 0;
   padding: 10px;
   width: 100%;
-  height: 150px;
-  border: 1px solid $border-color;
-  //background-color: red;
+  height: 180px;
+  background-color: $white-color;
 
   &:last-child {
     margin-bottom: 0;
@@ -18,13 +16,17 @@
     @include cover-img();
     display: inline-block;
     height: 100%;
-    width: 100px;
+    width: 120px;
   }
 
   .info-wrapper {
-    display: inline-block;
-    margin-left: 20px;
-    width: 770px;
+    position: absolute;
+    //display: inline-block;
+    padding: 0 10px 0 140px;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 100%;
     vertical-align: top;
 
     h1 {
@@ -33,17 +35,34 @@
       font-size: 16px;
       font-weight: 400;
     }
+    .right-top {
+      position: absolute;
+      top: 0;
+      right: 10px;
+      text-align: right;
+    }
 
     .order-time {
-      float: right;
+      //display: inline-block;
+      //float: right;
       margin-top: 5px;
       font-size: 12px;
       color: $light-grey;
     }
 
-    button {
-      float: right;
-      padding: 5px 10px;
+    .detail-wrapper {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .button-wrapper {
+      position: absolute;
+      right: 10px;
+      bottom: 0;
+    }
+    /deep/ .el-button {
+      //float: right;
+      //padding: 5px 10px;
       background-color: $main-color;
       border-radius: 3px;
       color: $white-color;
@@ -57,14 +76,84 @@
     }
 
     p {
-      display: inline-block;
+      //display: inline-block;
       margin-top: 3px;
       font-size: 14px;
       color: $grey;
     }
 
-    /deep/ .el-tag {
-      margin-left: 10px;
-    }
+    ///deep/ .el-tag {
+    //  margin-left: 10px;
+    //}
   }
 }
+
+.tag {
+  display: inline-block;
+  padding: 0 10px;
+  height: 28px;
+  line-height: 27px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid;
+  box-sizing: border-box;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tag+.tag {
+  margin-left: 10px;
+}
+@mixin tag-color($color) {
+  color: $color;
+  border-color: rgba($color, 0.8);
+}
+@mixin tag-color-active($color) {
+  background-color: rgba($color, 0.1);
+  border-color: rgba($color, 0.2);
+}
+
+.tag-blue {
+  @include tag-color($tag-blue);
+}
+.tag-blue.tag-active {
+  @include tag-color-active($tag-blue);
+}
+
+.tag-purple {
+  @include tag-color($tag-purple);
+}
+.tag-purple.tag-active {
+  @include tag-color-active($tag-purple);
+}
+
+.tag-red {
+  @include tag-color($tag-red);
+}
+.tag-red.tag-active {
+  @include tag-color-active($tag-red);
+}
+
+.tag-green {
+  @include tag-color($tag-green);
+}
+.tag-green.tag-active {
+  @include tag-color-active($tag-green);
+}
+
+
+.tag-yellow {
+  @include tag-color($tag-yellow);
+}
+.tag-yellow.tag-active {
+  @include tag-color-active($tag-yellow);
+}
+
+
+.tag-grey {
+  @include tag-color($tag-grey);
+}
+.tag-grey.tag-active {
+  @include tag-color-active($tag-grey);
+}
+

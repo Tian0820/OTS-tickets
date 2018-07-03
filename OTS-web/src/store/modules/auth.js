@@ -1,20 +1,23 @@
 import * as authApi from '../../api/auth'
 
 const state = {
-    loginType: null,
-    registerStep: 0,
-    ifSendVerifyCode: false,
-    username: '',
-    email: '',
-    password: '',
-    phone: '',
-    currentUsername: '',
-    currentUser: null,
-    userOrders: [],
-    userCoupons: [],
-    modifyType: 'info'
-  }
-;
+  loginType: null,
+  registerStep: 0,
+  ifSendVerifyCode: false,
+  username: '',
+  email: '',
+  password: '',
+  phone: '',
+  currentUsername: '',
+  currentUser: null,
+  userOrders: [],
+  orderFilter: '全部',
+  userCoupons: [],
+  homeType: 'info',
+  modifyType: 'info',
+  exchangeCouponModal: false,
+
+};
 
 const actions = {
 
@@ -83,7 +86,9 @@ const actions = {
           onSuccess(state.currentUser.username)
         }
       } else {
-        onError('登录已过期，请重新登录！')
+        if (onError) {
+          onError('登录已过期，请重新登录！')
+        }
       }
     }, currentUsername)
   },
@@ -201,8 +206,17 @@ const mutations = {
   'saveUserCoupons'(state, userCoupons) {
     state.userCoupons = userCoupons
   },
+  'saveHomeType'(state, type) {
+    state.homeType = type
+  },
   'saveModifyType'(state, type) {
     state.modifyType = type
+  },
+  'saveOrderFilter'(state, orderFilter) {
+    state.orderFilter = orderFilter
+  },
+  'saveExchangeCouponModal'(state, exchangeCouponModal) {
+    state.exchangeCouponModal = exchangeCouponModal
   }
 };
 

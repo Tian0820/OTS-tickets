@@ -1,0 +1,56 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/base";
+@import "../../assets/scss/mixin";
+
+.pay-success-wrapper {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 30px;
+  width: 100%;
+  height: auto;
+  background-color: $white-color;
+
+  .info-wrapper {
+    margin-top: 40px;
+    text-align: center;
+
+    span {
+      margin-left: 10px;
+      font-size: 24px;
+      font-weight: 400;
+      color: $area-green;
+    }
+
+    p {
+      display: inline-block;
+      margin-top: 20px;
+      color: $main-color;
+      font-size: 14px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+/deep/ .el-step__head.is-success {
+  color: $main-color;
+  border-color: $main-color;
+}
+
+/deep/ .el-step__title.is-success {
+  color: $main-color;
+}
+
+/deep/ .el-step__head.is-process {
+  color: $main-color;
+  border-color: $main-color;
+}
+
+/deep/ .el-step__title.is-process {
+  color: $main-color;
+}
+
+/deep/ [class^="el-icon-"], [class*=" el-icon-"] {
+  color: $area-green;
+  font-size: 30px;
+}

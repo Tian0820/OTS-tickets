@@ -1,9 +1,9 @@
 <template>
 
   <div class="user-home-wrapper">
-    <user-info-brief></user-info-brief>
-    <my-order v-if="userOrders" :userOrders="userOrders"></my-order>
-    <my-coupon></my-coupon>
+    <user-info-brief v-if="homeType === 'info'"></user-info-brief>
+    <my-order v-if="homeType === 'order'" :userOrders="userOrders"></my-order>
+    <my-coupon v-if="homeType === 'coupon'"></my-coupon>
 
   </div>
 
@@ -26,7 +26,8 @@
     },
     computed: {
       ...mapState('auth', {
-        userOrders: state => state.userOrders
+        userOrders: state => state.userOrders,
+        homeType: state => state.homeType
       })
     },
     data() {

@@ -15,8 +15,13 @@
 
         <type-tabs v-if="showPlans" :types="tabTypes" :value="tabValue" :tabClick="handleTypeTabClick"></type-tabs>
         <show-list v-if="typeShowPlans" :showPlans="typeShowPlans"></show-list>
+        <div>
+          <button v-if="typeShowPlans" class="more" @click="handleClickMore">
+            更多<i class="el-icon-d-arrow-right el-icon--right"></i>
+          </button>
+        </div>
 
-        <div v-if="showPlans">
+        <div v-if="showPlans" class="recent">
           <div-header :header="'最近演出'"></div-header>
           <show-list :showPlans="showPlans"
                      :pageInfo="pageInfo"
@@ -107,6 +112,10 @@
       },
       handleSearchClick () {
         this.saveSearchType('全部')
+        router.push({name: 'ShowSearchPage'})
+      },
+      handleClickMore () {
+        this.saveSearchType(this.tabValue)
         router.push({name: 'ShowSearchPage'})
       }
     },

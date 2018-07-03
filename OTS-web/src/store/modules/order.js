@@ -2,7 +2,8 @@ import * as orderApi from '../../api/order'
 
 const state = {
     currentOrder: null,
-    allOrders: null
+    allOrders: null,
+    refundModal: false
   }
 ;
 
@@ -14,10 +15,10 @@ const actions = {
       if (data !== null && data !== undefined) {
         commit('saveCurrentOrder', data)
         if (onSuccess) {
-          onSuccess('下单成功！')
+          onSuccess(data.message)
         }
       } else {
-        onError('下单失败！')
+        onError(data.message)
       }
     }, info)
   },
@@ -30,15 +31,16 @@ const actions = {
     }, id)
   },
 
-  payOrder({commit, state}, {order, onSuccess, onError}) {
+  payOrder({commit, state, dispatch}, {order, onSuccess, onError}) {
     console.log('pay-order', order)
     orderApi.payOrder(data => {
       if (data.result === true) {
         if (onSuccess) {
-          onSuccess("支付成功！")
+          dispatch('fetchOrder', state.currentOrder.id)
+          onSuccess('支付成功！')
         }
       } else {
-        onError("支付失败！")
+        onError(data.message)
       }
     }, order)
   },
@@ -72,6 +74,9 @@ const mutations = {
   },
   'saveAllOrders'(state, allOrders) {
     state.allOrders = allOrders
+  },
+  'saveRefundModal'(state, refundModal) {
+    state.refundModal = refundModal
   }
 };
 

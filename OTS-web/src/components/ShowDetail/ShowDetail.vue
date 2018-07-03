@@ -66,7 +66,11 @@
     <div class="show-info-wrapper">
       <div-header :header="'演出信息'"></div-header>
 
-      <p>{{currentShow.introduction}}</p>
+      <pre>
+         <!--<p>-->
+        {{currentShow.introduction}}
+        <!--</p>-->
+      </pre>
     </div>
   </div>
 
@@ -133,16 +137,17 @@
         'createOrder'
       ]),
       ...mapMutations('showPlan', [
-        'saveChosenArea'
+        'saveChosenArea',
+        'saveChooseSeatModal'
       ]),
       handleChange(val) {
 //        this.chosenPrices = this.checkboxGroup
       },
       handleChooseSeat() {
         if (this.type === 'user') {
-          this.$modal.show('choose-seat-modal')
+          this.saveChooseSeatModal(true)
         } else if (this.type === 'venue') {
-          this.$modal.show('user-account-modal')
+          this.saveChooseSeatModal(true)
         } else if (this.type === 'manager') {
           Message.warning('经理无法操作！')
         } else {
@@ -170,7 +175,7 @@
             seats: seats.join(';')
           },
           onSuccess: (success) => {
-            Message.success(success)
+//            Message.success(success)
             router.push({name: 'PayPage', params: {orderId: this.currentOrder.id}})
           },
           onError:

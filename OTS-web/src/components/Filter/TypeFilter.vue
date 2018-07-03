@@ -8,12 +8,11 @@
 </template>
 
 <script>
-  import {Radio} from 'element-ui'
+
 
   export default {
     name: 'type-filter',
     components: {
-      elRadio: Radio
     },
     props: ['filter'],
     data () {
