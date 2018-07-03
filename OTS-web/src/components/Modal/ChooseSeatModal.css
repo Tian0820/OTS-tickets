@@ -82,6 +82,15 @@
   color: #ffcf53; }
 .modal-wrapper .seat-3 {
   color: #add478; }
+.modal-wrapper .chosen {
+  font-size: 14px;
+  color: #595959;
+  text-align: left; }
+.modal-wrapper .price {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #595959;
+  text-align: left; }
 .modal-wrapper .confirm-button-wrapper {
   position: absolute;
   right: 0;

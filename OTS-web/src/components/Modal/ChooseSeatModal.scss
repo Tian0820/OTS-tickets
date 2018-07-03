@@ -8,7 +8,7 @@
   }
   .inner-wrapper {
     width: 500px;
-    margin:  0 auto;
+    margin: 0 auto;
   }
   .limit {
     color: $light-grey;
@@ -32,7 +32,7 @@
   }
 
   /deep/ .area-2-p {
-    margin-top:  10px;
+    margin-top: 10px;
     font-size: 12px;
     font-weight: 400;
     color: $area-yellow;
@@ -141,6 +141,17 @@
     color: $area-green
   }
 
+  .chosen {
+    font-size: 14px;
+    color: #595959;
+    text-align: left;
+  }
+  .price {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #595959;
+    text-align: left;
+  }
   .confirm-button-wrapper {
     //display: inline-block;
     position: absolute;

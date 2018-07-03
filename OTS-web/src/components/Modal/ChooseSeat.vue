@@ -6,6 +6,7 @@
   <div>
 
     <!--<h1>选座购票 <span :style="{color: '#595959', fontSize: '12px'}">（最多选择6个）</span></h1>-->
+    <div class="inner-wrapper">
 
     <div :style="{textAlign: 'center'}">
       <p class="stage-p">舞台</p>
@@ -34,42 +35,14 @@
         </el-checkbox-group>
         <!--<el-buttonxxcloseBox"></el-button>-->
 
-        <div class="inner-wrapper">
+
 
           <!--<h1>选座购票 <span :style="{color: '#595959', fontSize: '12px'}">（最多选择6个）</span></h1>-->
 
-          <div :style="{textAlign: 'center'}">
-
-            <div class="stage-p">舞台</div>
-            <div :style="{padding: '20px 100px'}">
-              <el-checkbox-group
-                v-model="chosenSeats"
-                :min="1"
-                :max="6">
-                <p class="area-1-p">一区 780元</p>
-                <el-checkbox class="area-1-box" v-for="(seat, index) in seats" v-if="index < 30"
-                             :disabled="seat.available===0"
-                             :label="seat"
-                             :key="seat.id">&nbsp;
-                </el-checkbox>
-                <p class="area-2-p">二区 580元</p>
-                <el-checkbox class="area-2-box" v-for="(seat, index) in seats" v-if="index >= 30 && index < 70"
-                             :disabled="seat.available===0" :label="seat"
-                             :key="seat.id">&nbsp;
-                </el-checkbox>
-                <p class="area-3-p">三区 380元</p>
-                <el-checkbox class="area-3-box" v-for="(seat, index) in seats" v-if="index >= 70"
-                             :disabled="seat.available===0"
-                             :label="seat"
-                             :key="seat.id">&nbsp;
-                </el-checkbox>
-              </el-checkbox-group>
-            </div>
-          </div>
         </div>
 
-        <div>
-          <span :style="{fontSize: '14px', color: '#595959'}">已选：</span>
+        <div class="chosen">
+          <span  >已选：</span>
           <div v-for="seat in chosenSeats" class="chosen-seat" :class="chosenSeat(seat)">
             <button class="chosen-seat-button" :class="chosenSeat(seat)" type="primary"></button>
             {{calSeatNumber(seat)}}
@@ -77,7 +50,7 @@
         </div>
         <p class="limit">最多都买6张</p>
 
-        <p :style="{marginTop: '30px',fontSize: '14px', color: '#595959'}">
+        <p  class="price" >
           共 <span :style="{border: 'none', fontSize: '20px', color: '#E9A038', fontWeight: '400'}">{{totalPrice}}</span>
           元
         </p>
