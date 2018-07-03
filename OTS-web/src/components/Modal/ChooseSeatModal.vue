@@ -9,7 +9,7 @@
     title="选座购票"
     :visible="chooseSeatModal"
     @close="handleClose"
-    width="540px"
+    width="600px"
     margin-top="10vh">
 
 

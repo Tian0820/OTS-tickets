@@ -19,7 +19,8 @@
     height: 100%;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover; }
+    background-size: cover;
+    cursor: pointer; }
     .banner-wrapper .img-wrapper h1 {
       padding-top: 120px;
       color: #ffffff;

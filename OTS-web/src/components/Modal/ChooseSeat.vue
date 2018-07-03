@@ -3,12 +3,13 @@
   <!--<div class="modal-wrapper" v-if="currentShow">-->
     <!--<el-buttonxxcloseBox"></el-button>-->
 
-    <div>
+    <div class="inner-wrapper">
 
       <!--<h1>选座购票 <span :style="{color: '#595959', fontSize: '12px'}">（最多选择6个）</span></h1>-->
 
       <div :style="{textAlign: 'center'}">
-        <p class="stage-p">舞台</p>
+
+        <div class="stage-p">舞台</div>
         <div :style="{padding: '20px 100px'}">
           <el-checkbox-group
             v-model="chosenSeats"
@@ -42,6 +43,7 @@
           {{calSeatNumber(seat)}}
         </div>
       </div>
+      <p class="limit">最多都买6张</p>
 
       <p :style="{marginTop: '30px',fontSize: '14px', color: '#595959'}">
         共 <span :style="{border: 'none', fontSize: '20px', color: '#E9A038', fontWeight: '400'}">{{totalPrice}}</span> 元
