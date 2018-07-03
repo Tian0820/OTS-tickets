@@ -4,7 +4,7 @@
     </div>
 
     <div class="info-wrapper">
-      <h1>{{order.showPlan.name}}（订单号：{{order.id}}）</h1>
+      <h1>{{order.showPlan.name}}</h1>
       <p class="order-time">{{order.createTime}}</p>
       <div class="right-top">
         <!--<el-tag size="small" :type="type">{{order.state}}</el-tag>-->
@@ -19,6 +19,7 @@
       </div>
 
       <div class="detail-wrapper">
+        <p>订单号：{{order.id}}</p>
         <p>时间：{{order.showPlan.time}}</p>
         <p>地点：{{order.showPlan.venue.city}}   {{order.showPlan.venue.venueName}}    {{order.showPlan.venue.address}}</p>
         <p>座位：{{orderSeats.join(', ')}}</p>

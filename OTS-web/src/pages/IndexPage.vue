@@ -4,7 +4,7 @@
       <banner></banner>
 
       <div class="container">
-        <show-search v-if="showPlans" class="show-search"
+        <show-search v-if="typeShowPlans" class="show-search"
                      :isSelect="true"
                      :inputValue="keyword"
                      :onInputChange="handleSearchKeywordChange"
@@ -13,19 +13,20 @@
                      :onSearchClick="handleSearchClick"
         ></show-search>
 
-        <type-tabs v-if="showPlans" :types="tabTypes" :value="tabValue" :tabClick="handleTypeTabClick"></type-tabs>
-        <show-list v-if="typeShowPlans" :showPlans="typeShowPlans"></show-list>
         <div>
           <button v-if="typeShowPlans" class="more" @click="handleClickMore">
             更多<i class="el-icon-d-arrow-right el-icon--right"></i>
           </button>
         </div>
+        <type-tabs v-if="typeShowPlans" :types="tabTypes" :value="tabValue" :tabClick="handleTypeTabClick"></type-tabs>
+        <show-list v-if="typeShowPlans" :showPlans="typeShowPlans"></show-list>
+
 
         <div v-if="showPlans" class="recent">
-          <div-header :header="'最近演出'"></div-header>
+          <div-header :header="'最近演出'" ref="showHeader"></div-header>
           <show-list :showPlans="showPlans"
                      :pageInfo="pageInfo"
-                     :changePage="fetchAllShowPlans"
+                     :changePage="handleChangePage"
           ></show-list>
         </div>
 
@@ -117,8 +118,15 @@
         router.push({name: 'ShowSearchPage'})
       },
       handleClickMore () {
+        this.saveSearchType('全部')
+        this.saveSearchDate(['全部'])
+
         this.saveSearchType(this.tabValue)
         router.push({name: 'ShowSearchPage'})
+      },
+      handleChangePage(page) {
+
+          this.fetchAllShowPlans(page)
       }
     },
     beforeRouteEnter(to, from, next) {
