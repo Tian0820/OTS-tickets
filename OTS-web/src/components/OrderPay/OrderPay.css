@@ -52,6 +52,11 @@
       font-weight: 400;
       color: #e9a038; }
   .order-pay-wrapper .show-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     display: inline-block;
     vertical-align: middle;
     color: #595959;

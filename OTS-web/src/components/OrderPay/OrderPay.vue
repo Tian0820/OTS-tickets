@@ -99,13 +99,19 @@
     data() {
       let name = this.currentOrder.showPlan.id + '.jpeg'
       let createTime = new Date(this.currentOrder.createTime)
+      let minDiscount = 1
+      this.userCoupons.map(c => {
+        if (c.discount < minDiscount) {
+          minDiscount = c.discount
+        }
+      })
 
       return {
         posterUrl: require('../../assets/img/' + name),
         limitTime: new Date(createTime.setMinutes(createTime.getMinutes() + 15)),
         leftTime: '--:--',
         expired: false,
-        chosenDiscount: 1,
+        chosenDiscount: minDiscount
       }
     },
     mounted: function () {

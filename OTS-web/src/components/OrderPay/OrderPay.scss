@@ -68,6 +68,7 @@
   }
 
   .show-title {
+    @include line-wrap(1);
     display: inline-block;
     vertical-align: middle;
     color: $grey;
