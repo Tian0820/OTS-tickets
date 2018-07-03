@@ -36,7 +36,7 @@
     data() {
       let name = '0banner.jpeg'
       return {
-        urlIndex: [0, 10, 11, 21, 22],
+        urlIndex: [0, 10, 11, 21, 22, 26],
         name: '0banner.jpeg',
 //        bannerUrl: require('../../assets/img/' + name),
         input: ''
