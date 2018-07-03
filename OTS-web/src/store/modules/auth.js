@@ -1,24 +1,23 @@
 import * as authApi from '../../api/auth'
 
 const state = {
-    loginType: null,
-    registerStep: 0,
-    ifSendVerifyCode: false,
-    username: '',
-    email: '',
-    password: '',
-    phone: '',
-    currentUsername: '',
-    currentUser: null,
-    userOrders: [],
-    orderFilter: '全部',
-    userCoupons: [],
-    homeType: 'info',
-    modifyType: 'info',
-    exchangeCouponModal: false,
+  loginType: null,
+  registerStep: 0,
+  ifSendVerifyCode: false,
+  username: '',
+  email: '',
+  password: '',
+  phone: '',
+  currentUsername: '',
+  currentUser: null,
+  userOrders: [],
+  orderFilter: '全部',
+  userCoupons: [],
+  homeType: 'info',
+  modifyType: 'info',
+  exchangeCouponModal: false,
 
-  }
-;
+};
 
 const actions = {
 

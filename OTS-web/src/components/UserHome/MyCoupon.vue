@@ -35,7 +35,30 @@
     },
     computed: {
       ...mapState('auth', {
-        coupons: state => state.userCoupons,
+        coupons: state => {
+
+          let array = []
+
+          state.userCoupons.forEach(c => {
+
+            let coupon = array.filter(a => a.couponName === c.couponName)
+
+            if (coupon.length > 0) {
+              coupon[0].num += 1
+            } else {
+
+              array.push({
+                ...c,
+                num: 1
+              })
+            }
+          })
+
+          console.log(array)
+
+          return array
+
+        },
         user: state => state.currentUser
       })
     },
