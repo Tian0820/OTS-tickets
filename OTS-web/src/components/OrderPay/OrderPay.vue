@@ -42,7 +42,7 @@
           <p class="show-info" :style="{display: 'inline-block', verticalAlign: 'top'}">优惠券：</p>
           <el-radio-group v-model="chosenDiscount">
             <el-radio :label="1">不使用优惠券</el-radio>
-            <el-radio v-for="(coupon, index) in userCoupons" :label=coupon.discount>{{coupon.couponName}}</el-radio>
+            <el-radio v-for="(coupon, index) in coupons" :label=coupon.discount>{{coupon.couponName}}</el-radio>
             <!--<el-radio :label="3">备选项</el-radio>-->
             <!--<el-radio :label="6">备选项</el-radio>-->
             <!--<el-radio :label="9">备选项</el-radio>-->
@@ -126,6 +126,17 @@
           })
         }
         return seats
+      },
+
+      coupons: function () {
+        let coupons = []
+        this.userCoupons.forEach(coupon => {
+          let temp = coupons.filter(c => c.couponName === coupon.couponName)
+          if (temp.length === 0) {
+            coupons.push(coupon)
+          }
+        })
+        return coupons
       }
     },
     methods: {

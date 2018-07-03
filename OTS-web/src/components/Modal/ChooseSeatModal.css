@@ -80,6 +80,7 @@
     margin-top: 20px;
     padding: 5px 10px;
     border-radius: 3px;
+    border: none;
     background-color: #e9a038;
     color: #ffffff;
     cursor: pointer;
@@ -95,5 +96,8 @@
       -o-transition: all, 0.3s;
       transition: all, 0.3s;
       background-color: #f1a63a; }
+    .modal-wrapper .confirm-button-wrapper .confirm-button:disabled {
+      background-color: #bababa;
+      cursor: not-allowed; }
 
 /*# sourceMappingURL=ChooseSeatModal.css.map */

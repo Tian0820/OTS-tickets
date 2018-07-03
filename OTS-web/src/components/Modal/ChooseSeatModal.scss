@@ -140,6 +140,7 @@
       margin-top: 20px;
       padding: 5px 10px;
       border-radius: 3px;
+      border: none;
       background-color: $main-color;
       color: $white-color;
       cursor: pointer;
@@ -148,6 +149,11 @@
       &:hover {
         @include transition(all, 0.3s);
         background-color: $sub-color;
+      }
+
+      &:disabled {
+        background-color: $light-grey;
+        cursor: not-allowed;
       }
     }
   }
