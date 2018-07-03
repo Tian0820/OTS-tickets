@@ -136,9 +136,6 @@
       handleSearchClick () {
 //        router.push({name: 'ShowSearchPage'})
         this.fetchSearchShowPlans(1)
-      },
-      handlePageChange () {
-
       }
     },
     beforeRouteEnter(to, from, next) {

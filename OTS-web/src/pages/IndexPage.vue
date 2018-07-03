@@ -98,7 +98,8 @@
       ...mapMutations('showPlan', [
         'saveSearchKeyword',
         'saveSearchCity',
-        'saveSearchType'
+        'saveSearchType',
+        'saveSearchDate'
       ]),
       handleTypeTabClick (tab) {
         this.tabValue = tab
@@ -112,6 +113,7 @@
       },
       handleSearchClick () {
         this.saveSearchType('全部')
+        this.saveSearchDate(['全部'])
         router.push({name: 'ShowSearchPage'})
       },
       handleClickMore () {

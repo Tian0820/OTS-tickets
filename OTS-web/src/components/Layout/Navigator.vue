@@ -34,7 +34,7 @@
 
           <div v-else-if="user">
             <el-dropdown placement="bottom-start" @command="handleUserCommand">
-          <span class="el-dropdown-link">
+          <span class="username">
           {{user.username}}<i class="el-icon-caret-bottom el-icon--right"></i>
           </span>
               <el-dropdown-menu slot="dropdown">

@@ -32,7 +32,7 @@
   .single-coupon-wrapper .circle-o {
     z-index: 2;
     position: absolute;
-    top: 87px;
+    top: 8px;
     width: 26px;
     height: 26px;
     border-radius: 13px;
@@ -55,7 +55,7 @@
       right: -14px; }
   .single-coupon-wrapper .num-wrapper {
     height: 40px;
-    border-top: dashed 1px #eeeeee;
+    border-top: dashed 1px #dddddd;
     padding: 10px 30px; }
     .single-coupon-wrapper .num-wrapper p {
       font-size: 14px;

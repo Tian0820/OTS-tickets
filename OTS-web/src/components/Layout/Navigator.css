@@ -58,6 +58,8 @@
         .nav-wrapper .right-wrapper .button-wrapper .el-button /deep/ .el-icon-caret-bottom:before, .nav-wrapper .right-wrapper .button-wrapper .el-dropdown /deep/ .el-icon-caret-bottom:before {
           font-size: 10px;
           color: #848484; }
+    .nav-wrapper .right-wrapper .username {
+      cursor: pointer; }
 
 li {
   padding: 2px 10px;
