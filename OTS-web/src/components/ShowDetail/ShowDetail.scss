@@ -93,9 +93,11 @@
   background-color: $white-color;
 
   pre {
+    margin: 0;
     color: $grey;
     font-family: $base-font-family;
     font-size: 14px;
+    font-weight: 400;
     word-wrap: break-word;
     white-space: pre-wrap;
   }

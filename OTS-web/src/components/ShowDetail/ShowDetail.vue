@@ -64,13 +64,13 @@
     </div>
 
     <div class="show-info-wrapper">
-      <div-header :header="'演出信息'"></div-header>
+      <div-header :header="'基本信息'"></div-header>
+      <img src="../../assets/img/basicInfo.png" width="60%" draggable="false"/>
+      <br/>
+      <br/>
 
-      <pre>
-         <!--<p>-->
-        {{currentShow.introduction}}
-        <!--</p>-->
-      </pre>
+      <div-header :header="'演出介绍'"></div-header>
+      <pre>{{currentShow.introduction}}</pre>
     </div>
   </div>
 
