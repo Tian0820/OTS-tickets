@@ -57,6 +57,13 @@ html {
     }
   }
 
+  .date-picker {
+    .el-date-range-picker__header div {
+      margin-left: 50px;
+    }
+  }
+
+
   //search input style
   //.el-input__inner {
   //  height: 30px;

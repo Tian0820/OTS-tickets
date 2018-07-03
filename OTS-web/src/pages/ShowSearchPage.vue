@@ -9,7 +9,7 @@
                      :onSearchClick="handleSearchClick"
         ></show-search>
 
-        <filter-group class="filter" :filters="filters"></filter-group>
+        <filter-group class="filter" :filters="filters" :dateFilter="dateFilter"></filter-group>
 
         <show-list v-if="showPlans"
                    :showPlans="showPlans"
@@ -30,6 +30,7 @@
   import {router, store} from '../main'
   import {mapActions, mapMutations, mapState} from 'vuex'
   import {CITY, TYPE} from '../constant'
+  import moment from 'moment'
 
   export default {
     name: 'show-search-page',
@@ -49,6 +50,7 @@
         keyword: state => state.search.keyword,
         city: state => state.search.city,
         type: state => state.search.type,
+        date: state => state.search.date,
         showPlans: state => state.search.showPlans,
         pageInfo: state => {
           return {
@@ -78,6 +80,41 @@
             }
           }
         ]
+      },
+      dateFilter () {
+        return {
+          name: '日期',
+          options: ['全部', '近一周', '近一个月', '近三个月'],
+          model: this.date,
+          onChange: (value, isDate) => {
+
+            if (isDate) {
+              this.saveSearchDate(value)
+            } else {
+              if (value === '近一周') {
+                let end = moment().add(1, 'weeks').format('YYYY-MM-DD');
+                let start = moment().format('YYYY-MM-DD');
+                this.saveSearchDate([value,[start, end]])
+
+              } else if (value === '近一个月') {
+                let end = moment().add(1, 'months').format('YYYY-MM-DD');
+                let start = moment().format('YYYY-MM-DD');
+                this.saveSearchDate([value,[start, end]])
+
+              } else if (value === '近三个月') {
+                let end = moment().add(3, 'months').format('YYYY-MM-DD');
+                let start = moment().format('YYYY-MM-DD');
+                this.saveSearchDate([value,[start, end]])
+
+              } else {
+                this.saveSearchDate([value])
+              }
+
+            }
+            this.fetchSearchShowPlans(1)
+          }
+        }
+
       }
     },
     methods: {
@@ -87,7 +124,8 @@
       ...mapMutations('showPlan', [
         'saveSearchKeyword',
         'saveSearchCity',
-        'saveSearchType'
+        'saveSearchType',
+        'saveSearchDate'
       ]),
       handleSearchKeywordChange (keyword) {
         this.saveSearchKeyword(keyword)

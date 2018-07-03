@@ -31,8 +31,8 @@ export function fetchShowPlanById(callback, id) {
 }
 
 
-export function fetchSearchShowPlans(callback, keyword, city, type, size, page) {
-  let url = `/search?keyword=${keyword}&city=${city}&type=${type}&size=${size}&page=${page-1}`;
+export function fetchSearchShowPlans(callback, keyword, city, type, startDate, endDate, size, page) {
+  let url = `/search?keyword=${keyword}&city=${city}&type=${type}&size=${size}&starttime=${startDate}&endtime=${endDate}&page=${page-1}`;
   console.log(url)
   axios.get(url)
     .then(function (response) {

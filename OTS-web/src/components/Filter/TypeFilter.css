@@ -2,7 +2,7 @@
   width: 100%;
   margin: 10px 0;
   font-size: 0; }
-  .type-filter span {
+  .type-filter > span {
     display: inline-block;
     padding: 4px 6px;
     margin: 0 5px;

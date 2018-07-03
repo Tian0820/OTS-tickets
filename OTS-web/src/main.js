@@ -6,8 +6,11 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import VModal from 'vue-js-modal'
+// import VMoment from 'vue-moment'
 
 Vue.use(VModal)
+
+
 
 Vue.config.productionTip = false
 

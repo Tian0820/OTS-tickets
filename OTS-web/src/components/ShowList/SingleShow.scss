@@ -45,6 +45,7 @@
       color: $grey;
       font-weight: 400;
       font-size: 14px;
+      @include line-wrap(2);
       //overflow: hidden;
       //text-overflow: ellipsis;
       //white-space: nowrap;

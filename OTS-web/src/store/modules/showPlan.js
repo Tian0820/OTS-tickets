@@ -13,7 +13,7 @@ const state = {
   search: {
     keyword: '',
     city: '全部',
-    // starttime
+    date: ['全部'],
     type: '全部',
     showPlans: null,
     page: null,
@@ -55,11 +55,13 @@ const actions = {
     let keyword = state.search.keyword
     let city = state.search.city === '全部' ? '' : state.search.city
     let type = state.search.type === '全部' ? '' : state.search.type
+    let startDate = state.search.date[0] === '全部' ? '' : state.search.date[1][0]
+    let endDate = state.search.date[0] === '全部' ? '' : state.search.date[1][1]
     showApi.fetchSearchShowPlans(data => {
       if (data !== null) {
         commit('saveSearchShowPlans', data)
       }
-    }, keyword, city, type, 8, page)
+    }, keyword, city, type, startDate, endDate, 8, page)
   },
 
 };
@@ -94,6 +96,9 @@ const mutations = {
   },
   'saveSearchType'(state, type) {
     state.search.type = type
+  },
+  'saveSearchDate'(state, date) {
+    state.search.date = date
   },
   'saveSearchShowPlans'(state, data) {
     state.search.showPlans = data.content
