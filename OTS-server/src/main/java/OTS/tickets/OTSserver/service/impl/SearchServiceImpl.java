@@ -17,10 +17,7 @@ import javax.persistence.criteria.Root;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class SearchServiceImpl implements SearchService {
@@ -51,7 +48,10 @@ public class SearchServiceImpl implements SearchService {
                     Date end = dateFormat.parse(endtime);
                     Date date = dateFormat.parse(showPlan.getTime());
 
-                    if (start.getTime() > date.getTime() && end.getTime() < date.getTime()) {
+                    System.out.println(starttime + " " + endtime + " " + showPlan.getTime());
+
+                    if (start.getTime() > date.getTime() || end.getTime() < date.getTime()) {
+
                         iterator.remove();
                         continue;
                     }
@@ -62,10 +62,32 @@ public class SearchServiceImpl implements SearchService {
 
             if (null != type && !"".equals(type) && !type.equals(showPlan.getType())) {
                 iterator.remove();
-                continue;
             }
         }
 
+
+        showPlans.sort(new Comparator<ShowPlan>() {
+            @Override
+            public int compare(ShowPlan o1, ShowPlan o2) {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date1 = null;
+                Date date2 = null;
+                try {
+                    date1 = dateFormat.parse(o1.getTime());
+                    date2 = dateFormat.parse(o2.getTime());
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                if(date1.before(date2))
+                    return 1;
+                if(date1.equals(date2))
+                    return 0;
+                else
+                    return -1;
+            }
+        });
 
 //        Page<ShowPlan> p = showPlanRepository.findByCityAndKeyword(city, keyword, new Specification<ShowPlan>() {
 //            @Override
@@ -93,6 +115,6 @@ public class SearchServiceImpl implements SearchService {
 //            }
 //        }, pageable);
 
-        return new PageImpl<>(showPlans.subList(size * page, Math.min(showPlans.size(),size * page + size)), pageable, showPlans.size());
+        return new PageImpl<>(showPlans.subList(size * page, Math.min(showPlans.size(), size * page + size)), pageable, showPlans.size());
     }
 }
