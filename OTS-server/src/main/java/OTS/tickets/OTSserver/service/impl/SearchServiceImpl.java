@@ -81,11 +81,11 @@ public class SearchServiceImpl implements SearchService {
                 }
 
                 if(date1.before(date2))
-                    return 1;
+                    return -1;
                 if(date1.equals(date2))
                     return 0;
                 else
-                    return -1;
+                    return 1;
             }
         });
 

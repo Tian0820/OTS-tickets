@@ -121,7 +121,8 @@
         'createOrder'
       ]),
       ...mapMutations('showPlan', [
-        'saveChosenSeats'
+        'saveChosenSeats',
+        'saveChooseSeatModal',
       ]),
       closeBox() {
         this.chosenSeats = []
@@ -165,7 +166,8 @@
             },
             onSuccess: (success) => {
 //              Message.success(success)
-              this.$modal.hide('choose-seat-modal')
+//              this.$modal.hide('choose-seat-modal')
+              this.saveChooseSeatModal(false)
               router.push({name: 'PayPage', params: {orderId: this.currentOrder.id}})
             },
             onError:
