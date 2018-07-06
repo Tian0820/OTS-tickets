@@ -4,7 +4,7 @@
     title="确认退款？"
     :visible="refundModal"
     @close="handleClose"
-    width="50%">
+    width="40%">
 
     <!--<modal-->
     <!--name="refund-modal"-->
@@ -12,8 +12,8 @@
     <!--:height="200">-->
 
 
-    <p>距离演出一个月可全额退款，否则退款减半。演出前一周无法退款。</p>
-    <p>确认退款？</p>
+    <p>距离演出一个月可全额退款，否则退款减半。</p>
+    <!--<p>确认退款？</p>-->
 
     <span slot="footer" class="dialog-footer">
       <el-button size="medium" @click="handleClose">取 消</el-button>
